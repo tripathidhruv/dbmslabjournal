@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DBMS Journal | Practical 11 - Triggers</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Newsreader:ital,wght@0,300;0,400;0,500;0,600;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#dfe2eb",
+                        "tertiary-fixed-dim": "#ffba3d",
+                        "tertiary-fixed": "#ffdeae",
+                        "primary-container": "#00d4ff",
+                        "on-background": "#dfe2eb",
+                        "on-primary-container": "#00586b",
+                        "on-primary-fixed": "#001f27",
+                        "surface-tint": "#3cd7ff",
+                        "surface-container-high": "#262a31",
+                        "on-primary": "#003642",
+                        "primary-fixed-dim": "#3cd7ff",
+                        "surface-container": "#1c2026",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed": "#291800",
+                        "inverse-on-surface": "#2d3137",
+                        "surface-container-lowest": "#0a0e14",
+                        "secondary-container": "#dc9100",
+                        "surface-variant": "#31353c",
+                        "secondary-fixed": "#ffddb4",
+                        "inverse-primary": "#00677e",
+                        "on-secondary": "#452b00",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "primary-fixed": "#b4ebff",
+                        "on-tertiary-fixed-variant": "#604100",
+                        "on-tertiary": "#432c00",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#6c4900",
+                        "on-primary-fixed-variant": "#004e5f",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#31353c",
+                        "tertiary-container": "#feb528",
+                        "secondary": "#ffb955",
+                        "surface-dim": "#10141a",
+                        "on-tertiary-fixed": "#281900",
+                        "on-secondary-container": "#4f3100",
+                        "error-container": "#93000a",
+                        "secondary-fixed-dim": "#ffb955",
+                        "outline": "#859398",
+                        "surface-bright": "#353940",
+                        "on-surface": "#dfe2eb",
+                        "surface-container-low": "#181c22",
+                        "on-surface-variant": "#bbc9cf",
+                        "surface": "#10141a",
+                        "background": "#10141a",
+                        "tertiary": "#ffd9a1",
+                        "primary": "#a8e8ff",
+                        "outline-variant": "#3c494e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Newsreader"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .dot-matrix {
+            background-image: radial-gradient(circle, #3c494e 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container font-body">
+<!-- TopNavBar -->
+<nav class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)]">
+<div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
+<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-headline tracking-tight">
+                DBMS Journal
+            </div>
+<div class="hidden md:flex items-center gap-8 font-headline text-sm uppercase tracking-widest">
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">Home</a>
+<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1" href="#">Practicals</a>
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">About</a>
+</div>
+<button class="text-cyan-400 scale-95 active:scale-90 transition-transform p-2 hover:bg-cyan-500/10 rounded-full">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</nav>
+<div class="flex max-w-[1440px] mx-auto relative">
+<!-- SideNavBar -->
+<aside class="sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] hidden md:flex flex-col gap-2 p-6 overflow-y-auto">
+<div class="mb-8">
+<h3 class="font-headline text-primary text-xs uppercase tracking-[0.2em] mb-1">Lab Practicals</h3>
+<p class="font-body italic text-on-surface-variant text-sm">DBMS Coursework</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="terminal">terminal</span> Practical 1
+                </a>
+<!-- ... Repeated items for brevity, focusing on P11 active state ... -->
+<div class="h-4 border-l border-outline-variant/20 ml-6 my-2"></div>
+<a class="flex items-center gap-3 px-4 py-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 font-['JetBrains_Mono'] text-sm uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="cloud_done">cloud_done</span> Practical 11
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="account_tree">account_tree</span> Practical 12
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="reorder">reorder</span> Practical 13
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="history">history</span> Practical 14
+                </a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-8 md:px-16 py-12 relative overflow-hidden">
+<div class="absolute inset-0 dot-matrix opacity-5 pointer-events-none"></div>
+<!-- Practical Header -->
+<header class="mb-16 relative">
+<div class="flex items-center gap-4 mb-4">
+<span class="px-3 py-1 rounded-full border border-outline-variant/30 text-[10px] font-['Inter'] uppercase tracking-widest text-on-surface-variant bg-surface-container-low">
+                        Group C: Advanced SQL
+                    </span>
+<span class="w-12 h-[1px] bg-outline-variant/30"></span>
+<span class="text-secondary font-headline text-xs tracking-widest uppercase">Database Consistency</span>
+</div>
+<h1 class="text-6xl md:text-7xl font-headline font-bold text-on-surface tracking-tighter mb-6 leading-none">
+                    Triggers in <br/><span class="text-primary">PL/SQL</span>
+</h1>
+<p class="max-w-2xl text-xl text-on-surface-variant leading-relaxed">
+                    Automating database integrity. Triggers allow us to execute procedural code automatically in response to specific events on a particular table or view.
+                </p>
+</header>
+<!-- Bento Grid Content -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+<!-- Definition Card -->
+<section class="md:col-span-7 bg-surface-container-low rounded-xl p-8 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-110 duration-700"></div>
+<h2 class="font-headline text-3xl mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="bolt">bolt</span>
+                        Core Concept
+                    </h2>
+<div class="space-y-6 text-on-surface-variant text-lg">
+<p>A trigger is a stored procedure that is automatically invoked by the DBMS when a specific event occurs. Unlike a subprogram, which must be invoked explicitly, a trigger is "fired" by the system.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+<div class="bg-surface-container p-5 rounded-lg border-l-4 border-primary">
+<h4 class="font-headline text-on-surface text-sm uppercase tracking-widest mb-2">BEFORE Triggers</h4>
+<p class="text-sm">Execute before the triggering statement runs. Often used to validate or modify data before it's saved.</p>
+</div>
+<div class="bg-surface-container p-5 rounded-lg border-l-4 border-secondary">
+<h4 class="font-headline text-on-surface text-sm uppercase tracking-widest mb-2">AFTER Triggers</h4>
+<p class="text-sm">Execute after the statement completes. Ideal for logging, auditing, or cascading updates.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Syntax Highlight Card -->
+<section class="md:col-span-5 bg-surface-container-highest rounded-xl p-8 shadow-2xl">
+<div class="flex gap-1.5 mb-6">
+<div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+</div>
+<h3 class="font-headline text-xl mb-4 text-on-surface">CREATE TRIGGER Syntax</h3>
+<div class="bg-surface-container-lowest p-6 rounded font-['JetBrains_Mono'] text-sm text-cyan-300 leading-relaxed overflow-x-auto">
+<span class="text-slate-500">-- Basic Structure</span><br/>
+<span class="text-secondary">CREATE</span> [OR REPLACE] <span class="text-secondary">TRIGGER</span> trigger_name<br/>
+                        {BEFORE | AFTER | INSTEAD OF}<br/>
+                        {INSERT [OR] | UPDATE [OR] | DELETE}<br/>
+                        [OF column_name]<br/>
+<span class="text-secondary">ON</span> table_name<br/>
+                        [FOR EACH ROW]<br/>
+                        [WHEN (condition)]<br/>
+<span class="text-secondary">BEGIN</span><br/>
+                          <span class="text-slate-400">-- Executable statements</span><br/>
+<span class="text-secondary">END</span>;
+                    </div>
+</section>
+<!-- Granularity & Levels -->
+<section class="md:col-span-12 bg-surface-container-low rounded-xl p-8 border border-outline-variant/10">
+<div class="flex flex-col md:flex-row gap-12">
+<div class="flex-1">
+<h3 class="font-headline text-2xl mb-4 italic text-on-surface">Row-Level Triggers</h3>
+<p class="text-on-surface-variant mb-4">Specified with <code class="bg-surface-container px-2 py-1 rounded text-primary">FOR EACH ROW</code>. Fires once for each row affected by the SQL statement. Access old and new values using <code class="text-secondary">:OLD</code> and <code class="text-secondary">:NEW</code>.</p>
+<img class="w-full h-48 object-cover rounded-lg opacity-40 grayscale hover:grayscale-0 transition-all duration-500" data-alt="Close-up of organized data cables in a server room with blue and white lights, representing technical precision and connectivity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcrek1uwrnhzATpXEy7LfFYpBwnAmP7BDfQRfzZyrjUgXzyCc9tARcWPZyU3DbZvfzltyyOXLMU_SXfR1-eV2vaX8UKYB8dILzCoHDSX6Ym8-J-7Lr4A9d0zlD5mZswRX9CIniidjDZFQZeTXJTwyeSgRy_IenO6dS91rdANYw-bTsfYcwAVmVaxtsfwGQu0h_387aHqSVgwDQ8y-agjdEtKWC_wEP9y6u2VWRVssR5l0Vo_8_RfzYqsybtBSJciRVK92YMS0cQSY"/>
+</div>
+<div class="flex-1">
+<h3 class="font-headline text-2xl mb-4 italic text-on-surface">Statement-Level Triggers</h3>
+<p class="text-on-surface-variant mb-4">Default behavior. Fires exactly once for the SQL statement, regardless of how many rows are affected. Used for global integrity checks or logging the action itself rather than the data.</p>
+<img class="w-full h-48 object-cover rounded-lg opacity-40 grayscale hover:grayscale-0 transition-all duration-500" data-alt="Abstract digital visualization of data streams and flow charts on a dark interface, technical and futuristic aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU8voAgtpnIsw8uahhrjgC3iuf0zCQceIhJtZtN8eVMjvubTGbtfXirhYpaU65wKUDsEXKtNrLUqZpXgdSCIZGWn7vLHj0q2QgT_BlIZb1ogd_ST4Te8cH_T1NC5iEw1iaYx72nVQ2HyxyVU8r7nr-_kqldQYoXQKrdUCy4bst8pj-hPGwcN3K2Q7GFu1JXOkycpBuQbWZtnaB3CrQqmoVpB0OrTMxMLl7dKK8ym6DAq5RDJprN9LhbxGesuh0tU0a6eDMia6cE_4"/>
+</div>
+</div>
+</section>
+<!-- Practical Example Card -->
+<section class="md:col-span-12 bg-gradient-to-br from-surface-container-high to-surface-container-low rounded-xl p-8 relative">
+<h3 class="font-headline text-3xl mb-8 flex items-center gap-4">
+                        Practical Implementation: <span class="text-secondary">Audit Trail</span>
+</h3>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<div class="space-y-4">
+<div class="bg-surface-container-lowest p-6 rounded-lg font-['JetBrains_Mono'] text-sm leading-relaxed border border-outline-variant/20">
+<span class="text-slate-500">-- Trigger to maintain Salary Audit</span><br/>
+<span class="text-secondary">CREATE OR REPLACE TRIGGER</span> audit_salary_update<br/>
+<span class="text-secondary">AFTER UPDATE OF</span> salary <span class="text-secondary">ON</span> Employees<br/>
+<span class="text-secondary">FOR EACH ROW</span><br/>
+<span class="text-secondary">BEGIN</span><br/>
+                                  <span class="text-secondary">INSERT INTO</span> Salary_History<br/>
+                                  (emp_id, old_sal, new_sal, change_date)<br/>
+                                  <span class="text-secondary">VALUES</span>(:OLD.id, :OLD.salary, :NEW.salary, SYSDATE);<br/>
+<span class="text-secondary">END</span>;
+                            </div>
+</div>
+<div class="flex flex-col justify-center">
+<h4 class="text-secondary font-headline text-lg mb-3">Mechanism Explanation</h4>
+<ul class="space-y-3 text-on-surface-variant">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-sm mt-1" data-icon="check_circle">check_circle</span>
+<span>The trigger fires <strong class="text-on-surface">AFTER</strong> the record is updated.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-sm mt-1" data-icon="check_circle">check_circle</span>
+<span>It only fires when the <code class="text-primary">salary</code> column specifically is changed.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-sm mt-1" data-icon="check_circle">check_circle</span>
+<span>Using <code class="text-primary">:OLD</code> captures the state before the update for historical accuracy.</span>
+</li>
+</ul>
+</div>
+</div>
+</section>
+</div>
+<!-- Navigation Footer -->
+<footer class="w-full border-t border-slate-800/50 mt-20">
+<div class="flex flex-col md:flex-row justify-between items-center px-4 py-10 w-full gap-8">
+<div class="flex flex-col">
+<span class="font-headline text-xs uppercase tracking-widest text-slate-500 mb-2">Previous Lab</span>
+<a class="font-['Newsreader'] italic text-2xl text-slate-400 hover:text-amber-200 transition-colors flex items-center gap-2" href="#">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+                            Practical 10: PL/SQL Intro
+                        </a>
+</div>
+<div class="text-center">
+<div class="text-amber-500 font-serif text-xl mb-1">S.Y.B.Tech IT</div>
+<div class="text-slate-500 text-xs font-['Inter'] uppercase tracking-widest">Sem IV | Pattern 2023</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-headline text-xs uppercase tracking-widest text-slate-500 mb-2">Next Lab</span>
+<a class="font-['Newsreader'] italic text-2xl text-amber-400 underline flex items-center gap-2" href="#">
+                            Practical 12: Sequences
+                            <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="flex justify-center gap-8 py-6 text-slate-500 text-sm border-t border-outline-variant/10">
+<a class="hover:text-amber-200 transition-colors" href="#">University Guidelines</a>
+<a class="hover:text-amber-200 transition-colors" href="#">Lab Manual</a>
+<a class="hover:text-amber-200 transition-colors" href="#">Contact Faculty</a>
+</div>
+</footer>
+</main>
+</div>
+<!-- Floating Action Button (Only on Home/Dash, here suppressed or contextualized for help) -->
+<!-- Suppressed as per context rules for Detail page -->
+</body></html>

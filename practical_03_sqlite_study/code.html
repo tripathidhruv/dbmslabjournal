@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#dfe2eb",
+                    "tertiary-fixed-dim": "#ffba3d",
+                    "tertiary-fixed": "#ffdeae",
+                    "primary-container": "#00d4ff",
+                    "on-background": "#dfe2eb",
+                    "on-primary-container": "#00586b",
+                    "on-primary-fixed": "#001f27",
+                    "surface-tint": "#3cd7ff",
+                    "surface-container-high": "#262a31",
+                    "on-primary": "#003642",
+                    "primary-fixed-dim": "#3cd7ff",
+                    "surface-container": "#1c2026",
+                    "error": "#ffb4ab",
+                    "on-secondary-fixed": "#291800",
+                    "inverse-on-surface": "#2d3137",
+                    "surface-container-lowest": "#0a0e14",
+                    "secondary-container": "#dc9100",
+                    "surface-variant": "#31353c",
+                    "secondary-fixed": "#ffddb4",
+                    "inverse-primary": "#00677e",
+                    "on-secondary": "#452b00",
+                    "on-secondary-fixed-variant": "#633f00",
+                    "primary-fixed": "#b4ebff",
+                    "on-tertiary-fixed-variant": "#604100",
+                    "on-tertiary": "#432c00",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-container": "#6c4900",
+                    "on-primary-fixed-variant": "#004e5f",
+                    "on-error": "#690005",
+                    "surface-container-highest": "#31353c",
+                    "tertiary-container": "#feb528",
+                    "secondary": "#ffb955",
+                    "surface-dim": "#10141a",
+                    "on-tertiary-fixed": "#281900",
+                    "on-secondary-container": "#4f3100",
+                    "error-container": "#93000a",
+                    "secondary-fixed-dim": "#ffb955",
+                    "outline": "#859398",
+                    "surface-bright": "#353940",
+                    "on-surface": "#dfe2eb",
+                    "surface-container-low": "#181c22",
+                    "on-surface-variant": "#bbc9cf",
+                    "surface": "#10141a",
+                    "background": "#10141a",
+                    "tertiary": "#ffd9a1",
+                    "primary": "#a8e8ff",
+                    "outline-variant": "#3c494e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Newsreader"],
+                    "label": ["Inter"],
+                    "mono": ["JetBrains Mono"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #10141a;
+            background-image: radial-gradient(#1c2026 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)]">
+<div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
+<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-headline tracking-tight">
+                DBMS Journal
+            </div>
+<div class="hidden md:flex items-center space-x-8 font-headline text-sm tracking-widest">
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">Home</a>
+<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1" href="#">Practicals</a>
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">About</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-cyan-500/10 transition-all duration-300 rounded-lg scale-95 active:scale-90">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<div class="flex max-w-[1440px] mx-auto">
+<!-- SideNavBar -->
+<aside class="sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] hidden lg:flex flex-col">
+<div class="p-6 pb-2">
+<h2 class="font-headline font-bold text-primary tracking-tight text-xl">Lab Practicals</h2>
+<p class="font-mono text-[10px] uppercase tracking-widest text-outline">DBMS Coursework</p>
+</div>
+<div class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar">
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all ease-out duration-400" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="terminal">terminal</span>
+<span class="font-mono text-xs uppercase tracking-widest">Practical 1</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all ease-out duration-400" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="database">database</span>
+<span class="font-mono text-xs uppercase tracking-widest">Practical 2</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 translate-x-1 transition-all ease-out duration-400" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="schema">schema</span>
+<span class="font-mono text-xs uppercase tracking-widest">Practical 3</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="table_chart">table_chart</span>
+<span class="font-mono text-xs uppercase tracking-widest">Practical 4</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="query_stats">query_stats</span>
+<span class="font-mono text-xs uppercase tracking-widest">Practical 5</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="storage">storage</span>
+<span class="font-mono text-xs uppercase tracking-widest">Practical 6</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="security">security</span>
+<span class="font-mono text-xs uppercase tracking-widest">Practical 7</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="code_blocks">code_blocks</span>
+<span class="font-mono text-xs uppercase tracking-widest">Practical 8</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="settings_ethernet">settings_ethernet</span>
+<span class="font-mono text-xs uppercase tracking-widest">Practical 9</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="lan">lan</span>
+<span class="font-mono text-xs uppercase tracking-widest">Practical 10</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="cloud_done">cloud_done</span>
+<span class="font-mono text-xs uppercase tracking-widest">Practical 11</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="account_tree">account_tree</span>
+<span class="font-mono text-xs uppercase tracking-widest">Practical 12</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="reorder">reorder</span>
+<span class="font-mono text-xs uppercase tracking-widest">Practical 13</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+<span class="font-mono text-xs uppercase tracking-widest">Practical 14</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-8 py-12 md:px-16 overflow-x-hidden">
+<!-- Header Section -->
+<header class="mb-16">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-6">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span class="font-mono text-[10px] uppercase tracking-tighter text-primary">Group A | Practical 03</span>
+</div>
+<h1 class="text-6xl md:text-7xl font-headline font-bold text-on-surface tracking-tighter leading-none mb-4">
+                    SQLite <br/><span class="text-primary-container">Architecture &amp; Installation</span>
+</h1>
+<p class="max-w-2xl text-xl text-on-surface-variant font-body italic leading-relaxed">
+                    A comprehensive study of the serverless, zero-configuration database engine that powers millions of global applications.
+                </p>
+</header>
+<!-- Bento Grid Content -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-20">
+<!-- Definition Card -->
+<div class="md:col-span-7 bg-surface-container-low p-8 rounded-xl flex flex-col justify-between group hover:bg-surface-container transition-colors duration-500">
+<div>
+<h3 class="font-headline text-2xl font-semibold mb-4 text-primary">What is SQLite?</h3>
+<p class="text-on-surface-variant leading-loose mb-6">
+                            SQLite is a C-language library that implements a <strong class="text-on-surface">small, fast, self-contained, high-reliability, full-featured</strong>, SQL database engine. Unlike most other SQL databases, SQLite does not have a separate server process. It reads and writes directly to ordinary disk files.
+                        </p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 bg-surface-container-highest rounded-lg border-l-4 border-primary">
+<span class="block font-mono text-xs text-primary mb-1 uppercase">Attribute</span>
+<span class="font-headline font-bold text-lg">Serverless</span>
+</div>
+<div class="p-4 bg-surface-container-highest rounded-lg border-l-4 border-secondary">
+<span class="block font-mono text-xs text-secondary mb-1 uppercase">Storage</span>
+<span class="font-headline font-bold text-lg">Single File</span>
+</div>
+</div>
+</div>
+<!-- Visual Element / Image -->
+<div class="md:col-span-5 relative overflow-hidden rounded-xl bg-surface-container-high h-[400px] md:h-auto">
+<img class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-luminosity" data-alt="Abstract visualization of a database core with floating digital data nodes and blue cybernetic neural pathways" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-rmiD4boclOKMhlt3se2Pi0zNzNi8Bw9X9PfKj4sexRXRHUPEXVHUWTS9kll2UBUqCUYDljT2YULJGVrRYavhM6edgVY4EQzxRib_cGbObys5w-Rf9rhB1T7qJTtOnNUorPGiAVIuMFkZIdRrnOMaGMmZ0V-wL_Ym1WJ5W2BfeypBo0EoYPS8szJg0hw3TNYchgXkyfaYsSqaAlBa1bkSToGoIW5r3bRvL36k9JrHJa81XyxODL4SHcMdtiNdIJJWiXer2pkVUp8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent"></div>
+<div class="absolute bottom-8 left-8">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="database">database</span>
+<h4 class="font-headline font-bold text-2xl mt-2">Zero-Config<br/>Embedded Engine</h4>
+</div>
+</div>
+<!-- Comparisons -->
+<div class="md:col-span-12 bg-surface-container-lowest p-8 rounded-xl border-l-8 border-tertiary">
+<div class="flex flex-col md:flex-row gap-12">
+<div class="flex-1">
+<h3 class="font-headline text-2xl font-semibold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary" data-icon="compare_arrows">compare_arrows</span>
+                                SQLite vs MySQL
+                            </h3>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="mt-1 text-primary"><span class="material-symbols-outlined" data-icon="check_circle">check_circle</span></div>
+<div>
+<h5 class="font-bold text-on-surface">SQLite is Local</h5>
+<p class="text-sm text-on-surface-variant">The database is a file on the host machine. Ideal for mobile and IoT.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="mt-1 text-tertiary"><span class="material-symbols-outlined" data-icon="cancel">cancel</span></div>
+<div>
+<h5 class="font-bold text-on-surface">MySQL is Client-Server</h5>
+<p class="text-sm text-on-surface-variant">Requires a running server process and network protocol. Ideal for multi-user web apps.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-1 bg-surface-container p-6 rounded-lg">
+<h4 class="font-mono text-xs uppercase tracking-widest text-outline mb-4">Common Use Cases</h4>
+<ul class="space-y-3 font-body italic text-lg text-on-surface">
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Embedded devices and IoT</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Application file format (Desktop software)</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Low-traffic websites &amp; Prototyping</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Data Analysis &amp; Educational labs</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Terminal Block -->
+<div class="md:col-span-12">
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-2xl">
+<div class="flex items-center justify-between px-6 py-4 bg-surface-container-high">
+<div class="flex gap-2">
+<div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+</div>
+<span class="font-mono text-[10px] uppercase text-outline tracking-widest">build_and_install_sqlite.sh</span>
+</div>
+<div class="p-8 font-mono text-sm leading-relaxed overflow-x-auto">
+<div class="mb-4 text-outline-variant"># Step 1: Download Source and Extract</div>
+<div class="mb-2"><span class="text-secondary">wget</span> https://www.sqlite.org/2023/sqlite-autoconf-3440000.tar.gz</div>
+<div class="mb-6"><span class="text-secondary">tar</span> xvfz sqlite-autoconf-3440000.tar.gz</div>
+<div class="mb-4 text-outline-variant"># Step 2: Configure and Compile</div>
+<div class="mb-2"><span class="text-primary">cd</span> sqlite-autoconf-3440000</div>
+<div class="mb-2"><span class="text-secondary">./configure</span> --prefix=/usr/local</div>
+<div class="mb-6"><span class="text-secondary">make</span></div>
+<div class="mb-4 text-outline-variant"># Step 3: Install binary</div>
+<div class="mb-2"><span class="text-secondary">sudo make install</span></div>
+<div class="text-on-primary-container bg-primary-container/20 px-2 py-1 rounded inline-block mt-4">SQLite version 3.44.0 installed successfully.</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Navigation Footer -->
+<div class="flex flex-col md:flex-row justify-between items-stretch gap-6 border-t border-outline-variant/20 pt-12">
+<a class="flex-1 p-6 bg-surface-container-low rounded-lg group hover:bg-surface-container-high transition-all" href="#">
+<span class="font-mono text-[10px] text-outline uppercase tracking-widest block mb-2">Previous Lab</span>
+<div class="flex items-center justify-between">
+<span class="font-headline font-bold text-xl">Practical 02: Relational Schema</span>
+<span class="material-symbols-outlined transition-transform group-hover:-translate-x-2" data-icon="arrow_back">arrow_back</span>
+</div>
+</a>
+<a class="flex-1 p-6 bg-surface-container-low rounded-lg group hover:bg-surface-container-high transition-all text-right border-r-4 border-primary" href="#">
+<span class="font-mono text-[10px] text-outline uppercase tracking-widest block mb-2">Next Lab</span>
+<div class="flex items-center justify-between flex-row-reverse">
+<span class="font-headline font-bold text-xl">Practical 04: Basic SQL Queries</span>
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-2" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</a>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="w-full bg-[#10141a] border-t border-slate-800/50 mt-20">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full max-w-[1440px] mx-auto gap-8">
+<div class="flex flex-col items-center md:items-start">
+<span class="text-amber-500 font-serif text-2xl">DBMS Journal</span>
+<span class="font-body italic text-lg text-slate-500">S.Y.B.Tech IT | Sem IV | Pattern 2023</span>
+</div>
+<div class="flex gap-8 font-body italic text-lg">
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">University Guidelines</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Lab Manual</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Contact Faculty</a>
+</div>
+</div>
+</footer>
+</body></html>

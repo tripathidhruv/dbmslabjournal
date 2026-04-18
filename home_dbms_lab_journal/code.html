@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DBMS Journal | S.Y.B.Tech IT</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#633f00",
+                    "on-tertiary-container": "#6c4900",
+                    "on-primary-fixed-variant": "#004e5f",
+                    "secondary-fixed-dim": "#ffb955",
+                    "surface-bright": "#353940",
+                    "surface-dim": "#10141a",
+                    "on-tertiary": "#432c00",
+                    "on-surface": "#dfe2eb",
+                    "outline": "#859398",
+                    "inverse-on-surface": "#2d3137",
+                    "secondary-fixed": "#ffddb4",
+                    "on-error-container": "#ffdad6",
+                    "surface-container": "#1c2026",
+                    "on-primary-container": "#00586b",
+                    "primary-container": "#00d4ff",
+                    "on-secondary": "#452b00",
+                    "tertiary-fixed": "#ffdeae",
+                    "error-container": "#93000a",
+                    "surface-container-high": "#262a31",
+                    "on-tertiary-fixed": "#281900",
+                    "inverse-primary": "#00677e",
+                    "surface": "#10141a",
+                    "on-primary-fixed": "#001f27",
+                    "surface-container-low": "#181c22",
+                    "surface-container-highest": "#31353c",
+                    "on-surface-variant": "#bbc9cf",
+                    "error": "#ffb4ab",
+                    "surface-container-lowest": "#0a0e14",
+                    "inverse-surface": "#dfe2eb",
+                    "on-secondary-fixed": "#291800",
+                    "primary": "#a8e8ff",
+                    "on-error": "#690005",
+                    "tertiary-fixed-dim": "#ffba3d",
+                    "on-tertiary-fixed-variant": "#604100",
+                    "tertiary": "#ffd9a1",
+                    "secondary": "#ffb955",
+                    "on-background": "#dfe2eb",
+                    "primary-fixed-dim": "#3cd7ff",
+                    "outline-variant": "#3c494e",
+                    "on-secondary-container": "#4f3100",
+                    "primary-fixed": "#b4ebff",
+                    "surface-variant": "#31353c",
+                    "on-primary": "#003642",
+                    "secondary-container": "#dc9100",
+                    "tertiary-container": "#feb528",
+                    "background": "#10141a",
+                    "surface-tint": "#3cd7ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Newsreader"],
+                    "label": ["Inter"],
+                    "mono": ["JetBrains Mono"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .dot-matrix {
+            background-image: radial-gradient(circle, rgba(168, 232, 255, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)] border-none">
+<div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-['Space_Grotesk'] tracking-tight">DBMS Journal</span>
+<div class="hidden md:flex gap-6 font-['Space_Grotesk'] tracking-tight">
+<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1" href="#">Home</a>
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">Practicals</a>
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">About</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center bg-surface-container-low rounded px-3 py-1.5 border border-outline-variant/15">
+<span class="material-symbols-outlined text-sm text-outline mr-2">search</span>
+<input class="bg-transparent border-none text-sm focus:ring-0 text-on-surface w-48" placeholder="Search practicals..." type="text"/>
+</div>
+<button class="scale-95 active:scale-90 transition-transform hover:bg-cyan-500/10 p-2 rounded">
+<span class="material-symbols-outlined text-cyan-400">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="relative min-h-screen">
+<!-- Hero Section -->
+<section class="relative pt-32 pb-20 px-8 overflow-hidden">
+<div class="absolute inset-0 dot-matrix -z-10"></div>
+<div class="max-w-[1440px] mx-auto relative">
+<!-- Decorative Elements -->
+<div class="absolute -top-24 -left-24 w-96 h-96 bg-primary/10 blur-[120px] rounded-full"></div>
+<div class="flex flex-col items-start gap-6 max-w-4xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant/20 mb-4">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-xs font-mono tracking-widest text-primary uppercase">Lab Journal Online</span>
+</div>
+<h1 class="text-5xl md:text-7xl font-headline font-bold text-on-surface leading-tight tracking-tighter">
+                        DBMS Lab Journal — <br/>
+<span class="bg-gradient-to-r from-primary to-primary-container bg-clip-text text-transparent">S.Y.B.Tech IT, Sem IV</span>
+</h1>
+<p class="text-xl md:text-2xl font-body italic text-on-surface-variant max-w-2xl">
+                        Pattern 2023 | Subject Code: <span class="text-secondary font-mono">2308215</span>
+</p>
+<div class="mt-8 flex flex-wrap gap-4">
+<button class="px-8 py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-bold rounded shadow-[0_0_20px_rgba(0,212,255,0.3)] hover:shadow-[0_0_30px_rgba(0,212,255,0.5)] transition-all flex items-center gap-2 group">
+                            Explore Practicals 
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="px-8 py-4 bg-surface-container-high text-on-surface font-headline font-bold rounded border border-outline-variant/20 hover:bg-surface-container-highest transition-colors">
+                            Lab Manual PDF
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Practicals Grid Section -->
+<section class="px-8 py-20 bg-surface-container-low">
+<div class="max-w-[1440px] mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+<div class="space-y-2">
+<h2 class="text-4xl font-headline font-bold text-on-surface">Curriculum Roadmap</h2>
+<p class="text-on-surface-variant font-body text-lg">A comprehensive journey through Relational Databases, SQL, and Beyond.</p>
+</div>
+<div class="flex gap-4 font-mono text-xs uppercase tracking-widest">
+<span class="flex items-center gap-2 text-primary"><span class="w-2 h-2 rounded-full bg-primary"></span> Group A</span>
+<span class="flex items-center gap-2 text-success-container text-green-400"><span class="w-2 h-2 rounded-full bg-green-400"></span> Group B</span>
+<span class="flex items-center gap-2 text-tertiary-container text-purple-400"><span class="w-2 h-2 rounded-full bg-purple-400"></span> Group C</span>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Practical 1 (Group A) -->
+<div class="group relative bg-surface-container-high p-8 rounded border border-outline-variant/10 hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(168,232,255,0.1)]">
+<div class="flex justify-between items-start mb-6">
+<span class="text-3xl font-mono font-bold text-primary opacity-20 group-hover:opacity-100 transition-opacity">01</span>
+<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-mono tracking-widest uppercase border border-primary/20">Group A</span>
+</div>
+<h3 class="text-2xl font-headline font-semibold text-on-surface mb-4">ER Diagram Design</h3>
+<p class="text-on-surface-variant font-body text-lg mb-8 leading-relaxed">System design for university databases using ER modeling, constraints, and attribute mapping.</p>
+<div class="flex items-center text-primary font-mono text-sm tracking-widest opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0">
+                            VIEW DETAILS <span class="material-symbols-outlined ml-2 text-sm">trending_flat</span>
+</div>
+</div>
+<!-- Practical 2 (Group A) -->
+<div class="group relative bg-surface-container-high p-8 rounded border border-outline-variant/10 hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(168,232,255,0.1)]">
+<div class="flex justify-between items-start mb-6">
+<span class="text-3xl font-mono font-bold text-primary opacity-20 group-hover:opacity-100 transition-opacity">02</span>
+<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-mono tracking-widest uppercase border border-primary/20">Group A</span>
+</div>
+<h3 class="text-2xl font-headline font-semibold text-on-surface mb-4">DDL Operations</h3>
+<p class="text-on-surface-variant font-body text-lg mb-8 leading-relaxed">Creation and modification of table structures using SQL CREATE, ALTER, and DROP commands.</p>
+<div class="flex items-center text-primary font-mono text-sm tracking-widest opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0">
+                            VIEW DETAILS <span class="material-symbols-outlined ml-2 text-sm">trending_flat</span>
+</div>
+</div>
+<!-- Practical 4 (Group B) -->
+<div class="group relative bg-surface-container-high p-8 rounded border border-outline-variant/10 hover:border-green-400/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(74,222,128,0.1)]">
+<div class="flex justify-between items-start mb-6">
+<span class="text-3xl font-mono font-bold text-green-400 opacity-20 group-hover:opacity-100 transition-opacity">04</span>
+<span class="px-2 py-1 bg-green-400/10 text-green-400 text-[10px] font-mono tracking-widest uppercase border border-green-400/20">Group B</span>
+</div>
+<h3 class="text-2xl font-headline font-semibold text-on-surface mb-4">Complex SQL Joins</h3>
+<p class="text-on-surface-variant font-body text-lg mb-8 leading-relaxed">Mastering INNER, LEFT, RIGHT, and FULL OUTER joins to retrieve relational data across tables.</p>
+<div class="flex items-center text-green-400 font-mono text-sm tracking-widest opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0">
+                            VIEW DETAILS <span class="material-symbols-outlined ml-2 text-sm">trending_flat</span>
+</div>
+</div>
+<!-- Practical 10 (Group C) -->
+<div class="group relative bg-surface-container-high p-8 rounded border border-outline-variant/10 hover:border-purple-400/50 transition-all duration-300 hover:-translate-y-2 lg:col-span-2 hover:shadow-[0_10px_30px_rgba(192,132,252,0.1)]">
+<div class="flex justify-between items-start mb-6">
+<span class="text-3xl font-mono font-bold text-purple-400 opacity-20 group-hover:opacity-100 transition-opacity">10</span>
+<span class="px-2 py-1 bg-purple-400/10 text-purple-400 text-[10px] font-mono tracking-widest uppercase border border-purple-400/20">Group C</span>
+</div>
+<div class="grid md:grid-cols-2 gap-8">
+<div>
+<h3 class="text-2xl font-headline font-semibold text-on-surface mb-4">Stored Procedures &amp; Functions</h3>
+<p class="text-on-surface-variant font-body text-lg mb-4 leading-relaxed">Implementation of business logic directly into the database engine using PL/SQL blocks and functions.</p>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-lg flex flex-col gap-2">
+<div class="flex gap-1.5 mb-2">
+<div class="w-2 h-2 rounded-full bg-red-500/50"></div>
+<div class="w-2 h-2 rounded-full bg-amber-500/50"></div>
+<div class="w-2 h-2 rounded-full bg-green-500/50"></div>
+</div>
+<code class="text-xs font-mono text-primary/80">CREATE OR REPLACE PROCEDURE update_stock...</code>
+<code class="text-xs font-mono text-on-surface-variant">BEGIN -- logic here END;</code>
+</div>
+</div>
+<div class="flex items-center text-purple-400 font-mono text-sm tracking-widest opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0 mt-4">
+                            VIEW DETAILS <span class="material-symbols-outlined ml-2 text-sm">trending_flat</span>
+</div>
+</div>
+<!-- Practical 13 (Group D) -->
+<div class="group relative bg-surface-container-high p-8 rounded border border-outline-variant/10 hover:border-secondary/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(255,185,85,0.1)]">
+<div class="flex justify-between items-start mb-6">
+<span class="text-3xl font-mono font-bold text-secondary opacity-20 group-hover:opacity-100 transition-opacity">13</span>
+<span class="px-2 py-1 bg-secondary/10 text-secondary text-[10px] font-mono tracking-widest uppercase border border-secondary/20">Group D</span>
+</div>
+<h3 class="text-2xl font-headline font-semibold text-on-surface mb-4">NoSQL Integration</h3>
+<p class="text-on-surface-variant font-body text-lg mb-8 leading-relaxed">Transitioning from relational models to document-based storage with MongoDB basics.</p>
+<div class="flex items-center text-secondary font-mono text-sm tracking-widest opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0">
+                            VIEW DETAILS <span class="material-symbols-outlined ml-2 text-sm">trending_flat</span>
+</div>
+</div>
+</div>
+<div class="mt-12 text-center">
+<button class="px-10 py-4 bg-surface-container-highest text-on-surface font-headline font-semibold rounded-full border border-outline-variant/20 hover:border-primary/40 transition-all">
+                        Load 8 More Practicals
+                    </button>
+</div>
+</div>
+</section>
+<!-- Stats Section -->
+<section class="py-20 px-8">
+<div class="max-w-[1440px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-12">
+<div class="flex flex-col items-center text-center gap-2">
+<span class="text-4xl font-headline font-bold text-secondary">14</span>
+<span class="text-xs font-mono uppercase tracking-widest text-on-surface-variant">Practicals</span>
+</div>
+<div class="flex flex-col items-center text-center gap-2">
+<span class="text-4xl font-headline font-bold text-primary">04</span>
+<span class="text-xs font-mono uppercase tracking-widest text-on-surface-variant">Course Groups</span>
+</div>
+<div class="flex flex-col items-center text-center gap-2">
+<span class="text-4xl font-headline font-bold text-on-surface">100+</span>
+<span class="text-xs font-mono uppercase tracking-widest text-on-surface-variant">SQL Queries</span>
+</div>
+<div class="flex flex-col items-center text-center gap-2">
+<span class="text-4xl font-headline font-bold text-green-400">A+</span>
+<span class="text-xs font-mono uppercase tracking-widest text-on-surface-variant">Quality Grade</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-slate-800/50 mt-20 bg-[#10141a]">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full max-w-[1440px] mx-auto">
+<div class="flex flex-col gap-2 mb-8 md:mb-0">
+<span class="text-amber-500 font-serif font-bold text-2xl">DBMS Journal</span>
+<p class="font-['Newsreader'] italic text-lg text-slate-500">S.Y.B.Tech IT | Sem IV | Pattern 2023</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8 font-['Newsreader'] italic text-lg">
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">University Guidelines</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Lab Manual</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Contact Faculty</a>
+</div>
+<div class="mt-8 md:mt-0 flex gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-secondary/20 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-secondary text-xl">description</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-secondary/20 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-secondary text-xl">school</span>
+</div>
+</div>
+</div>
+<div class="w-full text-center pb-6 opacity-30 text-[10px] font-mono tracking-[0.2em] uppercase">
+            Curated Academic Interface © 2024
+        </div>
+</footer>
+<!-- SideNav (Suppressed as per rules for Home Page focus) -->
+<!-- FAB (Suppressed as per rules for Home Page focus) -->
+</body></html>

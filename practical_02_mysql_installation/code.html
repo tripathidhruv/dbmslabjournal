@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Practical 02 | DBMS Journal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=JetBrains+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#dfe2eb",
+                        "tertiary-fixed-dim": "#ffba3d",
+                        "tertiary-fixed": "#ffdeae",
+                        "primary-container": "#00d4ff",
+                        "on-background": "#dfe2eb",
+                        "on-primary-container": "#00586b",
+                        "on-primary-fixed": "#001f27",
+                        "surface-tint": "#3cd7ff",
+                        "surface-container-high": "#262a31",
+                        "on-primary": "#003642",
+                        "primary-fixed-dim": "#3cd7ff",
+                        "surface-container": "#1c2026",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed": "#291800",
+                        "inverse-on-surface": "#2d3137",
+                        "surface-container-lowest": "#0a0e14",
+                        "secondary-container": "#dc9100",
+                        "surface-variant": "#31353c",
+                        "secondary-fixed": "#ffddb4",
+                        "inverse-primary": "#00677e",
+                        "on-secondary": "#452b00",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "primary-fixed": "#b4ebff",
+                        "on-tertiary-fixed-variant": "#604100",
+                        "on-tertiary": "#432c00",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#6c4900",
+                        "on-primary-fixed-variant": "#004e5f",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#31353c",
+                        "tertiary-container": "#feb528",
+                        "secondary": "#ffb955",
+                        "surface-dim": "#10141a",
+                        "on-tertiary-fixed": "#281900",
+                        "on-secondary-container": "#4f3100",
+                        "error-container": "#93000a",
+                        "secondary-fixed-dim": "#ffb955",
+                        "outline": "#859398",
+                        "surface-bright": "#353940",
+                        "on-surface": "#dfe2eb",
+                        "surface-container-low": "#181c22",
+                        "on-surface-variant": "#bbc9cf",
+                        "surface": "#10141a",
+                        "background": "#10141a",
+                        "tertiary": "#ffd9a1",
+                        "primary": "#a8e8ff",
+                        "outline-variant": "#3c494e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Newsreader"],
+                        "label": ["Inter"],
+                        "mono": ["JetBrains Mono"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .dot-matrix {
+            background-image: radial-gradient(circle, rgba(168, 232, 255, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30 selection:text-primary min-h-screen dot-matrix">
+<!-- TopNavBar -->
+<nav class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)]">
+<div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
+<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-headline tracking-tight">
+                DBMS Journal
+            </div>
+<div class="hidden md:flex items-center gap-8 font-headline text-sm uppercase tracking-widest">
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">Home</a>
+<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1" href="#">Practicals</a>
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">About</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-cyan-400 hover:bg-cyan-500/10 p-2 rounded-lg transition-all duration-300">menu</button>
+</div>
+</div>
+</nav>
+<div class="flex max-w-[1440px] mx-auto">
+<!-- SideNavBar -->
+<aside class="sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] hidden lg:block overflow-hidden flex flex-col">
+<div class="p-6 border-b border-outline-variant/10">
+<h3 class="font-headline font-bold text-primary tracking-tight">Lab Practicals</h3>
+<p class="font-mono text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">DBMS Coursework</p>
+</div>
+<div class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest ease-out duration-400" href="#">
+<span class="material-symbols-outlined text-sm">terminal</span> Practical 1
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 font-mono text-xs uppercase tracking-widest translate-x-1" href="#">
+<span class="material-symbols-outlined text-sm">database</span> Practical 2
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm">schema</span> Practical 3
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm">table_chart</span> Practical 4
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm">query_stats</span> Practical 5
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm">storage</span> Practical 6
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm">security</span> Practical 7
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm">code_blocks</span> Practical 8
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm">settings_ethernet</span> Practical 9
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm">lan</span> Practical 10
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm">cloud_done</span> Practical 11
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm">account_tree</span> Practical 12
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm">reorder</span> Practical 13
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm">history</span> Practical 14
+                </a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 px-6 md:px-12 py-12 max-w-4xl mx-auto">
+<header class="mb-16">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/20 rounded-full mb-6">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label text-[10px] font-bold uppercase tracking-widest text-primary">Group A | Practical 02</span>
+</div>
+<h1 class="text-5xl md:text-6xl font-headline font-bold text-on-surface mb-6 leading-tight">
+                    MySQL Client &amp; Server <span class="text-primary italic">Installation</span>
+</h1>
+<p class="text-xl text-on-surface-variant font-body leading-relaxed max-w-2xl italic">
+                    A comprehensive guide to setting up the MySQL ecosystem, establishing a robust foundation for database management and query execution.
+                </p>
+</header>
+<!-- Hero Image / Visual Anchor -->
+<div class="relative w-full h-64 rounded-xl overflow-hidden mb-20 shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="Modern server room with glowing blue led lights and futuristic hardware racks in a dark environment with soft cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZmrek7HVaVfqPx24KnP_dagCbC-QIDAOJvtGjb90dvoGCylVHRv8LDfFNhYP9pVp-Yftt-NCb64VlHg1AS9MBQzrePAILnbR4PnY9lXtLhJiLsXid4jtibHCV0TVFvtsa8HNR6O7Tg07NyKgO5otClIQdLQ9rpACUXmgUI9JWVdczJ-Yl_ECYGcYluyZB5kIWFCHcBNutjMAeqbpmlq5K_fN8FL1MiZe4zitCgrfZkiiIKuurONRsOB_ew9Aeo-tRHyGQWmxDT8k"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"></div>
+</div>
+<!-- Installation Steps -->
+<section class="space-y-12 mb-24">
+<div class="flex items-baseline gap-4 mb-8">
+<h2 class="text-3xl font-headline font-semibold text-primary">Installation Steps</h2>
+<div class="h-px flex-1 bg-outline-variant/20"></div>
+</div>
+<div class="grid grid-cols-1 gap-12">
+<!-- Step 1 -->
+<div class="group relative bg-surface-container-low p-8 rounded-lg transition-all duration-500 hover:bg-surface-container hover:shadow-[0_15px_30px_-10px_rgba(0,212,255,0.1)]">
+<div class="absolute -top-4 -left-4 w-12 h-12 bg-primary text-on-primary flex items-center justify-center font-headline font-bold text-xl rounded-lg">01</div>
+<h3 class="text-2xl font-headline font-medium text-on-surface mb-4">Update System Repositories</h3>
+<p class="text-on-surface-variant mb-6 leading-relaxed">Ensure your local package index is up-to-date before initiating the installation process to avoid version conflicts.</p>
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden font-mono text-sm">
+<div class="flex items-center gap-2 px-4 py-2 bg-surface-variant/30 border-b border-outline-variant/10">
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-amber-500/50"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-emerald-500/50"></div>
+</div>
+<span class="text-[10px] text-on-surface-variant ml-2 uppercase tracking-tighter">Terminal — Bash</span>
+</div>
+<div class="p-6 text-primary-fixed-dim">
+<code>$ sudo apt update &amp;&amp; sudo apt upgrade</code>
+</div>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="group relative bg-surface-container-low p-8 rounded-lg transition-all duration-500 hover:bg-surface-container hover:shadow-[0_15px_30px_-10px_rgba(0,212,255,0.1)]">
+<div class="absolute -top-4 -left-4 w-12 h-12 bg-primary text-on-primary flex items-center justify-center font-headline font-bold text-xl rounded-lg">02</div>
+<h3 class="text-2xl font-headline font-medium text-on-surface mb-4">Install MySQL Server</h3>
+<p class="text-on-surface-variant mb-6 leading-relaxed">Download and install the core MySQL server package. This will handle all data storage and query processing.</p>
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden font-mono text-sm">
+<div class="flex items-center gap-2 px-4 py-2 bg-surface-variant/30 border-b border-outline-variant/10">
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-amber-500/50"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-emerald-500/50"></div>
+</div>
+<span class="text-[10px] text-on-surface-variant ml-2 uppercase tracking-tighter">Terminal — Bash</span>
+</div>
+<div class="p-6 text-primary-fixed-dim">
+<code>$ sudo apt install mysql-server</code>
+</div>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="group relative bg-surface-container-low p-8 rounded-lg transition-all duration-500 hover:bg-surface-container hover:shadow-[0_15px_30px_-10px_rgba(0,212,255,0.1)]">
+<div class="absolute -top-4 -left-4 w-12 h-12 bg-primary text-on-primary flex items-center justify-center font-headline font-bold text-xl rounded-lg">03</div>
+<h3 class="text-2xl font-headline font-medium text-on-surface mb-4">Secure Configuration</h3>
+<p class="text-on-surface-variant mb-6 leading-relaxed">Run the built-in security script to lock down the installation, set root passwords, and remove anonymous users.</p>
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden font-mono text-sm">
+<div class="flex items-center gap-2 px-4 py-2 bg-surface-variant/30 border-b border-outline-variant/10">
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-amber-500/50"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-emerald-500/50"></div>
+</div>
+<span class="text-[10px] text-on-surface-variant ml-2 uppercase tracking-tighter">Terminal — Bash</span>
+</div>
+<div class="p-6 text-primary-fixed-dim">
+<code>$ sudo mysql_secure_installation</code>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Verification Section -->
+<section class="mb-24">
+<div class="flex items-baseline gap-4 mb-10">
+<h2 class="text-3xl font-headline font-semibold text-secondary">Verification</h2>
+<div class="h-px flex-1 bg-outline-variant/20"></div>
+</div>
+<div class="bg-surface-container-high rounded-xl p-8 border border-outline-variant/10">
+<div class="flex flex-col md:flex-row gap-8">
+<div class="flex-1">
+<h4 class="font-headline font-bold text-lg mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">task_alt</span>
+                                Service Check
+                            </h4>
+<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Confirm that the MySQL daemon is active and running as a background service.</p>
+<div class="bg-surface-container-lowest p-4 rounded-lg font-mono text-xs text-secondary-fixed">
+<code>$ systemctl status mysql</code>
+</div>
+</div>
+<div class="flex-1">
+<h4 class="font-headline font-bold text-lg mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">login</span>
+                                Access Login
+                            </h4>
+<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Attempt a local connection to the database server using the client terminal.</p>
+<div class="bg-surface-container-lowest p-4 rounded-lg font-mono text-xs text-secondary-fixed">
+<code>$ sudo mysql -u root -p</code>
+</div>
+</div>
+</div>
+<div class="mt-8 p-4 bg-secondary/5 rounded-lg border border-secondary/10">
+<p class="text-secondary text-sm font-body italic flex items-center gap-3">
+<span class="material-symbols-outlined text-[18px]">info</span>
+                            Pro Tip: Successful login will present you with the <span class="font-mono px-1 bg-secondary/10">mysql&gt;</span> prompt.
+                        </p>
+</div>
+</div>
+</section>
+<!-- Pagination Footer -->
+<footer class="flex justify-between items-center pt-12 border-t border-outline-variant/20">
+<a class="group flex flex-col items-start gap-1" href="#">
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant font-label">Previous Lab</span>
+<span class="flex items-center gap-2 text-on-surface group-hover:text-primary transition-colors font-headline font-bold text-xl">
+<span class="material-symbols-outlined">arrow_back</span>
+                        P1: Introduction
+                    </span>
+</a>
+<a class="group flex flex-col items-end gap-1" href="#">
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant font-label">Next Lab</span>
+<span class="flex items-center gap-2 text-on-surface group-hover:text-primary transition-colors font-headline font-bold text-xl text-right">
+                        P3: DDL Commands
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</span>
+</a>
+</footer>
+</main>
+</div>
+<!-- Global Footer -->
+<footer class="bg-[#10141a] w-full border-t border-slate-800/50 mt-20">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full max-w-[1440px] mx-auto">
+<div class="text-amber-500 font-serif font-['Newsreader'] italic text-lg mb-4 md:mb-0">
+                S.Y.B.Tech IT | Sem IV | Pattern 2023
+            </div>
+<div class="flex gap-8 text-slate-500 text-sm font-label">
+<a class="hover:text-amber-200 transition-colors" href="#">University Guidelines</a>
+<a class="hover:text-amber-200 transition-colors" href="#">Lab Manual</a>
+<a class="hover:text-amber-200 transition-colors" href="#">Contact Faculty</a>
+</div>
+</div>
+</footer>
+</body></html>

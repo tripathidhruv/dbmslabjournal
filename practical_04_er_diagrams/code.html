@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Practical 04 | DBMS Journal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#633f00",
+                    "on-tertiary-container": "#6c4900",
+                    "on-primary-fixed-variant": "#004e5f",
+                    "secondary-fixed-dim": "#ffb955",
+                    "surface-bright": "#353940",
+                    "surface-dim": "#10141a",
+                    "on-tertiary": "#432c00",
+                    "on-surface": "#dfe2eb",
+                    "outline": "#859398",
+                    "inverse-on-surface": "#2d3137",
+                    "secondary-fixed": "#ffddb4",
+                    "on-error-container": "#ffdad6",
+                    "surface-container": "#1c2026",
+                    "on-primary-container": "#00586b",
+                    "primary-container": "#00d4ff",
+                    "on-secondary": "#452b00",
+                    "tertiary-fixed": "#ffdeae",
+                    "error-container": "#93000a",
+                    "surface-container-high": "#262a31",
+                    "on-tertiary-fixed": "#281900",
+                    "inverse-primary": "#00677e",
+                    "surface": "#10141a",
+                    "on-primary-fixed": "#001f27",
+                    "surface-container-low": "#181c22",
+                    "surface-container-highest": "#31353c",
+                    "on-surface-variant": "#bbc9cf",
+                    "error": "#ffb4ab",
+                    "surface-container-lowest": "#0a0e14",
+                    "inverse-surface": "#dfe2eb",
+                    "on-secondary-fixed": "#291800",
+                    "primary": "#a8e8ff",
+                    "on-error": "#690005",
+                    "tertiary-fixed-dim": "#ffba3d",
+                    "on-tertiary-fixed-variant": "#604100",
+                    "tertiary": "#ffd9a1",
+                    "secondary": "#ffb955",
+                    "on-background": "#dfe2eb",
+                    "primary-fixed-dim": "#3cd7ff",
+                    "outline-variant": "#3c494e",
+                    "on-secondary-container": "#4f3100",
+                    "primary-fixed": "#b4ebff",
+                    "surface-variant": "#31353c",
+                    "on-primary": "#003642",
+                    "secondary-container": "#dc9100",
+                    "tertiary-container": "#feb528",
+                    "background": "#10141a",
+                    "surface-tint": "#3cd7ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Newsreader"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .dot-matrix {
+            background-image: radial-gradient(circle, #3c494e 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)]">
+<div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
+<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-['Space_Grotesk'] tracking-tight">
+                DBMS Journal
+            </div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-slate-400 hover:text-cyan-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#">Home</a>
+<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1 font-['Space_Grotesk'] tracking-tight" href="#">Practicals</a>
+<a class="text-slate-400 hover:text-cyan-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#">About</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-cyan-400 hover:bg-cyan-500/10 transition-all duration-300 scale-95 active:scale-90">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<div class="flex max-w-[1440px] mx-auto">
+<!-- SideNavBar -->
+<aside class="sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] overflow-y-auto hidden lg:block">
+<div class="p-8 border-b border-outline-variant/20">
+<h3 class="font-['JetBrains_Mono'] text-sm uppercase tracking-widest text-cyan-400">Lab Practicals</h3>
+<p class="text-slate-500 text-xs font-['Inter'] mt-1">DBMS Coursework</p>
+</div>
+<div class="flex flex-col gap-2 p-6 overflow-y-auto">
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors ease-out duration-400 translate-x-1 font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">terminal</span> Practical 1
+                </a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors ease-out duration-400 translate-x-1 font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">database</span> Practical 2
+                </a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors ease-out duration-400 translate-x-1 font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">schema</span> Practical 3
+                </a>
+<a class="flex items-center gap-3 p-3 rounded-lg bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 ease-out duration-400 translate-x-1 font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">table_chart</span> Practical 4
+                </a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors ease-out duration-400 translate-x-1 font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">query_stats</span> Practical 5
+                </a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors ease-out duration-400 translate-x-1 font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">storage</span> Practical 6
+                </a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors ease-out duration-400 translate-x-1 font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">security</span> Practical 7
+                </a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors ease-out duration-400 translate-x-1 font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">code_blocks</span> Practical 8
+                </a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 min-w-0 bg-surface dot-matrix bg-opacity-5">
+<div class="max-w-4xl mx-auto px-8 py-12">
+<!-- Header Section -->
+<header class="mb-16">
+<div class="flex items-center gap-4 mb-4">
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-['JetBrains_Mono'] tracking-widest uppercase rounded">Practical 04</span>
+<span class="px-3 py-1 bg-secondary/10 text-secondary text-xs font-['JetBrains_Mono'] tracking-widest uppercase rounded">Group B: MySQL</span>
+</div>
+<h1 class="text-5xl md:text-6xl font-['Space_Grotesk'] font-bold tracking-tight text-on-surface mb-6 leading-tight">
+                        Design a database using EER/ER model. <span class="text-primary/50">Draw ER/EER diagram.</span>
+</h1>
+<div class="flex gap-2">
+<span class="px-3 py-1.5 border border-outline-variant/30 rounded text-[10px] uppercase tracking-tighter font-['Inter'] text-on-surface-variant">CO301.1: Database Design</span>
+<span class="px-3 py-1.5 border border-outline-variant/30 rounded text-[10px] uppercase tracking-tighter font-['Inter'] text-on-surface-variant">CO301.4: Schema Modeling</span>
+</div>
+</header>
+<!-- Theory Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
+<div class="p-8 bg-surface-container-low rounded-xl group hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary">schema</span>
+<h3 class="text-xl font-['Space_Grotesk'] font-semibold">Entities</h3>
+</div>
+<p class="font-['Newsreader'] text-lg text-on-surface-variant leading-relaxed italic">
+                            A real-world object distinguishable from other objects. An entity set is a collection of similar entities, usually mapped to a database table.
+                        </p>
+</div>
+<div class="p-8 bg-surface-container-low rounded-xl group hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-secondary">settings_ethernet</span>
+<h3 class="text-xl font-['Space_Grotesk'] font-semibold">Relationships</h3>
+</div>
+<p class="font-['Newsreader'] text-lg text-on-surface-variant leading-relaxed italic">
+                            Associations among entities. We define cardinality (one-to-one, one-to-many, many-to-many) to enforce business rules in the schema.
+                        </p>
+</div>
+<div class="p-8 bg-surface-container-low rounded-xl group hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary">reorder</span>
+<h3 class="text-xl font-['Space_Grotesk'] font-semibold">Attributes</h3>
+</div>
+<p class="font-['Newsreader'] text-lg text-on-surface-variant leading-relaxed italic">
+                            Properties of an entity. They can be simple, composite, multi-valued, or derived. The Primary Key is a unique attribute.
+                        </p>
+</div>
+<div class="p-8 bg-surface-container-low rounded-xl group hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-secondary">history</span>
+<h3 class="text-xl font-['Space_Grotesk'] font-semibold">Notation</h3>
+</div>
+<p class="font-['Newsreader'] text-lg text-on-surface-variant leading-relaxed italic">
+                            Standard symbols used for drawing: Rectangles (Entities), Diamonds (Relationships), Ellipses (Attributes), and Lines.
+                        </p>
+</div>
+</section>
+<!-- Problem Statement -->
+<section class="mb-20">
+<div class="flex items-center gap-4 mb-8">
+<div class="h-[1px] flex-1 bg-outline-variant/30"></div>
+<h2 class="text-3xl font-['Space_Grotesk'] font-bold text-center">Problem Statement</h2>
+<div class="h-[1px] flex-1 bg-outline-variant/30"></div>
+</div>
+<div class="bg-surface-container-lowest p-10 rounded-xl border-l-4 border-primary">
+<p class="font-['Newsreader'] text-2xl text-on-surface leading-snug">
+                            "Design a comprehensive <span class="text-primary font-semibold">Library Management System</span> that tracks books, authors, publishers, and library members. The system must support book lending, late fee calculations, and category management while ensuring data integrity through appropriate EER constraints."
+                        </p>
+</div>
+</section>
+<!-- ER Diagram Frame -->
+<section class="mb-20">
+<div class="bg-surface-container-high rounded-xl overflow-hidden shadow-2xl">
+<div class="p-4 bg-surface-container-highest flex items-center gap-2 border-b border-outline-variant/10">
+<div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+<div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+<div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+<span class="ml-4 font-['JetBrains_Mono'] text-xs text-slate-400 uppercase tracking-widest">library_eer_diagram.png</span>
+</div>
+<div class="aspect-[16/10] bg-black/40 relative group">
+<img alt="Technical diagram" class="w-full h-full object-cover mix-blend-luminosity opacity-40 group-hover:opacity-60 transition-opacity" data-alt="Blueprint of a technical architectural diagram on a dark blueprint paper with glowing cyan lines and geometric shapes representing database schema" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpOMecAUm3fqc657uAEcffmG3030qGq4CwwXLNrEqPdcaYdqJ_aNNGYkNtXGvQrwwDdyFl2vGmJv5b_MMwauuzutRa2b7ZgyAqp82LuF9GXvCzAHL0rvaWLr3L0BWVnTTE19jVSWb65VcTpNHx8dKVoA2vOR61vlY2nDH3WRAKf715poSjAMui47jV8fvCtL9-qfsmDg3GDS019z8TKqzn3zmecznZFgr8rlY83_E-QVDiSpSmibV6cupHHFB148J3dIn1VavlFe8"/>
+<div class="absolute inset-0 flex flex-col items-center justify-center p-12 text-center">
+<span class="material-symbols-outlined text-6xl text-primary mb-4 opacity-50">account_tree</span>
+<h4 class="text-2xl font-['Space_Grotesk'] font-bold text-primary mb-2">ER Diagram for Library Management System</h4>
+<p class="text-slate-400 font-['Inter'] text-sm max-w-md">Detailed mapping of Book, Author, Member, and Transaction entities with primary/foreign key relationships.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Viva Q&A -->
+<section class="mb-20">
+<h2 class="text-3xl font-['Space_Grotesk'] font-bold mb-8">Viva Questions &amp; Answers</h2>
+<div class="space-y-4">
+<details class="group bg-surface-container-low rounded-lg overflow-hidden transition-all duration-300">
+<summary class="flex justify-between items-center p-6 cursor-pointer list-none">
+<h3 class="text-xl font-['Newsreader'] font-semibold italic">1. What is the difference between Strong and Weak entities?</h3>
+<span class="material-symbols-outlined text-secondary transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pt-0 font-['Inter'] text-on-surface-variant leading-relaxed">
+                                A strong entity exists independently and has its own primary key. A weak entity depends on a identifying owner entity and uses a partial key (discriminator) combined with the owner's primary key for identification.
+                            </div>
+</details>
+<details class="group bg-surface-container-low rounded-lg overflow-hidden transition-all duration-300">
+<summary class="flex justify-between items-center p-6 cursor-pointer list-none">
+<h3 class="text-xl font-['Newsreader'] font-semibold italic">2. Define Participation Constraints in E-R Modeling.</h3>
+<span class="material-symbols-outlined text-secondary transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pt-0 font-['Inter'] text-on-surface-variant leading-relaxed">
+                                Participation constraints specify whether the existence of an entity depends on its being related to another entity via the relationship set. It can be Total (Double line) or Partial (Single line).
+                            </div>
+</details>
+<details class="group bg-surface-container-low rounded-lg overflow-hidden transition-all duration-300">
+<summary class="flex justify-between items-center p-6 cursor-pointer list-none">
+<h3 class="text-xl font-['Newsreader'] font-semibold italic">3. When should we use EER (Enhanced ER) diagrams over standard ER?</h3>
+<span class="material-symbols-outlined text-secondary transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pt-0 font-['Inter'] text-on-surface-variant leading-relaxed">
+                                EER is used when we need to model complex requirements like Specialization, Generalization, and Aggregation, which are not easily captured by standard ER modeling.
+                            </div>
+</details>
+</div>
+</section>
+<!-- Navigation Footer -->
+<footer class="flex justify-between items-center pt-12 border-t border-outline-variant/20">
+<button class="flex items-center gap-2 px-6 py-3 bg-surface-container-low text-slate-400 hover:text-white transition-all font-['JetBrains_Mono'] text-sm uppercase tracking-widest rounded group">
+<span class="material-symbols-outlined group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                        Previous
+                    </button>
+<button class="flex items-center gap-2 px-8 py-3 bg-gradient-to-br from-cyan-300 to-cyan-500 text-on-primary font-['JetBrains_Mono'] text-sm uppercase tracking-widest rounded-lg shadow-[0_0_20px_rgba(0,212,255,0.2)] hover:scale-105 transition-all">
+                        Next Practical
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</footer>
+</div>
+</main>
+</div>
+<!-- Global Footer -->
+<footer class="bg-[#10141a] border-t border-slate-800/50 mt-20">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full max-w-[1440px] mx-auto">
+<div class="text-amber-500 font-serif font-['Newsreader'] italic text-lg mb-4 md:mb-0">
+                S.Y.B.Tech IT | Sem IV | Pattern 2023
+            </div>
+<div class="flex gap-8">
+<a class="text-slate-500 hover:text-amber-200 transition-colors font-['Newsreader'] italic" href="#">University Guidelines</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors font-['Newsreader'] italic" href="#">Lab Manual</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors font-['Newsreader'] italic" href="#">Contact Faculty</a>
+</div>
+</div>
+</footer>
+</body></html>

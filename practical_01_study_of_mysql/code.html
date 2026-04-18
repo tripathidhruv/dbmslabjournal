@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Practical 01 | DBMS Journal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=JetBrains+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "inverse-surface": "#dfe2eb",
+                "tertiary-fixed-dim": "#ffba3d",
+                "tertiary-fixed": "#ffdeae",
+                "primary-container": "#00d4ff",
+                "on-background": "#dfe2eb",
+                "on-primary-container": "#00586b",
+                "on-primary-fixed": "#001f27",
+                "surface-tint": "#3cd7ff",
+                "surface-container-high": "#262a31",
+                "on-primary": "#003642",
+                "primary-fixed-dim": "#3cd7ff",
+                "surface-container": "#1c2026",
+                "error": "#ffb4ab",
+                "on-secondary-fixed": "#291800",
+                "inverse-on-surface": "#2d3137",
+                "surface-container-lowest": "#0a0e14",
+                "secondary-container": "#dc9100",
+                "surface-variant": "#31353c",
+                "secondary-fixed": "#ffddb4",
+                "inverse-primary": "#00677e",
+                "on-secondary": "#452b00",
+                "on-secondary-fixed-variant": "#633f00",
+                "primary-fixed": "#b4ebff",
+                "on-tertiary-fixed-variant": "#604100",
+                "on-tertiary": "#432c00",
+                "on-error-container": "#ffdad6",
+                "on-tertiary-container": "#6c4900",
+                "on-primary-fixed-variant": "#004e5f",
+                "on-error": "#690005",
+                "surface-container-highest": "#31353c",
+                "tertiary-container": "#feb528",
+                "secondary": "#ffb955",
+                "surface-dim": "#10141a",
+                "on-tertiary-fixed": "#281900",
+                "on-secondary-container": "#4f3100",
+                "error-container": "#93000a",
+                "secondary-fixed-dim": "#ffb955",
+                "outline": "#859398",
+                "surface-bright": "#353940",
+                "on-surface": "#dfe2eb",
+                "surface-container-low": "#181c22",
+                "on-surface-variant": "#bbc9cf",
+                "surface": "#10141a",
+                "background": "#10141a",
+                "tertiary": "#ffd9a1",
+                "primary": "#a8e8ff",
+                "outline-variant": "#3c494e"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "fontFamily": {
+                "headline": ["Space Grotesk"],
+                "body": ["Newsreader"],
+                "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .dot-matrix {
+            background-image: radial-gradient(circle, #3c494e 1px, transparent 1px);
+            background-size: 32px 32px;
+            opacity: 0.05;
+        }
+        body {
+            background-color: #10141a;
+            color: #dfe2eb;
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-primary/30 selection:text-primary">
+<nav class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)]">
+<div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
+<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-headline tracking-tight">
+                DBMS Journal
+            </div>
+<div class="hidden md:flex gap-8 font-headline">
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">Home</a>
+<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1" href="#">Practicals</a>
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">About</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">menu</button>
+</div>
+</div>
+</nav>
+<div class="flex max-w-[1440px] mx-auto relative">
+<!-- Sidebar Navigation -->
+<aside class="hidden md:block sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] overflow-y-auto scrollbar-hide border-none">
+<div class="flex flex-col gap-2 p-6">
+<div class="mb-6">
+<h3 class="font-headline font-bold text-primary tracking-widest uppercase text-xs">Lab Practicals</h3>
+<p class="text-on-surface-variant text-[10px] uppercase tracking-[0.2em] mt-1 font-label">DBMS Coursework</p>
+</div>
+<a class="flex items-center gap-3 p-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 font-label text-sm uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">terminal</span>
+                    Practical 1
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="#">
+<span class="material-symbols-outlined">database</span>
+                    Practical 2
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="#">
+<span class="material-symbols-outlined">schema</span>
+                    Practical 3
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="#">
+<span class="material-symbols-outlined">table_chart</span>
+                    Practical 4
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="#">
+<span class="material-symbols-outlined">query_stats</span>
+                    Practical 5
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="#">
+<span class="material-symbols-outlined">storage</span>
+                    Practical 6
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="#">
+<span class="material-symbols-outlined">security</span>
+                    Practical 7
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="#">
+<span class="material-symbols-outlined">code_blocks</span>
+                    Practical 8
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="#">
+<span class="material-symbols-outlined">settings_ethernet</span>
+                    Practical 9
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="#">
+<span class="material-symbols-outlined">lan</span>
+                    Practical 10
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="#">
+<span class="material-symbols-outlined">cloud_done</span>
+                    Practical 11
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+                    Practical 12
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="#">
+<span class="material-symbols-outlined">reorder</span>
+                    Practical 13
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="#">
+<span class="material-symbols-outlined">history</span>
+                    Practical 14
+                </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 min-w-0 bg-background relative overflow-hidden">
+<div class="absolute inset-0 dot-matrix pointer-events-none"></div>
+<div class="px-8 py-12 lg:px-16 max-w-5xl mx-auto relative z-10">
+<!-- Header Section -->
+<header class="mb-16">
+<div class="flex items-center gap-4 mb-6">
+<span class="px-3 py-1 bg-primary/10 text-primary border border-primary/20 rounded-lg text-xs font-label uppercase tracking-widest">Group A</span>
+<span class="text-on-surface-variant/40">—</span>
+<span class="text-on-surface-variant font-label text-xs uppercase tracking-widest">Relational Databases</span>
+</div>
+<h1 class="text-5xl md:text-7xl font-headline font-bold text-on-surface mb-6 tracking-tight">
+                        Practical 01: <span class="text-primary">Study of MySQL</span>
+</h1>
+<p class="text-xl md:text-2xl text-on-surface-variant font-body leading-relaxed max-w-3xl italic">
+                        An exploration into the architecture, core characteristics, and fundamental properties of the world's most popular open-source relational database.
+                    </p>
+</header>
+<!-- Theory Section: Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+<div class="lg:col-span-2 p-8 bg-surface-container-low rounded-xl border-l-4 border-primary">
+<h2 class="text-2xl font-headline font-semibold text-on-surface mb-4">The Core Characteristics</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+<div>
+<h3 class="text-secondary font-label font-bold text-sm uppercase tracking-tighter mb-2">Efficiency</h3>
+<p class="text-on-surface-variant font-body leading-relaxed">
+                                    MySQL utilizes a sophisticated query cache and optimized storage engines like InnoDB to ensure rapid data retrieval and minimal CPU overhead during complex operations.
+                                </p>
+</div>
+<div>
+<h3 class="text-secondary font-label font-bold text-sm uppercase tracking-tighter mb-2">Scalability</h3>
+<p class="text-on-surface-variant font-body leading-relaxed">
+                                    Engineered to handle massive datasets and high-traffic applications, MySQL supports vertical scaling and horizontal read-scaling through replication.
+                                </p>
+</div>
+</div>
+</div>
+<div class="p-8 bg-surface-container-highest rounded-xl flex flex-col justify-center shadow-[0_0_15px_rgba(0,212,255,0.1)]">
+<h3 class="text-primary font-headline font-bold text-3xl mb-4">Performance</h3>
+<p class="text-on-surface-variant font-body leading-relaxed mb-4">
+                            Consistently ranked as one of the fastest RDBMS, MySQL excels in both read-heavy and write-intensive environments.
+                        </p>
+<div class="w-full h-1 bg-outline-variant rounded-full overflow-hidden">
+<div class="w-[92%] h-full bg-primary shadow-[0_0_10px_#00d4ff]"></div>
+</div>
+<p class="text-[10px] uppercase font-label mt-2 tracking-widest text-on-surface-variant/60">Benchmark Reliability Score</p>
+</div>
+<!-- ACID Properties Card -->
+<div class="lg:col-span-3 p-10 bg-surface-container rounded-xl">
+<div class="flex flex-col md:flex-row gap-12 items-center">
+<div class="flex-1">
+<h2 class="text-3xl font-headline font-bold text-on-surface mb-6">ACID Properties</h2>
+<p class="text-on-surface-variant font-body text-lg leading-relaxed mb-8">
+                                    Transactional integrity is the backbone of DBMS reliability. MySQL ensures every operation adheres to these four pillars:
+                                </p>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="p-4 bg-background rounded-lg border border-outline-variant/20 group hover:border-primary/50 transition-all">
+<div class="text-primary font-headline font-bold text-2xl mb-1">A</div>
+<div class="text-xs uppercase font-label tracking-widest font-bold">Atomicity</div>
+</div>
+<div class="p-4 bg-background rounded-lg border border-outline-variant/20 group hover:border-primary/50 transition-all">
+<div class="text-primary font-headline font-bold text-2xl mb-1">C</div>
+<div class="text-xs uppercase font-label tracking-widest font-bold">Consistency</div>
+</div>
+<div class="p-4 bg-background rounded-lg border border-outline-variant/20 group hover:border-primary/50 transition-all">
+<div class="text-primary font-headline font-bold text-2xl mb-1">I</div>
+<div class="text-xs uppercase font-label tracking-widest font-bold">Isolation</div>
+</div>
+<div class="p-4 bg-background rounded-lg border border-outline-variant/20 group hover:border-primary/50 transition-all">
+<div class="text-primary font-headline font-bold text-2xl mb-1">D</div>
+<div class="text-xs uppercase font-label tracking-widest font-bold">Durability</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Architecture Diagram Section -->
+<section class="mb-20">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface">MySQL Architecture</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div>
+</div>
+<div class="relative w-full aspect-[16/9] bg-surface-container-low rounded-xl overflow-hidden group">
+<img alt="Architecture Schema" class="w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-700" data-alt="Technical schematic showing layers of data processing, glowing network lines, and server nodes in a dark futuristic laboratory setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMZVYff0LQa-VCYqKi0lPJJx3q3onNtBBEu0zuCqXwK67QpmqfeahO-FXiXpcgbeNM9vg6pIpM97e7boq46tHspyqrx1-x4EFtMQ2fh7hGXYLq1qzMMG4cVHUmgAmJhtm2PfLJKra3wmS_vGI8HZXB0XyEhBAVxwLr6I2uYymCF1Fn-vE0ErX1-DPypu_kQjcvbylN5S9DOZwoWOVdss8XyFyzOxa1_yWyBpd9TcTq59Zl53zH84KyBBR6brVDN-FTxkkwhKxs0y4"/>
+<div class="absolute inset-0 flex flex-col items-center justify-center p-12 text-center">
+<div class="max-w-2xl">
+<span class="material-symbols-outlined text-6xl text-primary mb-6">account_tree</span>
+<h3 class="text-2xl font-headline font-bold text-on-surface mb-4">Architecture Schematic Placeholder</h3>
+<p class="text-on-surface-variant font-body leading-relaxed mb-8">
+                                    MySQL's unique pluggable storage engine architecture allows for a separation of the core database functionality from the data handling. The layers include:
+                                </p>
+<div class="flex flex-wrap justify-center gap-3">
+<span class="px-4 py-2 bg-surface-variant rounded font-label text-xs uppercase tracking-widest">Connectors</span>
+<span class="px-4 py-2 bg-surface-variant rounded font-label text-xs uppercase tracking-widest">Management Services</span>
+<span class="px-4 py-2 bg-surface-variant rounded font-label text-xs uppercase tracking-widest">SQL Interface</span>
+<span class="px-4 py-2 bg-surface-variant rounded font-label text-xs uppercase tracking-widest">Query Optimizer</span>
+<span class="px-4 py-2 bg-surface-variant rounded font-label text-xs uppercase tracking-widest">Caches &amp; Buffers</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer/Nav Button -->
+<div class="flex justify-between items-center pt-12 border-t border-outline-variant/20">
+<div>
+<p class="text-on-surface-variant/40 font-label text-[10px] uppercase tracking-[0.3em]">End of Practical 01</p>
+</div>
+<a class="group relative px-8 py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-bold rounded-lg overflow-hidden transition-transform active:scale-95" href="#">
+<span class="relative z-10 flex items-center gap-2">
+                            Next: Practical 02
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</span>
+<div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</a>
+</div>
+</div>
+</main>
+</div>
+<footer class="w-full border-t border-slate-800/50 mt-20 bg-[#10141a]">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full max-w-[1440px] mx-auto">
+<div class="text-amber-500 font-serif font-['Newsreader'] italic text-lg mb-4 md:mb-0">
+                S.Y.B.Tech IT | Sem IV | Pattern 2023
+            </div>
+<div class="flex gap-8 font-['Newsreader'] italic text-lg">
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">University Guidelines</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Lab Manual</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Contact Faculty</a>
+</div>
+</div>
+</footer>
+</body></html>

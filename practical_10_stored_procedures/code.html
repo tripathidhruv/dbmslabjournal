@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DBMS Journal | Practical 10</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=JetBrains+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#633f00",
+                    "on-tertiary-container": "#6c4900",
+                    "on-primary-fixed-variant": "#004e5f",
+                    "secondary-fixed-dim": "#ffb955",
+                    "surface-bright": "#353940",
+                    "surface-dim": "#10141a",
+                    "on-tertiary": "#432c00",
+                    "on-surface": "#dfe2eb",
+                    "outline": "#859398",
+                    "inverse-on-surface": "#2d3137",
+                    "secondary-fixed": "#ffddb4",
+                    "on-error-container": "#ffdad6",
+                    "surface-container": "#1c2026",
+                    "on-primary-container": "#00586b",
+                    "primary-container": "#00d4ff",
+                    "on-secondary": "#452b00",
+                    "tertiary-fixed": "#ffdeae",
+                    "error-container": "#93000a",
+                    "surface-container-high": "#262a31",
+                    "on-tertiary-fixed": "#281900",
+                    "inverse-primary": "#00677e",
+                    "surface": "#10141a",
+                    "on-primary-fixed": "#001f27",
+                    "surface-container-low": "#181c22",
+                    "surface-container-highest": "#31353c",
+                    "on-surface-variant": "#bbc9cf",
+                    "error": "#ffb4ab",
+                    "surface-container-lowest": "#0a0e14",
+                    "inverse-surface": "#dfe2eb",
+                    "on-secondary-fixed": "#291800",
+                    "primary": "#a8e8ff",
+                    "on-error": "#690005",
+                    "tertiary-fixed-dim": "#ffba3d",
+                    "on-tertiary-fixed-variant": "#604100",
+                    "tertiary": "#ffd9a1",
+                    "secondary": "#ffb955",
+                    "on-background": "#dfe2eb",
+                    "primary-fixed-dim": "#3cd7ff",
+                    "outline-variant": "#3c494e",
+                    "on-secondary-container": "#4f3100",
+                    "primary-fixed": "#b4ebff",
+                    "surface-container-highest": "#31353c",
+                    "background": "#10141a",
+                    "surface-tint": "#3cd7ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Newsreader"],
+                    "label": ["Inter"],
+                    "mono": ["JetBrains Mono"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #10141a;
+            background-image: radial-gradient(#1c2026 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            background-attachment: fixed;
+        }
+        .glass-panel {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="text-on-surface selection:bg-primary/30">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)] border-none">
+<nav class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-['Space_Grotesk'] tracking-tight">DBMS Journal</span>
+</div>
+<div class="hidden md:flex gap-8 items-center font-['Space_Grotesk'] tracking-tight">
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">Home</a>
+<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1" href="#">Practicals</a>
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">About</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-cyan-400 hover:bg-cyan-500/10 transition-all duration-300 scale-95 active:scale-90">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+</header>
+<div class="flex max-w-[1440px] mx-auto relative">
+<!-- SideNavBar -->
+<aside class="sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] border-none hidden md:block overflow-y-auto custom-scrollbar">
+<div class="p-6">
+<div class="mb-8">
+<h2 class="font-['JetBrains_Mono'] text-sm uppercase tracking-widest text-cyan-400">Lab Practicals</h2>
+<p class="text-xs text-slate-500 mt-1">DBMS Coursework</p>
+</div>
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-lg">terminal</span> Practical 1
+                    </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-lg">database</span> Practical 2
+                    </a>
+<!-- ... Items omitted for brevity, focusing on active ... -->
+<div class="h-4"></div>
+<span class="text-[10px] text-slate-600 font-bold px-3">GROUP C: PL/SQL</span>
+<a class="flex items-center gap-3 p-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 font-['JetBrains_Mono'] text-sm uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
+<span class="material-symbols-outlined text-lg">lan</span> Practical 10
+                    </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-lg">cloud_done</span> Practical 11
+                    </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-lg">account_tree</span> Practical 12
+                    </a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 p-8 md:p-12 bg-transparent overflow-x-hidden">
+<!-- Header Section -->
+<section class="mb-16">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="space-y-4">
+<div class="flex items-center gap-4">
+<span class="px-3 py-1 bg-tertiary-container/20 text-tertiary border border-tertiary/20 rounded-full text-xs font-['JetBrains_Mono'] font-bold">GROUP C: PL/SQL</span>
+<span class="text-outline-variant opacity-50">•</span>
+<span class="text-on-surface-variant font-['Space_Grotesk'] text-sm uppercase tracking-tighter">CO: DBMS-4.2</span>
+</div>
+<h1 class="text-5xl md:text-6xl font-['Space_Grotesk'] font-bold tracking-tight text-on-surface leading-tight">
+                            Practical 10
+                        </h1>
+<p class="font-['Newsreader'] text-2xl md:text-3xl text-on-surface-variant italic max-w-3xl leading-relaxed">
+                            Write and execute PL/SQL stored procedure and function to manage complex database operations and return computed values.
+                        </p>
+</div>
+<div class="flex gap-2">
+<span class="px-4 py-2 bg-primary-container text-on-primary-container font-['JetBrains_Mono'] text-xs font-bold rounded-lg">CO-MAPPED</span>
+<span class="px-4 py-2 bg-surface-container-high text-on-surface-variant font-['JetBrains_Mono'] text-xs font-bold rounded-lg border border-outline-variant/15">DBMS_C3</span>
+</div>
+</div>
+</section>
+<!-- Theory Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-16">
+<div class="md:col-span-8 bg-surface-container-low p-8 rounded-xl shadow-[0_0_32px_rgba(0,212,255,0.02)] border border-outline-variant/10">
+<h3 class="font-['Space_Grotesk'] text-2xl font-bold mb-6 text-primary">Procedures vs Functions</h3>
+<div class="space-y-6 font-['Newsreader'] text-lg text-on-surface-variant leading-relaxed">
+<p>
+                            In DBMS, <span class="text-on-surface font-semibold underline decoration-primary/30">Stored Procedures</span> are groups of statements that can be saved and reused. They are typically used for administrative tasks or complex business logic that doesn't necessarily return a single value.
+                        </p>
+<p>
+                            Conversely, <span class="text-on-surface font-semibold underline decoration-secondary/30">Functions</span> are specialized procedures that MUST return a value. They are often used in calculations and can be called directly within SQL queries (e.g., SELECT statements).
+                        </p>
+</div>
+</div>
+<div class="md:col-span-4 bg-surface-container-high p-8 rounded-xl border border-outline-variant/15 flex flex-col justify-center">
+<h3 class="font-['Space_Grotesk'] text-xl font-bold mb-4 text-secondary">The Delimiter</h3>
+<p class="font-['Newsreader'] italic text-on-surface-variant text-lg">
+                        In MySQL, the default delimiter is <code class="text-secondary font-['JetBrains_Mono'] font-bold">;</code>. When writing PL/SQL, we must temporarily change it to something like <code class="text-secondary font-['JetBrains_Mono'] font-bold">//</code> to allow the entire block to be compiled as a single unit.
+                    </p>
+</div>
+</section>
+<!-- Code IDE Section -->
+<section class="mb-16">
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-2xl border border-outline-variant/20">
+<!-- Window Header -->
+<div class="flex items-center justify-between px-6 py-4 bg-surface-container-high border-b border-outline-variant/20">
+<div class="flex gap-2">
+<div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+</div>
+<div class="flex gap-4 font-['JetBrains_Mono'] text-xs uppercase tracking-widest">
+<button class="text-cyan-400 border-b-2 border-cyan-400 pb-1">Stored Procedure</button>
+<button class="text-slate-500 hover:text-slate-300 transition-colors">Stored Function</button>
+<button class="text-slate-500 hover:text-slate-300 transition-colors">Execution Call</button>
+</div>
+<button class="text-slate-500 hover:text-cyan-400 transition-colors">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+</button>
+</div>
+<!-- Code Block -->
+<div class="p-8 overflow-x-auto font-['JetBrains_Mono'] text-sm leading-relaxed">
+<pre class="text-on-surface-variant"><span class="text-secondary">DELIMITER</span> //
+
+<span class="text-primary">CREATE PROCEDURE</span> UpdateSalary(
+    <span class="text-on-tertiary-container">IN</span> emp_id <span class="text-on-tertiary-container">INT</span>,
+    <span class="text-on-tertiary-container">IN</span> increment <span class="text-on-tertiary-container">DECIMAL</span>(10,2)
+)
+<span class="text-primary">BEGIN</span>
+    <span class="text-primary">UPDATE</span> Employees 
+    <span class="text-primary">SET</span> salary = salary + increment
+    <span class="text-primary">WHERE</span> id = emp_id;
+    
+    <span class="text-slate-500 italic">-- Log the transaction</span>
+    <span class="text-primary">INSERT INTO</span> AuditLog(emp_id, log_time) 
+    <span class="text-primary">VALUES</span> (emp_id, <span class="text-secondary">NOW</span>());
+<span class="text-primary">END</span> //
+
+<span class="text-secondary">DELIMITER</span> ;</pre>
+</div>
+</div>
+</section>
+<!-- Terminal Output -->
+<section class="mb-16">
+<div class="bg-black/80 rounded-lg p-6 font-['JetBrains_Mono'] text-sm shadow-inner relative group overflow-hidden">
+<div class="absolute inset-0 bg-primary/5 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-green-500 text-lg">terminal</span>
+<span class="text-slate-500 uppercase tracking-widest text-[10px] font-bold">Query Output</span>
+</div>
+<div class="space-y-2">
+<div class="text-slate-500">mysql&gt; CALL UpdateSalary(101, 500.00);</div>
+<div class="text-green-400">Query OK, 1 row affected (0.01 sec)</div>
+<div class="text-slate-500 mt-4">mysql&gt; SELECT * FROM Employees WHERE id = 101;</div>
+<div class="grid grid-cols-4 gap-4 border-b border-slate-800 pb-1 mt-2 text-slate-400">
+<div>ID</div><div>Name</div><div>Salary</div><div>Status</div>
+</div>
+<div class="grid grid-cols-4 gap-4 pt-1 text-on-surface">
+<div>101</div><div>J. Smith</div><div>5500.00</div><div class="text-green-500">PROCESSED</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Viva Accordion -->
+<section class="mb-16">
+<h3 class="font-['Space_Grotesk'] text-3xl font-bold mb-8">Viva Questions</h3>
+<div class="space-y-4">
+<div class="bg-surface-container-low rounded-xl border border-outline-variant/10 hover:border-outline-variant/30 transition-all">
+<button class="w-full flex items-center justify-between p-6 text-left">
+<span class="font-['Newsreader'] text-xl font-semibold">What is the difference between IN and OUT parameters?</span>
+<span class="material-symbols-outlined text-secondary">expand_more</span>
+</button>
+<div class="px-6 pb-6 text-on-surface-variant font-['Newsreader'] text-lg border-t border-outline-variant/10 pt-4 hidden">
+                            IN parameters pass values into the procedure, while OUT parameters return values back to the calling environment.
+                        </div>
+</div>
+<div class="bg-surface-container-high rounded-xl border border-outline-variant/10 shadow-sm">
+<button class="w-full flex items-center justify-between p-6 text-left">
+<span class="font-['Newsreader'] text-xl font-semibold">Can we call a Stored Procedure from a Function?</span>
+<span class="material-symbols-outlined text-secondary transform rotate-180">expand_less</span>
+</button>
+<div class="px-6 pb-6 text-on-surface-variant font-['Newsreader'] text-lg border-t border-outline-variant/10 pt-4">
+                            Generally, no. Functions are designed to be side-effect free and deterministic within queries. Procedures allow DML operations, which could violate the constraints of a Function call.
+                        </div>
+</div>
+</div>
+</section>
+<!-- Navigation Footer -->
+<footer class="flex justify-between items-center pt-12 mt-20 border-t border-slate-800/50 w-full">
+<a class="flex items-center gap-4 group" href="#">
+<div class="w-12 h-12 rounded-full border border-outline-variant/20 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-slate-500 group-hover:text-primary transition-colors">arrow_back</span>
+</div>
+<div class="hidden sm:block">
+<div class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Previous</div>
+<div class="font-['Space_Grotesk'] font-bold text-on-surface">Practical 09</div>
+</div>
+</a>
+<div class="text-center font-['Newsreader'] italic text-lg text-amber-400">
+                    S.Y.B.Tech IT | Sem IV | Pattern 2023
+                </div>
+<a class="flex items-center gap-4 group text-right" href="#">
+<div class="hidden sm:block">
+<div class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Next</div>
+<div class="font-['Space_Grotesk'] font-bold text-on-surface">Practical 11</div>
+</div>
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center shadow-[0_0_15px_rgba(0,212,255,0.2)] group-hover:shadow-[0_0_25px_rgba(0,212,255,0.4)] transition-all">
+<span class="material-symbols-outlined text-on-primary">arrow_forward</span>
+</div>
+</a>
+</footer>
+<!-- Bottom Brand Info (JSON Footer) -->
+<div class="flex flex-col md:flex-row justify-between items-center py-10 mt-10 w-full gap-6">
+<div class="font-['Newsreader'] italic text-lg text-slate-500">
+                    Coursework developed by IT Department
+                </div>
+<div class="flex gap-8 font-['Newsreader'] italic text-lg">
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">University Guidelines</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Lab Manual</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Contact Faculty</a>
+</div>
+</div>
+</main>
+</div>
+<!-- Floating Action for Quick Reference (Optional) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 rounded-full bg-secondary-container text-on-secondary-container shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-transform z-50">
+<span class="material-symbols-outlined">help</span>
+</button>
+</body></html>

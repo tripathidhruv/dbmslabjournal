@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Practical 05 - DBMS Journal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=JetBrains+Mono:wght@100..800&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#dfe2eb",
+                        "tertiary-fixed-dim": "#ffba3d",
+                        "tertiary-fixed": "#ffdeae",
+                        "primary-container": "#00d4ff",
+                        "on-background": "#dfe2eb",
+                        "on-primary-container": "#00586b",
+                        "on-primary-fixed": "#001f27",
+                        "surface-tint": "#3cd7ff",
+                        "surface-container-high": "#262a31",
+                        "on-primary": "#003642",
+                        "primary-fixed-dim": "#3cd7ff",
+                        "surface-container": "#1c2026",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed": "#291800",
+                        "inverse-on-surface": "#2d3137",
+                        "surface-container-lowest": "#0a0e14",
+                        "secondary-container": "#dc9100",
+                        "surface-variant": "#31353c",
+                        "secondary-fixed": "#ffddb4",
+                        "inverse-primary": "#00677e",
+                        "on-secondary": "#452b00",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "primary-fixed": "#b4ebff",
+                        "on-tertiary-fixed-variant": "#604100",
+                        "on-tertiary": "#432c00",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#6c4900",
+                        "on-primary-fixed-variant": "#004e5f",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#31353c",
+                        "tertiary-container": "#feb528",
+                        "secondary": "#ffb955",
+                        "surface-dim": "#10141a",
+                        "on-tertiary-fixed": "#281900",
+                        "on-secondary-container": "#4f3100",
+                        "error-container": "#93000a",
+                        "secondary-fixed-dim": "#ffb955",
+                        "outline": "#859398",
+                        "surface-bright": "#353940",
+                        "on-surface": "#dfe2eb",
+                        "surface-container-low": "#181c22",
+                        "on-surface-variant": "#bbc9cf",
+                        "surface": "#10141a",
+                        "background": "#10141a",
+                        "tertiary": "#ffd9a1",
+                        "primary": "#a8e8ff",
+                        "outline-variant": "#3c494e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Newsreader"],
+                        "label": ["Inter"],
+                        "mono": ["JetBrains Mono"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .dot-matrix {
+            background-image: radial-gradient(circle, rgba(168, 232, 255, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        body {
+            background-color: #10141a;
+            color: #bbc9cf;
+        }
+        .scroll-hide::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)]">
+<nav class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
+<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-headline tracking-tight">
+                DBMS Journal
+            </div>
+<div class="hidden md:flex items-center gap-8 font-headline text-sm uppercase tracking-widest">
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">Home</a>
+<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1" href="#">Practicals</a>
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">About</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-cyan-400 hover:bg-cyan-500/10 transition-all duration-300 rounded-lg scale-95 active:scale-90">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+</header>
+<div class="flex max-w-[1440px] mx-auto min-h-screen dot-matrix">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col sticky top-20 h-[calc(100vh-80px)] w-72 bg-[#181c22] border-none overflow-y-auto scroll-hide">
+<div class="p-6 border-b border-outline-variant/10">
+<h3 class="font-headline font-bold text-primary tracking-tight text-lg">Lab Practicals</h3>
+<p class="font-mono text-[10px] text-slate-500 uppercase tracking-widest mt-1">DBMS Coursework</p>
+</div>
+<div class="flex flex-col gap-1 p-4">
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
+<span class="material-symbols-outlined text-sm">terminal</span> Practical 1
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
+<span class="material-symbols-outlined text-sm">database</span> Practical 2
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
+<span class="material-symbols-outlined text-sm">schema</span> Practical 3
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
+<span class="material-symbols-outlined text-sm">table_chart</span> Practical 4
+                </a>
+<a class="flex items-center gap-3 p-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 rounded-l-lg font-mono text-sm uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
+<span class="material-symbols-outlined text-sm">query_stats</span> Practical 5
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
+<span class="material-symbols-outlined text-sm">storage</span> Practical 6
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
+<span class="material-symbols-outlined text-sm">security</span> Practical 7
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
+<span class="material-symbols-outlined text-sm">code_blocks</span> Practical 8
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
+<span class="material-symbols-outlined text-sm">settings_ethernet</span> Practical 9
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
+<span class="material-symbols-outlined text-sm">lan</span> Practical 10
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
+<span class="material-symbols-outlined text-sm">cloud_done</span> Practical 11
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
+<span class="material-symbols-outlined text-sm">account_tree</span> Practical 12
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
+<span class="material-symbols-outlined text-sm">reorder</span> Practical 13
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
+<span class="material-symbols-outlined text-sm">history</span> Practical 14
+                </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-6 md:px-12 py-10 overflow-x-hidden">
+<!-- Header Section -->
+<div class="mb-16">
+<div class="flex items-center gap-2 mb-4">
+<span class="px-3 py-1 rounded bg-primary-container/10 border border-primary/20 text-primary font-mono text-xs tracking-tighter">Group B</span>
+<span class="px-3 py-1 rounded bg-secondary-container/10 border border-secondary/20 text-secondary font-mono text-xs tracking-tighter">Normalization</span>
+</div>
+<h1 class="font-headline text-5xl md:text-7xl font-bold text-on-surface leading-tight tracking-tight mb-6">
+                    Practical 05: <br/>
+<span class="text-primary">DDL + Normalization</span>
+</h1>
+<p class="font-body text-xl md:text-2xl italic text-on-surface-variant max-w-2xl">
+                    "The art of structural integrity—transforming chaotic datasets into efficient, relational masterpieces through rigorous normalization forms."
+                </p>
+</div>
+<!-- Bento Grid Content -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Theory: 1NF & 2NF -->
+<div class="md:col-span-7 bg-surface-container-low p-8 rounded-lg">
+<h2 class="font-headline text-2xl font-bold text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined">account_tree</span> Theoretical Foundations
+                    </h2>
+<div class="space-y-8">
+<div>
+<h3 class="font-headline text-lg font-semibold text-secondary mb-2">1NF: First Normal Form</h3>
+<p class="font-body text-lg text-on-surface-variant">
+                                A relation is in 1NF if and only if the domain of each attribute contains only atomic values, and the value of each attribute contains only a single value from that domain. No repeating groups allowed.
+                            </p>
+</div>
+<div class="h-px bg-outline-variant/10"></div>
+<div>
+<h3 class="font-headline text-lg font-semibold text-secondary mb-2">2NF: Second Normal Form</h3>
+<p class="font-body text-lg text-on-surface-variant">
+                                A relation is in 2NF if it is in 1NF and every non-prime attribute is fully functionally dependent on the primary key. This eliminates partial functional dependency.
+                            </p>
+</div>
+</div>
+</div>
+<!-- 3NF & BCNF Sidecard -->
+<div class="md:col-span-5 flex flex-col gap-6">
+<div class="bg-surface-container-high p-8 rounded-lg flex-1">
+<h3 class="font-headline text-lg font-semibold text-tertiary mb-3">3NF: Third Normal Form</h3>
+<p class="font-body text-on-surface-variant leading-relaxed">
+                            Ensures no transitive dependencies. "Every non-key attribute must provide a fact about the key, the whole key, and nothing but the key (so help me Codd)."
+                        </p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/20 p-8 rounded-lg flex-1">
+<h3 class="font-headline text-lg font-semibold text-primary mb-3">BCNF: Boyce-Codd</h3>
+<p class="font-body text-on-surface-variant leading-relaxed">
+                            A stronger version of 3NF. For every non-trivial functional dependency X → Y, X must be a superkey. It addresses anomalies that 3NF might miss in tables with multiple candidate keys.
+                        </p>
+</div>
+</div>
+<!-- SQL Terminal Block -->
+<div class="md:col-span-12 bg-surface-container-lowest rounded-lg overflow-hidden mt-6">
+<div class="flex items-center justify-between px-6 py-3 bg-surface-container-high">
+<div class="flex gap-1.5">
+<div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+</div>
+<span class="font-mono text-[10px] uppercase text-slate-500 tracking-[0.2em]">ddl_schema.sql</span>
+<button class="flex items-center gap-2 text-[10px] font-mono text-cyan-400 hover:text-cyan-200 transition-colors">
+<span class="material-symbols-outlined text-sm">content_copy</span> COPY
+                        </button>
+</div>
+<div class="p-8 font-mono text-sm md:text-base leading-relaxed text-cyan-300/90 overflow-x-auto">
+<pre><code><span class="text-secondary">CREATE TABLE</span> Students (
+    StudentID <span class="text-tertiary">INT</span> PRIMARY KEY,
+    FullName <span class="text-tertiary">VARCHAR</span>(100) NOT NULL,
+    Email <span class="text-tertiary">VARCHAR</span>(50) UNIQUE
+);
+
+<span class="text-secondary">CREATE TABLE</span> Courses (
+    CourseID <span class="text-tertiary">VARCHAR</span>(10) PRIMARY KEY,
+    CourseName <span class="text-tertiary">VARCHAR</span>(100),
+    Credits <span class="text-tertiary">INT</span>
+);
+
+<span class="text-secondary">CREATE TABLE</span> Enrollments (
+    EnrollmentID <span class="text-tertiary">SERIAL</span> PRIMARY KEY,
+    StudentID <span class="text-tertiary">INT</span> REFERENCES Students(StudentID),
+    CourseID <span class="text-tertiary">VARCHAR</span>(10) REFERENCES Courses(CourseID),
+    Grade <span class="text-tertiary">CHAR</span>(1)
+);</code></pre>
+</div>
+</div>
+<!-- Normalization Example Case -->
+<div class="md:col-span-12 grid grid-cols-1 lg:grid-cols-2 gap-10 mt-12 items-center">
+<div>
+<h2 class="font-headline text-3xl font-bold text-on-surface mb-6">Case Study: Practical Normalization</h2>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary">01</div>
+<div>
+<h4 class="font-headline font-bold text-lg">Initial Unnormalized State</h4>
+<p class="font-body text-on-surface-variant">Data contains multi-valued attributes like "Phone Numbers" in a single cell and redundant instructor details.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center flex-shrink-0 text-secondary">02</div>
+<div>
+<h4 class="font-headline font-bold text-lg">Process of Decomposition</h4>
+<p class="font-body text-on-surface-variant">Splitting the flat table into <code>Instructors</code>, <code>Departments</code>, and <code>CourseAssignment</code> entities.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary/10 flex items-center justify-center flex-shrink-0 text-tertiary">03</div>
+<div>
+<h4 class="font-headline font-bold text-lg">Verification of Dependency</h4>
+<p class="font-body text-on-surface-variant">Ensuring that every non-key attribute is dependent only on the Primary Key, achieving 3NF status.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="relative aspect-video rounded-lg overflow-hidden group">
+<img alt="Database schema visualization" class="w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="Technical visualization of database schema relations with floating nodes and glowing cyan connecting lines on a dark futuristic background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsc61kolVVaic5eBFgJIuCD_LW5iwaEn-8PYbS4XteHxlVxi6Mtm3eVXrtsH2prkqjms1Gh1yATHJm5Zfh50kK2678lwIXUpJfTDXVX9xUvmIQyU1ZxAThntRMNOBDPskghq5CPgKW7P7UD0a_VPpfnRyENKXjXLh-h4QJMAxqtV4jTCUpME5Wp-28X9QXKw2utC4xP4KYNiRLptC0-J-cggzx15rxQYRzqYg_maJlxFT4HoDTrniGY5g2rRDYzlSYYmbGlSzZ0ps"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute bottom-6 left-6">
+<span class="text-xs font-mono text-cyan-400 bg-cyan-950/50 px-2 py-1 backdrop-blur-md rounded">Visualization v1.02</span>
+</div>
+</div>
+</div>
+<!-- Viva Accordion Section -->
+<div class="md:col-span-12 mt-20">
+<h2 class="font-headline text-3xl font-bold text-on-surface mb-8 text-center">Frequently Asked (Viva-Voce)</h2>
+<div class="space-y-4 max-w-4xl mx-auto">
+<div class="bg-surface-container-low rounded-lg p-6 hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex justify-between items-center">
+<h4 class="font-headline text-xl font-medium">Difference between 3NF and BCNF?</h4>
+<span class="material-symbols-outlined text-secondary">expand_more</span>
+</div>
+<p class="mt-4 font-body text-on-surface-variant hidden">3NF allows non-prime attributes to be dependent on candidate keys. BCNF requires all determinants to be candidate keys.</p>
+</div>
+<div class="bg-surface-container-low rounded-lg p-6 hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex justify-between items-center">
+<h4 class="font-headline text-xl font-medium">What is Transitive Dependency?</h4>
+<span class="material-symbols-outlined text-secondary">expand_more</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-6 hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex justify-between items-center">
+<h4 class="font-headline text-xl font-medium">Why is Normalization necessary?</h4>
+<span class="material-symbols-outlined text-secondary">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Practical Navigation -->
+<div class="flex justify-between items-center mt-24 pt-12 border-t border-outline-variant/10">
+<a class="group flex flex-col items-start" href="#">
+<span class="text-[10px] font-mono uppercase text-slate-500 tracking-widest mb-1 group-hover:text-primary transition-colors">Previous Module</span>
+<span class="font-headline text-2xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined group-hover:-translate-x-2 transition-transform">arrow_back</span> Practical 4
+                    </span>
+</a>
+<a class="group flex flex-col items-end text-right" href="#">
+<span class="text-[10px] font-mono uppercase text-slate-500 tracking-widest mb-1 group-hover:text-primary transition-colors">Next Module</span>
+<span class="font-headline text-2xl font-bold flex items-center gap-2">
+                        Practical 6 <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
+</span>
+</a>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-[#10141a] w-full border-t border-slate-800/50 mt-20">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full max-w-[1440px] mx-auto">
+<div class="mb-6 md:mb-0">
+<p class="font-body italic text-lg text-amber-500 font-serif">DBMS Journal</p>
+<p class="text-[10px] font-mono text-slate-500 uppercase tracking-widest mt-1">S.Y.B.Tech IT | Sem IV | Pattern 2023</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8 font-body italic text-lg">
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">University Guidelines</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Lab Manual</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Contact Faculty</a>
+</div>
+</div>
+</footer>
+</body></html>

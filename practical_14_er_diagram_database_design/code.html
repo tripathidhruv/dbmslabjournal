@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DBMS Journal | Practical 14</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#dfe2eb",
+                        "tertiary-fixed-dim": "#ffba3d",
+                        "tertiary-fixed": "#ffdeae",
+                        "primary-container": "#00d4ff",
+                        "on-background": "#dfe2eb",
+                        "on-primary-container": "#00586b",
+                        "on-primary-fixed": "#001f27",
+                        "surface-tint": "#3cd7ff",
+                        "surface-container-high": "#262a31",
+                        "on-primary": "#003642",
+                        "primary-fixed-dim": "#3cd7ff",
+                        "surface-container": "#1c2026",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed": "#291800",
+                        "inverse-on-surface": "#2d3137",
+                        "surface-container-lowest": "#0a0e14",
+                        "secondary-container": "#dc9100",
+                        "surface-variant": "#31353c",
+                        "secondary-fixed": "#ffddb4",
+                        "inverse-primary": "#00677e",
+                        "on-secondary": "#452b00",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "primary-fixed": "#b4ebff",
+                        "on-tertiary-fixed-variant": "#604100",
+                        "on-tertiary": "#432c00",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#6c4900",
+                        "on-primary-fixed-variant": "#004e5f",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#31353c",
+                        "tertiary-container": "#feb528",
+                        "secondary": "#ffb955",
+                        "surface-dim": "#10141a",
+                        "on-tertiary-fixed": "#281900",
+                        "on-secondary-container": "#4f3100",
+                        "error-container": "#93000a",
+                        "secondary-fixed-dim": "#ffb955",
+                        "outline": "#859398",
+                        "surface-bright": "#353940",
+                        "on-surface": "#dfe2eb",
+                        "surface-container-low": "#181c22",
+                        "on-surface-variant": "#bbc9cf",
+                        "surface": "#10141a",
+                        "background": "#10141a",
+                        "tertiary": "#ffd9a1",
+                        "primary": "#a8e8ff",
+                        "outline-variant": "#3c494e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Newsreader"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .dot-matrix {
+            background-image: radial-gradient(circle, #3c494e 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)]">
+<div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
+<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-headline tracking-tight">
+                DBMS Journal
+            </div>
+<div class="hidden md:flex items-center gap-8 font-headline text-sm uppercase tracking-widest">
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">Home</a>
+<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1" href="#">Practicals</a>
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">About</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-primary hover:bg-cyan-500/10 transition-all duration-300 rounded-lg scale-95 active:scale-90">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<div class="flex max-w-[1440px] mx-auto min-h-screen relative">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col gap-2 p-6 sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] overflow-y-auto">
+<div class="mb-6 px-2">
+<h3 class="font-headline font-bold text-primary text-lg">Lab Practicals</h3>
+<p class="text-xs text-outline font-label uppercase tracking-tighter">DBMS Coursework</p>
+</div>
+<nav class="flex flex-col gap-1">
+<!-- Manual loop for tabs -->
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors font-label text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">terminal</span> Practical 1
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors font-label text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">database</span> Practical 2
+                </a>
+<!-- ... Skipping middle items for brevity ... -->
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors font-label text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">reorder</span> Practical 13
+                </a>
+<a class="flex items-center gap-3 p-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 ease-out duration-400 translate-x-1 font-label text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">history</span> Practical 14
+                </a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-8 py-12 dot-matrix bg-opacity-5">
+<!-- Header Section -->
+<header class="mb-16">
+<div class="inline-flex items-center px-3 py-1 rounded-full border border-secondary/20 bg-secondary/5 text-secondary font-label text-xs tracking-widest uppercase mb-4">
+                    Group D: Database Architecture
+                </div>
+<h1 class="text-6xl font-headline font-bold text-on-surface tracking-tighter mb-6 leading-none">
+                    Practical 14: <span class="text-primary-container">ER Diagram + Database Design</span>
+</h1>
+<p class="text-xl text-on-surface-variant max-w-2xl italic leading-relaxed">
+                    A comprehensive framework for synthesizing conceptual models into physical schemas through rigorous normalization and semantic documentation.
+                </p>
+</header>
+<!-- Asymmetric Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Guidelines & Design Philosophy -->
+<section class="md:col-span-8 bg-surface-container-low p-10 rounded-xl relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+<h2 class="text-3xl font-headline font-semibold mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">architecture</span>
+                        Design Guidelines
+                    </h2>
+<div class="grid md:grid-cols-2 gap-8 text-on-surface-variant text-lg leading-relaxed">
+<div class="space-y-4">
+<p>Prioritize <span class="text-secondary">Semantic Clarity</span> over storage optimization in the conceptual phase. Every entity must represent a unique business concept.</p>
+<p>Maintain <span class="text-secondary">Referential Integrity</span> as a non-negotiable constraint. All foreign keys must map to validated candidate keys.</p>
+</div>
+<div class="space-y-4">
+<p>Use <span class="text-secondary">Crow’s Foot Notation</span> for explicit cardinality representation. Avoid ambiguous many-to-many relationships in the final physical design.</p>
+<p>Implement <span class="text-secondary">Consistent Naming</span>. Use snake_case for tables and attributes to ensure multi-platform compatibility.</p>
+</div>
+</div>
+</section>
+<!-- Status Panel -->
+<aside class="md:col-span-4 bg-secondary-container/10 p-8 rounded-xl border border-secondary/10">
+<h3 class="font-headline text-secondary text-xl mb-6">Practical Metadata</h3>
+<ul class="space-y-4 font-label text-sm uppercase tracking-wider">
+<li class="flex justify-between border-b border-outline-variant/20 pb-2">
+<span class="text-outline">Category</span>
+<span class="text-on-surface">Physical Design</span>
+</li>
+<li class="flex justify-between border-b border-outline-variant/20 pb-2">
+<span class="text-outline">Complexity</span>
+<span class="text-secondary">High</span>
+</li>
+<li class="flex justify-between border-b border-outline-variant/20 pb-2">
+<span class="text-outline">Tools</span>
+<span class="text-on-surface">MySQL / Draw.io</span>
+</li>
+</ul>
+<div class="mt-8">
+<img alt="ER Diagram" class="rounded-lg shadow-lg" data-alt="abstract minimalist line art of a complex database schema with connecting nodes in electric cyan on a dark slate background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCXkCzOSz44QwqpN3dUkYhf3erNGrsSnoKUce92eF6NVySK96JrgLT1dRvRPVPZUNuR2kHsqdaoOCx5WVhNAC-pFylHpdw6mLUhaCowODrpGbzepTqKeD8MqErY-y5EAmuoS_EbZaneGtrwY-MR0b6e7OFnYGPK13m_OkY8ZQ51uppC6TWMEa_TUW0rx15sRYJwwXvGo5nMBx0CPb74-jGXlxcF0_j8zP9BshhROUu4cS-sZP5TfFeV_I64E5KfSYuJHFsHVYK2NU"/>
+</div>
+</aside>
+<!-- Functional Dependencies Section -->
+<section class="md:col-span-6 bg-surface-container-high p-10 rounded-xl">
+<h2 class="text-3xl font-headline font-semibold mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">key</span>
+                        Functional Dependencies
+                    </h2>
+<div class="bg-surface-container-lowest p-6 rounded-lg font-mono text-sm space-y-3 relative">
+<div class="flex items-center gap-2 mb-4">
+<span class="w-3 h-3 rounded-full bg-red-500/50"></span>
+<span class="w-3 h-3 rounded-full bg-yellow-500/50"></span>
+<span class="w-3 h-3 rounded-full bg-green-500/50"></span>
+</div>
+<p class="text-primary-container"># Candidate Key Identification</p>
+<p class="text-on-surface-variant">FD1: student_id → {name, email, dob}</p>
+<p class="text-on-surface-variant">FD2: course_id → {title, credits, dept_id}</p>
+<p class="text-on-surface-variant">FD3: {student_id, course_id} → {grade, semester}</p>
+<p class="text-on-surface-variant">FD4: dept_id → {dept_name, HOD}</p>
+<button class="absolute top-6 right-6 p-2 bg-surface-variant/50 backdrop-blur rounded-md hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-xs">content_copy</span>
+</button>
+</div>
+</section>
+<!-- Normalization Checklist -->
+<section class="md:col-span-6 bg-surface-container-high p-10 rounded-xl">
+<h2 class="text-3xl font-headline font-semibold mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-fixed-dim">verified</span>
+                        Normalization Checklist
+                    </h2>
+<div class="space-y-4">
+<div class="flex items-start gap-4 p-4 bg-surface-container rounded-lg border-l-4 border-primary">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div>
+<h4 class="font-headline font-bold">1NF: Atomic Values</h4>
+<p class="text-sm text-on-surface-variant">No multi-valued attributes or repeating groups in relation.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 bg-surface-container rounded-lg border-l-4 border-primary">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div>
+<h4 class="font-headline font-bold">2NF: Partial Dependency</h4>
+<p class="text-sm text-on-surface-variant">No non-prime attribute is dependent on a proper subset of any candidate key.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 bg-surface-container rounded-lg border-l-4 border-outline-variant">
+<span class="material-symbols-outlined text-outline">radio_button_unchecked</span>
+<div>
+<h4 class="font-headline font-bold">3NF: Transitive Dependency</h4>
+<p class="text-sm text-on-surface-variant">No non-prime attribute is transitively dependent on the primary key.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Data Dictionary Table -->
+<section class="md:col-span-12 bg-surface-container-low p-10 rounded-xl overflow-x-auto">
+<h2 class="text-3xl font-headline font-semibold mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">table_view</span>
+                        Data Dictionary Template
+                    </h2>
+<table class="w-full text-left font-label">
+<thead>
+<tr class="text-outline uppercase text-xs tracking-widest border-b border-outline-variant/30">
+<th class="pb-4 px-4">Field Name</th>
+<th class="pb-4 px-4">Data Type</th>
+<th class="pb-4 px-4">Constraints</th>
+<th class="pb-4 px-4">Description</th>
+<th class="pb-4 px-4">Reference</th>
+</tr>
+</thead>
+<tbody class="text-on-surface-variant divide-y divide-outline-variant/10">
+<tr>
+<td class="py-4 px-4 font-mono text-secondary">user_id</td>
+<td class="py-4 px-4">BIGINT</td>
+<td class="py-4 px-4"><span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px]">PK</span> <span class="bg-outline-variant/20 px-2 py-0.5 rounded text-[10px]">AUTO_INC</span></td>
+<td class="py-4 px-4">Unique identifier for system users</td>
+<td class="py-4 px-4 text-xs">N/A</td>
+</tr>
+<tr>
+<td class="py-4 px-4 font-mono text-secondary">email_addr</td>
+<td class="py-4 px-4">VARCHAR(255)</td>
+<td class="py-4 px-4"><span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px]">UNIQUE</span> <span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px]">NOT NULL</span></td>
+<td class="py-4 px-4">Primary contact email address</td>
+<td class="py-4 px-4 text-xs">N/A</td>
+</tr>
+<tr>
+<td class="py-4 px-4 font-mono text-secondary">role_code</td>
+<td class="py-4 px-4">CHAR(3)</td>
+<td class="py-4 px-4"><span class="bg-secondary/10 text-secondary px-2 py-0.5 rounded text-[10px]">FK</span></td>
+<td class="py-4 px-4">Security role categorization</td>
+<td class="py-4 px-4 text-xs text-primary underline">roles.code</td>
+</tr>
+<tr>
+<td class="py-4 px-4 font-mono text-secondary">created_at</td>
+<td class="py-4 px-4">TIMESTAMP</td>
+<td class="py-4 px-4"><span class="bg-outline-variant/20 px-2 py-0.5 rounded text-[10px]">DEFAULT NOW()</span></td>
+<td class="py-4 px-4">Record insertion audit time</td>
+<td class="py-4 px-4 text-xs">N/A</td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-[#10141a] w-full border-t border-slate-800/50 mt-20">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full max-w-[1440px] mx-auto">
+<div class="mb-6 md:mb-0">
+<p class="font-body italic text-lg text-amber-500 font-serif">S.Y.B.Tech IT | Sem IV | Pattern 2023</p>
+<div class="flex gap-6 mt-2">
+<a class="text-slate-500 hover:text-amber-200 transition-colors font-body italic" href="#">University Guidelines</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors font-body italic" href="#">Lab Manual</a>
+</div>
+</div>
+<div class="flex items-center gap-12">
+<a class="group flex items-center gap-2 text-slate-500 hover:text-amber-400 transition-all" href="#">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+<span class="font-headline uppercase tracking-widest text-xs">Prev -&gt; P13</span>
+</a>
+<a class="group flex items-center gap-2 text-amber-400 underline decoration-2 underline-offset-8 transition-all" href="#">
+<span class="material-symbols-outlined text-sm">home</span>
+<span class="font-headline uppercase tracking-widest text-xs">Home</span>
+</a>
+</div>
+</div>
+</footer>
+</body></html>

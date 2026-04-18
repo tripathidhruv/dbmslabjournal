@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Practical 13 | DBMS Journal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#dfe2eb",
+                        "tertiary-fixed-dim": "#ffba3d",
+                        "tertiary-fixed": "#ffdeae",
+                        "primary-container": "#00d4ff",
+                        "on-background": "#dfe2eb",
+                        "on-primary-container": "#00586b",
+                        "on-primary-fixed": "#001f27",
+                        "surface-tint": "#3cd7ff",
+                        "surface-container-high": "#262a31",
+                        "on-primary": "#003642",
+                        "primary-fixed-dim": "#3cd7ff",
+                        "surface-container": "#1c2026",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed": "#291800",
+                        "inverse-on-surface": "#2d3137",
+                        "surface-container-lowest": "#0a0e14",
+                        "secondary-container": "#dc9100",
+                        "surface-variant": "#31353c",
+                        "secondary-fixed": "#ffddb4",
+                        "inverse-primary": "#00677e",
+                        "on-secondary": "#452b00",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "primary-fixed": "#b4ebff",
+                        "on-tertiary-fixed-variant": "#604100",
+                        "on-tertiary": "#432c00",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#6c4900",
+                        "on-primary-fixed-variant": "#004e5f",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#31353c",
+                        "tertiary-container": "#feb528",
+                        "secondary": "#ffb955",
+                        "surface-dim": "#10141a",
+                        "on-tertiary-fixed": "#281900",
+                        "on-secondary-container": "#4f3100",
+                        "error-container": "#93000a",
+                        "secondary-fixed-dim": "#ffb955",
+                        "outline": "#859398",
+                        "surface-bright": "#353940",
+                        "on-surface": "#dfe2eb",
+                        "surface-container-low": "#181c22",
+                        "on-surface-variant": "#bbc9cf",
+                        "surface": "#10141a",
+                        "background": "#10141a",
+                        "tertiary": "#ffd9a1",
+                        "primary": "#a8e8ff",
+                        "outline-variant": "#3c494e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Newsreader"],
+                        "label": ["Inter"],
+                        "mono": ["JetBrains Mono"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .dot-matrix {
+            background-image: radial-gradient(circle, #3c494e 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)]">
+<nav class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
+<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-headline tracking-tight">
+                DBMS Journal
+            </div>
+<div class="hidden md:flex gap-8 items-center font-headline font-medium">
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">Home</a>
+<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1" href="#">Practicals</a>
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">About</a>
+<div class="flex items-center ml-4 gap-2 px-3 py-1.5 bg-surface-container-high rounded-lg text-slate-400 border border-outline-variant/20 hover:border-primary/40 transition-all">
+<span class="material-symbols-outlined text-sm">search</span>
+<span class="font-label text-xs uppercase tracking-widest">Search Lab</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-cyan-500/10 rounded-full transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+</header>
+<div class="flex max-w-[1440px] mx-auto relative">
+<!-- SideNavBar -->
+<aside class="sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] hidden lg:block overflow-y-auto custom-scrollbar border-r border-outline-variant/10">
+<div class="p-6">
+<h3 class="font-headline text-xs uppercase tracking-[0.2em] text-cyan-400 mb-1">Lab Practicals</h3>
+<p class="font-label text-[10px] text-slate-500 uppercase tracking-widest mb-8">DBMS Coursework</p>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg group cursor-pointer ease-out duration-400 translate-x-1">
+<span class="material-symbols-outlined text-sm">terminal</span>
+<span class="font-mono text-sm uppercase tracking-widest">Practical 1</span>
+</div>
+<!-- Simplified list for brevity as per JSON but focusing on P13 -->
+<div class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg group cursor-pointer ease-out duration-400 translate-x-1">
+<span class="material-symbols-outlined text-sm">database</span>
+<span class="font-mono text-sm uppercase tracking-widest">Practical 12</span>
+</div>
+<div class="flex items-center gap-3 p-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 rounded-l-lg group cursor-pointer ease-out duration-400 translate-x-1">
+<span class="material-symbols-outlined text-sm">reorder</span>
+<span class="font-mono text-sm uppercase tracking-widest">Practical 13</span>
+</div>
+<div class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg group cursor-pointer ease-out duration-400 translate-x-1">
+<span class="material-symbols-outlined text-sm">history</span>
+<span class="font-mono text-sm uppercase tracking-widest">Practical 14</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 min-h-screen p-8 lg:p-12 dot-matrix bg-opacity-5">
+<!-- Breadcrumb & Header -->
+<div class="mb-12">
+<div class="flex items-center gap-2 mb-6">
+<span class="px-3 py-1 bg-secondary-container/20 text-secondary text-[10px] font-bold uppercase tracking-widest rounded-full border border-secondary/30">Group D</span>
+<span class="text-on-surface-variant/40 text-sm italic font-body">Software Engineering Module</span>
+</div>
+<h1 class="font-headline text-5xl md:text-7xl font-bold text-on-surface tracking-tighter mb-4 leading-none">
+                    Project Proposal <span class="text-primary">(SRS)</span>
+</h1>
+<p class="font-body text-xl text-on-surface-variant max-w-2xl leading-relaxed">
+                    Formalizing software requirements and technical documentation for the <span class="text-tertiary italic underline decoration-tertiary/30">Online Library Management System</span>.
+                </p>
+</div>
+<!-- Bento Grid Section -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-16">
+<!-- Main Goals: Glassmorphism Card -->
+<div class="md:col-span-8 bg-surface-container-low rounded-xl p-8 border border-outline-variant/10 shadow-xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 blur-3xl group-hover:bg-primary/10 transition-colors"></div>
+<h2 class="font-headline text-3xl font-semibold mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">target</span>
+                        System Goals
+                    </h2>
+<ul class="space-y-4 font-body text-lg text-on-surface-variant/90">
+<li class="flex gap-4">
+<span class="text-primary font-mono mt-1">01</span>
+                            Automate the legacy manual book tracking system to reduce human error and data redundancy.
+                        </li>
+<li class="flex gap-4">
+<span class="text-primary font-mono mt-1">02</span>
+                            Implement a real-time availability checker for over 50,000+ digital and physical assets.
+                        </li>
+<li class="flex gap-4">
+<span class="text-primary font-mono mt-1">03</span>
+                            Streamline the fine calculation and digital payment gateway integration for overdue returns.
+                        </li>
+</ul>
+</div>
+<!-- User Types: Tonal Layering -->
+<div class="md:col-span-4 bg-surface-container-high rounded-xl p-8 flex flex-col justify-between border border-outline-variant/10">
+<h3 class="font-headline text-xl font-bold text-secondary uppercase tracking-widest mb-8">User Personas</h3>
+<div class="space-y-6">
+<div class="flex items-center gap-4 group">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center border border-outline-variant/20 group-hover:border-secondary/50 transition-colors">
+<span class="material-symbols-outlined text-secondary">admin_panel_settings</span>
+</div>
+<div>
+<h4 class="font-label font-bold text-on-surface">Librarian</h4>
+<p class="font-label text-xs text-on-surface-variant/60 uppercase">Full CRUD Access</p>
+</div>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center border border-outline-variant/20 group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-primary">person</span>
+</div>
+<div>
+<h4 class="font-label font-bold text-on-surface">Member</h4>
+<p class="font-label text-xs text-on-surface-variant/60 uppercase">Search &amp; Request</p>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/10">
+<p class="text-xs font-mono text-on-surface-variant/40 italic">Estimated Active Users: ~2,500/day</p>
+</div>
+</div>
+<!-- Functionalities: Asymmetric Card -->
+<div class="md:col-span-12 lg:col-span-7 bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/5 shadow-inner">
+<h2 class="font-headline text-3xl font-semibold mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary">settings_suggest</span>
+                        Core Functionalities
+                    </h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+<div class="space-y-2">
+<h4 class="font-headline font-bold text-lg text-primary">Inventory Mgmt</h4>
+<p class="font-body text-on-surface-variant leading-relaxed">Cataloging books with ISBN, genres, and multi-format support (eBook/Hardcover).</p>
+</div>
+<div class="space-y-2">
+<h4 class="font-headline font-bold text-lg text-primary">Circulation Control</h4>
+<p class="font-body text-on-surface-variant leading-relaxed">Automated check-out/check-in workflows with QR code scanning capabilities.</p>
+</div>
+<div class="space-y-2">
+<h4 class="font-headline font-bold text-lg text-primary">Reporting Engine</h4>
+<p class="font-body text-on-surface-variant leading-relaxed">Daily transaction reports, late return alerts, and trend analysis for procurement.</p>
+</div>
+<div class="space-y-2">
+<h4 class="font-headline font-bold text-lg text-primary">User Dashboard</h4>
+<p class="font-body text-on-surface-variant leading-relaxed">Personalized reading lists, fine history, and reservation queue management.</p>
+</div>
+</div>
+</div>
+<!-- Load Estimation: Technical Highlight -->
+<div class="md:col-span-12 lg:col-span-5 bg-gradient-to-br from-surface-container-high to-surface-container-low rounded-xl p-8 border border-outline-variant/10 flex flex-col justify-center">
+<h3 class="font-headline text-2xl font-bold mb-6 text-on-surface italic">Load Estimation</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center bg-surface-container-highest p-4 rounded-lg">
+<span class="font-label text-sm">Concurrent Queries</span>
+<span class="font-mono text-primary font-bold">~500 TPS</span>
+</div>
+<div class="flex justify-between items-center bg-surface-container-highest p-4 rounded-lg">
+<span class="font-label text-sm">Data Growth Rate</span>
+<span class="font-mono text-primary font-bold">120MB / Month</span>
+</div>
+<div class="flex justify-between items-center bg-surface-container-highest p-4 rounded-lg">
+<span class="font-label text-sm">Storage Capacity</span>
+<span class="font-mono text-primary font-bold">2.5 TB (Scalable)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Requirements: Editorial Layout -->
+<div class="mb-16">
+<h2 class="font-headline text-4xl font-bold mb-12 text-center text-on-surface underline decoration-primary/20 underline-offset-8">Resource Blueprint</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<!-- Hardware -->
+<div class="relative pl-8 border-l-2 border-primary/20">
+<div class="absolute -left-3 top-0 w-6 h-6 bg-background border-2 border-primary rounded-full flex items-center justify-center">
+<span class="w-2 h-2 bg-primary rounded-full"></span>
+</div>
+<h4 class="font-headline text-2xl font-bold mb-6">Hardware Requirements</h4>
+<div class="bg-surface-container-low p-6 rounded-lg space-y-4 border border-outline-variant/10">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary">dns</span>
+<div>
+<p class="font-label font-bold text-sm">Application Server</p>
+<p class="font-body text-on-surface-variant">Quad-Core Xeon Processor, 32GB ECC RAM</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary">storage</span>
+<div>
+<p class="font-label font-bold text-sm">Database Cluster</p>
+<p class="font-body text-on-surface-variant">RAID 10 SSD Storage Array (1TB Initial)</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Software -->
+<div class="relative pl-8 border-l-2 border-secondary/20">
+<div class="absolute -left-3 top-0 w-6 h-6 bg-background border-2 border-secondary rounded-full flex items-center justify-center">
+<span class="w-2 h-2 bg-secondary rounded-full"></span>
+</div>
+<h4 class="font-headline text-2xl font-bold mb-6">Software Stack</h4>
+<div class="bg-surface-container-low p-6 rounded-lg space-y-4 border border-outline-variant/10">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-secondary">code</span>
+<div>
+<p class="font-label font-bold text-sm">Backend &amp; DB</p>
+<p class="font-body text-on-surface-variant">Node.js, PostgreSQL v15, Redis for Caching</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-secondary">terminal</span>
+<div>
+<p class="font-label font-bold text-sm">Operating Environment</p>
+<p class="font-body text-on-surface-variant">Ubuntu Server 22.04 LTS, Docker Containerization</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Terminal Output Section -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-2xl mb-20 border border-outline-variant/20">
+<div class="flex items-center gap-1.5 p-4 bg-surface-container-high border-b border-outline-variant/10">
+<div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+<span class="ml-4 font-mono text-xs text-on-surface-variant/60 uppercase tracking-widest">Proposal_Review_Summary.log</span>
+</div>
+<div class="p-8 font-mono text-sm text-green-400 leading-relaxed overflow-x-auto">
+<p class="mb-2">$ ./generate-summary.sh --project "Online Library"</p>
+<p class="mb-2 text-on-surface-variant">&gt;&gt; Analyzing requirements for Group D...</p>
+<p class="mb-2 text-on-surface-variant">&gt;&gt; Scanning feasibility...</p>
+<p class="mb-4 text-secondary">[SUCCESS] Project Proposal (SRS) v1.0.3 Compiled Successfully.</p>
+<div class="grid grid-cols-2 gap-4 text-on-surface-variant/80">
+<div class="border-l-2 border-primary/40 pl-4 py-1">
+<p class="font-bold text-primary">Modules Verified:</p>
+<p>- Auth Service</p>
+<p>- Catalog Manager</p>
+</div>
+<div class="border-l-2 border-secondary/40 pl-4 py-1">
+<p class="font-bold text-secondary">Risk Analysis:</p>
+<p>- Low Latency: Pass</p>
+<p>- Concurrency: Pass</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer Navigation -->
+<footer class="w-full border-t border-slate-800/50 bg-[#10141a]">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full max-w-[1440px] mx-auto">
+<div class="mb-8 md:mb-0">
+<span class="font-['Newsreader'] italic text-2xl text-amber-500 block">S.Y.B.Tech IT | Sem IV | Pattern 2023</span>
+<div class="flex gap-6 mt-4 font-headline text-sm text-slate-500 uppercase tracking-widest">
+<a class="hover:text-amber-200 transition-colors" href="#">University Guidelines</a>
+<a class="hover:text-amber-200 transition-colors" href="#">Lab Manual</a>
+<a class="hover:text-amber-200 transition-colors" href="#">Contact Faculty</a>
+</div>
+</div>
+<div class="flex gap-4">
+<a class="flex items-center gap-3 px-6 py-3 bg-surface-container-low border border-outline-variant/20 rounded-lg group hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined text-slate-500 group-hover:text-amber-400">arrow_back</span>
+<div class="text-right">
+<span class="block text-[10px] uppercase text-slate-500 font-label tracking-tighter">Previous Lab</span>
+<span class="font-headline font-bold text-on-surface">Practical 12</span>
+</div>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 bg-surface-container-low border border-outline-variant/20 rounded-lg group hover:bg-surface-container-high transition-all" href="#">
+<div class="text-left">
+<span class="block text-[10px] uppercase text-slate-500 font-label tracking-tighter">Next Lab</span>
+<span class="font-headline font-bold text-on-surface">Practical 14</span>
+</div>
+<span class="material-symbols-outlined text-slate-500 group-hover:text-amber-400">arrow_forward</span>
+</a>
+</div>
+</div>
+</footer>
+</body></html>

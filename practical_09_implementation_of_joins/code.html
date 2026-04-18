@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Practical 09 - Implementation of Joins</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#dfe2eb",
+                        "tertiary-fixed-dim": "#ffba3d",
+                        "tertiary-fixed": "#ffdeae",
+                        "primary-container": "#00d4ff",
+                        "on-background": "#dfe2eb",
+                        "on-primary-container": "#00586b",
+                        "on-primary-fixed": "#001f27",
+                        "surface-tint": "#3cd7ff",
+                        "surface-container-high": "#262a31",
+                        "on-primary": "#003642",
+                        "primary-fixed-dim": "#3cd7ff",
+                        "surface-container": "#1c2026",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed": "#291800",
+                        "inverse-on-surface": "#2d3137",
+                        "surface-container-lowest": "#0a0e14",
+                        "secondary-container": "#dc9100",
+                        "surface-variant": "#31353c",
+                        "secondary-fixed": "#ffddb4",
+                        "inverse-primary": "#00677e",
+                        "on-secondary": "#452b00",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "primary-fixed": "#b4ebff",
+                        "on-tertiary-fixed-variant": "#604100",
+                        "on-tertiary": "#432c00",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#6c4900",
+                        "on-primary-fixed-variant": "#004e5f",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#31353c",
+                        "tertiary-container": "#feb528",
+                        "secondary": "#ffb955",
+                        "surface-dim": "#10141a",
+                        "on-tertiary-fixed": "#281900",
+                        "on-secondary-container": "#4f3100",
+                        "error-container": "#93000a",
+                        "secondary-fixed-dim": "#ffb955",
+                        "outline": "#859398",
+                        "surface-bright": "#353940",
+                        "on-surface": "#dfe2eb",
+                        "surface-container-low": "#181c22",
+                        "on-surface-variant": "#bbc9cf",
+                        "surface": "#10141a",
+                        "background": "#10141a",
+                        "tertiary": "#ffd9a1",
+                        "primary": "#a8e8ff",
+                        "outline-variant": "#3c494e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Newsreader"],
+                        "label": ["Inter"],
+                        "mono": ["JetBrains Mono"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #10141a;
+            color: #bbc9cf;
+            font-family: 'Newsreader', serif;
+        }
+        .dot-matrix {
+            background-image: radial-gradient(#3c494e 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.05;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #10141a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #31353c;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00d4ff;
+        }
+    </style>
+</head>
+<body class="selection:bg-primary-container selection:text-on-primary-container">
+<div class="fixed inset-0 dot-matrix pointer-events-none"></div>
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)]">
+<nav class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
+<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-['Space_Grotesk'] tracking-tight">
+                DBMS Journal
+            </div>
+<div class="hidden md:flex gap-8 font-['Space_Grotesk']">
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">Home</a>
+<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1" href="#">Practicals</a>
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">About</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-400 hover:bg-cyan-500/10 transition-all duration-300 rounded-lg scale-95 active:scale-90">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+</header>
+<div class="flex max-w-[1440px] mx-auto relative">
+<!-- Sidebar Navigation -->
+<aside class="sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] overflow-y-auto hidden lg:flex flex-col gap-2 p-6">
+<div class="mb-6">
+<h3 class="font-['JetBrains_Mono'] text-sm uppercase tracking-widest text-cyan-400">Lab Practicals</h3>
+<p class="text-xs text-slate-500 font-['Inter']">DBMS Coursework</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
+<span class="material-symbols-outlined">terminal</span> Practical 1
+                </a>
+<!-- ... others ... -->
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">database</span> Practical 8
+                </a>
+<a class="flex items-center gap-3 p-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
+<span class="material-symbols-outlined">schema</span> Practical 9
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">table_chart</span> Practical 10
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">query_stats</span> Practical 11
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">storage</span> Practical 12
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">security</span> Practical 13
+                </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">code_blocks</span> Practical 14
+                </a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 px-8 py-12 md:px-16 lg:px-24">
+<!-- Practical Header -->
+<section class="mb-16">
+<div class="flex items-center gap-4 mb-4">
+<span class="px-3 py-1 rounded-full text-xs font-['Inter'] font-semibold bg-primary-container/20 text-primary uppercase tracking-wider">Group B</span>
+<span class="text-on-surface-variant/40 font-mono text-sm">#SQL-09</span>
+</div>
+<h1 class="text-5xl md:text-6xl font-['Space_Grotesk'] font-bold text-on-surface mb-6 leading-tight">Implementation of Joins</h1>
+<p class="text-xl md:text-2xl text-on-surface-variant font-['Newsreader'] italic max-w-3xl border-l-2 border-secondary pl-6">
+                    A comprehensive study on relational algebra implementation using SQL Joins to combine data from multiple entities based on related columns.
+                </p>
+</section>
+<!-- Sample Data Tables (Bento Grid Style) -->
+<section class="mb-20">
+<h2 class="text-3xl font-['Space_Grotesk'] font-semibold text-on-surface mb-8">Base Relation Tables</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Table 1: Students -->
+<div class="bg-surface-container-low p-8 rounded-xl relative overflow-hidden group hover:bg-surface-container transition-all duration-300">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-['JetBrains_Mono'] text-primary uppercase text-sm tracking-widest">Table: Students</h3>
+<span class="material-symbols-outlined text-on-surface-variant/20">account_circle</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-['Inter'] text-sm">
+<thead>
+<tr class="text-on-surface-variant/60 border-b border-outline-variant/20">
+<th class="pb-3 font-medium">STU_ID</th>
+<th class="pb-3 font-medium">NAME</th>
+<th class="pb-3 font-medium">DEPT_ID</th>
+</tr>
+</thead>
+<tbody class="text-on-surface">
+<tr><td class="py-3">101</td><td class="py-3">Alan Turing</td><td class="py-3">D01</td></tr>
+<tr><td class="py-3">102</td><td class="py-3">Grace Hopper</td><td class="py-3">D02</td></tr>
+<tr><td class="py-3">103</td><td class="py-3">Ada Lovelace</td><td class="py-3">D01</td></tr>
+<tr><td class="py-3">104</td><td class="py-3">John von Neumann</td><td class="py-3">D04</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Table 2: Departments -->
+<div class="bg-surface-container-low p-8 rounded-xl relative overflow-hidden group hover:bg-surface-container transition-all duration-300">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-['JetBrains_Mono'] text-secondary uppercase text-sm tracking-widest">Table: Departments</h3>
+<span class="material-symbols-outlined text-on-surface-variant/20">hub</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-['Inter'] text-sm">
+<thead>
+<tr class="text-on-surface-variant/60 border-b border-outline-variant/20">
+<th class="pb-3 font-medium">DEPT_ID</th>
+<th class="pb-3 font-medium">DEPT_NAME</th>
+</tr>
+</thead>
+<tbody class="text-on-surface">
+<tr><td class="py-3">D01</td><td class="py-3">Computer Science</td></tr>
+<tr><td class="py-3">D02</td><td class="py-3">Mathematics</td></tr>
+<tr><td class="py-3">D03</td><td class="py-3">Physics</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<!-- Joins Content -->
+<div class="space-y-24">
+<!-- 1. INNER JOIN -->
+<section>
+<div class="flex items-baseline gap-4 mb-6">
+<span class="text-4xl font-['Space_Grotesk'] font-bold text-primary">01.</span>
+<h2 class="text-3xl font-['Space_Grotesk'] font-semibold text-on-surface">Inner Join</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+<div class="lg:col-span-2 space-y-6">
+<p class="text-lg leading-relaxed">Returns records that have matching values in both tables. This is the most common type of join.</p>
+<div class="bg-surface-container-lowest p-6 rounded-lg font-['JetBrains_Mono'] text-sm border-l-4 border-primary">
+<div class="flex gap-1.5 mb-4">
+<div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+</div>
+<code class="text-primary-container">
+                                    SELECT S.NAME, D.DEPT_NAME<br/>
+                                    FROM Students S<br/>
+                                    INNER JOIN Departments D<br/>
+                                    ON S.DEPT_ID = D.DEPT_ID;
+                                </code>
+</div>
+</div>
+<div class="lg:col-span-3">
+<div class="bg-surface-container-high p-8 rounded-xl shadow-xl">
+<p class="font-['JetBrains_Mono'] text-xs text-on-surface-variant/40 mb-4 uppercase">Execution Result</p>
+<table class="w-full text-left font-['Inter'] text-sm">
+<thead>
+<tr class="text-primary/80 border-b border-primary/10">
+<th class="pb-3 px-2">NAME</th>
+<th class="pb-3 px-2">DEPT_NAME</th>
+</tr>
+</thead>
+<tbody class="text-on-surface">
+<tr class="bg-primary/5"><td class="py-3 px-2">Alan Turing</td><td class="py-3 px-2">Computer Science</td></tr>
+<tr><td class="py-3 px-2">Grace Hopper</td><td class="py-3 px-2">Mathematics</td></tr>
+<tr class="bg-primary/5"><td class="py-3 px-2">Ada Lovelace</td><td class="py-3 px-2">Computer Science</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. LEFT OUTER JOIN -->
+<section>
+<div class="flex items-baseline gap-4 mb-6">
+<span class="text-4xl font-['Space_Grotesk'] font-bold text-secondary">02.</span>
+<h2 class="text-3xl font-['Space_Grotesk'] font-semibold text-on-surface">Left Join</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+<div class="lg:col-span-2 space-y-6">
+<p class="text-lg leading-relaxed">Returns all records from the left table, and the matched records from the right table. Records with no match in the right table show <span class="text-secondary italic">NULL</span>.</p>
+<div class="bg-surface-container-lowest p-6 rounded-lg font-['JetBrains_Mono'] text-sm border-l-4 border-secondary">
+<div class="flex gap-1.5 mb-4">
+<div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+</div>
+<code class="text-tertiary">
+                                    SELECT S.NAME, D.DEPT_NAME<br/>
+                                    FROM Students S<br/>
+                                    LEFT JOIN Departments D<br/>
+                                    ON S.DEPT_ID = D.DEPT_ID;
+                                </code>
+</div>
+</div>
+<div class="lg:col-span-3">
+<div class="bg-surface-container-high p-8 rounded-xl shadow-xl">
+<p class="font-['JetBrains_Mono'] text-xs text-on-surface-variant/40 mb-4 uppercase">Execution Result</p>
+<table class="w-full text-left font-['Inter'] text-sm">
+<thead>
+<tr class="text-secondary/80 border-b border-secondary/10">
+<th class="pb-3 px-2">NAME</th>
+<th class="pb-3 px-2">DEPT_NAME</th>
+</tr>
+</thead>
+<tbody class="text-on-surface">
+<tr><td class="py-3 px-2">Alan Turing</td><td class="py-3 px-2">Computer Science</td></tr>
+<tr class="bg-secondary/5"><td class="py-3 px-2">Grace Hopper</td><td class="py-3 px-2">Mathematics</td></tr>
+<tr><td class="py-3 px-2">Ada Lovelace</td><td class="py-3 px-2">Computer Science</td></tr>
+<tr class="bg-secondary/10"><td class="py-3 px-2">John von Neumann</td><td class="py-3 px-2 text-secondary-container italic">NULL</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. RIGHT OUTER JOIN -->
+<section>
+<div class="flex items-baseline gap-4 mb-6">
+<span class="text-4xl font-['Space_Grotesk'] font-bold text-tertiary-fixed-dim">03.</span>
+<h2 class="text-3xl font-['Space_Grotesk'] font-semibold text-on-surface">Right Join</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+<div class="lg:col-span-2 space-y-6">
+<p class="text-lg leading-relaxed">Returns all records from the right table, and the matched records from the left table. Departments with no students will result in <span class="text-tertiary italic">NULL</span>.</p>
+<div class="bg-surface-container-lowest p-6 rounded-lg font-['JetBrains_Mono'] text-sm border-l-4 border-tertiary-fixed-dim">
+<code class="text-tertiary-fixed">
+                                    SELECT S.NAME, D.DEPT_NAME<br/>
+                                    FROM Students S<br/>
+                                    RIGHT JOIN Departments D<br/>
+                                    ON S.DEPT_ID = D.DEPT_ID;
+                                </code>
+</div>
+</div>
+<div class="lg:col-span-3">
+<div class="bg-surface-container-high p-8 rounded-xl shadow-xl">
+<p class="font-['JetBrains_Mono'] text-xs text-on-surface-variant/40 mb-4 uppercase">Execution Result</p>
+<table class="w-full text-left font-['Inter'] text-sm">
+<thead>
+<tr class="text-tertiary/80 border-b border-tertiary/10">
+<th class="pb-3 px-2">NAME</th>
+<th class="pb-3 px-2">DEPT_NAME</th>
+</tr>
+</thead>
+<tbody class="text-on-surface">
+<tr><td class="py-3 px-2">Alan Turing</td><td class="py-3 px-2">Computer Science</td></tr>
+<tr class="bg-tertiary/5"><td class="py-3 px-2">Ada Lovelace</td><td class="py-3 px-2">Computer Science</td></tr>
+<tr><td class="py-3 px-2">Grace Hopper</td><td class="py-3 px-2">Mathematics</td></tr>
+<tr class="bg-tertiary/10"><td class="py-3 px-2 text-tertiary-container italic">NULL</td><td class="py-3 px-2">Physics</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. NATURAL JOIN -->
+<section class="pb-20">
+<div class="flex items-baseline gap-4 mb-6">
+<span class="text-4xl font-['Space_Grotesk'] font-bold text-primary-container">04.</span>
+<h2 class="text-3xl font-['Space_Grotesk'] font-semibold text-on-surface">Natural Join</h2>
+</div>
+<div class="bg-surface-container-low p-8 rounded-xl">
+<p class="text-lg mb-8 max-w-4xl">A Natural Join creates an implicit join clause for you based on the common columns in the two tables being joined. In this case, both tables share <code class="bg-surface-container-highest px-2 py-0.5 rounded text-primary">DEPT_ID</code>.</p>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<div class="bg-surface-container-lowest p-6 rounded-lg font-['JetBrains_Mono'] text-sm border-t-2 border-primary-container">
+<code class="text-primary-fixed-dim">
+                                    SELECT *<br/>
+                                    FROM Students<br/>
+                                    NATURAL JOIN Departments;
+                                </code>
+</div>
+<div class="flex items-center justify-center p-8 border border-outline-variant/10 rounded-lg">
+<div class="text-center">
+<span class="material-symbols-outlined text-5xl text-primary-container/20 mb-4">join_inner</span>
+<p class="font-['Newsreader'] italic text-on-surface-variant">Simplified syntax for identical column names</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="w-full border-t border-slate-800/50 mt-20 bg-[#10141a]">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full max-w-[1440px] mx-auto">
+<div class="flex flex-col gap-2 mb-8 md:mb-0">
+<span class="text-amber-500 font-serif font-['Newsreader'] italic text-2xl">DBMS Journal</span>
+<p class="text-slate-500 font-['Newsreader'] italic text-lg">S.Y.B.Tech IT | Sem IV | Pattern 2023</p>
+</div>
+<div class="flex gap-12 items-center">
+<a class="group flex items-center gap-3 text-slate-500 hover:text-amber-200 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+<span class="font-['Newsreader'] italic text-lg">Prev -&gt; P8</span>
+</a>
+<div class="h-8 w-[1px] bg-outline-variant/20 hidden md:block"></div>
+<a class="group flex items-center gap-3 text-amber-400 underline font-['Newsreader'] italic text-lg hover:text-amber-200 transition-colors" href="#">
+<span>Next -&gt; P10</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="mt-8 md:mt-0 flex gap-6 text-slate-500 font-['Newsreader'] italic text-lg">
+<a class="hover:text-amber-200 transition-colors" href="#">University Guidelines</a>
+<a class="hover:text-amber-200 transition-colors" href="#">Lab Manual</a>
+</div>
+</div>
+</footer>
+</body></html>

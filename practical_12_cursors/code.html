@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DBMS Journal | Practical 12 - Cursors</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#dfe2eb",
+                    "tertiary-fixed-dim": "#ffba3d",
+                    "tertiary-fixed": "#ffdeae",
+                    "primary-container": "#00d4ff",
+                    "on-background": "#dfe2eb",
+                    "on-primary-container": "#00586b",
+                    "on-primary-fixed": "#001f27",
+                    "surface-tint": "#3cd7ff",
+                    "surface-container-high": "#262a31",
+                    "on-primary": "#003642",
+                    "primary-fixed-dim": "#3cd7ff",
+                    "surface-container": "#1c2026",
+                    "error": "#ffb4ab",
+                    "on-secondary-fixed": "#291800",
+                    "inverse-on-surface": "#2d3137",
+                    "surface-container-lowest": "#0a0e14",
+                    "secondary-container": "#dc9100",
+                    "surface-variant": "#31353c",
+                    "secondary-fixed": "#ffddb4",
+                    "inverse-primary": "#00677e",
+                    "on-secondary": "#452b00",
+                    "on-secondary-fixed-variant": "#633f00",
+                    "primary-fixed": "#b4ebff",
+                    "on-tertiary-fixed-variant": "#604100",
+                    "on-tertiary": "#432c00",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-container": "#6c4900",
+                    "on-primary-fixed-variant": "#004e5f",
+                    "on-error": "#690005",
+                    "surface-container-highest": "#31353c",
+                    "tertiary-container": "#feb528",
+                    "secondary": "#ffb955",
+                    "surface-dim": "#10141a",
+                    "on-tertiary-fixed": "#281900",
+                    "on-secondary-container": "#4f3100",
+                    "error-container": "#93000a",
+                    "secondary-fixed-dim": "#ffb955",
+                    "outline": "#859398",
+                    "surface-bright": "#353940",
+                    "on-surface": "#dfe2eb",
+                    "surface-container-low": "#181c22",
+                    "on-surface-variant": "#bbc9cf",
+                    "surface": "#10141a",
+                    "background": "#10141a",
+                    "tertiary": "#ffd9a1",
+                    "primary": "#a8e8ff",
+                    "outline-variant": "#3c494e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Newsreader"],
+                    "label": ["Inter"],
+                    "mono": ["JetBrains Mono"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .dot-matrix {
+            background-image: radial-gradient(circle, #3c494e 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)] border-none">
+<nav class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-headline font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent">DBMS Journal</span>
+</div>
+<div class="hidden md:flex items-center gap-8 font-headline text-sm tracking-tight">
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">Home</a>
+<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1" href="#">Practicals</a>
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">About</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-cyan-400 hover:bg-cyan-500/10 p-2 rounded-full transition-all duration-300 active:scale-90">menu</button>
+</div>
+</nav>
+</header>
+<div class="flex max-w-[1440px] mx-auto relative">
+<!-- SideNavBar -->
+<aside class="sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] overflow-y-auto hidden md:block">
+<div class="p-8 border-b border-outline-variant/10">
+<h2 class="font-headline font-bold text-primary tracking-tight">Lab Practicals</h2>
+<p class="font-mono text-[10px] text-slate-500 uppercase tracking-widest mt-1">DBMS Coursework</p>
+</div>
+<nav class="flex flex-col gap-2 p-6">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined text-xl">terminal</span>
+<span class="font-mono text-sm uppercase tracking-widest">Practical 1</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined text-xl">database</span>
+<span class="font-mono text-sm uppercase tracking-widest">Practical 2</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined text-xl">schema</span>
+<span class="font-mono text-sm uppercase tracking-widest">Practical 3</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined text-xl">table_chart</span>
+<span class="font-mono text-sm uppercase tracking-widest">Practical 4</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined text-xl">query_stats</span>
+<span class="font-mono text-sm uppercase tracking-widest">Practical 5</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined text-xl">storage</span>
+<span class="font-mono text-sm uppercase tracking-widest">Practical 6</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined text-xl">security</span>
+<span class="font-mono text-sm uppercase tracking-widest">Practical 7</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined text-xl">code_blocks</span>
+<span class="font-mono text-sm uppercase tracking-widest">Practical 8</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined text-xl">settings_ethernet</span>
+<span class="font-mono text-sm uppercase tracking-widest">Practical 9</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined text-xl">lan</span>
+<span class="font-mono text-sm uppercase tracking-widest">Practical 10</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined text-xl">cloud_done</span>
+<span class="font-mono text-sm uppercase tracking-widest">Practical 11</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 transition-all duration-400 translate-x-1" href="#">
+<span class="material-symbols-outlined text-xl">account_tree</span>
+<span class="font-mono text-sm uppercase tracking-widest">Practical 12</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined text-xl">reorder</span>
+<span class="font-mono text-sm uppercase tracking-widest">Practical 13</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined text-xl">history</span>
+<span class="font-mono text-sm uppercase tracking-widest">Practical 14</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 min-w-0 bg-surface dot-matrix p-8 md:p-12">
+<div class="max-w-4xl mx-auto space-y-16">
+<!-- Hero Section -->
+<section class="space-y-6">
+<div class="inline-flex items-center px-3 py-1 rounded-full border border-outline-variant/30 bg-surface-container-low text-tertiary-fixed-dim font-label text-xs tracking-widest uppercase">
+                        Group C | PL/SQL Intermediate
+                    </div>
+<h1 class="text-5xl md:text-7xl font-headline font-bold text-on-surface tracking-tighter leading-none">
+                        Practical 12: <span class="text-primary-container">Cursors</span>
+</h1>
+<p class="text-xl md:text-2xl text-on-surface-variant font-body leading-relaxed italic max-w-2xl">
+                        A cursor is a pointer to the context area. PL/SQL controls the context area through a cursor. It holds the rows returned by a SQL statement.
+                    </p>
+</section>
+<!-- Key Concepts Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Implicit Cursors -->
+<div class="md:col-span-1 bg-surface-container-low p-8 rounded-xl border border-outline-variant/10 group hover:border-primary/30 transition-all duration-500">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary">auto_fix_high</span>
+</div>
+<h3 class="text-2xl font-headline font-bold mb-4 text-on-surface">Implicit Cursors</h3>
+<p class="text-on-surface-variant font-body leading-relaxed">
+                            Automatically created by Oracle whenever an SQL statement is executed, when there is no explicit cursor for the statement.
+                        </p>
+</div>
+<!-- Explicit Cursors -->
+<div class="md:col-span-2 bg-surface-container-high p-8 rounded-xl border border-outline-variant/20 relative overflow-hidden group">
+<div class="relative z-10">
+<div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-secondary">edit_note</span>
+</div>
+<h3 class="text-2xl font-headline font-bold mb-4 text-on-surface">Explicit Cursors</h3>
+<p class="text-on-surface-variant font-body leading-relaxed max-w-lg">
+                                Defined by programmers for queries that return more than one row. These offer more control over data processing and require a specific lifecycle.
+                            </p>
+</div>
+<!-- Abstract Graphic -->
+<div class="absolute right-[-20px] bottom-[-20px] opacity-10 scale-150 rotate-12 group-hover:rotate-0 transition-transform duration-700">
+<span class="material-symbols-outlined text-[120px] text-primary">data_object</span>
+</div>
+</div>
+</section>
+<!-- Lifecycle Section -->
+<section class="space-y-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface">The Cursor Lifecycle</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="p-6 bg-surface-container rounded-lg border-l-4 border-primary">
+<span class="font-mono text-xs text-primary block mb-2">01</span>
+<h4 class="font-headline font-bold text-lg mb-1">DECLARE</h4>
+<p class="text-sm text-on-surface-variant font-body">Defines the cursor name and the associated SQL query.</p>
+</div>
+<div class="p-6 bg-surface-container rounded-lg border-l-4 border-tertiary">
+<span class="font-mono text-xs text-tertiary block mb-2">02</span>
+<h4 class="font-headline font-bold text-lg mb-1">OPEN</h4>
+<p class="text-sm text-on-surface-variant font-body">Allocates memory and executes the SQL query.</p>
+</div>
+<div class="p-6 bg-surface-container rounded-lg border-l-4 border-secondary">
+<span class="font-mono text-xs text-secondary block mb-2">03</span>
+<h4 class="font-headline font-bold text-lg mb-1">FETCH</h4>
+<p class="text-sm text-on-surface-variant font-body">Retrieves data from the cursor into local variables.</p>
+</div>
+<div class="p-6 bg-surface-container rounded-lg border-l-4 border-error">
+<span class="font-mono text-xs text-error block mb-2">04</span>
+<h4 class="font-headline font-bold text-lg mb-1">CLOSE</h4>
+<p class="text-sm text-on-surface-variant font-body">Releases the allocated memory area.</p>
+</div>
+</div>
+</section>
+<!-- Implementation Block -->
+<section class="space-y-8">
+<div class="flex items-center justify-between">
+<h2 class="text-3xl font-headline font-bold text-on-surface">Practical Implementation</h2>
+<div class="px-4 py-2 bg-surface-container-lowest rounded-md flex items-center gap-2 border border-outline-variant/20">
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-amber-500/50"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
+</div>
+<span class="text-[10px] font-mono text-slate-500 ml-4 uppercase">cursor_loop.sql</span>
+</div>
+</div>
+<div class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/20 to-tertiary/20 rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+<div class="relative bg-surface-container-lowest p-8 rounded-lg overflow-hidden border border-outline-variant/30">
+<pre class="font-mono text-sm leading-relaxed overflow-x-auto text-primary"><span class="text-slate-600">-- Cursor with Loop Implementation</span>
+<span class="text-secondary">DECLARE</span>
+    c_id students.id%<span class="text-tertiary">TYPE</span>;
+    c_name students.name%<span class="text-tertiary">TYPE</span>;
+    <span class="text-tertiary">CURSOR</span> c_students <span class="text-tertiary">IS</span> 
+        <span class="text-secondary">SELECT</span> id, name <span class="text-secondary">FROM</span> students;
+<span class="text-secondary">BEGIN</span>
+    <span class="text-secondary">OPEN</span> c_students;
+    <span class="text-secondary">LOOP</span>
+        <span class="text-secondary">FETCH</span> c_students <span class="text-secondary">INTO</span> c_id, c_name;
+        <span class="text-secondary">EXIT WHEN</span> c_students%<span class="text-tertiary">NOTFOUND</span>;
+        
+        dbms_output.put_line(c_id || <span class="text-slate-400">' '</span> || c_name);
+    <span class="text-secondary">END LOOP</span>;
+    <span class="text-secondary">CLOSE</span> c_students;
+<span class="text-secondary">END</span>;
+<span class="text-slate-400">/</span></pre>
+<button class="absolute top-4 right-4 bg-surface-variant/40 backdrop-blur-md px-3 py-1.5 rounded text-xs font-label text-on-surface-variant hover:text-primary transition-colors">
+                                COPY SNIPPET
+                            </button>
+</div>
+</div>
+<!-- Output Box -->
+<div class="bg-surface-container-low p-6 rounded-lg border-l-4 border-green-500/40">
+<h4 class="font-mono text-xs text-green-500 uppercase tracking-widest mb-4">Query Execution Result</h4>
+<div class="font-mono text-sm text-slate-400 space-y-1">
+<p>PL/SQL procedure successfully completed.</p>
+<p>101 Rahul Sharma</p>
+<p>102 Priya Iyer</p>
+<p>103 Amit Patel</p>
+</div>
+</div>
+</section>
+<!-- Image Placeholder -->
+<section class="rounded-2xl overflow-hidden aspect-[21/9] relative group">
+<img alt="Database schema" class="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-700" data-alt="Technical close-up of computer code on a dark screen with vibrant cyan and blue glowing highlights in a cinematic style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvpDcqUrk8Qo5yQnrEhPYQB5ffeldXGeZ0uJ0-AuIxVU2izG_evzbJi9BIsmMNwYP6aL9yu6gCF_S79qb00P7rp2ey_5YT_qeynBt3iHa4DJ4k8_7t6aNzMARlp6oA5g0d0lmTra2g_hiyB7KRHInD7nlouARvzKXQm3Plhqvk2x339Za2ldfgAVhAGbKqlYmsLG9jO5AyCPoPEEQvN0OfMNQ12iJ3AuilPyljvGP99cPtLTUvP81MsSLHGi5V0lhIMBiSC3Zl75s"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent flex items-end p-12">
+<div class="max-w-md">
+<h3 class="text-2xl font-headline font-bold text-on-surface mb-2">Cursor Attributes</h3>
+<p class="text-on-surface-variant text-sm font-body italic">Utilize %FOUND, %NOTFOUND, %ROWCOUNT, and %ISOPEN to monitor cursor status in real-time.</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer Navigation -->
+<footer class="w-full border-t border-slate-800/50 mt-20 bg-[#10141a]">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full gap-8">
+<div class="flex items-center gap-12 order-2 md:order-1">
+<div class="flex flex-col">
+<span class="text-slate-500 text-xs font-mono uppercase mb-2">Previous Practical</span>
+<a class="text-amber-400 font-body italic text-lg hover:text-amber-200 transition-colors group" href="#">
+<span class="material-symbols-outlined align-middle mr-2">arrow_back</span>
+                                Practical 11: PL/SQL Intro
+                            </a>
+</div>
+<div class="flex flex-col text-right">
+<span class="text-slate-500 text-xs font-mono uppercase mb-2">Next Practical</span>
+<a class="text-amber-400 font-body italic text-lg hover:text-amber-200 transition-colors group underline" href="#">
+                                Practical 13: Exception Handling
+                                <span class="material-symbols-outlined align-middle ml-2">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="order-1 md:order-2 text-center md:text-right">
+<p class="font-body italic text-lg text-amber-500">S.Y.B.Tech IT | Sem IV | Pattern 2023</p>
+<div class="flex gap-4 justify-center md:justify-end mt-4">
+<a class="text-slate-500 hover:text-amber-200 text-sm font-label transition-colors" href="#">University Guidelines</a>
+<a class="text-slate-500 hover:text-amber-200 text-sm font-label transition-colors" href="#">Lab Manual</a>
+</div>
+</div>
+</div>
+</footer>
+</main>
+</div>
+</body></html>
