@@ -2653,7 +2653,7 @@
         sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
           auth: {
             persistSession: true,
-            storageKey: 'dbms_lab_portal_session_v2', // Changed storage key to break deadlock
+            storageKey: 'dbms_lab_portal_session_v3', // Changed storage key AGAIN to break the current deadlock
             autoRefreshToken: true,
             detectSessionInUrl: false
           }
@@ -2989,14 +2989,16 @@
 
     if (supabaseReady) {
       sb.auth.onAuthStateChange(async (event, session) => {
-        if (session && session.user) {
+        console.log("[Auth] Event triggered:", event);
+        if (event === 'INITIAL_SESSION' && session && session.user) {
           currentUser = session.user;
           await loadProfile();
           enterPortal();
         } else if (event === 'SIGNED_OUT') {
-          currentUser = null; currentProfile = null;
+          currentUser = null; currentProfile = null; submissions = [];
           document.getElementById('portal').style.display = 'none';
           document.getElementById('auth-screen').style.display = 'flex';
+          toggleUserMenu(true);
         }
       });
     }
