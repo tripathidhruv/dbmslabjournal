@@ -2317,16 +2317,9 @@
               </button>
             </div>
           </div>
-          <div class="field-group">
-            <label class="field-label">Role</label>
-            <select id="signup-role" class="field-select" onchange="toggleRollField()">
-              <option value="student">Student</option>
-              <option value="staff">Staff</option>
-            </select>
-          </div>
           <div class="field-group" id="roll-field">
             <label class="field-label">Roll Number</label>
-            <input id="signup-roll" class="field-input" type="text" placeholder="e.g. 2023BTIT001" />
+            <input id="signup-roll" class="field-input" type="text" placeholder="e.g. 21BCE1023" />
           </div>
           <button id="signup-btn" type="submit" class="auth-submit">
             <span class="material-symbols-outlined spinner" style="font-size:20px;">progress_activity</span>
@@ -2842,8 +2835,7 @@
     }
 
     function toggleRollField() {
-      document.getElementById('roll-field').style.display =
-        document.getElementById('signup-role').value === 'student' ? 'block' : 'none';
+      // Field is always visible now since only students can sign up
     }
 
     function showAuthError(msg) {
@@ -2926,10 +2918,10 @@
         const name = document.getElementById('signup-name').value;
         const email = document.getElementById('signup-email').value;
         const pw = document.getElementById('signup-password').value;
-        const role = document.getElementById('signup-role').value;
+        const role = 'student'; // Harcoded: only students can sign up
         const roll = document.getElementById('signup-roll').value;
 
-        if (role === 'student' && !roll) { showAuthError('Roll number is required for students.'); setAuthLoading('signup', false); return; }
+        if (!roll) { showAuthError('Roll number is required for students.'); setAuthLoading('signup', false); return; }
 
         if (!supabaseReady) {
           currentUser = { id: 'demo', email, user_metadata: { full_name: name, role, roll_number: roll }, created_at: new Date().toISOString() };
