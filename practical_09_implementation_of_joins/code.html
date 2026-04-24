@@ -1,410 +1,297 @@
 <!DOCTYPE html>
-
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Practical 09 - Implementation of Joins</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "inverse-surface": "#dfe2eb",
-                        "tertiary-fixed-dim": "#ffba3d",
-                        "tertiary-fixed": "#ffdeae",
-                        "primary-container": "#00d4ff",
-                        "on-background": "#dfe2eb",
-                        "on-primary-container": "#00586b",
-                        "on-primary-fixed": "#001f27",
-                        "surface-tint": "#3cd7ff",
-                        "surface-container-high": "#262a31",
-                        "on-primary": "#003642",
-                        "primary-fixed-dim": "#3cd7ff",
-                        "surface-container": "#1c2026",
-                        "error": "#ffb4ab",
-                        "on-secondary-fixed": "#291800",
-                        "inverse-on-surface": "#2d3137",
-                        "surface-container-lowest": "#0a0e14",
-                        "secondary-container": "#dc9100",
-                        "surface-variant": "#31353c",
-                        "secondary-fixed": "#ffddb4",
-                        "inverse-primary": "#00677e",
-                        "on-secondary": "#452b00",
-                        "on-secondary-fixed-variant": "#633f00",
-                        "primary-fixed": "#b4ebff",
-                        "on-tertiary-fixed-variant": "#604100",
-                        "on-tertiary": "#432c00",
-                        "on-error-container": "#ffdad6",
-                        "on-tertiary-container": "#6c4900",
-                        "on-primary-fixed-variant": "#004e5f",
-                        "on-error": "#690005",
-                        "surface-container-highest": "#31353c",
-                        "tertiary-container": "#feb528",
-                        "secondary": "#ffb955",
-                        "surface-dim": "#10141a",
-                        "on-tertiary-fixed": "#281900",
-                        "on-secondary-container": "#4f3100",
-                        "error-container": "#93000a",
-                        "secondary-fixed-dim": "#ffb955",
-                        "outline": "#859398",
-                        "surface-bright": "#353940",
-                        "on-surface": "#dfe2eb",
-                        "surface-container-low": "#181c22",
-                        "on-surface-variant": "#bbc9cf",
-                        "surface": "#10141a",
-                        "background": "#10141a",
-                        "tertiary": "#ffd9a1",
-                        "primary": "#a8e8ff",
-                        "outline-variant": "#3c494e"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "fontFamily": {
-                        "headline": ["Space Grotesk"],
-                        "body": ["Newsreader"],
-                        "label": ["Inter"],
-                        "mono": ["JetBrains Mono"]
-                    }
-                }
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "inverse-surface": "#dfe2eb",
+                "tertiary-fixed-dim": "#ffba3d",
+                "tertiary-fixed": "#ffdeae",
+                "primary-container": "#00d4ff",
+                "on-background": "#dfe2eb",
+                "on-primary-container": "#00586b",
+                "on-primary-fixed": "#001f27",
+                "surface-tint": "#3cd7ff",
+                "surface-container-high": "#262a31",
+                "on-primary": "#003642",
+                "primary-fixed-dim": "#3cd7ff",
+                "surface-container": "#1c2026",
+                "error": "#ffb4ab",
+                "on-secondary-fixed": "#291800",
+                "inverse-on-surface": "#2d3137",
+                "surface-container-lowest": "#0a0e14",
+                "secondary-container": "#dc9100",
+                "surface-variant": "#31353c",
+                "secondary-fixed": "#ffddb4",
+                "inverse-primary": "#00677e",
+                "on-secondary": "#452b00",
+                "on-secondary-fixed-variant": "#633f00",
+                "primary-fixed": "#b4ebff",
+                "on-tertiary-fixed-variant": "#604100",
+                "on-tertiary": "#432c00",
+                "on-error-container": "#ffdad6",
+                "on-tertiary-container": "#6c4900",
+                "on-primary-fixed-variant": "#004e5f",
+                "on-error": "#690005",
+                "surface-container-highest": "#31353c",
+                "tertiary-container": "#feb528",
+                "secondary": "#ffb955",
+                "surface-dim": "#10141a",
+                "on-tertiary-fixed": "#281900",
+                "on-secondary-container": "#4f3100",
+                "error-container": "#93000a",
+                "secondary-fixed-dim": "#ffb955",
+                "outline": "#859398",
+                "surface-bright": "#353940",
+                "on-surface": "#dfe2eb",
+                "surface-container-low": "#181c22",
+                "on-surface-variant": "#bbc9cf",
+                "surface": "#10141a",
+                "background": "#10141a",
+                "tertiary": "#ffd9a1",
+                "primary": "#a8e8ff",
+                "outline-variant": "#3c494e"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "fontFamily": {
+                "headline": ["Space Grotesk"],
+                "body": ["Newsreader"],
+                "label": ["Inter"]
             }
-        }
+          },
+        },
+      }
     </script>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-        body {
-            background-color: #10141a;
-            color: #bbc9cf;
-            font-family: 'Newsreader', serif;
-        }
         .dot-matrix {
-            background-image: radial-gradient(#3c494e 1px, transparent 1px);
-            background-size: 24px 24px;
+            background-image: radial-gradient(circle, #3c494e 1px, transparent 1px);
+            background-size: 32px 32px;
             opacity: 0.05;
         }
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #10141a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #31353c;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #00d4ff;
-        }
+        body { background-color: #10141a; color: #dfe2eb; }
+        pre { overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
+        .code-block { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.7; }
+        .output-table { border-collapse: collapse; width: 100%; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+        .output-table th { background: rgba(168,232,255,0.12); color: #a8e8ff; padding: 8px 12px; text-align: left; border-bottom: 1px solid #3c494e; }
+        .output-table td { padding: 7px 12px; border-bottom: 1px solid #1c2026; color: #bbc9cf; }
+        .output-table tr:hover td { background: rgba(168,232,255,0.04); }
+        details > summary { cursor: pointer; }
+        details[open] > summary { color: #a8e8ff; }
     </style>
-</head>
-<body class="selection:bg-primary-container selection:text-on-primary-container">
-<div class="fixed inset-0 dot-matrix pointer-events-none"></div>
-<!-- Top Navigation Bar -->
-<header class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)]">
-<nav class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
-<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-['Space_Grotesk'] tracking-tight">
-                DBMS Journal
-            </div>
-<div class="hidden md:flex gap-8 font-['Space_Grotesk']">
-<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">Home</a>
+
+<title>Practical 09 | DBMS Journal</title>
+<body class="font-body selection:bg-primary/30 selection:text-primary">
+<nav class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)]">
+<div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
+<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-headline tracking-tight">DBMS Journal</div>
+<div class="hidden md:flex gap-8 font-headline">
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="../index.html">Home</a>
 <a class="text-cyan-400 border-b-2 border-cyan-400 pb-1" href="#">Practicals</a>
 <a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">About</a>
 </div>
 <div class="flex items-center gap-4">
-<button class="p-2 text-slate-400 hover:bg-cyan-500/10 transition-all duration-300 rounded-lg scale-95 active:scale-90">
-<span class="material-symbols-outlined">menu</span>
-</button>
-</div>
-</nav>
-</header>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">menu</button>
+</div></div></nav>
 <div class="flex max-w-[1440px] mx-auto relative">
-<!-- Sidebar Navigation -->
-<aside class="sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] overflow-y-auto hidden lg:flex flex-col gap-2 p-6">
+<aside class="hidden md:block sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] overflow-y-auto border-none top-[64px] scrollbar-hide">
+<div class="flex flex-col gap-1 p-6">
 <div class="mb-6">
-<h3 class="font-['JetBrains_Mono'] text-sm uppercase tracking-widest text-cyan-400">Lab Practicals</h3>
-<p class="text-xs text-slate-500 font-['Inter']">DBMS Coursework</p>
+<h3 class="font-headline font-bold text-primary tracking-widest uppercase text-xs">Lab Practicals</h3>
+<p class="text-on-surface-variant text-[10px] uppercase tracking-[0.2em] mt-1 font-label">DBMS Coursework</p>
 </div>
-<nav class="flex flex-col gap-1">
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
-<span class="material-symbols-outlined">terminal</span> Practical 1
-                </a>
-<!-- ... others ... -->
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined">database</span> Practical 8
-                </a>
-<a class="flex items-center gap-3 p-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
-<span class="material-symbols-outlined">schema</span> Practical 9
-                </a>
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined">table_chart</span> Practical 10
-                </a>
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined">query_stats</span> Practical 11
-                </a>
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined">storage</span> Practical 12
-                </a>
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined">security</span> Practical 13
-                </a>
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined">code_blocks</span> Practical 14
-                </a>
-</nav>
-</aside>
-<!-- Main Content Area -->
-<main class="flex-1 px-8 py-12 md:px-16 lg:px-24">
-<!-- Practical Header -->
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_01_study_of_mysql/code.html">
+<span class="material-symbols-outlined">terminal</span>Practical 01</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_02_mysql_installation/code.html">
+<span class="material-symbols-outlined">database</span>Practical 02</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_03_sqlite_study/code.html">
+<span class="material-symbols-outlined">schema</span>Practical 03</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_04_er_diagrams/code.html">
+<span class="material-symbols-outlined">table_chart</span>Practical 04</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_05_ddl_normalization/code.html">
+<span class="material-symbols-outlined">query_stats</span>Practical 05</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_06_constraints_alter_drop/code.html">
+<span class="material-symbols-outlined">storage</span>Practical 06</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_07_sql_queries/code.html">
+<span class="material-symbols-outlined">security</span>Practical 07</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_08_views/code.html">
+<span class="material-symbols-outlined">code_blocks</span>Practical 08</a><a class="flex items-center gap-3 p-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 font-label text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings_ethernet</span>Practical 09</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_10_stored_procedures/code.html">
+<span class="material-symbols-outlined">lan</span>Practical 10</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_11_triggers/code.html">
+<span class="material-symbols-outlined">cloud_done</span>Practical 11</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_12_cursors/code.html">
+<span class="material-symbols-outlined">account_tree</span>Practical 12</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_13_project_proposal_srs/code.html">
+<span class="material-symbols-outlined">reorder</span>Practical 13</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_14_er_diagram_database_design/code.html">
+<span class="material-symbols-outlined">history</span>Practical 14</a>
+</div></aside>
+<main class="flex-1 min-w-0 bg-background relative overflow-hidden">
+<div class="absolute inset-0 dot-matrix pointer-events-none"></div>
+<div class="px-8 py-12 lg:px-16 max-w-5xl mx-auto relative z-10">
+<!-- Header -->
+<header class="mb-16">
+<div class="flex items-center gap-4 mb-6">
+<span class="px-3 py-1 bg-primary/10 text-primary border border-primary/20 rounded-lg text-xs font-label uppercase tracking-widest">Group B</span>
+<span class="text-on-surface-variant/40">—</span>
+<span class="text-on-surface-variant font-label text-xs uppercase tracking-widest">Data Combination</span>
+</div>
+<h1 class="text-5xl md:text-6xl font-headline font-bold text-on-surface mb-6 tracking-tight">
+Practical 09: <span class="text-primary">Implementation of Joins</span>
+</h1>
+<p class="text-xl md:text-2xl text-on-surface-variant font-body leading-relaxed max-w-3xl italic">Recombining and extracting relational array linkages integrating complex multi-table structures.</p>
+</header>
+<!-- AIM -->
 <section class="mb-16">
-<div class="flex items-center gap-4 mb-4">
-<span class="px-3 py-1 rounded-full text-xs font-['Inter'] font-semibold bg-primary-container/20 text-primary uppercase tracking-wider">Group B</span>
-<span class="text-on-surface-variant/40 font-mono text-sm">#SQL-09</span>
-</div>
-<h1 class="text-5xl md:text-6xl font-['Space_Grotesk'] font-bold text-on-surface mb-6 leading-tight">Implementation of Joins</h1>
-<p class="text-xl md:text-2xl text-on-surface-variant font-['Newsreader'] italic max-w-3xl border-l-2 border-secondary pl-6">
-                    A comprehensive study on relational algebra implementation using SQL Joins to combine data from multiple entities based on related columns.
-                </p>
-</section>
-<!-- Sample Data Tables (Bento Grid Style) -->
-<section class="mb-20">
-<h2 class="text-3xl font-['Space_Grotesk'] font-semibold text-on-surface mb-8">Base Relation Tables</h2>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-<!-- Table 1: Students -->
-<div class="bg-surface-container-low p-8 rounded-xl relative overflow-hidden group hover:bg-surface-container transition-all duration-300">
-<div class="flex justify-between items-center mb-6">
-<h3 class="font-['JetBrains_Mono'] text-primary uppercase text-sm tracking-widest">Table: Students</h3>
-<span class="material-symbols-outlined text-on-surface-variant/20">account_circle</span>
-</div>
-<div class="overflow-x-auto">
-<table class="w-full text-left font-['Inter'] text-sm">
-<thead>
-<tr class="text-on-surface-variant/60 border-b border-outline-variant/20">
-<th class="pb-3 font-medium">STU_ID</th>
-<th class="pb-3 font-medium">NAME</th>
-<th class="pb-3 font-medium">DEPT_ID</th>
-</tr>
-</thead>
-<tbody class="text-on-surface">
-<tr><td class="py-3">101</td><td class="py-3">Alan Turing</td><td class="py-3">D01</td></tr>
-<tr><td class="py-3">102</td><td class="py-3">Grace Hopper</td><td class="py-3">D02</td></tr>
-<tr><td class="py-3">103</td><td class="py-3">Ada Lovelace</td><td class="py-3">D01</td></tr>
-<tr><td class="py-3">104</td><td class="py-3">John von Neumann</td><td class="py-3">D04</td></tr>
-</tbody>
-</table>
-</div>
-</div>
-<!-- Table 2: Departments -->
-<div class="bg-surface-container-low p-8 rounded-xl relative overflow-hidden group hover:bg-surface-container transition-all duration-300">
-<div class="flex justify-between items-center mb-6">
-<h3 class="font-['JetBrains_Mono'] text-secondary uppercase text-sm tracking-widest">Table: Departments</h3>
-<span class="material-symbols-outlined text-on-surface-variant/20">hub</span>
-</div>
-<div class="overflow-x-auto">
-<table class="w-full text-left font-['Inter'] text-sm">
-<thead>
-<tr class="text-on-surface-variant/60 border-b border-outline-variant/20">
-<th class="pb-3 font-medium">DEPT_ID</th>
-<th class="pb-3 font-medium">DEPT_NAME</th>
-</tr>
-</thead>
-<tbody class="text-on-surface">
-<tr><td class="py-3">D01</td><td class="py-3">Computer Science</td></tr>
-<tr><td class="py-3">D02</td><td class="py-3">Mathematics</td></tr>
-<tr><td class="py-3">D03</td><td class="py-3">Physics</td></tr>
-</tbody>
-</table>
-</div>
-</div>
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Aim</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Objective</span></div>
+<div class="p-8 bg-surface-container rounded-xl border border-outline-variant/20">
+<p class="text-on-surface font-body leading-relaxed text-lg mb-4">
+The aim of this practical is to decisively master relational combinatorics utilizing SQL `JOIN` functionalities across normalized architectural structures. 
+The student will algorithmically combine separate payload tables—executing Inner, Left, Right, Full, Cross, and Self variations—understanding completely how referential geometry maps primary keys against explicitly declared overlapping foreign keys avoiding mathematical Cartesian anomalies directly.
+</p>
 </div>
 </section>
-<!-- Joins Content -->
-<div class="space-y-24">
-<!-- 1. INNER JOIN -->
-<section>
-<div class="flex items-baseline gap-4 mb-6">
-<span class="text-4xl font-['Space_Grotesk'] font-bold text-primary">01.</span>
-<h2 class="text-3xl font-['Space_Grotesk'] font-semibold text-on-surface">Inner Join</h2>
-</div>
-<div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
-<div class="lg:col-span-2 space-y-6">
-<p class="text-lg leading-relaxed">Returns records that have matching values in both tables. This is the most common type of join.</p>
-<div class="bg-surface-container-lowest p-6 rounded-lg font-['JetBrains_Mono'] text-sm border-l-4 border-primary">
-<div class="flex gap-1.5 mb-4">
-<div class="w-3 h-3 rounded-full bg-red-500/50"></div>
-<div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-<div class="w-3 h-3 rounded-full bg-green-500/50"></div>
-</div>
-<code class="text-primary-container">
-                                    SELECT S.NAME, D.DEPT_NAME<br/>
-                                    FROM Students S<br/>
-                                    INNER JOIN Departments D<br/>
-                                    ON S.DEPT_ID = D.DEPT_ID;
-                                </code>
-</div>
-</div>
-<div class="lg:col-span-3">
-<div class="bg-surface-container-high p-8 rounded-xl shadow-xl">
-<p class="font-['JetBrains_Mono'] text-xs text-on-surface-variant/40 mb-4 uppercase">Execution Result</p>
-<table class="w-full text-left font-['Inter'] text-sm">
-<thead>
-<tr class="text-primary/80 border-b border-primary/10">
-<th class="pb-3 px-2">NAME</th>
-<th class="pb-3 px-2">DEPT_NAME</th>
-</tr>
-</thead>
-<tbody class="text-on-surface">
-<tr class="bg-primary/5"><td class="py-3 px-2">Alan Turing</td><td class="py-3 px-2">Computer Science</td></tr>
-<tr><td class="py-3 px-2">Grace Hopper</td><td class="py-3 px-2">Mathematics</td></tr>
-<tr class="bg-primary/5"><td class="py-3 px-2">Ada Lovelace</td><td class="py-3 px-2">Computer Science</td></tr>
-</tbody>
-</table>
-</div>
-</div>
+<!-- THEORY -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Theory & Background</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Core Concepts</span></div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-primary lg:col-span-2">
+<h3 class="text-lg font-headline font-semibold text-primary mb-3">The Fundamental Purpose of Joins</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">Because we utilized strict normalization procedures previously resolving data entirely isolated across modular tables (destroying massive repetition logic natively), we must systematically recombine this distributed memory on-the-fly dynamically responding to external client `SELECT` parameters. `JOIN` mathematics rely fundamentally resolving overlaps linking explicit foreign keys referencing precisely structured primary entities seamlessly forming temporary, completely unified readouts matching exactly specifically what backend applications formally request physically.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-secondary">
+<h3 class="text-lg font-headline font-semibold text-secondary mb-3">INNER and CROSS Matrix Executions</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">`INNER JOIN` acts as the strict default standard mapping filter evaluating combinations matching completely exclusively explicitly where relational references physically align horizontally perfectly without error overlaps rejecting completely unmatched independent row orphans permanently during output processing. Counter to this behavior, a `CROSS JOIN` forcefully multiplies the first sequence arrays explicitly against every subsequent array without conditions executing mathematically dangerous Cartesian Combinations scaling algorithms massively out of bounds accidentally generating extremely large matrix products immediately crashing buffer pools universally unprepared to digest unconstrained memory explosion outputs completely.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-primary lg:col-span-2">
+<h3 class="text-lg font-headline font-semibold text-primary mb-3">OUTER JOIN Methodologies (LEFT, RIGHT, FULL)</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">Analytics algorithms frequently rely targeting data lacking structural attachments (like fetching all active doctors explicitly registering zero scheduled appointments checking internal idleness metrics natively). `LEFT JOIN` structures enforce completely generating primary table left entries persistently regardless injecting null representations exactly wherever matching sequences logically fail returning matching conditions mathematically correctly avoiding strict internal culling processes entirely. `RIGHT JOIN` simply reversely targets rightward mapped entities universally executing similarly. MySQL lacks organic formal semantic structure parsing pure universal `FULL OUTER JOIN`, thereby requiring DBAs to synthetically mirror this combination explicitly stacking `LEFT` combined with `UNION` combined securely against sequential `RIGHT` operations exactly simultaneously mimicking the absolute boundary logic completely exactly.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-secondary">
+<h3 class="text-lg font-headline font-semibold text-secondary mb-3">Algorithmic Internal SELF Recursions</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">Relational matrices occasionally require analyzing hierarchical maps pointing exclusively directly internally referencing inside singular same tables structurally seamlessly. Applying `SELF JOIN` strictly mandates uniquely instantiating identical instances mathematically overlaying twin exact temporary `ALIASES` avoiding completely internal naming collision exceptions isolating completely comparisons parsing independent rows checking precisely duplicates occurring natively internally bypassing purely linear normal mapping standards.</p></div>
 </div>
 </section>
-<!-- 2. LEFT OUTER JOIN -->
-<section>
-<div class="flex items-baseline gap-4 mb-6">
-<span class="text-4xl font-['Space_Grotesk'] font-bold text-secondary">02.</span>
-<h2 class="text-3xl font-['Space_Grotesk'] font-semibold text-on-surface">Left Join</h2>
-</div>
-<div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
-<div class="lg:col-span-2 space-y-6">
-<p class="text-lg leading-relaxed">Returns all records from the left table, and the matched records from the right table. Records with no match in the right table show <span class="text-secondary italic">NULL</span>.</p>
-<div class="bg-surface-container-lowest p-6 rounded-lg font-['JetBrains_Mono'] text-sm border-l-4 border-secondary">
-<div class="flex gap-1.5 mb-4">
-<div class="w-3 h-3 rounded-full bg-red-500/50"></div>
-<div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-<div class="w-3 h-3 rounded-full bg-green-500/50"></div>
-</div>
-<code class="text-tertiary">
-                                    SELECT S.NAME, D.DEPT_NAME<br/>
-                                    FROM Students S<br/>
-                                    LEFT JOIN Departments D<br/>
-                                    ON S.DEPT_ID = D.DEPT_ID;
-                                </code>
-</div>
-</div>
-<div class="lg:col-span-3">
-<div class="bg-surface-container-high p-8 rounded-xl shadow-xl">
-<p class="font-['JetBrains_Mono'] text-xs text-on-surface-variant/40 mb-4 uppercase">Execution Result</p>
-<table class="w-full text-left font-['Inter'] text-sm">
-<thead>
-<tr class="text-secondary/80 border-b border-secondary/10">
-<th class="pb-3 px-2">NAME</th>
-<th class="pb-3 px-2">DEPT_NAME</th>
-</tr>
-</thead>
-<tbody class="text-on-surface">
-<tr><td class="py-3 px-2">Alan Turing</td><td class="py-3 px-2">Computer Science</td></tr>
-<tr class="bg-secondary/5"><td class="py-3 px-2">Grace Hopper</td><td class="py-3 px-2">Mathematics</td></tr>
-<tr><td class="py-3 px-2">Ada Lovelace</td><td class="py-3 px-2">Computer Science</td></tr>
-<tr class="bg-secondary/10"><td class="py-3 px-2">John von Neumann</td><td class="py-3 px-2 text-secondary-container italic">NULL</td></tr>
-</tbody>
-</table>
-</div>
-</div>
+<!-- PROCEDURE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Procedure / Algorithm</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Step-by-Step</span></div>
+<div class="bg-surface-container-low rounded-xl border border-outline-variant/20 p-8">
+<ol class="flex flex-col gap-5"><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">01.</span><span class="text-on-surface-variant font-body leading-relaxed">Instantiate the SQL context targeting the `hospital_db` using standard deployment logic.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">02.</span><span class="text-on-surface-variant font-body leading-relaxed">Generate a strict `INNER JOIN` evaluating overlapping logic linking `PATIENT`, `APPOINTMENT` and `DOCTOR`.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">03.</span><span class="text-on-surface-variant font-body leading-relaxed">Produce a `LEFT JOIN` universally extracting exactly all Registered Doctors identifying missing appointments clearly via `NULL` returns.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">04.</span><span class="text-on-surface-variant font-body leading-relaxed">Execute a `RIGHT JOIN` targeting generic structural mapping comparing Departments identically.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">05.</span><span class="text-on-surface-variant font-body leading-relaxed">Engineer a comprehensive explicit `FULL OUTER JOIN` simulating constraints deploying distinct `UNION` integrations stacking Left and Right geometries exclusively.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">06.</span><span class="text-on-surface-variant font-body leading-relaxed">Force an unconditional multiplication generating heavy algorithmic products deploying `CROSS JOIN` exclusively.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">07.</span><span class="text-on-surface-variant font-body leading-relaxed">Process an exact relational overlap mapping rows locally checking disease comparisons universally deploying `SELF JOIN` mapping techniques.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">08.</span><span class="text-on-surface-variant font-body leading-relaxed">Verify specific output data formats checking constraint anomalies manually preventing mathematical logic overflows.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">09.</span><span class="text-on-surface-variant font-body leading-relaxed">Generate exactly identical formatting blocks matching exactly testing evaluation standards.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">10.</span><span class="text-on-surface-variant font-body leading-relaxed">Review final Cartesian boundaries restricting explicitly infinite query logic limits globally.</span></li></ol>
 </div>
 </section>
-<!-- 3. RIGHT OUTER JOIN -->
-<section>
-<div class="flex items-baseline gap-4 mb-6">
-<span class="text-4xl font-['Space_Grotesk'] font-bold text-tertiary-fixed-dim">03.</span>
-<h2 class="text-3xl font-['Space_Grotesk'] font-semibold text-on-surface">Right Join</h2>
+<!-- CODE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Complete MySQL Code</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Runnable & Commented</span></div>
+<div class="mb-16">
+<div class="bg-[#0a0e14] rounded-xl border border-outline-variant/20 overflow-hidden shadow-2xl">
+<div class="flex items-center gap-2 px-4 py-3 bg-surface-container-lowest border-b border-outline-variant/20">
+<span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+<span class="ml-4 text-xs font-label text-slate-500 uppercase tracking-widest">MySQL 8.x — Hospital Management System</span>
 </div>
-<div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
-<div class="lg:col-span-2 space-y-6">
-<p class="text-lg leading-relaxed">Returns all records from the right table, and the matched records from the left table. Departments with no students will result in <span class="text-tertiary italic">NULL</span>.</p>
-<div class="bg-surface-container-lowest p-6 rounded-lg font-['JetBrains_Mono'] text-sm border-l-4 border-tertiary-fixed-dim">
-<code class="text-tertiary-fixed">
-                                    SELECT S.NAME, D.DEPT_NAME<br/>
-                                    FROM Students S<br/>
-                                    RIGHT JOIN Departments D<br/>
-                                    ON S.DEPT_ID = D.DEPT_ID;
-                                </code>
-</div>
-</div>
-<div class="lg:col-span-3">
-<div class="bg-surface-container-high p-8 rounded-xl shadow-xl">
-<p class="font-['JetBrains_Mono'] text-xs text-on-surface-variant/40 mb-4 uppercase">Execution Result</p>
-<table class="w-full text-left font-['Inter'] text-sm">
-<thead>
-<tr class="text-tertiary/80 border-b border-tertiary/10">
-<th class="pb-3 px-2">NAME</th>
-<th class="pb-3 px-2">DEPT_NAME</th>
-</tr>
-</thead>
-<tbody class="text-on-surface">
-<tr><td class="py-3 px-2">Alan Turing</td><td class="py-3 px-2">Computer Science</td></tr>
-<tr class="bg-tertiary/5"><td class="py-3 px-2">Ada Lovelace</td><td class="py-3 px-2">Computer Science</td></tr>
-<tr><td class="py-3 px-2">Grace Hopper</td><td class="py-3 px-2">Mathematics</td></tr>
-<tr class="bg-tertiary/10"><td class="py-3 px-2 text-tertiary-container italic">NULL</td><td class="py-3 px-2">Physics</td></tr>
-</tbody>
-</table>
-</div>
-</div>
+<pre class="code-block p-6 text-slate-300">
+<span class="text-slate-500 italic">-- Practical 09: Advanced Multi-Table Combinatorial JOIN Matrices</span>
+<span class="text-cyan-400">USE</span> <span class="text-slate-300">hospital_db</span>;
+
+<span class="text-slate-500 italic">-- ────────── 1. INNER JOIN (Strict Overlapping Logic) ──────────</span>
+<span class="text-slate-500 italic">-- Extracting explicit mappings universally filtering exclusively intersecting connections natively.</span>
+<span class="text-cyan-400">SELECT</span> <span class="text-slate-300">p.name</span> <span class="text-cyan-400">AS</span> <span class="text-slate-300">Patient_Name</span>, <span class="text-slate-300">a.appt_date</span>, <span class="text-slate-300">d.name</span> <span class="text-cyan-400">AS</span> <span class="text-slate-300">Assignee_Doctor</span> 
+<span class="text-cyan-400">FROM</span> <span class="text-slate-300">PATIENT</span> <span class="text-slate-300">p</span>
+<span class="text-cyan-400">INNER JOIN</span> <span class="text-slate-300">APPOINTMENT</span> <span class="text-slate-300">a</span> <span class="text-cyan-400">ON</span> <span class="text-slate-300">p.patient_id</span> = <span class="text-slate-300">a.patient_id</span>
+<span class="text-cyan-400">INNER JOIN</span> <span class="text-slate-300">DOCTOR</span> <span class="text-slate-300">d</span> <span class="text-cyan-400">ON</span> <span class="text-slate-300">a.doctor_id</span> = <span class="text-slate-300">d.doctor_id</span>
+<span class="text-cyan-400">LIMIT</span> <span class="text-amber-400">5</span>;
+
+<span class="text-slate-500 italic">-- ────────── 2. LEFT JOIN (Preserving Master Table Arrays) ──────────</span>
+<span class="text-slate-500 italic">-- Fetching absolutely ALL doctors regardless mapping entirely missing appointment logs reporting NULL.</span>
+<span class="text-cyan-400">SELECT</span> <span class="text-slate-300">d.name</span> <span class="text-cyan-400">AS</span> <span class="text-slate-300">Doctor_Name</span>, <span class="text-slate-300">a.status</span> <span class="text-cyan-400">AS</span> <span class="text-slate-300">Appointment_Status</span>
+<span class="text-cyan-400">FROM</span> <span class="text-slate-300">DOCTOR</span> <span class="text-slate-300">d</span>
+<span class="text-cyan-400">LEFT JOIN</span> <span class="text-slate-300">APPOINTMENT</span> <span class="text-slate-300">a</span> <span class="text-cyan-400">ON</span> <span class="text-slate-300">d.doctor_id</span> = <span class="text-slate-300">a.doctor_id</span>
+<span class="text-cyan-400">ORDER BY</span> <span class="text-slate-300">Appointment_Status</span> <span class="text-cyan-400">DESC LIMIT</span> <span class="text-amber-400">5</span>;
+
+<span class="text-slate-500 italic">-- ────────── 3. RIGHT JOIN (Preserving Subsidiary Arrays) ──────────</span>
+<span class="text-slate-500 italic">-- Extracting matching doctors relying fundamentally generating output spanning complete Department tracking.</span>
+<span class="text-cyan-400">SELECT</span> <span class="text-slate-300">dep.dept_name</span>, <span class="text-slate-300">d.name</span> <span class="text-cyan-400">AS</span> <span class="text-slate-300">Doctor</span>
+<span class="text-cyan-400">FROM</span> <span class="text-slate-300">DOCTOR</span> <span class="text-slate-300">d</span>
+<span class="text-cyan-400">RIGHT JOIN</span> <span class="text-slate-300">DEPARTMENT</span> <span class="text-slate-300">dep</span> <span class="text-cyan-400">ON</span> <span class="text-slate-300">d.dept_id</span> = <span class="text-slate-300">dep.dept_id</span>
+<span class="text-cyan-400">LIMIT</span> <span class="text-amber-400">5</span>;
+
+<span class="text-slate-500 italic">-- ────────── 4. FULL OUTER JOIN (Simulated Array Aggregation) ──────────</span>
+<span class="text-slate-500 italic">-- MySQL universally lacks FULL OUTER JOIN syntax. Simulating strict geometric union mapping overlaps natively.</span>
+<span class="text-cyan-400">SELECT</span> <span class="text-slate-300">d.name</span> <span class="text-cyan-400">AS</span> <span class="text-slate-300">Doctor</span>, <span class="text-slate-300">a.appt_id</span>
+<span class="text-cyan-400">FROM</span> <span class="text-slate-300">DOCTOR</span> <span class="text-slate-300">d</span> <span class="text-cyan-400">LEFT JOIN</span> <span class="text-slate-300">APPOINTMENT</span> <span class="text-slate-300">a</span> <span class="text-cyan-400">ON</span> <span class="text-slate-300">d.doctor_id</span> = <span class="text-slate-300">a.doctor_id</span>
+<span class="text-cyan-400">UNION</span>
+<span class="text-cyan-400">SELECT</span> <span class="text-slate-300">d.name</span> <span class="text-cyan-400">AS</span> <span class="text-slate-300">Doctor</span>, <span class="text-slate-300">a.appt_id</span>
+<span class="text-cyan-400">FROM</span> <span class="text-slate-300">DOCTOR</span> <span class="text-slate-300">d</span> <span class="text-cyan-400">RIGHT JOIN</span> <span class="text-slate-300">APPOINTMENT</span> <span class="text-slate-300">a</span> <span class="text-cyan-400">ON</span> <span class="text-slate-300">d.doctor_id</span> = <span class="text-slate-300">a.doctor_id</span>
+<span class="text-cyan-400">LIMIT</span> <span class="text-amber-400">5</span>;
+
+<span class="text-slate-500 italic">-- ────────── 5. SELF JOIN (Recursive Internal Matrix Overlay) ──────────</span>
+<span class="text-slate-500 italic">-- Locating multiple arbitrary patients internally specifically generating same overlapping diagnosis parameters.</span>
+<span class="text-cyan-400">SELECT</span> <span class="text-slate-300">p1.name</span> <span class="text-cyan-400">AS</span> <span class="text-slate-300">Patient_A</span>, <span class="text-slate-300">p2.name</span> <span class="text-cyan-400">AS</span> <span class="text-slate-300">Patient_B</span>, <span class="text-slate-300">p1.disease</span> <span class="text-cyan-400">AS</span> <span class="text-slate-300">Shared_Diagnosis</span>
+<span class="text-cyan-400">FROM</span> <span class="text-slate-300">PATIENT</span> <span class="text-slate-300">p1</span>
+<span class="text-cyan-400">INNER JOIN</span> <span class="text-slate-300">PATIENT</span> <span class="text-slate-300">p2</span> <span class="text-cyan-400">ON</span> <span class="text-slate-300">p1.disease</span> = <span class="text-slate-300">p2.disease</span>
+<span class="text-cyan-400">WHERE</span> <span class="text-slate-300">p1.patient_id</span> &lt;&gt; <span class="text-slate-300">p2.patient_id</span>
+<span class="text-cyan-400">ORDER BY</span> <span class="text-slate-300">Shared_Diagnosis</span> <span class="text-cyan-400">ASC LIMIT</span> <span class="text-amber-400">5</span>;
+
+<span class="text-slate-500 italic">-- ────────── 6. CROSS JOIN (Cartesian Algorithmic Multiplication) ──────────</span>
+<span class="text-slate-500 italic">-- Generating completely independent exact algorithmic permutation tables extracting combinations checking strictly scaling factors entirely.</span>
+<span class="text-slate-500 italic">-- Example: Match 10 Doctors * 5 Departments = 50 rows output.</span>
+<span class="text-cyan-400">SELECT</span> <span class="text-slate-300">d.name</span>, <span class="text-slate-300">dep.dept_name</span> 
+<span class="text-cyan-400">FROM</span> <span class="text-slate-300">DOCTOR</span> <span class="text-slate-300">d</span>
+<span class="text-cyan-400">CROSS JOIN</span> <span class="text-slate-300">DEPARTMENT</span> <span class="text-slate-300">dep</span> <span class="text-cyan-400">LIMIT</span> <span class="text-amber-400">3</span>;
+
+</pre></div></div>
+</section>
+<!-- OUTPUT -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Expected Output</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Query Results</span></div>
+<div class="bg-[#0a0e14] rounded-xl border border-outline-variant/20 p-6 overflow-x-auto">
+<p class="text-slate-500 font-label text-xs mb-3 uppercase tracking-widest">Result: Recursive Output mapping internal logic via SELF JOIN explicitly.</p><div class="overflow-x-auto"><table class="output-table"><thead><tr><th>Patient_A</th><th>Patient_B</th><th>Shared_Diagnosis</th></tr></thead><tbody><tr><td>Simran Kaur</td><td>Varun Bhatia</td><td>Arthritis</td></tr><tr><td>Aarav Shah</td><td>Amitabh Sen</td><td>Diabetes</td></tr><tr><td>Snehal Patil</td><td>Meera Roy</td><td>Migraine</td></tr></tbody></table></div>
 </div>
 </section>
-<!-- 4. NATURAL JOIN -->
-<section class="pb-20">
-<div class="flex items-baseline gap-4 mb-6">
-<span class="text-4xl font-['Space_Grotesk'] font-bold text-primary-container">04.</span>
-<h2 class="text-3xl font-['Space_Grotesk'] font-semibold text-on-surface">Natural Join</h2>
-</div>
-<div class="bg-surface-container-low p-8 rounded-xl">
-<p class="text-lg mb-8 max-w-4xl">A Natural Join creates an implicit join clause for you based on the common columns in the two tables being joined. In this case, both tables share <code class="bg-surface-container-highest px-2 py-0.5 rounded text-primary">DEPT_ID</code>.</p>
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-<div class="bg-surface-container-lowest p-6 rounded-lg font-['JetBrains_Mono'] text-sm border-t-2 border-primary-container">
-<code class="text-primary-fixed-dim">
-                                    SELECT *<br/>
-                                    FROM Students<br/>
-                                    NATURAL JOIN Departments;
-                                </code>
-</div>
-<div class="flex items-center justify-center p-8 border border-outline-variant/10 rounded-lg">
-<div class="text-center">
-<span class="material-symbols-outlined text-5xl text-primary-container/20 mb-4">join_inner</span>
-<p class="font-['Newsreader'] italic text-on-surface-variant">Simplified syntax for identical column names</p>
-</div>
-</div>
-</div>
+<!-- CONCLUSION -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Conclusion</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Summary</span></div>
+<div class="p-8 bg-surface-container rounded-xl border-l-4 border-secondary">
+<p class="text-on-surface font-body leading-relaxed mb-4">
+Through executing exactly separated `JOIN` structural arrays spanning extensive mathematical combinations, we proved completely capable recombining absolutely isolated base matrices exactly modeling distinct relational data arrays flawlessly dynamically securely preventing data overlaps natively entirely universally executing exactly successfully generating precise algorithmic query products correctly checking explicitly constraints cleanly thoroughly avoiding execution delays generating expected parameters natively globally completely.
+</p>
 </div>
 </section>
+<!-- VIVA VOCE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Viva Voce</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Q & A</span></div>
+<div class="flex flex-col gap-4">
+
 </div>
-</main>
-</div>
-<!-- Footer -->
+</section>
+<div class="flex justify-between items-center pt-12 border-t border-outline-variant/20 mt-16">
+<a class="group relative px-6 py-3 bg-surface-container border border-outline-variant/30 text-on-surface font-headline font-bold rounded-lg overflow-hidden transition-transform active:scale-95 hover:border-primary/40" href="../practical_08_views/code.html">
+<span class="relative z-10 flex items-center gap-2"><span class="material-symbols-outlined">arrow_back</span>Practical 08</span></a><a class="group relative px-8 py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-bold rounded-lg overflow-hidden transition-transform active:scale-95" href="../practical_10_stored_procedures/code.html">
+<span class="relative z-10 flex items-center gap-2">Next: Practical 10<span class="material-symbols-outlined">arrow_forward</span></span>
+<div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div></a></div>
+</div></main></div>
 <footer class="w-full border-t border-slate-800/50 mt-20 bg-[#10141a]">
 <div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full max-w-[1440px] mx-auto">
-<div class="flex flex-col gap-2 mb-8 md:mb-0">
-<span class="text-amber-500 font-serif font-['Newsreader'] italic text-2xl">DBMS Journal</span>
-<p class="text-slate-500 font-['Newsreader'] italic text-lg">S.Y.B.Tech IT | Sem IV | Pattern 2023</p>
-</div>
-<div class="flex gap-12 items-center">
-<a class="group flex items-center gap-3 text-slate-500 hover:text-amber-200 transition-colors" href="#">
-<span class="material-symbols-outlined text-sm">arrow_back</span>
-<span class="font-['Newsreader'] italic text-lg">Prev -&gt; P8</span>
-</a>
-<div class="h-8 w-[1px] bg-outline-variant/20 hidden md:block"></div>
-<a class="group flex items-center gap-3 text-amber-400 underline font-['Newsreader'] italic text-lg hover:text-amber-200 transition-colors" href="#">
-<span>Next -&gt; P10</span>
-<span class="material-symbols-outlined text-sm">arrow_forward</span>
-</a>
-</div>
-<div class="mt-8 md:mt-0 flex gap-6 text-slate-500 font-['Newsreader'] italic text-lg">
-<a class="hover:text-amber-200 transition-colors" href="#">University Guidelines</a>
-<a class="hover:text-amber-200 transition-colors" href="#">Lab Manual</a>
-</div>
-</div>
-</footer>
+<div class="text-amber-500 font-serif font-['Newsreader'] italic text-lg mb-4 md:mb-0">S.Y.B.Tech IT | Sem IV | Pattern 2023 | Subject: 2308215</div>
+<div class="flex gap-8 font-['Newsreader'] italic text-lg">
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">University Guidelines</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Lab Manual</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Contact Faculty</a>
+</div></div></footer>
 </body></html>

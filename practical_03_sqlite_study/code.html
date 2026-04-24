@@ -1,316 +1,369 @@
 <!DOCTYPE html>
-
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
         theme: {
           extend: {
             "colors": {
-                    "inverse-surface": "#dfe2eb",
-                    "tertiary-fixed-dim": "#ffba3d",
-                    "tertiary-fixed": "#ffdeae",
-                    "primary-container": "#00d4ff",
-                    "on-background": "#dfe2eb",
-                    "on-primary-container": "#00586b",
-                    "on-primary-fixed": "#001f27",
-                    "surface-tint": "#3cd7ff",
-                    "surface-container-high": "#262a31",
-                    "on-primary": "#003642",
-                    "primary-fixed-dim": "#3cd7ff",
-                    "surface-container": "#1c2026",
-                    "error": "#ffb4ab",
-                    "on-secondary-fixed": "#291800",
-                    "inverse-on-surface": "#2d3137",
-                    "surface-container-lowest": "#0a0e14",
-                    "secondary-container": "#dc9100",
-                    "surface-variant": "#31353c",
-                    "secondary-fixed": "#ffddb4",
-                    "inverse-primary": "#00677e",
-                    "on-secondary": "#452b00",
-                    "on-secondary-fixed-variant": "#633f00",
-                    "primary-fixed": "#b4ebff",
-                    "on-tertiary-fixed-variant": "#604100",
-                    "on-tertiary": "#432c00",
-                    "on-error-container": "#ffdad6",
-                    "on-tertiary-container": "#6c4900",
-                    "on-primary-fixed-variant": "#004e5f",
-                    "on-error": "#690005",
-                    "surface-container-highest": "#31353c",
-                    "tertiary-container": "#feb528",
-                    "secondary": "#ffb955",
-                    "surface-dim": "#10141a",
-                    "on-tertiary-fixed": "#281900",
-                    "on-secondary-container": "#4f3100",
-                    "error-container": "#93000a",
-                    "secondary-fixed-dim": "#ffb955",
-                    "outline": "#859398",
-                    "surface-bright": "#353940",
-                    "on-surface": "#dfe2eb",
-                    "surface-container-low": "#181c22",
-                    "on-surface-variant": "#bbc9cf",
-                    "surface": "#10141a",
-                    "background": "#10141a",
-                    "tertiary": "#ffd9a1",
-                    "primary": "#a8e8ff",
-                    "outline-variant": "#3c494e"
+                "inverse-surface": "#dfe2eb",
+                "tertiary-fixed-dim": "#ffba3d",
+                "tertiary-fixed": "#ffdeae",
+                "primary-container": "#00d4ff",
+                "on-background": "#dfe2eb",
+                "on-primary-container": "#00586b",
+                "on-primary-fixed": "#001f27",
+                "surface-tint": "#3cd7ff",
+                "surface-container-high": "#262a31",
+                "on-primary": "#003642",
+                "primary-fixed-dim": "#3cd7ff",
+                "surface-container": "#1c2026",
+                "error": "#ffb4ab",
+                "on-secondary-fixed": "#291800",
+                "inverse-on-surface": "#2d3137",
+                "surface-container-lowest": "#0a0e14",
+                "secondary-container": "#dc9100",
+                "surface-variant": "#31353c",
+                "secondary-fixed": "#ffddb4",
+                "inverse-primary": "#00677e",
+                "on-secondary": "#452b00",
+                "on-secondary-fixed-variant": "#633f00",
+                "primary-fixed": "#b4ebff",
+                "on-tertiary-fixed-variant": "#604100",
+                "on-tertiary": "#432c00",
+                "on-error-container": "#ffdad6",
+                "on-tertiary-container": "#6c4900",
+                "on-primary-fixed-variant": "#004e5f",
+                "on-error": "#690005",
+                "surface-container-highest": "#31353c",
+                "tertiary-container": "#feb528",
+                "secondary": "#ffb955",
+                "surface-dim": "#10141a",
+                "on-tertiary-fixed": "#281900",
+                "on-secondary-container": "#4f3100",
+                "error-container": "#93000a",
+                "secondary-fixed-dim": "#ffb955",
+                "outline": "#859398",
+                "surface-bright": "#353940",
+                "on-surface": "#dfe2eb",
+                "surface-container-low": "#181c22",
+                "on-surface-variant": "#bbc9cf",
+                "surface": "#10141a",
+                "background": "#10141a",
+                "tertiary": "#ffd9a1",
+                "primary": "#a8e8ff",
+                "outline-variant": "#3c494e"
             },
             "borderRadius": {
-                    "DEFAULT": "0.125rem",
-                    "lg": "0.25rem",
-                    "xl": "0.5rem",
-                    "full": "0.75rem"
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
             },
             "fontFamily": {
-                    "headline": ["Space Grotesk"],
-                    "body": ["Newsreader"],
-                    "label": ["Inter"],
-                    "mono": ["JetBrains Mono"]
+                "headline": ["Space Grotesk"],
+                "body": ["Newsreader"],
+                "label": ["Inter"]
             }
           },
         },
       }
     </script>
 <style>
-        body {
-            background-color: #10141a;
-            background-image: radial-gradient(#1c2026 0.5px, transparent 0.5px);
-            background-size: 24px 24px;
-        }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
+        .dot-matrix {
+            background-image: radial-gradient(circle, #3c494e 1px, transparent 1px);
+            background-size: 32px 32px;
+            opacity: 0.05;
+        }
+        body { background-color: #10141a; color: #dfe2eb; }
+        pre { overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
+        .code-block { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.7; }
+        .output-table { border-collapse: collapse; width: 100%; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+        .output-table th { background: rgba(168,232,255,0.12); color: #a8e8ff; padding: 8px 12px; text-align: left; border-bottom: 1px solid #3c494e; }
+        .output-table td { padding: 7px 12px; border-bottom: 1px solid #1c2026; color: #bbc9cf; }
+        .output-table tr:hover td { background: rgba(168,232,255,0.04); }
+        details > summary { cursor: pointer; }
+        details[open] > summary { color: #a8e8ff; }
     </style>
-</head>
-<body class="text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
-<!-- TopNavBar -->
+
+<title>Practical 03 | DBMS Journal</title>
+<body class="font-body selection:bg-primary/30 selection:text-primary">
 <nav class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)]">
 <div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
-<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-headline tracking-tight">
-                DBMS Journal
-            </div>
-<div class="hidden md:flex items-center space-x-8 font-headline text-sm tracking-widest">
-<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">Home</a>
+<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-headline tracking-tight">DBMS Journal</div>
+<div class="hidden md:flex gap-8 font-headline">
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="../index.html">Home</a>
 <a class="text-cyan-400 border-b-2 border-cyan-400 pb-1" href="#">Practicals</a>
 <a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">About</a>
 </div>
 <div class="flex items-center gap-4">
-<button class="p-2 text-on-surface-variant hover:bg-cyan-500/10 transition-all duration-300 rounded-lg scale-95 active:scale-90">
-<span class="material-symbols-outlined" data-icon="menu">menu</span>
-</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">menu</button>
+</div></div></nav>
+<div class="flex max-w-[1440px] mx-auto relative">
+<aside class="hidden md:block sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] overflow-y-auto border-none top-[64px]">
+<div class="flex flex-col gap-1 p-6">
+<div class="mb-6">
+<h3 class="font-headline font-bold text-primary tracking-widest uppercase text-xs">Lab Practicals</h3>
+<p class="text-on-surface-variant text-[10px] uppercase tracking-[0.2em] mt-1 font-label">DBMS Coursework</p>
 </div>
-</div>
-</nav>
-<div class="flex max-w-[1440px] mx-auto">
-<!-- SideNavBar -->
-<aside class="sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] hidden lg:flex flex-col">
-<div class="p-6 pb-2">
-<h2 class="font-headline font-bold text-primary tracking-tight text-xl">Lab Practicals</h2>
-<p class="font-mono text-[10px] uppercase tracking-widest text-outline">DBMS Coursework</p>
-</div>
-<div class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar">
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all ease-out duration-400" href="#">
-<span class="material-symbols-outlined text-sm" data-icon="terminal">terminal</span>
-<span class="font-mono text-xs uppercase tracking-widest">Practical 1</span>
-</a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all ease-out duration-400" href="#">
-<span class="material-symbols-outlined text-sm" data-icon="database">database</span>
-<span class="font-mono text-xs uppercase tracking-widest">Practical 2</span>
-</a>
-<a class="flex items-center gap-3 p-3 rounded-lg bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 translate-x-1 transition-all ease-out duration-400" href="#">
-<span class="material-symbols-outlined text-sm" data-icon="schema">schema</span>
-<span class="font-mono text-xs uppercase tracking-widest">Practical 3</span>
-</a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
-<span class="material-symbols-outlined text-sm" data-icon="table_chart">table_chart</span>
-<span class="font-mono text-xs uppercase tracking-widest">Practical 4</span>
-</a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
-<span class="material-symbols-outlined text-sm" data-icon="query_stats">query_stats</span>
-<span class="font-mono text-xs uppercase tracking-widest">Practical 5</span>
-</a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
-<span class="material-symbols-outlined text-sm" data-icon="storage">storage</span>
-<span class="font-mono text-xs uppercase tracking-widest">Practical 6</span>
-</a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
-<span class="material-symbols-outlined text-sm" data-icon="security">security</span>
-<span class="font-mono text-xs uppercase tracking-widest">Practical 7</span>
-</a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
-<span class="material-symbols-outlined text-sm" data-icon="code_blocks">code_blocks</span>
-<span class="font-mono text-xs uppercase tracking-widest">Practical 8</span>
-</a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
-<span class="material-symbols-outlined text-sm" data-icon="settings_ethernet">settings_ethernet</span>
-<span class="font-mono text-xs uppercase tracking-widest">Practical 9</span>
-</a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
-<span class="material-symbols-outlined text-sm" data-icon="lan">lan</span>
-<span class="font-mono text-xs uppercase tracking-widest">Practical 10</span>
-</a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
-<span class="material-symbols-outlined text-sm" data-icon="cloud_done">cloud_done</span>
-<span class="font-mono text-xs uppercase tracking-widest">Practical 11</span>
-</a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
-<span class="material-symbols-outlined text-sm" data-icon="account_tree">account_tree</span>
-<span class="font-mono text-xs uppercase tracking-widest">Practical 12</span>
-</a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
-<span class="material-symbols-outlined text-sm" data-icon="reorder">reorder</span>
-<span class="font-mono text-xs uppercase tracking-widest">Practical 13</span>
-</a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-all" href="#">
-<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
-<span class="font-mono text-xs uppercase tracking-widest">Practical 14</span>
-</a>
-</div>
-</aside>
-<!-- Main Content Canvas -->
-<main class="flex-1 px-8 py-12 md:px-16 overflow-x-hidden">
-<!-- Header Section -->
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_01_study_of_mysql/code.html">
+<span class="material-symbols-outlined">terminal</span>Practical 01</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_02_mysql_installation/code.html">
+<span class="material-symbols-outlined">database</span>Practical 02</a>
+<a class="flex items-center gap-3 p-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 font-label text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">schema</span>Practical 03</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_04_er_diagrams/code.html">
+<span class="material-symbols-outlined">table_chart</span>Practical 04</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_05_ddl_normalization/code.html">
+<span class="material-symbols-outlined">query_stats</span>Practical 05</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_06_constraints_alter_drop/code.html">
+<span class="material-symbols-outlined">storage</span>Practical 06</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_07_sql_queries/code.html">
+<span class="material-symbols-outlined">security</span>Practical 07</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_08_views/code.html">
+<span class="material-symbols-outlined">code_blocks</span>Practical 08</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_09_implementation_of_joins/code.html">
+<span class="material-symbols-outlined">settings_ethernet</span>Practical 09</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_10_stored_procedures/code.html">
+<span class="material-symbols-outlined">lan</span>Practical 10</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_11_triggers/code.html">
+<span class="material-symbols-outlined">cloud_done</span>Practical 11</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_12_cursors/code.html">
+<span class="material-symbols-outlined">account_tree</span>Practical 12</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_13_project_proposal_srs/code.html">
+<span class="material-symbols-outlined">reorder</span>Practical 13</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_14_er_diagram_database_design/code.html">
+<span class="material-symbols-outlined">history</span>Practical 14</a>
+
+</div></aside>
+<main class="flex-1 min-w-0 bg-background relative overflow-hidden">
+<div class="absolute inset-0 dot-matrix pointer-events-none"></div>
+<div class="px-8 py-12 lg:px-16 max-w-5xl mx-auto relative z-10">
+<!-- Header -->
 <header class="mb-16">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-6">
-<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
-<span class="font-mono text-[10px] uppercase tracking-tighter text-primary">Group A | Practical 03</span>
+<div class="flex items-center gap-4 mb-6">
+<span class="px-3 py-1 bg-primary/10 text-primary border border-primary/20 rounded-lg text-xs font-label uppercase tracking-widest">Group A</span>
+<span class="text-on-surface-variant/40">—</span>
+<span class="text-on-surface-variant font-label text-xs uppercase tracking-widest">Embedded Databases</span>
 </div>
-<h1 class="text-6xl md:text-7xl font-headline font-bold text-on-surface tracking-tighter leading-none mb-4">
-                    SQLite <br/><span class="text-primary-container">Architecture &amp; Installation</span>
+<h1 class="text-5xl md:text-6xl font-headline font-bold text-on-surface mb-6 tracking-tight">
+Practical 03: <span class="text-primary">Study of SQLite</span>
 </h1>
-<p class="max-w-2xl text-xl text-on-surface-variant font-body italic leading-relaxed">
-                    A comprehensive study of the serverless, zero-configuration database engine that powers millions of global applications.
-                </p>
+<p class="text-xl md:text-2xl text-on-surface-variant font-body leading-relaxed max-w-3xl italic">A deep-dive comparison of SQLite vs MySQL — architectures, type systems, concurrency models, and use-case selection.</p>
 </header>
-<!-- Bento Grid Content -->
-<div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-20">
-<!-- Definition Card -->
-<div class="md:col-span-7 bg-surface-container-low p-8 rounded-xl flex flex-col justify-between group hover:bg-surface-container transition-colors duration-500">
-<div>
-<h3 class="font-headline text-2xl font-semibold mb-4 text-primary">What is SQLite?</h3>
-<p class="text-on-surface-variant leading-loose mb-6">
-                            SQLite is a C-language library that implements a <strong class="text-on-surface">small, fast, self-contained, high-reliability, full-featured</strong>, SQL database engine. Unlike most other SQL databases, SQLite does not have a separate server process. It reads and writes directly to ordinary disk files.
-                        </p>
+
+<!-- AIM -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Aim</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Objective</span></div>
+<div class="p-8 bg-surface-container rounded-xl border border-outline-variant/20">
+<p class="text-on-surface font-body leading-relaxed text-lg mb-4">
+The aim of this practical is to study SQLite — a lightweight, serverless, self-contained, embedded SQL database engine — and compare it with MySQL across key dimensions such as architecture, scalability, concurrency, data types, and target use cases. The student will understand when to choose SQLite over a full client-server RDBMS and learn how to interact with SQLite databases.
+</p>
+<p class="text-on-surface-variant font-body leading-relaxed">
+SQLite is deployed in billions of devices globally — including Android and iOS mobile apps, Chromium browser, Firefox, and many IoT sensors. Understanding its architecture helps developers make informed decisions when designing data-persistence layers for mobile healthcare apps, offline-capable web applications, and embedded systems that cannot run a full MySQL server.
+</p>
 </div>
-<div class="grid grid-cols-2 gap-4">
-<div class="p-4 bg-surface-container-highest rounded-lg border-l-4 border-primary">
-<span class="block font-mono text-xs text-primary mb-1 uppercase">Attribute</span>
-<span class="font-headline font-bold text-lg">Serverless</span>
+</section>
+
+<!-- THEORY -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Theory & Background</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Core Concepts</span></div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-primary lg:col-span-2">
+<h3 class="text-lg font-headline font-semibold text-primary mb-3">What is SQLite?</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">SQLite is a C-language library that implements a small, fast, self-contained, high-reliability, full-featured SQL database engine. Unlike client-server databases, SQLite reads and writes directly to ordinary disk files. The entire database — tables, indexes, triggers, and views — is stored in a single cross-platform .db file.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-secondary">
+<h3 class="text-lg font-headline font-semibold text-secondary mb-3">Serverless Architecture</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">SQLite has no separate server process. The application directly links to the SQLite library. This eliminates: client-server communication overhead, separate installation/admin, network latency, and authentication layers. The database is simply a file on disk — portable, zero-config.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-primary lg:col-span-3">
+<h3 class="text-lg font-headline font-semibold text-primary mb-3">SQLite vs MySQL — Comparison</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">SQLite: Serverless, single .db file, dynamic typing, no user management, 281TB max DB size, WAL mode for concurrency. MySQL: Client-server, separate data directory, strict typing, user/privilege system, no practical size limit, MVCC concurrency. SQLite suits embedded/local; MySQL suits multi-user/web.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-secondary">
+<h3 class="text-lg font-headline font-semibold text-secondary mb-3">Dynamic Typing</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">SQLite uses Type Affinity — a declared type is a suggestion, not enforcement. Storage classes: NULL, INTEGER, REAL, TEXT, BLOB. A TEXT column can store an integer. This flexibility is useful in rapid prototyping but can cause data integrity issues in production — MySQL's strict mode prevents such anomalies.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-primary">
+<h3 class="text-lg font-headline font-semibold text-primary mb-3">WAL Mode (Write-Ahead Log)</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">In WAL mode (PRAGMA journal_mode=WAL), writers do not block readers and readers do not block writers. This dramatically improves concurrent read performance. WAL is the recommended mode for mobile applications where reads greatly outnumber writes.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-secondary">
+<h3 class="text-lg font-headline font-semibold text-secondary mb-3">Use Cases for SQLite</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">SQLite is ideal for: Mobile apps (Android Room, iOS Core Data), Browser storage (localStorage alternative), Unit testing (in-memory database with :memory:), Configuration files replacement, Embedded devices, Offline-capable web apps (Electron, Tauri). It is NOT suitable for high-concurrency multi-user web backends.</p></div>
 </div>
-<div class="p-4 bg-surface-container-highest rounded-lg border-l-4 border-secondary">
-<span class="block font-mono text-xs text-secondary mb-1 uppercase">Storage</span>
-<span class="font-headline font-bold text-lg">Single File</span>
+</section>
+
+<!-- PROCEDURE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Procedure / Algorithm</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Step-by-Step</span></div>
+<div class="bg-surface-container-low rounded-xl border border-outline-variant/20 p-8">
+<ol class="flex flex-col gap-5"><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">01.</span><span class="text-on-surface-variant font-body leading-relaxed">Install SQLite: Linux: <code class='text-cyan-400'>sudo apt install sqlite3</code> | macOS: pre-installed | Windows: download from sqlite.org/download.html.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">02.</span><span class="text-on-surface-variant font-body leading-relaxed">Open SQLite CLI: type <code class='text-cyan-400'>sqlite3 hospital_lite.db</code> to create/open a database file.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">03.</span><span class="text-on-surface-variant font-body leading-relaxed">View available dot-commands: <code class='text-cyan-400'>.help</code> — these are SQLite-specific meta-commands.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">04.</span><span class="text-on-surface-variant font-body leading-relaxed">Create a simplified PATIENT table in SQLite to observe the dynamic typing behaviour.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">05.</span><span class="text-on-surface-variant font-body leading-relaxed">Insert sample data and perform SELECT queries — compare syntax with MySQL.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">06.</span><span class="text-on-surface-variant font-body leading-relaxed">Test dynamic typing: insert a text value into an INTEGER column — observe that SQLite accepts it.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">07.</span><span class="text-on-surface-variant font-body leading-relaxed">Enable WAL mode: <code class='text-cyan-400'>PRAGMA journal_mode=WAL;</code> and observe the response.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">08.</span><span class="text-on-surface-variant font-body leading-relaxed">View all tables: <code class='text-cyan-400'>.tables</code> and view schema: <code class='text-cyan-400'>.schema PATIENT</code></span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">09.</span><span class="text-on-surface-variant font-body leading-relaxed">Export database to SQL script: <code class='text-cyan-400'>.output hospital_backup.sql</code> then <code class='text-cyan-400'>.dump</code></span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">10.</span><span class="text-on-surface-variant font-body leading-relaxed">Open a fresh SQLite instance, import the backup: <code class='text-cyan-400'>.read hospital_backup.sql</code></span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">11.</span><span class="text-on-surface-variant font-body leading-relaxed">Compare with MySQL: note the absence of ENUM, no AUTO_INCREMENT (use INTEGER PRIMARY KEY for ROWID alias), no SHOW TABLES (use .tables instead).</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">12.</span><span class="text-on-surface-variant font-body leading-relaxed">Exit SQLite: <code class='text-cyan-400'>.quit</code> and note that the .db file persists on disk.</span></li></ol>
 </div>
+</section>
+
+<!-- CODE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Complete MySQL Code</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Runnable & Commented</span></div>
+<div class="mb-16">
+<div class="bg-[#0a0e14] rounded-xl border border-outline-variant/20 overflow-hidden shadow-2xl">
+<div class="flex items-center gap-2 px-4 py-3 bg-surface-container-lowest border-b border-outline-variant/20">
+<span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+<span class="ml-4 text-xs font-label text-slate-500 uppercase tracking-widest">MySQL 8.x — Hospital Management System</span>
 </div>
+<pre class="code-block p-6 text-slate-300">
+<span class="text-slate-500 italic">-- ================================================================</span>
+<span class="text-slate-500 italic">-- Practical 03: SQLite Study — Commands & Queries</span>
+<span class="text-slate-500 italic">-- These run in: sqlite3 hospital_lite.db</span>
+<span class="text-slate-500 italic">-- ================================================================</span>
+
+<span class="text-slate-500 italic">-- SQLite Dot Commands (meta-commands, not SQL)</span>
+<span class="text-slate-500 italic">-- .databases    -- show attached databases</span>
+<span class="text-slate-500 italic">-- .tables       -- list all tables</span>
+<span class="text-slate-500 italic">-- .schema <tbl> -- show CREATE statement</span>
+<span class="text-slate-500 italic">-- .mode column  -- display mode</span>
+<span class="text-slate-500 italic">-- .headers on   -- show column headers</span>
+<span class="text-slate-500 italic">-- .quit         -- exit SQLite</span>
+
+<span class="text-slate-500 italic">-- Step 1: Enable WAL journal mode for better concurrency</span>
+<span class="text-cyan-400">PRAGMA</span> <span class="text-slate-300">journal_mode</span> = <span class="text-green-400">WAL</span>;
+
+<span class="text-slate-500 italic">-- Step 2: Create lightweight PATIENT table (SQLite syntax)</span>
+<span class="text-cyan-400">CREATE TABLE IF NOT EXISTS</span> <span class="text-slate-300">PATIENT</span> (
+    <span class="text-slate-300">patient_id</span> <span class="text-cyan-400">INTEGER</span> <span class="text-cyan-400">PRIMARY KEY</span> <span class="text-cyan-400">AUTOINCREMENT</span>,  <span class="text-slate-500 italic">-- ROWID alias</span>
+    <span class="text-slate-300">name</span>       <span class="text-cyan-400">TEXT</span>    <span class="text-cyan-400">NOT NULL</span>,
+    <span class="text-slate-300">age</span>        <span class="text-cyan-400">INTEGER</span>,
+    <span class="text-slate-300">disease</span>    <span class="text-cyan-400">TEXT</span>
+);
+
+<span class="text-slate-500 italic">-- Step 3: Insert sample data</span>
+<span class="text-cyan-400">INSERT INTO</span> <span class="text-slate-300">PATIENT</span> (<span class="text-slate-300">name</span>, <span class="text-slate-300">age</span>, <span class="text-slate-300">disease</span>) <span class="text-cyan-400">VALUES</span>
+(<span class="text-green-400">'Aarav Shah'</span>,    <span class="text-amber-400">45</span>, <span class="text-green-400">'Diabetes'</span>),
+(<span class="text-green-400">'Priya Mehta'</span>,   <span class="text-amber-400">32</span>, <span class="text-green-400">'Asthma'</span>),
+(<span class="text-green-400">'Rohan Verma'</span>,   <span class="text-amber-400">58</span>, <span class="text-green-400">'Heart Disease'</span>),
+(<span class="text-green-400">'Sneha Joshi'</span>,   <span class="text-amber-400">27</span>, <span class="text-green-400">'Migraine'</span>),
+(<span class="text-green-400">'Amit Patel'</span>,    <span class="text-amber-400">63</span>, <span class="text-green-400">'Arthritis'</span>);
+
+<span class="text-slate-500 italic">-- Step 4: Query patients</span>
+<span class="text-cyan-400">SELECT</span> * <span class="text-cyan-400">FROM</span> <span class="text-slate-300">PATIENT</span> <span class="text-cyan-400">ORDER BY</span> <span class="text-slate-300">age</span> <span class="text-cyan-400">DESC</span>;
+
+<span class="text-slate-500 italic">-- Step 5: Demonstrate dynamic typing (SQLite-specific behaviour)</span>
+<span class="text-slate-500 italic">-- This would FAIL in MySQL strict mode but WORKS in SQLite</span>
+<span class="text-cyan-400">INSERT INTO</span> <span class="text-slate-300">PATIENT</span> (<span class="text-slate-300">name</span>, <span class="text-slate-300">age</span>, <span class="text-slate-300">disease</span>)
+<span class="text-cyan-400">VALUES</span> (<span class="text-green-400">'Test Patient'</span>, <span class="text-green-400">'forty-five'</span>, <span class="text-green-400">'Flu'</span>);
+<span class="text-slate-500 italic">-- Notice: 'forty-five' stored as TEXT in INTEGER column</span>
+
+<span class="text-cyan-400">SELECT</span> <span class="text-slate-300">name</span>, <span class="text-slate-300">age</span>, <span class="text-violet-400">TYPEOF</span>(<span class="text-slate-300">age</span>) <span class="text-cyan-400">AS</span> <span class="text-slate-300">age_type</span> <span class="text-cyan-400">FROM</span> <span class="text-slate-300">PATIENT</span>;
+
+<span class="text-slate-500 italic">-- Step 6: SQLite aggregate functions (same as MySQL)</span>
+<span class="text-cyan-400">SELECT</span> <span class="text-violet-400">COUNT</span>(*) <span class="text-cyan-400">AS</span> <span class="text-slate-300">Total_Patients</span>,
+       <span class="text-violet-400">AVG</span>(<span class="text-slate-300">age</span>) <span class="text-cyan-400">AS</span> <span class="text-slate-300">Avg_Age</span>,
+       <span class="text-violet-400">MAX</span>(<span class="text-slate-300">age</span>) <span class="text-cyan-400">AS</span> <span class="text-slate-300">Oldest</span>,
+       <span class="text-violet-400">MIN</span>(<span class="text-slate-300">age</span>) <span class="text-cyan-400">AS</span> <span class="text-slate-300">Youngest</span>
+<span class="text-cyan-400">FROM</span> <span class="text-slate-300">PATIENT</span>
+<span class="text-cyan-400">WHERE</span> <span class="text-violet-400">TYPEOF</span>(<span class="text-slate-300">age</span>) = <span class="text-green-400">'integer'</span>;
+
+<span class="text-slate-500 italic">-- Step 7: SQLite date/time functions</span>
+<span class="text-cyan-400">SELECT</span> <span class="text-violet-400">date</span>(<span class="text-green-400">'now'</span>) <span class="text-cyan-400">AS</span> <span class="text-slate-300">Today</span>,
+       <span class="text-violet-400">strftime</span>(<span class="text-green-400">'%Y'</span>, <span class="text-green-400">'now'</span>) <span class="text-cyan-400">AS</span> <span class="text-slate-300">Current_Year</span>;
+
+<span class="text-slate-500 italic">-- Step 8: Check SQLite version</span>
+<span class="text-cyan-400">SELECT</span> <span class="text-violet-400">sqlite_version</span>();
+
+</pre></div></div>
+</section>
+
+<!-- OUTPUT -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Expected Output</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Query Results</span></div>
+<div class="bg-[#0a0e14] rounded-xl border border-outline-variant/20 p-6 overflow-x-auto">
+<p class="text-slate-500 font-label text-xs mb-3 uppercase tracking-widest">SELECT * FROM PATIENT ORDER BY age DESC</p><div class="overflow-x-auto"><table class="output-table"><thead><tr><th>patient_id</th><th>name</th><th>age</th><th>disease</th></tr></thead><tbody><tr><td>5</td><td>Amit Patel</td><td>63</td><td>Arthritis</td></tr><tr><td>3</td><td>Rohan Verma</td><td>58</td><td>Heart Disease</td></tr><tr><td>1</td><td>Aarav Shah</td><td>45</td><td>Diabetes</td></tr><tr><td>2</td><td>Priya Mehta</td><td>32</td><td>Asthma</td></tr><tr><td>4</td><td>Sneha Joshi</td><td>27</td><td>Migraine</td></tr></tbody></table></div><br/><p class="text-slate-500 font-label text-xs mb-3 uppercase tracking-widest">Dynamic Typing Demo — TYPEOF(age)</p><div class="overflow-x-auto"><table class="output-table"><thead><tr><th>name</th><th>age</th><th>age_type</th></tr></thead><tbody><tr><td>Aarav Shah</td><td>45</td><td>integer</td></tr><tr><td>Priya Mehta</td><td>32</td><td>integer</td></tr><tr><td>Rohan Verma</td><td>58</td><td>integer</td></tr><tr><td>Sneha Joshi</td><td>27</td><td>integer</td></tr><tr><td>Amit Patel</td><td>63</td><td>integer</td></tr><tr><td>Test Patient</td><td>forty-five</td><td>text</td></tr></tbody></table></div><br/><p class="text-slate-500 font-label text-xs mb-3 uppercase tracking-widest">Aggregate on integer-typed rows only</p><div class="overflow-x-auto"><table class="output-table"><thead><tr><th>Total_Patients</th><th>Avg_Age</th><th>Oldest</th><th>Youngest</th></tr></thead><tbody><tr><td>5</td><td>45.0</td><td>63</td><td>27</td></tr></tbody></table></div>
 </div>
-<!-- Visual Element / Image -->
-<div class="md:col-span-5 relative overflow-hidden rounded-xl bg-surface-container-high h-[400px] md:h-auto">
-<img class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-luminosity" data-alt="Abstract visualization of a database core with floating digital data nodes and blue cybernetic neural pathways" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-rmiD4boclOKMhlt3se2Pi0zNzNi8Bw9X9PfKj4sexRXRHUPEXVHUWTS9kll2UBUqCUYDljT2YULJGVrRYavhM6edgVY4EQzxRib_cGbObys5w-Rf9rhB1T7qJTtOnNUorPGiAVIuMFkZIdRrnOMaGMmZ0V-wL_Ym1WJ5W2BfeypBo0EoYPS8szJg0hw3TNYchgXkyfaYsSqaAlBa1bkSToGoIW5r3bRvL36k9JrHJa81XyxODL4SHcMdtiNdIJJWiXer2pkVUp8"/>
-<div class="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent"></div>
-<div class="absolute bottom-8 left-8">
-<span class="material-symbols-outlined text-4xl text-primary" data-icon="database">database</span>
-<h4 class="font-headline font-bold text-2xl mt-2">Zero-Config<br/>Embedded Engine</h4>
+</section>
+
+<!-- CONCLUSION -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Conclusion</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Summary</span></div>
+<div class="p-8 bg-surface-container rounded-xl border-l-4 border-secondary">
+<p class="text-on-surface font-body leading-relaxed mb-4">
+This practical demonstrated that SQLite, despite being a lightweight serverless engine, supports the core SQL standard including DDL, DML, aggregate functions, joins, and triggers. Its defining characteristic — dynamic typing and single-file storage — makes it uniquely suited for mobile and embedded applications where deploying a full MySQL server is impractical. The Hospital Management System's mobile companion app, for example, could use SQLite for offline patient data capture, syncing to the central MySQL server when connectivity is restored.
+</p>
+<p class="text-on-surface-variant font-body leading-relaxed">
+Key limitations of SQLite include lack of user-level access control, limited concurrency for write-heavy workloads, no built-in network access, and incomplete support for some SQL features (e.g., RIGHT JOIN, FULL OUTER JOIN until v3.39). For a multi-user hospital system serving hundreds of concurrent nurses and doctors, MySQL with InnoDB remains the appropriate choice.
+</p>
 </div>
+</section>
+
+<!-- VIVA VOCE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Viva Voce</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Q & A</span></div>
+<div class="flex flex-col gap-4">
+<details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q1.</span>What does 'serverless' mean in the context of SQLite?
+</summary>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> Serverless in SQLite means there is no separate server process — the SQLite library is directly linked into the application and reads/writes the database file directly. There is no socket, no port, no authentication server. This contrasts with MySQL where a background mysqld daemon process handles all connections.
+</div></details><details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q2.</span>What is the maximum database size supported by SQLite?
+</summary>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> SQLite supports a maximum database file size of 281 terabytes (2^41 bytes). However, practical limits due to OS file size restrictions or storage media are typically encountered first. Individual row size is limited to 1 GB.
+</div></details><details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q3.</span>How does SQLite handle concurrent writes?
+</summary>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> SQLite uses file-level locking. In default journal mode, only one writer is allowed at a time (exclusive lock). In WAL (Write-Ahead Log) mode, one writer can proceed concurrently with multiple readers without blocking them. WAL mode is recommended for applications with a mix of reads and writes.
+</div></details><details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q4.</span>What is ROWID in SQLite?
+</summary>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> Every SQLite table (unless declared WITHOUT ROWID) automatically gets a 64-bit signed integer ROWID that uniquely identifies each row. If a table has an INTEGER PRIMARY KEY column, that column becomes an alias for ROWID. This is equivalent to AUTO_INCREMENT in MySQL.
+</div></details><details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q5.</span>When would you choose SQLite over MySQL for a hospital system?
+</summary>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> SQLite is appropriate for: (1) A mobile nursing app that captures patient vitals offline, (2) An archived read-only copy of a patient's discharge summary PDF database, (3) Unit tests where an in-memory :memory: database can replace the full MySQL setup. MySQL is preferred when multiple concurrent users access the same data, when network access is required, or when complex stored procedures and user management are needed.
+</div></details>
 </div>
-<!-- Comparisons -->
-<div class="md:col-span-12 bg-surface-container-lowest p-8 rounded-xl border-l-8 border-tertiary">
-<div class="flex flex-col md:flex-row gap-12">
-<div class="flex-1">
-<h3 class="font-headline text-2xl font-semibold mb-6 flex items-center gap-2">
-<span class="material-symbols-outlined text-tertiary" data-icon="compare_arrows">compare_arrows</span>
-                                SQLite vs MySQL
-                            </h3>
-<div class="space-y-6">
-<div class="flex gap-4">
-<div class="mt-1 text-primary"><span class="material-symbols-outlined" data-icon="check_circle">check_circle</span></div>
-<div>
-<h5 class="font-bold text-on-surface">SQLite is Local</h5>
-<p class="text-sm text-on-surface-variant">The database is a file on the host machine. Ideal for mobile and IoT.</p>
-</div>
-</div>
-<div class="flex gap-4">
-<div class="mt-1 text-tertiary"><span class="material-symbols-outlined" data-icon="cancel">cancel</span></div>
-<div>
-<h5 class="font-bold text-on-surface">MySQL is Client-Server</h5>
-<p class="text-sm text-on-surface-variant">Requires a running server process and network protocol. Ideal for multi-user web apps.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="flex-1 bg-surface-container p-6 rounded-lg">
-<h4 class="font-mono text-xs uppercase tracking-widest text-outline mb-4">Common Use Cases</h4>
-<ul class="space-y-3 font-body italic text-lg text-on-surface">
-<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Embedded devices and IoT</li>
-<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Application file format (Desktop software)</li>
-<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Low-traffic websites &amp; Prototyping</li>
-<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Data Analysis &amp; Educational labs</li>
-</ul>
-</div>
-</div>
-</div>
-<!-- Terminal Block -->
-<div class="md:col-span-12">
-<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-2xl">
-<div class="flex items-center justify-between px-6 py-4 bg-surface-container-high">
-<div class="flex gap-2">
-<div class="w-3 h-3 rounded-full bg-red-500/50"></div>
-<div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-<div class="w-3 h-3 rounded-full bg-green-500/50"></div>
-</div>
-<span class="font-mono text-[10px] uppercase text-outline tracking-widest">build_and_install_sqlite.sh</span>
-</div>
-<div class="p-8 font-mono text-sm leading-relaxed overflow-x-auto">
-<div class="mb-4 text-outline-variant"># Step 1: Download Source and Extract</div>
-<div class="mb-2"><span class="text-secondary">wget</span> https://www.sqlite.org/2023/sqlite-autoconf-3440000.tar.gz</div>
-<div class="mb-6"><span class="text-secondary">tar</span> xvfz sqlite-autoconf-3440000.tar.gz</div>
-<div class="mb-4 text-outline-variant"># Step 2: Configure and Compile</div>
-<div class="mb-2"><span class="text-primary">cd</span> sqlite-autoconf-3440000</div>
-<div class="mb-2"><span class="text-secondary">./configure</span> --prefix=/usr/local</div>
-<div class="mb-6"><span class="text-secondary">make</span></div>
-<div class="mb-4 text-outline-variant"># Step 3: Install binary</div>
-<div class="mb-2"><span class="text-secondary">sudo make install</span></div>
-<div class="text-on-primary-container bg-primary-container/20 px-2 py-1 rounded inline-block mt-4">SQLite version 3.44.0 installed successfully.</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Navigation Footer -->
-<div class="flex flex-col md:flex-row justify-between items-stretch gap-6 border-t border-outline-variant/20 pt-12">
-<a class="flex-1 p-6 bg-surface-container-low rounded-lg group hover:bg-surface-container-high transition-all" href="#">
-<span class="font-mono text-[10px] text-outline uppercase tracking-widest block mb-2">Previous Lab</span>
-<div class="flex items-center justify-between">
-<span class="font-headline font-bold text-xl">Practical 02: Relational Schema</span>
-<span class="material-symbols-outlined transition-transform group-hover:-translate-x-2" data-icon="arrow_back">arrow_back</span>
-</div>
-</a>
-<a class="flex-1 p-6 bg-surface-container-low rounded-lg group hover:bg-surface-container-high transition-all text-right border-r-4 border-primary" href="#">
-<span class="font-mono text-[10px] text-outline uppercase tracking-widest block mb-2">Next Lab</span>
-<div class="flex items-center justify-between flex-row-reverse">
-<span class="font-headline font-bold text-xl">Practical 04: Basic SQL Queries</span>
-<span class="material-symbols-outlined transition-transform group-hover:translate-x-2" data-icon="arrow_forward">arrow_forward</span>
-</div>
-</a>
-</div>
-</main>
-</div>
-<!-- Footer -->
-<footer class="w-full bg-[#10141a] border-t border-slate-800/50 mt-20">
-<div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full max-w-[1440px] mx-auto gap-8">
-<div class="flex flex-col items-center md:items-start">
-<span class="text-amber-500 font-serif text-2xl">DBMS Journal</span>
-<span class="font-body italic text-lg text-slate-500">S.Y.B.Tech IT | Sem IV | Pattern 2023</span>
-</div>
-<div class="flex gap-8 font-body italic text-lg">
+</section>
+
+<div class="flex justify-between items-center pt-12 border-t border-outline-variant/20 mt-16">
+<a class="group relative px-6 py-3 bg-surface-container border border-outline-variant/30 text-on-surface font-headline font-bold rounded-lg overflow-hidden transition-transform active:scale-95 hover:border-primary/40" href="../practical_02_mysql_installation/code.html">
+<span class="relative z-10 flex items-center gap-2"><span class="material-symbols-outlined">arrow_back</span>Practical 02</span></a><a class="group relative px-8 py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-bold rounded-lg overflow-hidden transition-transform active:scale-95" href="../practical_04_er_diagrams/code.html">
+<span class="relative z-10 flex items-center gap-2">Next: Practical 04<span class="material-symbols-outlined">arrow_forward</span></span>
+<div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div></a></div>
+</div></main></div>
+<footer class="w-full border-t border-slate-800/50 mt-20 bg-[#10141a]">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full max-w-[1440px] mx-auto">
+<div class="text-amber-500 font-serif font-['Newsreader'] italic text-lg mb-4 md:mb-0">S.Y.B.Tech IT | Sem IV | Pattern 2023 | Subject: 2308215</div>
+<div class="flex gap-8 font-['Newsreader'] italic text-lg">
 <a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">University Guidelines</a>
 <a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Lab Manual</a>
 <a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Contact Faculty</a>
-</div>
-</div>
-</footer>
+</div></div></footer>
 </body></html>

@@ -1,350 +1,412 @@
 <!DOCTYPE html>
-
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Practical 05 - DBMS Journal</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=JetBrains+Mono:wght@100..800&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "inverse-surface": "#dfe2eb",
-                        "tertiary-fixed-dim": "#ffba3d",
-                        "tertiary-fixed": "#ffdeae",
-                        "primary-container": "#00d4ff",
-                        "on-background": "#dfe2eb",
-                        "on-primary-container": "#00586b",
-                        "on-primary-fixed": "#001f27",
-                        "surface-tint": "#3cd7ff",
-                        "surface-container-high": "#262a31",
-                        "on-primary": "#003642",
-                        "primary-fixed-dim": "#3cd7ff",
-                        "surface-container": "#1c2026",
-                        "error": "#ffb4ab",
-                        "on-secondary-fixed": "#291800",
-                        "inverse-on-surface": "#2d3137",
-                        "surface-container-lowest": "#0a0e14",
-                        "secondary-container": "#dc9100",
-                        "surface-variant": "#31353c",
-                        "secondary-fixed": "#ffddb4",
-                        "inverse-primary": "#00677e",
-                        "on-secondary": "#452b00",
-                        "on-secondary-fixed-variant": "#633f00",
-                        "primary-fixed": "#b4ebff",
-                        "on-tertiary-fixed-variant": "#604100",
-                        "on-tertiary": "#432c00",
-                        "on-error-container": "#ffdad6",
-                        "on-tertiary-container": "#6c4900",
-                        "on-primary-fixed-variant": "#004e5f",
-                        "on-error": "#690005",
-                        "surface-container-highest": "#31353c",
-                        "tertiary-container": "#feb528",
-                        "secondary": "#ffb955",
-                        "surface-dim": "#10141a",
-                        "on-tertiary-fixed": "#281900",
-                        "on-secondary-container": "#4f3100",
-                        "error-container": "#93000a",
-                        "secondary-fixed-dim": "#ffb955",
-                        "outline": "#859398",
-                        "surface-bright": "#353940",
-                        "on-surface": "#dfe2eb",
-                        "surface-container-low": "#181c22",
-                        "on-surface-variant": "#bbc9cf",
-                        "surface": "#10141a",
-                        "background": "#10141a",
-                        "tertiary": "#ffd9a1",
-                        "primary": "#a8e8ff",
-                        "outline-variant": "#3c494e"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "fontFamily": {
-                        "headline": ["Space Grotesk"],
-                        "body": ["Newsreader"],
-                        "label": ["Inter"],
-                        "mono": ["JetBrains Mono"]
-                    }
-                }
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "inverse-surface": "#dfe2eb",
+                "tertiary-fixed-dim": "#ffba3d",
+                "tertiary-fixed": "#ffdeae",
+                "primary-container": "#00d4ff",
+                "on-background": "#dfe2eb",
+                "on-primary-container": "#00586b",
+                "on-primary-fixed": "#001f27",
+                "surface-tint": "#3cd7ff",
+                "surface-container-high": "#262a31",
+                "on-primary": "#003642",
+                "primary-fixed-dim": "#3cd7ff",
+                "surface-container": "#1c2026",
+                "error": "#ffb4ab",
+                "on-secondary-fixed": "#291800",
+                "inverse-on-surface": "#2d3137",
+                "surface-container-lowest": "#0a0e14",
+                "secondary-container": "#dc9100",
+                "surface-variant": "#31353c",
+                "secondary-fixed": "#ffddb4",
+                "inverse-primary": "#00677e",
+                "on-secondary": "#452b00",
+                "on-secondary-fixed-variant": "#633f00",
+                "primary-fixed": "#b4ebff",
+                "on-tertiary-fixed-variant": "#604100",
+                "on-tertiary": "#432c00",
+                "on-error-container": "#ffdad6",
+                "on-tertiary-container": "#6c4900",
+                "on-primary-fixed-variant": "#004e5f",
+                "on-error": "#690005",
+                "surface-container-highest": "#31353c",
+                "tertiary-container": "#feb528",
+                "secondary": "#ffb955",
+                "surface-dim": "#10141a",
+                "on-tertiary-fixed": "#281900",
+                "on-secondary-container": "#4f3100",
+                "error-container": "#93000a",
+                "secondary-fixed-dim": "#ffb955",
+                "outline": "#859398",
+                "surface-bright": "#353940",
+                "on-surface": "#dfe2eb",
+                "surface-container-low": "#181c22",
+                "on-surface-variant": "#bbc9cf",
+                "surface": "#10141a",
+                "background": "#10141a",
+                "tertiary": "#ffd9a1",
+                "primary": "#a8e8ff",
+                "outline-variant": "#3c494e"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "fontFamily": {
+                "headline": ["Space Grotesk"],
+                "body": ["Newsreader"],
+                "label": ["Inter"]
             }
-        }
+          },
+        },
+      }
     </script>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
         .dot-matrix {
-            background-image: radial-gradient(circle, rgba(168, 232, 255, 0.05) 1px, transparent 1px);
-            background-size: 24px 24px;
+            background-image: radial-gradient(circle, #3c494e 1px, transparent 1px);
+            background-size: 32px 32px;
+            opacity: 0.05;
         }
-        body {
-            background-color: #10141a;
-            color: #bbc9cf;
-        }
-        .scroll-hide::-webkit-scrollbar {
-            display: none;
-        }
+        body { background-color: #10141a; color: #dfe2eb; }
+        pre { overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
+        .code-block { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.7; }
+        .output-table { border-collapse: collapse; width: 100%; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+        .output-table th { background: rgba(168,232,255,0.12); color: #a8e8ff; padding: 8px 12px; text-align: left; border-bottom: 1px solid #3c494e; }
+        .output-table td { padding: 7px 12px; border-bottom: 1px solid #1c2026; color: #bbc9cf; }
+        .output-table tr:hover td { background: rgba(168,232,255,0.04); }
+        details > summary { cursor: pointer; }
+        details[open] > summary { color: #a8e8ff; }
     </style>
-</head>
-<body class="font-body selection:bg-primary-container selection:text-on-primary-container">
-<!-- TopNavBar -->
-<header class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)]">
-<nav class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
-<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-headline tracking-tight">
-                DBMS Journal
-            </div>
-<div class="hidden md:flex items-center gap-8 font-headline text-sm uppercase tracking-widest">
-<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">Home</a>
+
+<title>Practical 05 | DBMS Journal</title>
+<body class="font-body selection:bg-primary/30 selection:text-primary">
+<nav class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)]">
+<div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
+<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-headline tracking-tight">DBMS Journal</div>
+<div class="hidden md:flex gap-8 font-headline">
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="../index.html">Home</a>
 <a class="text-cyan-400 border-b-2 border-cyan-400 pb-1" href="#">Practicals</a>
 <a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">About</a>
 </div>
 <div class="flex items-center gap-4">
-<button class="p-2 text-cyan-400 hover:bg-cyan-500/10 transition-all duration-300 rounded-lg scale-95 active:scale-90">
-<span class="material-symbols-outlined">menu</span>
-</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">menu</button>
+</div></div></nav>
+<div class="flex max-w-[1440px] mx-auto relative">
+<aside class="hidden md:block sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] overflow-y-auto border-none top-[64px]">
+<div class="flex flex-col gap-1 p-6">
+<div class="mb-6">
+<h3 class="font-headline font-bold text-primary tracking-widest uppercase text-xs">Lab Practicals</h3>
+<p class="text-on-surface-variant text-[10px] uppercase tracking-[0.2em] mt-1 font-label">DBMS Coursework</p>
 </div>
-</nav>
-</header>
-<div class="flex max-w-[1440px] mx-auto min-h-screen dot-matrix">
-<!-- SideNavBar -->
-<aside class="hidden lg:flex flex-col sticky top-20 h-[calc(100vh-80px)] w-72 bg-[#181c22] border-none overflow-y-auto scroll-hide">
-<div class="p-6 border-b border-outline-variant/10">
-<h3 class="font-headline font-bold text-primary tracking-tight text-lg">Lab Practicals</h3>
-<p class="font-mono text-[10px] text-slate-500 uppercase tracking-widest mt-1">DBMS Coursework</p>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_01_study_of_mysql/code.html">
+<span class="material-symbols-outlined">terminal</span>Practical 01</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_02_mysql_installation/code.html">
+<span class="material-symbols-outlined">database</span>Practical 02</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_03_sqlite_study/code.html">
+<span class="material-symbols-outlined">schema</span>Practical 03</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_04_er_diagrams/code.html">
+<span class="material-symbols-outlined">table_chart</span>Practical 04</a>
+<a class="flex items-center gap-3 p-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 font-label text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">query_stats</span>Practical 05</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_06_constraints_alter_drop/code.html">
+<span class="material-symbols-outlined">storage</span>Practical 06</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_07_sql_queries/code.html">
+<span class="material-symbols-outlined">security</span>Practical 07</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_08_views/code.html">
+<span class="material-symbols-outlined">code_blocks</span>Practical 08</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_09_implementation_of_joins/code.html">
+<span class="material-symbols-outlined">settings_ethernet</span>Practical 09</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_10_stored_procedures/code.html">
+<span class="material-symbols-outlined">lan</span>Practical 10</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_11_triggers/code.html">
+<span class="material-symbols-outlined">cloud_done</span>Practical 11</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_12_cursors/code.html">
+<span class="material-symbols-outlined">account_tree</span>Practical 12</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_13_project_proposal_srs/code.html">
+<span class="material-symbols-outlined">reorder</span>Practical 13</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_14_er_diagram_database_design/code.html">
+<span class="material-symbols-outlined">history</span>Practical 14</a>
+
+</div></aside>
+<main class="flex-1 min-w-0 bg-background relative overflow-hidden">
+<div class="absolute inset-0 dot-matrix pointer-events-none"></div>
+<div class="px-8 py-12 lg:px-16 max-w-5xl mx-auto relative z-10">
+<!-- Header -->
+<header class="mb-16">
+<div class="flex items-center gap-4 mb-6">
+<span class="px-3 py-1 bg-primary/10 text-primary border border-primary/20 rounded-lg text-xs font-label uppercase tracking-widest">Group B</span>
+<span class="text-on-surface-variant/40">—</span>
+<span class="text-on-surface-variant font-label text-xs uppercase tracking-widest">Schema Design</span>
 </div>
-<div class="flex flex-col gap-1 p-4">
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
-<span class="material-symbols-outlined text-sm">terminal</span> Practical 1
-                </a>
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
-<span class="material-symbols-outlined text-sm">database</span> Practical 2
-                </a>
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
-<span class="material-symbols-outlined text-sm">schema</span> Practical 3
-                </a>
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
-<span class="material-symbols-outlined text-sm">table_chart</span> Practical 4
-                </a>
-<a class="flex items-center gap-3 p-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 rounded-l-lg font-mono text-sm uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
-<span class="material-symbols-outlined text-sm">query_stats</span> Practical 5
-                </a>
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
-<span class="material-symbols-outlined text-sm">storage</span> Practical 6
-                </a>
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
-<span class="material-symbols-outlined text-sm">security</span> Practical 7
-                </a>
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
-<span class="material-symbols-outlined text-sm">code_blocks</span> Practical 8
-                </a>
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
-<span class="material-symbols-outlined text-sm">settings_ethernet</span> Practical 9
-                </a>
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
-<span class="material-symbols-outlined text-sm">lan</span> Practical 10
-                </a>
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
-<span class="material-symbols-outlined text-sm">cloud_done</span> Practical 11
-                </a>
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
-<span class="material-symbols-outlined text-sm">account_tree</span> Practical 12
-                </a>
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
-<span class="material-symbols-outlined text-sm">reorder</span> Practical 13
-                </a>
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors rounded-lg font-mono text-sm uppercase tracking-widest ease-out duration-400" href="#">
-<span class="material-symbols-outlined text-sm">history</span> Practical 14
-                </a>
-</div>
-</aside>
-<!-- Main Content Canvas -->
-<main class="flex-1 px-6 md:px-12 py-10 overflow-x-hidden">
-<!-- Header Section -->
-<div class="mb-16">
-<div class="flex items-center gap-2 mb-4">
-<span class="px-3 py-1 rounded bg-primary-container/10 border border-primary/20 text-primary font-mono text-xs tracking-tighter">Group B</span>
-<span class="px-3 py-1 rounded bg-secondary-container/10 border border-secondary/20 text-secondary font-mono text-xs tracking-tighter">Normalization</span>
-</div>
-<h1 class="font-headline text-5xl md:text-7xl font-bold text-on-surface leading-tight tracking-tight mb-6">
-                    Practical 05: <br/>
-<span class="text-primary">DDL + Normalization</span>
+<h1 class="text-5xl md:text-6xl font-headline font-bold text-on-surface mb-6 tracking-tight">
+Practical 05: <span class="text-primary">DDL Commands & Normalization</span>
 </h1>
-<p class="font-body text-xl md:text-2xl italic text-on-surface-variant max-w-2xl">
-                    "The art of structural integrity—transforming chaotic datasets into efficient, relational masterpieces through rigorous normalization forms."
-                </p>
+<p class="text-xl md:text-2xl text-on-surface-variant font-body leading-relaxed max-w-3xl italic">Implementing MySQL DDL commands and applying normalization theory (1NF through BCNF) on the Hospital Management System.</p>
+</header>
+
+<!-- AIM -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Aim</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Objective</span></div>
+<div class="p-8 bg-surface-container rounded-xl border border-outline-variant/20">
+<p class="text-on-surface font-body leading-relaxed text-lg mb-4">
+The aim of this practical is to implement Data Definition Language (DDL) commands in MySQL to create, modify, and manage the Hospital Management System schema, and simultaneously apply database normalization techniques (1NF, 2NF, 3NF, BCNF) to eliminate data redundancy and ensure data integrity. The student will learn how improper schema design leads to update, insertion, and deletion anomalies, and how normalization resolves these systematically.
+</p>
+<p class="text-on-surface-variant font-body leading-relaxed">
+DDL is the backbone of database schema management — every production database begins with carefully written CREATE TABLE statements with appropriate constraints. Normalization is the theoretical framework that guides these design decisions, and understanding it is essential for designing efficient hospital databases where patient records, billing, and medical data must be stored without duplication or inconsistency.
+</p>
 </div>
-<!-- Bento Grid Content -->
-<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-<!-- Theory: 1NF & 2NF -->
-<div class="md:col-span-7 bg-surface-container-low p-8 rounded-lg">
-<h2 class="font-headline text-2xl font-bold text-primary mb-6 flex items-center gap-2">
-<span class="material-symbols-outlined">account_tree</span> Theoretical Foundations
-                    </h2>
-<div class="space-y-8">
-<div>
-<h3 class="font-headline text-lg font-semibold text-secondary mb-2">1NF: First Normal Form</h3>
-<p class="font-body text-lg text-on-surface-variant">
-                                A relation is in 1NF if and only if the domain of each attribute contains only atomic values, and the value of each attribute contains only a single value from that domain. No repeating groups allowed.
-                            </p>
+</section>
+
+<!-- THEORY -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Theory & Background</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Core Concepts</span></div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-primary lg:col-span-2">
+<h3 class="text-lg font-headline font-semibold text-primary mb-3">DDL Commands Overview</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">DDL (Data Definition Language) commands define and manage the structure of database objects. Key commands: CREATE (creates table/db/index/view), ALTER (modifies existing structure — add/drop/modify columns), DROP (permanently deletes object), TRUNCATE (removes all rows but keeps structure), RENAME (renames object). DDL is auto-committed in MySQL.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-secondary">
+<h3 class="text-lg font-headline font-semibold text-secondary mb-3">Data Types in MySQL</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">Numeric: INT, BIGINT, DECIMAL(p,s), FLOAT, DOUBLE. String: VARCHAR(n), CHAR(n), TEXT, ENUM, SET. Date/Time: DATE, TIME, DATETIME, TIMESTAMP, YEAR. Binary: BLOB, BINARY. JSON: native JSON type (MySQL 5.7+). Spatial: POINT, LINESTRING, POLYGON. Choosing the correct data type impacts storage and performance significantly.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-primary lg:col-span-3">
+<h3 class="text-lg font-headline font-semibold text-primary mb-3">Normalization — What & Why?</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">Normalization is the process of organising a relational database to reduce data redundancy and improve data integrity. Proposed by E.F. Codd (1970). An un-normalised table can suffer from: Update Anomaly (changing a doctor's salary requires updating multiple rows), Insert Anomaly (cannot add a doctor without a patient), Delete Anomaly (deleting last patient loses doctor information).</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-secondary">
+<h3 class="text-lg font-headline font-semibold text-secondary mb-3">1NF — First Normal Form</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">Rules: (1) Each column must contain atomic (indivisible) values — no repeating groups or arrays. (2) Each row must be uniquely identifiable by a primary key. Violation example: storing multiple phone numbers in one column (phone: '9876543210, 9123456789'). Fix: create a separate PATIENT_PHONE table with patient_id FK.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-primary">
+<h3 class="text-lg font-headline font-semibold text-primary mb-3">2NF — Second Normal Form</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">Rules: Must be in 1NF + No partial dependencies (non-key attributes must depend on the ENTIRE composite primary key). Relevant for tables with composite PKs. Example: if APPOINTMENT had (patient_id, doctor_id) as composite PK and stored doctor_name, that violates 2NF because doctor_name depends only on doctor_id (partial dependency). Fix: separate DOCTOR table.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-secondary">
+<h3 class="text-lg font-headline font-semibold text-secondary mb-3">3NF — Third Normal Form</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">Rules: Must be in 2NF + No transitive dependencies (non-key attributes must not depend on other non-key attributes). Example: if DOCTOR table stored dept_name and dept_floor_no, then dept_floor_no → dept_name → doctor_id (transitive). Fix: separate DEPARTMENT table, store only dept_id FK in DOCTOR.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-primary">
+<h3 class="text-lg font-headline font-semibold text-primary mb-3">BCNF — Boyce-Codd Normal Form</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">BCNF is a stricter version of 3NF: for every non-trivial functional dependency X → Y, X must be a superkey. BCNF eliminates anomalies that 3NF may not catch when there are overlapping candidate keys. Most tables in the HMS schema are already in BCNF after applying 3NF rules.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-secondary lg:col-span-2">
+<h3 class="text-lg font-headline font-semibold text-secondary mb-3">4NF & 5NF (Higher Normal Forms)</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">4NF: No multi-valued dependencies (a doctor with multiple specializations AND multiple languages should have separate tables rather than all combinations). 5NF (PJNF): No join dependencies — relevant to very complex many-to-many relationships. In practice, most production schemas target 3NF/BCNF.</p></div>
 </div>
-<div class="h-px bg-outline-variant/10"></div>
-<div>
-<h3 class="font-headline text-lg font-semibold text-secondary mb-2">2NF: Second Normal Form</h3>
-<p class="font-body text-lg text-on-surface-variant">
-                                A relation is in 2NF if it is in 1NF and every non-prime attribute is fully functionally dependent on the primary key. This eliminates partial functional dependency.
-                            </p>
+</section>
+
+<!-- PROCEDURE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Procedure / Algorithm</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Step-by-Step</span></div>
+<div class="bg-surface-container-low rounded-xl border border-outline-variant/20 p-8">
+<ol class="flex flex-col gap-5"><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">01.</span><span class="text-on-surface-variant font-body leading-relaxed">Use the hospital_db database: <code class='text-cyan-400'>USE hospital_db;</code></span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">02.</span><span class="text-on-surface-variant font-body leading-relaxed">Create all 5 tables using CREATE TABLE with appropriate data types, PRIMARY KEY, NOT NULL, and CHECK constraints.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">03.</span><span class="text-on-surface-variant font-body leading-relaxed">Use DESCRIBE to inspect the created table structure: <code class='text-cyan-400'>DESCRIBE PATIENT;</code></span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">04.</span><span class="text-on-surface-variant font-body leading-relaxed">Demonstrate normalization by starting with an un-normalised PATIENT_DOCTOR_UNNORMALISED table.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">05.</span><span class="text-on-surface-variant font-body leading-relaxed">Identify all anomalies in the un-normalised table: update anomaly (changing doctor salary affects many rows), insert anomaly, delete anomaly.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">06.</span><span class="text-on-surface-variant font-body leading-relaxed">Apply 1NF: ensure atomic values — move multi-valued attributes to separate tables.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">07.</span><span class="text-on-surface-variant font-body leading-relaxed">Apply 2NF: remove partial dependencies — each non-key column must depend on the full PK.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">08.</span><span class="text-on-surface-variant font-body leading-relaxed">Apply 3NF: remove transitive dependencies — dept_name and floor_no moved from DOCTOR to DEPARTMENT.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">09.</span><span class="text-on-surface-variant font-body leading-relaxed">Verify the normalised schema results in the final 5-table design with FK constraints.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">10.</span><span class="text-on-surface-variant font-body leading-relaxed">Use SHOW CREATE TABLE to view the complete DDL including all FK definitions: <code class='text-cyan-400'>SHOW CREATE TABLE APPOINTMENT\G</code></span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">11.</span><span class="text-on-surface-variant font-body leading-relaxed">Create indexes on frequently queried columns to optimise performance.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">12.</span><span class="text-on-surface-variant font-body leading-relaxed">Document all functional dependencies identified during normalization in your journal.</span></li></ol>
 </div>
+</section>
+
+<!-- CODE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Complete MySQL Code</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Runnable & Commented</span></div>
+<div class="mb-16">
+<div class="bg-[#0a0e14] rounded-xl border border-outline-variant/20 overflow-hidden shadow-2xl">
+<div class="flex items-center gap-2 px-4 py-3 bg-surface-container-lowest border-b border-outline-variant/20">
+<span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+<span class="ml-4 text-xs font-label text-slate-500 uppercase tracking-widest">MySQL 8.x — Hospital Management System</span>
 </div>
-</div>
-<!-- 3NF & BCNF Sidecard -->
-<div class="md:col-span-5 flex flex-col gap-6">
-<div class="bg-surface-container-high p-8 rounded-lg flex-1">
-<h3 class="font-headline text-lg font-semibold text-tertiary mb-3">3NF: Third Normal Form</h3>
-<p class="font-body text-on-surface-variant leading-relaxed">
-                            Ensures no transitive dependencies. "Every non-key attribute must provide a fact about the key, the whole key, and nothing but the key (so help me Codd)."
-                        </p>
-</div>
-<div class="bg-surface-container-lowest border border-outline-variant/20 p-8 rounded-lg flex-1">
-<h3 class="font-headline text-lg font-semibold text-primary mb-3">BCNF: Boyce-Codd</h3>
-<p class="font-body text-on-surface-variant leading-relaxed">
-                            A stronger version of 3NF. For every non-trivial functional dependency X → Y, X must be a superkey. It addresses anomalies that 3NF might miss in tables with multiple candidate keys.
-                        </p>
-</div>
-</div>
-<!-- SQL Terminal Block -->
-<div class="md:col-span-12 bg-surface-container-lowest rounded-lg overflow-hidden mt-6">
-<div class="flex items-center justify-between px-6 py-3 bg-surface-container-high">
-<div class="flex gap-1.5">
-<div class="w-3 h-3 rounded-full bg-red-500/50"></div>
-<div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-<div class="w-3 h-3 rounded-full bg-green-500/50"></div>
-</div>
-<span class="font-mono text-[10px] uppercase text-slate-500 tracking-[0.2em]">ddl_schema.sql</span>
-<button class="flex items-center gap-2 text-[10px] font-mono text-cyan-400 hover:text-cyan-200 transition-colors">
-<span class="material-symbols-outlined text-sm">content_copy</span> COPY
-                        </button>
-</div>
-<div class="p-8 font-mono text-sm md:text-base leading-relaxed text-cyan-300/90 overflow-x-auto">
-<pre><code><span class="text-secondary">CREATE TABLE</span> Students (
-    StudentID <span class="text-tertiary">INT</span> PRIMARY KEY,
-    FullName <span class="text-tertiary">VARCHAR</span>(100) NOT NULL,
-    Email <span class="text-tertiary">VARCHAR</span>(50) UNIQUE
+<pre class="code-block p-6 text-slate-300">
+<span class="text-slate-500 italic">-- ================================================================</span>
+<span class="text-slate-500 italic">-- Practical 05: DDL Commands & Normalization</span>
+<span class="text-slate-500 italic">-- Hospital Management System</span>
+<span class="text-slate-500 italic">-- ================================================================</span>
+
+<span class="text-cyan-400">USE</span> <span class="text-slate-300">hospital_db</span>;
+
+<span class="text-slate-500 italic">-- ── Step 1: Demonstrate Un-Normalised Table (Violates 1NF & 2NF) ──</span>
+<span class="text-slate-500 italic">-- Un-Normalised: patient info + doctor info + dept info in one table</span>
+<span class="text-slate-500 italic">-- Anomalies present:</span>
+<span class="text-slate-500 italic">--   Update: Changing Dr. Sharma's salary requires updating ALL rows</span>
+<span class="text-slate-500 italic">--   Insert: Cannot add a doctor without a patient</span>
+<span class="text-slate-500 italic">--   Delete: Removing P001 deletes Dr. Sharma's information</span>
+<span class="text-cyan-400">CREATE TABLE</span> <span class="text-slate-300">UNNORMALISED</span> (
+    <span class="text-slate-300">patient_id</span>    <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">10</span>),
+    <span class="text-slate-300">patient_name</span>  <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">80</span>),
+    <span class="text-slate-300">patient_age</span>   <span class="text-cyan-400">INT</span>,
+    <span class="text-slate-300">diseases</span>      <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">200</span>),  <span class="text-slate-500 italic">-- VIOLATION: Multi-valued — 'Diabetes, Hypertension'</span>
+    <span class="text-slate-300">doctor_id</span>     <span class="text-cyan-400">INT</span>,
+    <span class="text-slate-300">doctor_name</span>   <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">80</span>),
+    <span class="text-slate-300">salary</span>        <span class="text-cyan-400">DECIMAL</span>(<span class="text-amber-400">10</span>,<span class="text-amber-400">2</span>),
+    <span class="text-slate-300">dept_name</span>     <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">50</span>),   <span class="text-slate-500 italic">-- Transitive: doctor_id → dept_id → dept_name</span>
+    <span class="text-slate-300">dept_floor</span>    <span class="text-cyan-400">INT</span>
 );
 
-<span class="text-secondary">CREATE TABLE</span> Courses (
-    CourseID <span class="text-tertiary">VARCHAR</span>(10) PRIMARY KEY,
-    CourseName <span class="text-tertiary">VARCHAR</span>(100),
-    Credits <span class="text-tertiary">INT</span>
-);
+<span class="text-slate-500 italic">-- ── Step 2: Apply 1NF ──</span>
+<span class="text-slate-500 italic">-- Remove multi-valued 'diseases' — each patient has one disease per row</span>
+<span class="text-slate-500 italic">-- Ensure atomic values in all columns</span>
+<span class="text-slate-500 italic">-- (Our final PATIENT table already satisfies 1NF)</span>
 
-<span class="text-secondary">CREATE TABLE</span> Enrollments (
-    EnrollmentID <span class="text-tertiary">SERIAL</span> PRIMARY KEY,
-    StudentID <span class="text-tertiary">INT</span> REFERENCES Students(StudentID),
-    CourseID <span class="text-tertiary">VARCHAR</span>(10) REFERENCES Courses(CourseID),
-    Grade <span class="text-tertiary">CHAR</span>(1)
-);</code></pre>
+<span class="text-slate-500 italic">-- ── Step 3: Apply 2NF ──</span>
+<span class="text-slate-500 italic">-- Separate DOCTOR information (no partial dependencies in FK tables)</span>
+
+<span class="text-slate-500 italic">-- ── Step 4: Apply 3NF — Create DDL for HMS ──</span>
+<span class="text-slate-500 italic">-- 3NF achieved: dept_name moved to DEPARTMENT table</span>
+<span class="text-slate-500 italic">-- DOCTOR stores only dept_id FK (not dept_name — removing transitive dep)</span>
+
+<span class="text-cyan-400">DROP TABLE IF EXISTS</span> <span class="text-slate-300">UNNORMALISED</span>;
+
+<span class="text-slate-500 italic">-- Final Normalised Schema — Complete DDL</span>
+<span class="text-cyan-400">CREATE TABLE</span> <span class="text-slate-300">DEPARTMENT</span> (
+    <span class="text-slate-300">dept_id</span>        <span class="text-cyan-400">INT</span>         <span class="text-cyan-400">PRIMARY KEY</span>,
+    <span class="text-slate-300">dept_name</span>      <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">50</span>)  <span class="text-cyan-400">NOT NULL</span> <span class="text-cyan-400">UNIQUE</span>,
+    <span class="text-slate-300">floor_no</span>       <span class="text-cyan-400">INT</span>         <span class="text-cyan-400">NOT NULL</span> <span class="text-cyan-400">CHECK</span>(<span class="text-slate-300">floor_no</span> <span class="text-cyan-400">BETWEEN</span> <span class="text-amber-400">1</span> <span class="text-cyan-400">AND</span> <span class="text-amber-400">20</span>),
+    <span class="text-slate-300">head_doctor_id</span> <span class="text-cyan-400">INT</span>         <span class="text-cyan-400">DEFAULT</span> <span class="text-cyan-400">NULL</span>
+) <span class="text-cyan-400">ENGINE</span>=<span class="text-green-400">InnoDB</span>;
+
+<span class="text-cyan-400">CREATE TABLE</span> <span class="text-slate-300">DOCTOR</span> (
+    <span class="text-slate-300">doctor_id</span>        <span class="text-cyan-400">INT</span>         <span class="text-cyan-400">PRIMARY KEY</span>,
+    <span class="text-slate-300">name</span>             <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">80</span>) <span class="text-cyan-400">NOT NULL</span>,
+    <span class="text-slate-300">specialization</span>   <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">50</span>) <span class="text-cyan-400">NOT NULL</span>,
+    <span class="text-slate-300">experience_years</span> <span class="text-cyan-400">INT</span>         <span class="text-cyan-400">DEFAULT</span> <span class="text-amber-400">0</span> <span class="text-cyan-400">CHECK</span>(<span class="text-slate-300">experience_years</span> &gt;= <span class="text-amber-400">0</span>),
+    <span class="text-slate-300">salary</span>           <span class="text-cyan-400">DECIMAL</span>(<span class="text-amber-400">10</span>,<span class="text-amber-400">2</span>) <span class="text-cyan-400">CHECK</span>(<span class="text-slate-300">salary</span> &gt; <span class="text-amber-400">0</span>),
+    <span class="text-slate-300">dept_id</span>          <span class="text-cyan-400">INT</span>,
+    <span class="text-cyan-400">FOREIGN KEY</span> (<span class="text-slate-300">dept_id</span>) <span class="text-cyan-400">REFERENCES</span> <span class="text-slate-300">DEPARTMENT</span>(<span class="text-slate-300">dept_id</span>) <span class="text-cyan-400">ON DELETE SET NULL</span>
+) <span class="text-cyan-400">ENGINE</span>=<span class="text-green-400">InnoDB</span>;
+
+<span class="text-cyan-400">CREATE TABLE</span> <span class="text-slate-300">PATIENT</span> (
+    <span class="text-slate-300">patient_id</span>     <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">10</span>) <span class="text-cyan-400">PRIMARY KEY</span>,
+    <span class="text-slate-300">name</span>           <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">80</span>) <span class="text-cyan-400">NOT NULL</span>,
+    <span class="text-slate-300">age</span>            <span class="text-cyan-400">INT</span>         <span class="text-cyan-400">NOT NULL</span> <span class="text-cyan-400">CHECK</span>(<span class="text-slate-300">age</span> <span class="text-cyan-400">BETWEEN</span> <span class="text-amber-400">0</span> <span class="text-cyan-400">AND</span> <span class="text-amber-400">150</span>),
+    <span class="text-slate-300">gender</span>         <span class="text-cyan-400">ENUM</span>(<span class="text-green-400">'Male'</span>,<span class="text-green-400">'Female'</span>,<span class="text-green-400">'Other'</span>) <span class="text-cyan-400">NOT NULL</span>,
+    <span class="text-slate-300">disease</span>        <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">100</span>) <span class="text-cyan-400">NOT NULL</span>,
+    <span class="text-slate-300">ward_no</span>        <span class="text-cyan-400">INT</span>         <span class="text-cyan-400">CHECK</span>(<span class="text-slate-300">ward_no</span> &gt; <span class="text-amber-400">0</span>),
+    <span class="text-slate-300">admission_date</span> <span class="text-cyan-400">DATE</span>        <span class="text-cyan-400">NOT NULL</span> <span class="text-cyan-400">DEFAULT</span> (<span class="text-cyan-400">CURRENT_DATE</span>)
+) <span class="text-cyan-400">ENGINE</span>=<span class="text-green-400">InnoDB</span>;
+
+<span class="text-cyan-400">CREATE TABLE</span> <span class="text-slate-300">APPOINTMENT</span> (
+    <span class="text-slate-300">appt_id</span>    <span class="text-cyan-400">INT</span>          <span class="text-cyan-400">AUTO_INCREMENT</span> <span class="text-cyan-400">PRIMARY KEY</span>,
+    <span class="text-slate-300">patient_id</span> <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">10</span>) <span class="text-cyan-400">NOT NULL</span>,
+    <span class="text-slate-300">doctor_id</span>  <span class="text-cyan-400">INT</span>          <span class="text-cyan-400">NOT NULL</span>,
+    <span class="text-slate-300">appt_date</span>  <span class="text-cyan-400">DATE</span>         <span class="text-cyan-400">NOT NULL</span>,
+    <span class="text-slate-300">status</span>     <span class="text-cyan-400">ENUM</span>(<span class="text-green-400">'Scheduled'</span>,<span class="text-green-400">'Completed'</span>,<span class="text-green-400">'Cancelled'</span>) <span class="text-cyan-400">DEFAULT</span> <span class="text-green-400">'Scheduled'</span>,
+    <span class="text-cyan-400">FOREIGN KEY</span> (<span class="text-slate-300">patient_id</span>) <span class="text-cyan-400">REFERENCES</span> <span class="text-slate-300">PATIENT</span>(<span class="text-slate-300">patient_id</span>) <span class="text-cyan-400">ON DELETE CASCADE</span>,
+    <span class="text-cyan-400">FOREIGN KEY</span> (<span class="text-slate-300">doctor_id</span>)  <span class="text-cyan-400">REFERENCES</span> <span class="text-slate-300">DOCTOR</span>(<span class="text-slate-300">doctor_id</span>)  <span class="text-cyan-400">ON DELETE CASCADE</span>
+) <span class="text-cyan-400">ENGINE</span>=<span class="text-green-400">InnoDB</span>;
+
+<span class="text-cyan-400">CREATE TABLE</span> <span class="text-slate-300">BILL</span> (
+    <span class="text-slate-300">bill_id</span>      <span class="text-cyan-400">INT</span>          <span class="text-cyan-400">AUTO_INCREMENT</span> <span class="text-cyan-400">PRIMARY KEY</span>,
+    <span class="text-slate-300">patient_id</span>   <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">10</span>) <span class="text-cyan-400">NOT NULL</span>,
+    <span class="text-slate-300">total_amount</span> <span class="text-cyan-400">DECIMAL</span>(<span class="text-amber-400">10</span>,<span class="text-amber-400">2</span>) <span class="text-cyan-400">NOT NULL</span> <span class="text-cyan-400">CHECK</span>(<span class="text-slate-300">total_amount</span> &gt;= <span class="text-amber-400">0</span>),
+    <span class="text-slate-300">paid_status</span>  <span class="text-cyan-400">ENUM</span>(<span class="text-green-400">'Paid'</span>,<span class="text-green-400">'Unpaid'</span>,<span class="text-green-400">'Partial'</span>) <span class="text-cyan-400">DEFAULT</span> <span class="text-green-400">'Unpaid'</span>,
+    <span class="text-slate-300">bill_date</span>    <span class="text-cyan-400">DATE</span>         <span class="text-cyan-400">NOT NULL</span> <span class="text-cyan-400">DEFAULT</span> (<span class="text-cyan-400">CURRENT_DATE</span>),
+    <span class="text-cyan-400">FOREIGN KEY</span> (<span class="text-slate-300">patient_id</span>) <span class="text-cyan-400">REFERENCES</span> <span class="text-slate-300">PATIENT</span>(<span class="text-slate-300">patient_id</span>) <span class="text-cyan-400">ON DELETE CASCADE</span>
+) <span class="text-cyan-400">ENGINE</span>=<span class="text-green-400">InnoDB</span>;
+
+<span class="text-slate-500 italic">-- Create indexes on frequently searched columns</span>
+<span class="text-cyan-400">CREATE INDEX</span> <span class="text-slate-300">idx_patient_disease</span>  <span class="text-cyan-400">ON</span> <span class="text-slate-300">PATIENT</span>(<span class="text-slate-300">disease</span>);
+<span class="text-cyan-400">CREATE INDEX</span> <span class="text-slate-300">idx_appt_date</span>         <span class="text-cyan-400">ON</span> <span class="text-slate-300">APPOINTMENT</span>(<span class="text-slate-300">appt_date</span>);
+<span class="text-cyan-400">CREATE INDEX</span> <span class="text-slate-300">idx_bill_paid_status</span>   <span class="text-cyan-400">ON</span> <span class="text-slate-300">BILL</span>(<span class="text-slate-300">paid_status</span>);
+
+<span class="text-slate-500 italic">-- Verify all tables and structure</span>
+<span class="text-cyan-400">SHOW</span> <span class="text-cyan-400">TABLES</span>;
+<span class="text-cyan-400">DESCRIBE</span> <span class="text-slate-300">PATIENT</span>;
+
+</pre></div></div>
+</section>
+
+<!-- OUTPUT -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Expected Output</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Query Results</span></div>
+<div class="bg-[#0a0e14] rounded-xl border border-outline-variant/20 p-6 overflow-x-auto">
+<p class="text-slate-500 font-label text-xs mb-3 uppercase tracking-widest">SHOW TABLES</p><div class="overflow-x-auto"><table class="output-table"><thead><tr><th>Tables_in_hospital_db</th></tr></thead><tbody><tr><td>APPOINTMENT</td></tr><tr><td>BILL</td></tr><tr><td>DEPARTMENT</td></tr><tr><td>DOCTOR</td></tr><tr><td>PATIENT</td></tr></tbody></table></div><br/><p class="text-slate-500 font-label text-xs mb-3 uppercase tracking-widest">DESCRIBE PATIENT</p><div class="overflow-x-auto"><table class="output-table"><thead><tr><th>Field</th><th>Type</th><th>Null</th><th>Key</th><th>Default</th><th>Extra</th></tr></thead><tbody><tr><td>patient_id</td><td>varchar(10)</td><td>NO</td><td>PRI</td><td>NULL</td><td></td></tr><tr><td>name</td><td>varchar(80)</td><td>NO</td><td></td><td>NULL</td><td></td></tr><tr><td>age</td><td>int</td><td>NO</td><td></td><td>NULL</td><td></td></tr><tr><td>gender</td><td>enum('Male','Female','Other')</td><td>NO</td><td></td><td>NULL</td><td></td></tr><tr><td>disease</td><td>varchar(100)</td><td>NO</td><td>MUL</td><td>NULL</td><td></td></tr><tr><td>ward_no</td><td>int</td><td>YES</td><td></td><td>NULL</td><td></td></tr><tr><td>admission_date</td><td>date</td><td>NO</td><td></td><td>current_date()</td><td></td></tr></tbody></table></div>
 </div>
+</section>
+
+<!-- CONCLUSION -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Conclusion</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Summary</span></div>
+<div class="p-8 bg-surface-container rounded-xl border-l-4 border-secondary">
+<p class="text-on-surface font-body leading-relaxed mb-4">
+This practical established the complete normalised DDL schema for the Hospital Management System. By progressing from an un-normalised monolithic table through 1NF (atomic values), 2NF (no partial dependencies), and 3NF (no transitive dependencies), we arrived at the final 5-table design in BCNF. Each normalization step was justified by identifying specific data anomalies and eliminating the functional dependencies that caused them.
+</p>
+<p class="text-on-surface-variant font-body leading-relaxed">
+Key takeaway: Normalization improves data integrity and reduces redundancy but may increase the number of JOIN operations required for queries. In practice, database designers sometimes deliberately denormaize (controlled redundancy) for read-heavy systems like data warehouses or reporting databases, while keeping OLTP databases like our HMS fully normalised to ensure consistency. Performance indexes were created on disease, appt_date, and paid_status columns for optimal query performance.
+</p>
 </div>
-<!-- Normalization Example Case -->
-<div class="md:col-span-12 grid grid-cols-1 lg:grid-cols-2 gap-10 mt-12 items-center">
-<div>
-<h2 class="font-headline text-3xl font-bold text-on-surface mb-6">Case Study: Practical Normalization</h2>
-<div class="space-y-6">
-<div class="flex gap-4">
-<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary">01</div>
-<div>
-<h4 class="font-headline font-bold text-lg">Initial Unnormalized State</h4>
-<p class="font-body text-on-surface-variant">Data contains multi-valued attributes like "Phone Numbers" in a single cell and redundant instructor details.</p>
+</section>
+
+<!-- VIVA VOCE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Viva Voce</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Q & A</span></div>
+<div class="flex flex-col gap-4">
+<details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q1.</span>What is a functional dependency? Give an example.
+</summary>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> A functional dependency X → Y means the value of X uniquely determines the value of Y. Example: patient_id → name (knowing patient_id tells us exactly which patient name). doctor_id → salary (knowing doctor_id determines the salary). Functional dependencies are the foundation of normalization theory.
+</div></details><details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q2.</span>What is a transitive dependency and how does 3NF eliminate it?
+</summary>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> A transitive dependency occurs when A → B → C (A determines B which determines C, making A indirectly determine C). In our schema, if DOCTOR stored dept_name: doctor_id → dept_id → dept_name. 3NF removes this by moving dept_name to the DEPARTMENT table, making DOCTOR store only dept_id FK.
+</div></details><details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q3.</span>What is the difference between DROP TABLE and TRUNCATE TABLE?
+</summary>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> DROP TABLE permanently deletes the table structure along with all data and releases storage (DDL, auto-committed). TRUNCATE TABLE removes all rows but keeps the table structure intact, resets AUTO_INCREMENT, and is also DDL (fast, no per-row logging). DELETE FROM removes rows one by one with individual transaction log entries (DML, can be rolled back).
+</div></details><details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q4.</span>Why is BCNF considered stricter than 3NF?
+</summary>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> 3NF allows functional dependencies where the determinant is not a superkey, as long as the dependent attribute is part of some candidate key. BCNF eliminates even these: for every non-trivial FD X → Y, X must be a superkey. This handles anomalies in tables with overlapping candidate keys that 3NF cannot.
+</div></details><details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q5.</span>What does the CHECK constraint do? Does MySQL fully enforce it?
+</summary>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> CHECK constraints in MySQL 8.0.16+ are fully enforced and will reject rows where the condition evaluates to FALSE. Example: CHECK(age BETWEEN 0 AND 150) prevents inserting age=200. Before 8.0.16, MySQL parsed but ignored CHECK constraints — a dangerous behaviour no longer present in current versions.
+</div></details>
 </div>
-</div>
-<div class="flex gap-4">
-<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center flex-shrink-0 text-secondary">02</div>
-<div>
-<h4 class="font-headline font-bold text-lg">Process of Decomposition</h4>
-<p class="font-body text-on-surface-variant">Splitting the flat table into <code>Instructors</code>, <code>Departments</code>, and <code>CourseAssignment</code> entities.</p>
-</div>
-</div>
-<div class="flex gap-4">
-<div class="w-10 h-10 rounded-full bg-tertiary/10 flex items-center justify-center flex-shrink-0 text-tertiary">03</div>
-<div>
-<h4 class="font-headline font-bold text-lg">Verification of Dependency</h4>
-<p class="font-body text-on-surface-variant">Ensuring that every non-key attribute is dependent only on the Primary Key, achieving 3NF status.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="relative aspect-video rounded-lg overflow-hidden group">
-<img alt="Database schema visualization" class="w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="Technical visualization of database schema relations with floating nodes and glowing cyan connecting lines on a dark futuristic background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsc61kolVVaic5eBFgJIuCD_LW5iwaEn-8PYbS4XteHxlVxi6Mtm3eVXrtsH2prkqjms1Gh1yATHJm5Zfh50kK2678lwIXUpJfTDXVX9xUvmIQyU1ZxAThntRMNOBDPskghq5CPgKW7P7UD0a_VPpfnRyENKXjXLh-h4QJMAxqtV4jTCUpME5Wp-28X9QXKw2utC4xP4KYNiRLptC0-J-cggzx15rxQYRzqYg_maJlxFT4HoDTrniGY5g2rRDYzlSYYmbGlSzZ0ps"/>
-<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
-<div class="absolute bottom-6 left-6">
-<span class="text-xs font-mono text-cyan-400 bg-cyan-950/50 px-2 py-1 backdrop-blur-md rounded">Visualization v1.02</span>
-</div>
-</div>
-</div>
-<!-- Viva Accordion Section -->
-<div class="md:col-span-12 mt-20">
-<h2 class="font-headline text-3xl font-bold text-on-surface mb-8 text-center">Frequently Asked (Viva-Voce)</h2>
-<div class="space-y-4 max-w-4xl mx-auto">
-<div class="bg-surface-container-low rounded-lg p-6 hover:bg-surface-container-high transition-colors cursor-pointer">
-<div class="flex justify-between items-center">
-<h4 class="font-headline text-xl font-medium">Difference between 3NF and BCNF?</h4>
-<span class="material-symbols-outlined text-secondary">expand_more</span>
-</div>
-<p class="mt-4 font-body text-on-surface-variant hidden">3NF allows non-prime attributes to be dependent on candidate keys. BCNF requires all determinants to be candidate keys.</p>
-</div>
-<div class="bg-surface-container-low rounded-lg p-6 hover:bg-surface-container-high transition-colors cursor-pointer">
-<div class="flex justify-between items-center">
-<h4 class="font-headline text-xl font-medium">What is Transitive Dependency?</h4>
-<span class="material-symbols-outlined text-secondary">expand_more</span>
-</div>
-</div>
-<div class="bg-surface-container-low rounded-lg p-6 hover:bg-surface-container-high transition-colors cursor-pointer">
-<div class="flex justify-between items-center">
-<h4 class="font-headline text-xl font-medium">Why is Normalization necessary?</h4>
-<span class="material-symbols-outlined text-secondary">expand_more</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Practical Navigation -->
-<div class="flex justify-between items-center mt-24 pt-12 border-t border-outline-variant/10">
-<a class="group flex flex-col items-start" href="#">
-<span class="text-[10px] font-mono uppercase text-slate-500 tracking-widest mb-1 group-hover:text-primary transition-colors">Previous Module</span>
-<span class="font-headline text-2xl font-bold flex items-center gap-2">
-<span class="material-symbols-outlined group-hover:-translate-x-2 transition-transform">arrow_back</span> Practical 4
-                    </span>
-</a>
-<a class="group flex flex-col items-end text-right" href="#">
-<span class="text-[10px] font-mono uppercase text-slate-500 tracking-widest mb-1 group-hover:text-primary transition-colors">Next Module</span>
-<span class="font-headline text-2xl font-bold flex items-center gap-2">
-                        Practical 6 <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
-</span>
-</a>
-</div>
-</main>
-</div>
-<!-- Footer -->
-<footer class="bg-[#10141a] w-full border-t border-slate-800/50 mt-20">
+</section>
+
+<div class="flex justify-between items-center pt-12 border-t border-outline-variant/20 mt-16">
+<a class="group relative px-6 py-3 bg-surface-container border border-outline-variant/30 text-on-surface font-headline font-bold rounded-lg overflow-hidden transition-transform active:scale-95 hover:border-primary/40" href="../practical_04_er_diagrams/code.html">
+<span class="relative z-10 flex items-center gap-2"><span class="material-symbols-outlined">arrow_back</span>Practical 04</span></a><a class="group relative px-8 py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-bold rounded-lg overflow-hidden transition-transform active:scale-95" href="../practical_06_constraints_alter_drop/code.html">
+<span class="relative z-10 flex items-center gap-2">Next: Practical 06<span class="material-symbols-outlined">arrow_forward</span></span>
+<div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div></a></div>
+</div></main></div>
+<footer class="w-full border-t border-slate-800/50 mt-20 bg-[#10141a]">
 <div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full max-w-[1440px] mx-auto">
-<div class="mb-6 md:mb-0">
-<p class="font-body italic text-lg text-amber-500 font-serif">DBMS Journal</p>
-<p class="text-[10px] font-mono text-slate-500 uppercase tracking-widest mt-1">S.Y.B.Tech IT | Sem IV | Pattern 2023</p>
-</div>
-<div class="flex flex-wrap justify-center gap-8 font-body italic text-lg">
+<div class="text-amber-500 font-serif font-['Newsreader'] italic text-lg mb-4 md:mb-0">S.Y.B.Tech IT | Sem IV | Pattern 2023 | Subject: 2308215</div>
+<div class="flex gap-8 font-['Newsreader'] italic text-lg">
 <a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">University Guidelines</a>
 <a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Lab Manual</a>
 <a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Contact Faculty</a>
-</div>
-</div>
-</footer>
+</div></div></footer>
 </body></html>

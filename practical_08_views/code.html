@@ -1,78 +1,74 @@
 <!DOCTYPE html>
-
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;family=Inter:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
         theme: {
           extend: {
             "colors": {
-                    "inverse-surface": "#dfe2eb",
-                    "tertiary-fixed-dim": "#ffba3d",
-                    "tertiary-fixed": "#ffdeae",
-                    "primary-container": "#00d4ff",
-                    "on-background": "#dfe2eb",
-                    "on-primary-container": "#00586b",
-                    "on-primary-fixed": "#001f27",
-                    "surface-tint": "#3cd7ff",
-                    "surface-container-high": "#262a31",
-                    "on-primary": "#003642",
-                    "primary-fixed-dim": "#3cd7ff",
-                    "surface-container": "#1c2026",
-                    "error": "#ffb4ab",
-                    "on-secondary-fixed": "#291800",
-                    "inverse-on-surface": "#2d3137",
-                    "surface-container-lowest": "#0a0e14",
-                    "secondary-container": "#dc9100",
-                    "surface-variant": "#31353c",
-                    "secondary-fixed": "#ffddb4",
-                    "inverse-primary": "#00677e",
-                    "on-secondary": "#452b00",
-                    "on-secondary-fixed-variant": "#633f00",
-                    "primary-fixed": "#b4ebff",
-                    "on-tertiary-fixed-variant": "#604100",
-                    "on-tertiary": "#432c00",
-                    "on-error-container": "#ffdad6",
-                    "on-tertiary-container": "#6c4900",
-                    "on-primary-fixed-variant": "#004e5f",
-                    "on-error": "#690005",
-                    "surface-container-highest": "#31353c",
-                    "tertiary-container": "#feb528",
-                    "secondary": "#ffb955",
-                    "surface-dim": "#10141a",
-                    "on-tertiary-fixed": "#281900",
-                    "on-secondary-container": "#4f3100",
-                    "error-container": "#93000a",
-                    "secondary-fixed-dim": "#ffb955",
-                    "outline": "#859398",
-                    "surface-bright": "#353940",
-                    "on-surface": "#dfe2eb",
-                    "surface-container-low": "#181c22",
-                    "on-surface-variant": "#bbc9cf",
-                    "surface": "#10141a",
-                    "background": "#10141a",
-                    "tertiary": "#ffd9a1",
-                    "primary": "#a8e8ff",
-                    "outline-variant": "#3c494e"
+                "inverse-surface": "#dfe2eb",
+                "tertiary-fixed-dim": "#ffba3d",
+                "tertiary-fixed": "#ffdeae",
+                "primary-container": "#00d4ff",
+                "on-background": "#dfe2eb",
+                "on-primary-container": "#00586b",
+                "on-primary-fixed": "#001f27",
+                "surface-tint": "#3cd7ff",
+                "surface-container-high": "#262a31",
+                "on-primary": "#003642",
+                "primary-fixed-dim": "#3cd7ff",
+                "surface-container": "#1c2026",
+                "error": "#ffb4ab",
+                "on-secondary-fixed": "#291800",
+                "inverse-on-surface": "#2d3137",
+                "surface-container-lowest": "#0a0e14",
+                "secondary-container": "#dc9100",
+                "surface-variant": "#31353c",
+                "secondary-fixed": "#ffddb4",
+                "inverse-primary": "#00677e",
+                "on-secondary": "#452b00",
+                "on-secondary-fixed-variant": "#633f00",
+                "primary-fixed": "#b4ebff",
+                "on-tertiary-fixed-variant": "#604100",
+                "on-tertiary": "#432c00",
+                "on-error-container": "#ffdad6",
+                "on-tertiary-container": "#6c4900",
+                "on-primary-fixed-variant": "#004e5f",
+                "on-error": "#690005",
+                "surface-container-highest": "#31353c",
+                "tertiary-container": "#feb528",
+                "secondary": "#ffb955",
+                "surface-dim": "#10141a",
+                "on-tertiary-fixed": "#281900",
+                "on-secondary-container": "#4f3100",
+                "error-container": "#93000a",
+                "secondary-fixed-dim": "#ffb955",
+                "outline": "#859398",
+                "surface-bright": "#353940",
+                "on-surface": "#dfe2eb",
+                "surface-container-low": "#181c22",
+                "on-surface-variant": "#bbc9cf",
+                "surface": "#10141a",
+                "background": "#10141a",
+                "tertiary": "#ffd9a1",
+                "primary": "#a8e8ff",
+                "outline-variant": "#3c494e"
             },
             "borderRadius": {
-                    "DEFAULT": "0.125rem",
-                    "lg": "0.25rem",
-                    "xl": "0.5rem",
-                    "full": "0.75rem"
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
             },
             "fontFamily": {
-                    "headline": ["Space Grotesk"],
-                    "body": ["Newsreader"],
-                    "label": ["Inter"],
-                    "mono": ["JetBrains Mono"]
+                "headline": ["Space Grotesk"],
+                "body": ["Newsreader"],
+                "label": ["Inter"]
             }
           },
         },
@@ -84,235 +80,227 @@
         }
         .dot-matrix {
             background-image: radial-gradient(circle, #3c494e 1px, transparent 1px);
-            background-size: 24px 24px;
+            background-size: 32px 32px;
+            opacity: 0.05;
         }
+        body { background-color: #10141a; color: #dfe2eb; }
+        pre { overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
+        .code-block { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.7; }
+        .output-table { border-collapse: collapse; width: 100%; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+        .output-table th { background: rgba(168,232,255,0.12); color: #a8e8ff; padding: 8px 12px; text-align: left; border-bottom: 1px solid #3c494e; }
+        .output-table td { padding: 7px 12px; border-bottom: 1px solid #1c2026; color: #bbc9cf; }
+        .output-table tr:hover td { background: rgba(168,232,255,0.04); }
+        details > summary { cursor: pointer; }
+        details[open] > summary { color: #a8e8ff; }
     </style>
-</head>
-<body class="bg-background text-on-surface font-body selection:bg-primary/30 selection:text-primary min-h-screen">
-<!-- TopNavBar -->
-<nav class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)] border-none">
+
+<title>Practical 08 | DBMS Journal</title>
+<body class="font-body selection:bg-primary/30 selection:text-primary">
+<nav class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)]">
 <div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
-<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-headline tracking-tight">
-                DBMS Journal
-            </div>
-<div class="hidden md:flex items-center gap-8 font-headline">
-<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">Home</a>
+<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-headline tracking-tight">DBMS Journal</div>
+<div class="hidden md:flex gap-8 font-headline">
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="../index.html">Home</a>
 <a class="text-cyan-400 border-b-2 border-cyan-400 pb-1" href="#">Practicals</a>
 <a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">About</a>
 </div>
 <div class="flex items-center gap-4">
-<div class="relative group">
-<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors cursor-pointer">menu</span>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">menu</button>
+</div></div></nav>
+<div class="flex max-w-[1440px] mx-auto relative">
+<aside class="hidden md:block sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] overflow-y-auto border-none top-[64px] scrollbar-hide">
+<div class="flex flex-col gap-1 p-6">
+<div class="mb-6">
+<h3 class="font-headline font-bold text-primary tracking-widest uppercase text-xs">Lab Practicals</h3>
+<p class="text-on-surface-variant text-[10px] uppercase tracking-[0.2em] mt-1 font-label">DBMS Coursework</p>
 </div>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_01_study_of_mysql/code.html">
+<span class="material-symbols-outlined">terminal</span>Practical 01</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_02_mysql_installation/code.html">
+<span class="material-symbols-outlined">database</span>Practical 02</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_03_sqlite_study/code.html">
+<span class="material-symbols-outlined">schema</span>Practical 03</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_04_er_diagrams/code.html">
+<span class="material-symbols-outlined">table_chart</span>Practical 04</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_05_ddl_normalization/code.html">
+<span class="material-symbols-outlined">query_stats</span>Practical 05</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_06_constraints_alter_drop/code.html">
+<span class="material-symbols-outlined">storage</span>Practical 06</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_07_sql_queries/code.html">
+<span class="material-symbols-outlined">security</span>Practical 07</a><a class="flex items-center gap-3 p-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 font-label text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">code_blocks</span>Practical 08</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_09_implementation_of_joins/code.html">
+<span class="material-symbols-outlined">settings_ethernet</span>Practical 09</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_10_stored_procedures/code.html">
+<span class="material-symbols-outlined">lan</span>Practical 10</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_11_triggers/code.html">
+<span class="material-symbols-outlined">cloud_done</span>Practical 11</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_12_cursors/code.html">
+<span class="material-symbols-outlined">account_tree</span>Practical 12</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_13_project_proposal_srs/code.html">
+<span class="material-symbols-outlined">reorder</span>Practical 13</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_14_er_diagram_database_design/code.html">
+<span class="material-symbols-outlined">history</span>Practical 14</a>
+</div></aside>
+<main class="flex-1 min-w-0 bg-background relative overflow-hidden">
+<div class="absolute inset-0 dot-matrix pointer-events-none"></div>
+<div class="px-8 py-12 lg:px-16 max-w-5xl mx-auto relative z-10">
+<!-- Header -->
+<header class="mb-16">
+<div class="flex items-center gap-4 mb-6">
+<span class="px-3 py-1 bg-primary/10 text-primary border border-primary/20 rounded-lg text-xs font-label uppercase tracking-widest">Group B</span>
+<span class="text-on-surface-variant/40">—</span>
+<span class="text-on-surface-variant font-label text-xs uppercase tracking-widest">Virtual Tables</span>
 </div>
-</div>
-</nav>
-<div class="flex max-w-[1440px] mx-auto">
-<!-- SideNavBar -->
-<aside class="sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] border-none hidden lg:block overflow-y-auto">
-<div class="p-6">
-<h3 class="font-headline font-bold text-primary tracking-tighter text-xl">Lab Practicals</h3>
-<p class="font-mono text-[10px] uppercase tracking-widest text-slate-500 mb-6">DBMS Coursework</p>
-<div class="flex flex-col gap-2">
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
-<span class="material-symbols-outlined text-lg">terminal</span> Practical 1
-                    </a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
-<span class="material-symbols-outlined text-lg">database</span> Practical 2
-                    </a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
-<span class="material-symbols-outlined text-lg">schema</span> Practical 3
-                    </a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
-<span class="material-symbols-outlined text-lg">table_chart</span> Practical 4
-                    </a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
-<span class="material-symbols-outlined text-lg">query_stats</span> Practical 5
-                    </a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
-<span class="material-symbols-outlined text-lg">storage</span> Practical 6
-                    </a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
-<span class="material-symbols-outlined text-lg">security</span> Practical 7
-                    </a>
-<a class="flex items-center gap-3 p-3 rounded-lg bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 transition-colors font-mono text-xs uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
-<span class="material-symbols-outlined text-lg">code_blocks</span> Practical 8
-                    </a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
-<span class="material-symbols-outlined text-lg">settings_ethernet</span> Practical 9
-                    </a>
-<!-- Simplified for length -->
-</div>
-</div>
-</aside>
-<!-- Main Content Canvas -->
-<main class="flex-1 min-w-0 dot-matrix bg-opacity-5 px-8 md:px-16 py-12">
-<!-- Hero Header -->
-<header class="mb-20">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-outline-variant/20 bg-surface-container-low mb-6">
-<span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_#ffb955]"></span>
-<span class="text-xs font-label uppercase tracking-widest text-on-surface-variant">Practical Group B</span>
-</div>
-<h1 class="text-6xl md:text-8xl font-headline font-bold text-on-surface mb-4 tracking-tighter leading-none">
-                    Practical 08: <br/><span class="text-primary italic font-body font-light">The Virtual Layer (Views)</span>
+<h1 class="text-5xl md:text-6xl font-headline font-bold text-on-surface mb-6 tracking-tight">
+Practical 08: <span class="text-primary">Views</span>
 </h1>
-<p class="text-xl md:text-2xl text-on-surface-variant max-w-2xl font-body italic leading-relaxed">
-                    Exploring the abstraction of data through SQL Views—enhancing security, simplifying complexity, and managing virtual datasets.
-                </p>
+<p class="text-xl md:text-2xl text-on-surface-variant font-body leading-relaxed max-w-3xl italic">Creating and manipulating virtual mapping matrices securing execution abstractions.</p>
 </header>
-<!-- Content Grid (Asymmetric) -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-<!-- Left Column: Concepts & Context -->
-<div class="lg:col-span-4 space-y-12">
-<section class="bg-surface-container-low p-8 rounded-lg">
-<h3 class="text-2xl font-headline font-bold text-primary mb-4 uppercase tracking-tighter">Objective</h3>
-<p class="text-on-surface-variant leading-relaxed mb-4">
-                            Understand how to implement and manage virtual tables in a relational database system using the <code>CREATE VIEW</code> statement.
-                        </p>
-<ul class="space-y-3 font-label text-sm text-on-surface">
-<li class="flex gap-2"><span class="text-secondary material-symbols-outlined text-sm">check_circle</span> Data Abstraction</li>
-<li class="flex gap-2"><span class="text-secondary material-symbols-outlined text-sm">check_circle</span> Logical Independence</li>
-<li class="flex gap-2"><span class="text-secondary material-symbols-outlined text-sm">check_circle</span> Security Through Redaction</li>
-</ul>
-</section>
-<div class="relative group aspect-[4/5] rounded-lg overflow-hidden bg-surface-container-high">
-<img class="object-cover w-full h-full opacity-60 group-hover:scale-110 transition-transform duration-700" data-alt="Modern server room with glowing blue neon lights and rows of data processors in a high-tech facility" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4yZE1ifxKsdVjpdEeFFPeOvHH9dRHhYnJhwaE4mkERZWUN4v9Ludc6gPwJ0Q_ILdRQCqwR4XiH6jLoyx4EjGCX6hRWS3iEOVjwXTP8LGSZEoUwP-cU8qMjLxBu5O_wAAN1_PLa90iZOtWZnczF1kdnT0lY5sjf36Wj00U7zfu8IjxCR929tdCL_iGFqlEfWm0mEc7j5xHlBGcw3JIIbi6V1DktbXlCPIgMLSck3fup0_xrc4a7Kzbf3K7Vpk6qcCql2XyQOHv9JQ"/>
-<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
-<div class="absolute bottom-6 left-6 right-6">
-<span class="font-mono text-[10px] text-primary uppercase tracking-widest">Technical Brief</span>
-<h4 class="font-headline text-xl text-on-surface font-bold mt-1">Virtualization of Storage</h4>
-</div>
-</div>
-</div>
-<!-- Right Column: Code & Implementation -->
-<div class="lg:col-span-8 space-y-16">
-<!-- Code Block 1 -->
-<article>
-<div class="flex items-center gap-4 mb-4">
-<span class="text-3xl font-headline font-extrabold text-outline-variant">01</span>
-<h2 class="text-3xl font-headline font-bold">Creating Basic Views</h2>
-</div>
-<p class="text-on-surface-variant italic mb-6 leading-relaxed">
-                            A view is a virtual table whose contents are defined by a query. It does not exist as a physical set of data values.
-                        </p>
-<div class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-2xl group">
-<div class="flex items-center justify-between px-4 py-3 bg-surface-container-high">
-<div class="flex gap-1.5">
-<div class="w-3 h-3 rounded-full bg-red-500/50"></div>
-<div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-<div class="w-3 h-3 rounded-full bg-green-500/50"></div>
-</div>
-<span class="font-mono text-[10px] text-on-surface-variant uppercase tracking-widest">SQL Syntax</span>
-</div>
-<div class="p-8 font-mono text-sm leading-loose">
-<span class="text-secondary">CREATE VIEW</span> employee_summary <span class="text-primary">AS</span><br/>
-<span class="text-primary">SELECT</span> e.first_name, e.last_name, d.dept_name<br/>
-<span class="text-primary">FROM</span> employees e<br/>
-<span class="text-primary">JOIN</span> departments d <span class="text-primary">ON</span> e.dept_id = d.dept_id<br/>
-<span class="text-primary">WHERE</span> e.salary &gt; 50000;
-                            </div>
-</div>
-</article>
-<!-- Bento Grid for Features -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="bg-surface-container-high p-8 rounded-lg border-l-4 border-primary">
-<h4 class="font-headline font-bold text-xl mb-3">Updatable Views</h4>
-<p class="text-on-surface-variant text-sm leading-relaxed">
-                                Views can be used to update the underlying tables if they satisfy certain conditions like containing a primary key and having no aggregate functions.
-                            </p>
-</div>
-<div class="bg-surface-container-high p-8 rounded-lg border-l-4 border-secondary">
-<h4 class="font-headline font-bold text-xl mb-3">Core Restrictions</h4>
-<p class="text-on-surface-variant text-sm leading-relaxed">
-                                You cannot use <code>ORDER BY</code> (unless TOP is specified) or temporary tables within a view definition in most standard SQL dialects.
-                            </p>
-</div>
-</div>
-<!-- Complex View Example -->
-<article>
-<div class="flex items-center gap-4 mb-4">
-<span class="text-3xl font-headline font-extrabold text-outline-variant">02</span>
-<h2 class="text-3xl font-headline font-bold">Views from Multiple Tables</h2>
-</div>
-<div class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-2xl group">
-<div class="flex items-center justify-between px-4 py-3 bg-surface-container-high">
-<div class="flex gap-1.5">
-<div class="w-3 h-3 rounded-full bg-red-500/50"></div>
-<div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-<div class="w-3 h-3 rounded-full bg-green-500/50"></div>
-</div>
-<span class="font-mono text-[10px] text-on-surface-variant uppercase tracking-widest">Complex Join View</span>
-</div>
-<div class="p-8 font-mono text-sm leading-loose">
-<span class="text-secondary">CREATE OR REPLACE VIEW</span> lab_inventory <span class="text-primary">AS</span><br/>
-<span class="text-primary">SELECT</span> s.supplier_name, i.item_name, c.category_name<br/>
-<span class="text-primary">FROM</span> items i<br/>
-<span class="text-primary">INNER JOIN</span> suppliers s <span class="text-primary">ON</span> i.supp_id = s.supp_id<br/>
-<span class="text-primary">LEFT JOIN</span> categories c <span class="text-primary">ON</span> i.cat_id = c.cat_id;
-                            </div>
-</div>
-</article>
-<!-- Viva Section -->
-<section class="mt-20">
-<div class="flex items-center gap-2 mb-8">
-<span class="material-symbols-outlined text-secondary">forum</span>
-<h2 class="text-4xl font-headline font-bold tracking-tight">Viva Q&amp;A</h2>
-</div>
-<div class="space-y-4">
-<details class="group bg-surface-container-low rounded-lg transition-all duration-300">
-<summary class="flex justify-between items-center p-6 cursor-pointer list-none">
-<span class="text-xl font-headline font-semibold">What is the difference between a Table and a View?</span>
-<span class="material-symbols-outlined text-secondary group-open:rotate-180 transition-transform">expand_more</span>
-</summary>
-<div class="px-6 pb-6 text-on-surface-variant leading-relaxed">
-                                    A Table stores physical data on the disk, whereas a View is a logical structure that stores only the query definition. A View behaves like a table but computes results on the fly.
-                                </div>
-</details>
-<details class="group bg-surface-container-low rounded-lg transition-all duration-300">
-<summary class="flex justify-between items-center p-6 cursor-pointer list-none">
-<span class="text-xl font-headline font-semibold">Can we use DML operations on all Views?</span>
-<span class="material-symbols-outlined text-secondary group-open:rotate-180 transition-transform">expand_more</span>
-</summary>
-<div class="px-6 pb-6 text-on-surface-variant leading-relaxed">
-                                    No. Only "Simple Views" (those created from a single table without groupings or functions) are generally updatable. Complex views involving joins or aggregates are usually read-only.
-                                </div>
-</details>
-<details class="group bg-surface-container-low rounded-lg transition-all duration-300">
-<summary class="flex justify-between items-center p-6 cursor-pointer list-none">
-<span class="text-xl font-headline font-semibold">What is 'WITH CHECK OPTION'?</span>
-<span class="material-symbols-outlined text-secondary group-open:rotate-180 transition-transform">expand_more</span>
-</summary>
-<div class="px-6 pb-6 text-on-surface-variant leading-relaxed">
-                                    It ensures that all UPDATE and INSERT statements satisfy the condition(s) in the view definition. It prevents users from updating rows such that they disappear from the view.
-                                </div>
-</details>
+<!-- AIM -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Aim</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Objective</span></div>
+<div class="p-8 bg-surface-container rounded-xl border border-outline-variant/20">
+<p class="text-on-surface font-body leading-relaxed text-lg mb-4">
+The aim of this practical is to instantiate dynamic Virtual Tables commonly referred to as `VIEW`s. 
+The student will master security layering architectures shielding internal database structures entirely from user exposure while mapping logical simplicity across multi-table query combinations utilizing both updatable checks and fixed view arrays.
+</p>
 </div>
 </section>
+<!-- THEORY -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Theory & Background</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Core Concepts</span></div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-primary lg:col-span-2">
+<h3 class="text-lg font-headline font-semibold text-primary mb-3">Conceptualizing Semantic Views</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">Views contain no data independently. A view exists mathematically compiled strictly as a stored pre-validated textual `SELECT` string residing inside the Database meta-catalog. At the precise millisecond a user executes querying logic against a named View, the internal MySQL engine translates the call algorithmically down into executing the complex raw Base Table operations mapped globally underly it. Extremely massive architectures utilize complex views heavily because they decouple exactly how application layers read the data from how internal DBA arrays index the tables underneath.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-secondary">
+<h3 class="text-lg font-headline font-semibold text-secondary mb-3">Abstraction and Structural Security</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">Security is the principal real-world catalyst for establishing explicit Views. Subsuming arbitrary `WHERE` structures entirely into the view string forces the user out of interacting directly with raw payloads. For instance, creating a View named `PEDIATRIC_WARD_VIEW` that masks its exact `WHERE dept_id = 4` prevents an end-user from maliciously dropping or overwriting standard patient blocks located inside other isolated wards entirely since the user cannot access raw internal fields.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-primary lg:col-span-2">
+<h3 class="text-lg font-headline font-semibold text-primary mb-3">Execution Logistics: Simple Vs Complex Views</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">A 'Simple' view refers explicitly to data originating exclusively from one isolated Base Table containing no generic math operations, constraints, distinct markers, or limits. Because Simple views maintain strict unified 1-to-1 mappings mapped backward directly onto their base table, they remain wholly 'Updatable', allowing DML `INSERT` logic seamlessly mirroring operations. Complex Views aggressively integrate deep mappings involving multiple generic tables via explicitly `JOIN` structured overlays and mathematically evaluated fields via aggregation groups; execution renders these outputs irrevocably fully Read-Only architectures.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-secondary">
+<h3 class="text-lg font-headline font-semibold text-secondary mb-3">The Mandatory 'WITH CHECK OPTION' Boundary</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">When interacting with updatable structural Views, executing raw inserts technically runs the risk of inserting specific configurations completely outside the target range filters of the primary view conditions. `WITH CHECK OPTION` explicitly locks all associated mutations aggressively into validating their resultant array values against the specific base table `WHERE` clause binding the explicit View construct, otherwise generating exact fatal violation errors on submission instantly protecting context arrays.</p></div>
 </div>
+</section>
+<!-- PROCEDURE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Procedure / Algorithm</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Step-by-Step</span></div>
+<div class="bg-surface-container-low rounded-xl border border-outline-variant/20 p-8">
+<ol class="flex flex-col gap-5"><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">01.</span><span class="text-on-surface-variant font-body leading-relaxed">Authenticate and set environment schema leveraging `USE hospital_db;`.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">02.</span><span class="text-on-surface-variant font-body leading-relaxed">Generate an atomic Simple View extracting distinct isolated structural columns restricting sensitive metadata.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">03.</span><span class="text-on-surface-variant font-body leading-relaxed">Produce an array-locking Updatable View constrained entirely via the strict `WITH CHECK OPTION` logic bounds.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">04.</span><span class="text-on-surface-variant font-body leading-relaxed">Analyze output boundaries by maliciously deploying an out-of-scope `INSERT` command explicitly targeting the Updatable View boundaries.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">05.</span><span class="text-on-surface-variant font-body leading-relaxed">Draft a heavy Complex View architecture leveraging embedded `JOIN` logic and grouping constructs spanning strictly across 3 distinct array structures.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">06.</span><span class="text-on-surface-variant font-body leading-relaxed">Target the deployed structures natively mimicking exact table selections securely restricting standard DML alterations preventing modification attempts.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">07.</span><span class="text-on-surface-variant font-body leading-relaxed">Identify internal meta arrays validating deployment success.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">08.</span><span class="text-on-surface-variant font-body leading-relaxed">Cleanse completely deploying final standard DDL layout `DROP VIEW` commands protecting long term integrity cycles.</span></li></ol>
 </div>
-</main>
+</section>
+<!-- CODE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Complete MySQL Code</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Runnable & Commented</span></div>
+<div class="mb-16">
+<div class="bg-[#0a0e14] rounded-xl border border-outline-variant/20 overflow-hidden shadow-2xl">
+<div class="flex items-center gap-2 px-4 py-3 bg-surface-container-lowest border-b border-outline-variant/20">
+<span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+<span class="ml-4 text-xs font-label text-slate-500 uppercase tracking-widest">MySQL 8.x — Hospital Management System</span>
 </div>
-<!-- Footer -->
+<pre class="code-block p-6 text-slate-300">
+<span class="text-slate-500 italic">-- Practical 08: Instantiating Logical Views for Structural Segregation</span>
+<span class="text-cyan-400">USE</span> <span class="text-slate-300">hospital_db</span>;
+
+<span class="text-slate-500 italic">-- ────────── 1. SIMPLE VIEW ESTABLISHMENT ──────────</span>
+<span class="text-slate-500 italic">-- Shielding Patient emails and actual diagnosis structures from low-auth users.</span>
+<span class="text-cyan-400">CREATE OR REPLACE VIEW</span> <span class="text-slate-300">V_Patient_Public_Mask</span> <span class="text-cyan-400">AS</span>
+<span class="text-cyan-400">SELECT</span> <span class="text-slate-300">patient_id</span>, <span class="text-slate-300">name</span>, <span class="text-slate-300">gender</span>, <span class="text-slate-300">age</span> 
+<span class="text-cyan-400">FROM</span> <span class="text-slate-300">PATIENT</span>;
+
+<span class="text-slate-500 italic">-- Validation: Retrieving the explicit layer masking underlying table properties.</span>
+<span class="text-cyan-400">SELECT</span> * <span class="text-cyan-400">FROM</span> <span class="text-slate-300">V_Patient_Public_Mask</span> <span class="text-cyan-400">LIMIT</span> <span class="text-amber-400">3</span>;
+
+<span class="text-slate-500 italic">-- ────────── 2. COMPLEX JOIN-VIEW ESTABLISHMENT ──────────</span>
+<span class="text-slate-500 italic">-- Extracting fully combined metadata across 3 tables eliminating user join parsing burdens.</span>
+<span class="text-cyan-400">CREATE VIEW</span> <span class="text-slate-300">V_Hospital_Financial_Overview</span> <span class="text-cyan-400">AS</span>
+<span class="text-cyan-400">SELECT</span> <span class="text-slate-300">p.name</span> <span class="text-cyan-400">AS</span> <span class="text-slate-300">Patient_Name</span>, <span class="text-slate-300">b.total_amount</span> <span class="text-cyan-400">AS</span> <span class="text-slate-300">Billed_Invoice</span>, <span class="text-slate-300">d.name</span> <span class="text-cyan-400">AS</span> <span class="text-slate-300">Attending_Physician</span> 
+<span class="text-cyan-400">FROM</span> <span class="text-slate-300">BILL</span> <span class="text-slate-300">b</span>
+<span class="text-cyan-400">JOIN</span> <span class="text-slate-300">PATIENT</span> <span class="text-slate-300">p</span> <span class="text-cyan-400">ON</span> <span class="text-slate-300">b.patient_id</span> = <span class="text-slate-300">p.patient_id</span>
+<span class="text-cyan-400">JOIN</span> <span class="text-slate-300">APPOINTMENT</span> <span class="text-slate-300">a</span> <span class="text-cyan-400">ON</span> <span class="text-slate-300">a.patient_id</span> = <span class="text-slate-300">p.patient_id</span>
+<span class="text-cyan-400">JOIN</span> <span class="text-slate-300">DOCTOR</span> <span class="text-slate-300">d</span> <span class="text-cyan-400">ON</span> <span class="text-slate-300">a.doctor_id</span> = <span class="text-slate-300">d.doctor_id</span>;
+
+<span class="text-slate-500 italic">-- Executing identical SELECT logic masking massively extensive relational structures.</span>
+<span class="text-cyan-400">SELECT</span> * <span class="text-cyan-400">FROM</span> <span class="text-slate-300">V_Hospital_Financial_Overview</span> <span class="text-cyan-400">ORDER BY</span> <span class="text-slate-300">Billed_Invoice</span> <span class="text-cyan-400">DESC LIMIT</span> <span class="text-amber-400">3</span>;
+
+<span class="text-slate-500 italic">-- Attempting an INSERT on Complex view will absolutely trigger Error Code 1471</span>
+<span class="text-slate-500 italic">-- The target table V_Hospital_Financial_Overview of the INSERT is not insertable-into.</span>
+
+<span class="text-slate-500 italic">-- ────────── 3. UPDATABLE VIEWS WITH BOUNDARY CHECKS ──────────</span>
+<span class="text-slate-500 italic">-- Instantiating isolated scopes parsing exclusively explicitly targeting Cardiology block tables.</span>
+<span class="text-cyan-400">CREATE VIEW</span> <span class="text-slate-300">V_Cardiology_Isolation</span> <span class="text-cyan-400">AS</span>
+<span class="text-cyan-400">SELECT</span> * <span class="text-cyan-400">FROM</span> <span class="text-slate-300">DOCTOR</span> <span class="text-cyan-400">WHERE</span> <span class="text-slate-300">dept_id</span> = <span class="text-amber-400">1</span>
+<span class="text-cyan-400">WITH CHECK OPTION</span>;
+
+<span class="text-slate-500 italic">-- Legitimate Insert logic mirroring parameters accepted perfectly by underlying structural tables.</span>
+<span class="text-cyan-400">INSERT INTO</span> <span class="text-slate-300">V_Cardiology_Isolation</span> (<span class="text-slate-300">name</span>, <span class="text-slate-300">specialization</span>, <span class="text-slate-300">dept_id</span>) 
+<span class="text-cyan-400">VALUES</span> (<span class="text-green-400">'Dr. Test Cardio'</span>, <span class="text-green-400">'Cardiologist'</span>, <span class="text-amber-400">1</span>);
+
+<span class="text-slate-500 italic">-- Attempting explicitly malformed boundary logic injection into Cardiology view directly.</span>
+<span class="text-slate-500 italic">-- Error Code 1369. CHECK OPTION failed 'hospital_db.V_Cardiology_Isolation'</span>
+<span class="text-slate-500 italic">/* </span>
+<span class="text-slate-500 italic">   INSERT INTO V_Cardiology_Isolation (name, dept_id) VALUES ('Dr. Oncology Hacker', 5);</span>
+<span class="text-slate-500 italic">*/</span>
+
+<span class="text-slate-500 italic">-- ────────── 4. AGGREGATED STATISTICAL READ-ONLY VIEW ──────────</span>
+<span class="text-cyan-400">CREATE VIEW</span> <span class="text-slate-300">V_Department_Payroll_Stats</span> <span class="text-cyan-400">AS</span>
+<span class="text-cyan-400">SELECT</span> <span class="text-slate-300">dept_id</span>, <span class="text-violet-400">SUM</span>(<span class="text-slate-300">salary</span>) <span class="text-cyan-400">AS</span> <span class="text-slate-300">Total_Payroll</span>, <span class="text-violet-400">COUNT</span>(*) <span class="text-cyan-400">AS</span> <span class="text-slate-300">Staff_Size</span>
+<span class="text-cyan-400">FROM</span> <span class="text-slate-300">DOCTOR</span> 
+<span class="text-cyan-400">GROUP BY</span> <span class="text-slate-300">dept_id</span>;
+
+<span class="text-slate-500 italic">-- View deployed metrics calculation completely abstracting complex logic parsing.</span>
+<span class="text-cyan-400">SELECT</span> * <span class="text-cyan-400">FROM</span> <span class="text-slate-300">V_Department_Payroll_Stats</span>;
+
+<span class="text-slate-500 italic">-- ────────── 5. CLEANUP DEPLOYMENT COMMANDS ──────────</span>
+<span class="text-cyan-400">DROP VIEW IF EXISTS</span> <span class="text-slate-300">V_Patient_Public_Mask</span>;
+<span class="text-cyan-400">DROP VIEW IF EXISTS</span> <span class="text-slate-300">V_Hospital_Financial_Overview</span>;
+<span class="text-cyan-400">DROP VIEW IF EXISTS</span> <span class="text-slate-300">V_Cardiology_Isolation</span>;
+<span class="text-cyan-400">DROP VIEW IF EXISTS</span> <span class="text-slate-300">V_Department_Payroll_Stats</span>;
+
+</pre></div></div>
+</section>
+<!-- OUTPUT -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Expected Output</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Query Results</span></div>
+<div class="bg-[#0a0e14] rounded-xl border border-outline-variant/20 p-6 overflow-x-auto">
+<p class="text-slate-500 font-label text-xs mb-3 uppercase tracking-widest">Result: Extract output isolating logical readouts exclusively across massive 3 table JOIN view.</p><div class="overflow-x-auto"><table class="output-table"><thead><tr><th>Patient_Name</th><th>Billed_Invoice</th><th>Attending_Physician</th></tr></thead><tbody><tr><td>Kunal Das</td><td>95000.00</td><td>Dr. Sanjay Gupta</td></tr><tr><td>Rajeev Nair</td><td>45000.00</td><td>Dr. Arjun Sharma</td></tr><tr><td>Ravi Kumar</td><td>15000.00</td><td>Dr. Vikram Joshi</td></tr></tbody></table></div>
+</div>
+</section>
+<!-- CONCLUSION -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Conclusion</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Summary</span></div>
+<div class="p-8 bg-surface-container rounded-xl border-l-4 border-secondary">
+<p class="text-on-surface font-body leading-relaxed mb-4">
+By utilizing standard definition syntax to declare explicitly structured Views, we isolated deeply complex execution sequences entirely behind singular functional blocks. This demonstrated absolute efficiency maintaining standard security firewalls restricting unauthorized parameter tampering specifically leveraging internal structural evaluations utilizing precise `WITH CHECK OPTION` modifiers ensuring relational stability completely. Understanding explicitly what factors force computational evaluations converting simplistic inputs against totally Read-Only restrictions limits unintentional destruction sequences completely globally during intensive integrations.
+</p>
+</div>
+</section>
+<!-- VIVA VOCE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Viva Voce</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Q & A</span></div>
+<div class="flex flex-col gap-4">
+
+</div>
+</section>
+<div class="flex justify-between items-center pt-12 border-t border-outline-variant/20 mt-16">
+<a class="group relative px-6 py-3 bg-surface-container border border-outline-variant/30 text-on-surface font-headline font-bold rounded-lg overflow-hidden transition-transform active:scale-95 hover:border-primary/40" href="../practical_07_sql_queries/code.html">
+<span class="relative z-10 flex items-center gap-2"><span class="material-symbols-outlined">arrow_back</span>Practical 07</span></a><a class="group relative px-8 py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-bold rounded-lg overflow-hidden transition-transform active:scale-95" href="../practical_09_implementation_of_joins/code.html">
+<span class="relative z-10 flex items-center gap-2">Next: Practical 09<span class="material-symbols-outlined">arrow_forward</span></span>
+<div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div></a></div>
+</div></main></div>
 <footer class="w-full border-t border-slate-800/50 mt-20 bg-[#10141a]">
 <div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full max-w-[1440px] mx-auto">
-<div class="mb-8 md:mb-0">
-<p class="font-body italic text-lg text-amber-500">S.Y.B.Tech IT | Sem IV | Pattern 2023</p>
-<div class="flex gap-6 mt-2 font-label text-xs uppercase tracking-widest text-slate-500">
-<a class="hover:text-amber-200 transition-colors" href="#">University Guidelines</a>
-<a class="hover:text-amber-200 transition-colors" href="#">Lab Manual</a>
-<a class="hover:text-amber-200 transition-colors" href="#">Contact Faculty</a>
-</div>
-</div>
-<div class="flex gap-4">
-<a class="group flex flex-col items-end px-6 py-4 rounded-lg bg-surface-container hover:bg-surface-container-high transition-all" href="#">
-<span class="text-[10px] text-slate-500 uppercase tracking-[0.2em]">Previous</span>
-<span class="font-headline font-bold text-on-surface group-hover:text-amber-400">P7: Security Controls</span>
-</a>
-<a class="group flex flex-col items-start px-6 py-4 rounded-lg bg-primary/10 border border-primary/20 hover:bg-primary/20 transition-all" href="#">
-<span class="text-[10px] text-primary/60 uppercase tracking-[0.2em]">Next</span>
-<span class="font-headline font-bold text-primary">P9: Sequences &amp; Synonyms</span>
-</a>
-</div>
-</div>
-</footer>
+<div class="text-amber-500 font-serif font-['Newsreader'] italic text-lg mb-4 md:mb-0">S.Y.B.Tech IT | Sem IV | Pattern 2023 | Subject: 2308215</div>
+<div class="flex gap-8 font-['Newsreader'] italic text-lg">
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">University Guidelines</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Lab Manual</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Contact Faculty</a>
+</div></div></footer>
 </body></html>

@@ -1,314 +1,361 @@
 <!DOCTYPE html>
-
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Practical 02 | DBMS Journal</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=JetBrains+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "inverse-surface": "#dfe2eb",
-                        "tertiary-fixed-dim": "#ffba3d",
-                        "tertiary-fixed": "#ffdeae",
-                        "primary-container": "#00d4ff",
-                        "on-background": "#dfe2eb",
-                        "on-primary-container": "#00586b",
-                        "on-primary-fixed": "#001f27",
-                        "surface-tint": "#3cd7ff",
-                        "surface-container-high": "#262a31",
-                        "on-primary": "#003642",
-                        "primary-fixed-dim": "#3cd7ff",
-                        "surface-container": "#1c2026",
-                        "error": "#ffb4ab",
-                        "on-secondary-fixed": "#291800",
-                        "inverse-on-surface": "#2d3137",
-                        "surface-container-lowest": "#0a0e14",
-                        "secondary-container": "#dc9100",
-                        "surface-variant": "#31353c",
-                        "secondary-fixed": "#ffddb4",
-                        "inverse-primary": "#00677e",
-                        "on-secondary": "#452b00",
-                        "on-secondary-fixed-variant": "#633f00",
-                        "primary-fixed": "#b4ebff",
-                        "on-tertiary-fixed-variant": "#604100",
-                        "on-tertiary": "#432c00",
-                        "on-error-container": "#ffdad6",
-                        "on-tertiary-container": "#6c4900",
-                        "on-primary-fixed-variant": "#004e5f",
-                        "on-error": "#690005",
-                        "surface-container-highest": "#31353c",
-                        "tertiary-container": "#feb528",
-                        "secondary": "#ffb955",
-                        "surface-dim": "#10141a",
-                        "on-tertiary-fixed": "#281900",
-                        "on-secondary-container": "#4f3100",
-                        "error-container": "#93000a",
-                        "secondary-fixed-dim": "#ffb955",
-                        "outline": "#859398",
-                        "surface-bright": "#353940",
-                        "on-surface": "#dfe2eb",
-                        "surface-container-low": "#181c22",
-                        "on-surface-variant": "#bbc9cf",
-                        "surface": "#10141a",
-                        "background": "#10141a",
-                        "tertiary": "#ffd9a1",
-                        "primary": "#a8e8ff",
-                        "outline-variant": "#3c494e"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "fontFamily": {
-                        "headline": ["Space Grotesk"],
-                        "body": ["Newsreader"],
-                        "label": ["Inter"],
-                        "mono": ["JetBrains Mono"]
-                    }
-                },
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "inverse-surface": "#dfe2eb",
+                "tertiary-fixed-dim": "#ffba3d",
+                "tertiary-fixed": "#ffdeae",
+                "primary-container": "#00d4ff",
+                "on-background": "#dfe2eb",
+                "on-primary-container": "#00586b",
+                "on-primary-fixed": "#001f27",
+                "surface-tint": "#3cd7ff",
+                "surface-container-high": "#262a31",
+                "on-primary": "#003642",
+                "primary-fixed-dim": "#3cd7ff",
+                "surface-container": "#1c2026",
+                "error": "#ffb4ab",
+                "on-secondary-fixed": "#291800",
+                "inverse-on-surface": "#2d3137",
+                "surface-container-lowest": "#0a0e14",
+                "secondary-container": "#dc9100",
+                "surface-variant": "#31353c",
+                "secondary-fixed": "#ffddb4",
+                "inverse-primary": "#00677e",
+                "on-secondary": "#452b00",
+                "on-secondary-fixed-variant": "#633f00",
+                "primary-fixed": "#b4ebff",
+                "on-tertiary-fixed-variant": "#604100",
+                "on-tertiary": "#432c00",
+                "on-error-container": "#ffdad6",
+                "on-tertiary-container": "#6c4900",
+                "on-primary-fixed-variant": "#004e5f",
+                "on-error": "#690005",
+                "surface-container-highest": "#31353c",
+                "tertiary-container": "#feb528",
+                "secondary": "#ffb955",
+                "surface-dim": "#10141a",
+                "on-tertiary-fixed": "#281900",
+                "on-secondary-container": "#4f3100",
+                "error-container": "#93000a",
+                "secondary-fixed-dim": "#ffb955",
+                "outline": "#859398",
+                "surface-bright": "#353940",
+                "on-surface": "#dfe2eb",
+                "surface-container-low": "#181c22",
+                "on-surface-variant": "#bbc9cf",
+                "surface": "#10141a",
+                "background": "#10141a",
+                "tertiary": "#ffd9a1",
+                "primary": "#a8e8ff",
+                "outline-variant": "#3c494e"
             },
-        }
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "fontFamily": {
+                "headline": ["Space Grotesk"],
+                "body": ["Newsreader"],
+                "label": ["Inter"]
+            }
+          },
+        },
+      }
     </script>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
         .dot-matrix {
-            background-image: radial-gradient(circle, rgba(168, 232, 255, 0.05) 1px, transparent 1px);
-            background-size: 24px 24px;
+            background-image: radial-gradient(circle, #3c494e 1px, transparent 1px);
+            background-size: 32px 32px;
+            opacity: 0.05;
         }
+        body { background-color: #10141a; color: #dfe2eb; }
+        pre { overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
+        .code-block { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.7; }
+        .output-table { border-collapse: collapse; width: 100%; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+        .output-table th { background: rgba(168,232,255,0.12); color: #a8e8ff; padding: 8px 12px; text-align: left; border-bottom: 1px solid #3c494e; }
+        .output-table td { padding: 7px 12px; border-bottom: 1px solid #1c2026; color: #bbc9cf; }
+        .output-table tr:hover td { background: rgba(168,232,255,0.04); }
+        details > summary { cursor: pointer; }
+        details[open] > summary { color: #a8e8ff; }
     </style>
-</head>
-<body class="bg-surface text-on-surface font-body selection:bg-primary/30 selection:text-primary min-h-screen dot-matrix">
-<!-- TopNavBar -->
+
+<title>Practical 02 | DBMS Journal</title>
+<body class="font-body selection:bg-primary/30 selection:text-primary">
 <nav class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)]">
 <div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
-<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-headline tracking-tight">
-                DBMS Journal
-            </div>
-<div class="hidden md:flex items-center gap-8 font-headline text-sm uppercase tracking-widest">
-<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">Home</a>
+<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-headline tracking-tight">DBMS Journal</div>
+<div class="hidden md:flex gap-8 font-headline">
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="../index.html">Home</a>
 <a class="text-cyan-400 border-b-2 border-cyan-400 pb-1" href="#">Practicals</a>
 <a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">About</a>
 </div>
 <div class="flex items-center gap-4">
-<button class="material-symbols-outlined text-cyan-400 hover:bg-cyan-500/10 p-2 rounded-lg transition-all duration-300">menu</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">menu</button>
+</div></div></nav>
+<div class="flex max-w-[1440px] mx-auto relative">
+<aside class="hidden md:block sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] overflow-y-auto border-none top-[64px]">
+<div class="flex flex-col gap-1 p-6">
+<div class="mb-6">
+<h3 class="font-headline font-bold text-primary tracking-widest uppercase text-xs">Lab Practicals</h3>
+<p class="text-on-surface-variant text-[10px] uppercase tracking-[0.2em] mt-1 font-label">DBMS Coursework</p>
 </div>
-</div>
-</nav>
-<div class="flex max-w-[1440px] mx-auto">
-<!-- SideNavBar -->
-<aside class="sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] hidden lg:block overflow-hidden flex flex-col">
-<div class="p-6 border-b border-outline-variant/10">
-<h3 class="font-headline font-bold text-primary tracking-tight">Lab Practicals</h3>
-<p class="font-mono text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">DBMS Coursework</p>
-</div>
-<div class="flex flex-col gap-1 p-4 overflow-y-auto custom-scrollbar">
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest ease-out duration-400" href="#">
-<span class="material-symbols-outlined text-sm">terminal</span> Practical 1
-                </a>
-<a class="flex items-center gap-3 px-4 py-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 font-mono text-xs uppercase tracking-widest translate-x-1" href="#">
-<span class="material-symbols-outlined text-sm">database</span> Practical 2
-                </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined text-sm">schema</span> Practical 3
-                </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined text-sm">table_chart</span> Practical 4
-                </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined text-sm">query_stats</span> Practical 5
-                </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined text-sm">storage</span> Practical 6
-                </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined text-sm">security</span> Practical 7
-                </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined text-sm">code_blocks</span> Practical 8
-                </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined text-sm">settings_ethernet</span> Practical 9
-                </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined text-sm">lan</span> Practical 10
-                </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined text-sm">cloud_done</span> Practical 11
-                </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined text-sm">account_tree</span> Practical 12
-                </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined text-sm">reorder</span> Practical 13
-                </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-mono text-xs uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined text-sm">history</span> Practical 14
-                </a>
-</div>
-</aside>
-<!-- Main Content -->
-<main class="flex-1 px-6 md:px-12 py-12 max-w-4xl mx-auto">
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_01_study_of_mysql/code.html">
+<span class="material-symbols-outlined">terminal</span>Practical 01</a>
+<a class="flex items-center gap-3 p-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 font-label text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">database</span>Practical 02</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_03_sqlite_study/code.html">
+<span class="material-symbols-outlined">schema</span>Practical 03</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_04_er_diagrams/code.html">
+<span class="material-symbols-outlined">table_chart</span>Practical 04</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_05_ddl_normalization/code.html">
+<span class="material-symbols-outlined">query_stats</span>Practical 05</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_06_constraints_alter_drop/code.html">
+<span class="material-symbols-outlined">storage</span>Practical 06</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_07_sql_queries/code.html">
+<span class="material-symbols-outlined">security</span>Practical 07</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_08_views/code.html">
+<span class="material-symbols-outlined">code_blocks</span>Practical 08</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_09_implementation_of_joins/code.html">
+<span class="material-symbols-outlined">settings_ethernet</span>Practical 09</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_10_stored_procedures/code.html">
+<span class="material-symbols-outlined">lan</span>Practical 10</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_11_triggers/code.html">
+<span class="material-symbols-outlined">cloud_done</span>Practical 11</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_12_cursors/code.html">
+<span class="material-symbols-outlined">account_tree</span>Practical 12</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_13_project_proposal_srs/code.html">
+<span class="material-symbols-outlined">reorder</span>Practical 13</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_14_er_diagram_database_design/code.html">
+<span class="material-symbols-outlined">history</span>Practical 14</a>
+
+</div></aside>
+<main class="flex-1 min-w-0 bg-background relative overflow-hidden">
+<div class="absolute inset-0 dot-matrix pointer-events-none"></div>
+<div class="px-8 py-12 lg:px-16 max-w-5xl mx-auto relative z-10">
+<!-- Header -->
 <header class="mb-16">
-<div class="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/20 rounded-full mb-6">
-<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-<span class="font-label text-[10px] font-bold uppercase tracking-widest text-primary">Group A | Practical 02</span>
+<div class="flex items-center gap-4 mb-6">
+<span class="px-3 py-1 bg-primary/10 text-primary border border-primary/20 rounded-lg text-xs font-label uppercase tracking-widest">Group A</span>
+<span class="text-on-surface-variant/40">—</span>
+<span class="text-on-surface-variant font-label text-xs uppercase tracking-widest">Database Setup</span>
 </div>
-<h1 class="text-5xl md:text-6xl font-headline font-bold text-on-surface mb-6 leading-tight">
-                    MySQL Client &amp; Server <span class="text-primary italic">Installation</span>
+<h1 class="text-5xl md:text-6xl font-headline font-bold text-on-surface mb-6 tracking-tight">
+Practical 02: <span class="text-primary">MySQL Installation & Configuration</span>
 </h1>
-<p class="text-xl text-on-surface-variant font-body leading-relaxed max-w-2xl italic">
-                    A comprehensive guide to setting up the MySQL ecosystem, establishing a robust foundation for database management and query execution.
-                </p>
+<p class="text-xl md:text-2xl text-on-surface-variant font-body leading-relaxed max-w-3xl italic">A complete walkthrough of installing, securing, and configuring MySQL 8.x for the Hospital Management System.</p>
 </header>
-<!-- Hero Image / Visual Anchor -->
-<div class="relative w-full h-64 rounded-xl overflow-hidden mb-20 shadow-2xl">
-<img class="w-full h-full object-cover" data-alt="Modern server room with glowing blue led lights and futuristic hardware racks in a dark environment with soft cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZmrek7HVaVfqPx24KnP_dagCbC-QIDAOJvtGjb90dvoGCylVHRv8LDfFNhYP9pVp-Yftt-NCb64VlHg1AS9MBQzrePAILnbR4PnY9lXtLhJiLsXid4jtibHCV0TVFvtsa8HNR6O7Tg07NyKgO5otClIQdLQ9rpACUXmgUI9JWVdczJ-Yl_ECYGcYluyZB5kIWFCHcBNutjMAeqbpmlq5K_fN8FL1MiZe4zitCgrfZkiiIKuurONRsOB_ew9Aeo-tRHyGQWmxDT8k"/>
-<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"></div>
-</div>
-<!-- Installation Steps -->
-<section class="space-y-12 mb-24">
-<div class="flex items-baseline gap-4 mb-8">
-<h2 class="text-3xl font-headline font-semibold text-primary">Installation Steps</h2>
-<div class="h-px flex-1 bg-outline-variant/20"></div>
-</div>
-<div class="grid grid-cols-1 gap-12">
-<!-- Step 1 -->
-<div class="group relative bg-surface-container-low p-8 rounded-lg transition-all duration-500 hover:bg-surface-container hover:shadow-[0_15px_30px_-10px_rgba(0,212,255,0.1)]">
-<div class="absolute -top-4 -left-4 w-12 h-12 bg-primary text-on-primary flex items-center justify-center font-headline font-bold text-xl rounded-lg">01</div>
-<h3 class="text-2xl font-headline font-medium text-on-surface mb-4">Update System Repositories</h3>
-<p class="text-on-surface-variant mb-6 leading-relaxed">Ensure your local package index is up-to-date before initiating the installation process to avoid version conflicts.</p>
-<div class="bg-surface-container-lowest rounded-lg overflow-hidden font-mono text-sm">
-<div class="flex items-center gap-2 px-4 py-2 bg-surface-variant/30 border-b border-outline-variant/10">
-<div class="flex gap-1.5">
-<div class="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
-<div class="w-2.5 h-2.5 rounded-full bg-amber-500/50"></div>
-<div class="w-2.5 h-2.5 rounded-full bg-emerald-500/50"></div>
-</div>
-<span class="text-[10px] text-on-surface-variant ml-2 uppercase tracking-tighter">Terminal — Bash</span>
-</div>
-<div class="p-6 text-primary-fixed-dim">
-<code>$ sudo apt update &amp;&amp; sudo apt upgrade</code>
-</div>
-</div>
-</div>
-<!-- Step 2 -->
-<div class="group relative bg-surface-container-low p-8 rounded-lg transition-all duration-500 hover:bg-surface-container hover:shadow-[0_15px_30px_-10px_rgba(0,212,255,0.1)]">
-<div class="absolute -top-4 -left-4 w-12 h-12 bg-primary text-on-primary flex items-center justify-center font-headline font-bold text-xl rounded-lg">02</div>
-<h3 class="text-2xl font-headline font-medium text-on-surface mb-4">Install MySQL Server</h3>
-<p class="text-on-surface-variant mb-6 leading-relaxed">Download and install the core MySQL server package. This will handle all data storage and query processing.</p>
-<div class="bg-surface-container-lowest rounded-lg overflow-hidden font-mono text-sm">
-<div class="flex items-center gap-2 px-4 py-2 bg-surface-variant/30 border-b border-outline-variant/10">
-<div class="flex gap-1.5">
-<div class="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
-<div class="w-2.5 h-2.5 rounded-full bg-amber-500/50"></div>
-<div class="w-2.5 h-2.5 rounded-full bg-emerald-500/50"></div>
-</div>
-<span class="text-[10px] text-on-surface-variant ml-2 uppercase tracking-tighter">Terminal — Bash</span>
-</div>
-<div class="p-6 text-primary-fixed-dim">
-<code>$ sudo apt install mysql-server</code>
-</div>
-</div>
-</div>
-<!-- Step 3 -->
-<div class="group relative bg-surface-container-low p-8 rounded-lg transition-all duration-500 hover:bg-surface-container hover:shadow-[0_15px_30px_-10px_rgba(0,212,255,0.1)]">
-<div class="absolute -top-4 -left-4 w-12 h-12 bg-primary text-on-primary flex items-center justify-center font-headline font-bold text-xl rounded-lg">03</div>
-<h3 class="text-2xl font-headline font-medium text-on-surface mb-4">Secure Configuration</h3>
-<p class="text-on-surface-variant mb-6 leading-relaxed">Run the built-in security script to lock down the installation, set root passwords, and remove anonymous users.</p>
-<div class="bg-surface-container-lowest rounded-lg overflow-hidden font-mono text-sm">
-<div class="flex items-center gap-2 px-4 py-2 bg-surface-variant/30 border-b border-outline-variant/10">
-<div class="flex gap-1.5">
-<div class="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
-<div class="w-2.5 h-2.5 rounded-full bg-amber-500/50"></div>
-<div class="w-2.5 h-2.5 rounded-full bg-emerald-500/50"></div>
-</div>
-<span class="text-[10px] text-on-surface-variant ml-2 uppercase tracking-tighter">Terminal — Bash</span>
-</div>
-<div class="p-6 text-primary-fixed-dim">
-<code>$ sudo mysql_secure_installation</code>
-</div>
-</div>
-</div>
+
+<!-- AIM -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Aim</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Objective</span></div>
+<div class="p-8 bg-surface-container rounded-xl border border-outline-variant/20">
+<p class="text-on-surface font-body leading-relaxed text-lg mb-4">
+The aim of this practical is to guide the student through the complete installation, configuration, and initial setup of MySQL Server 8.x on a local development machine (Windows/Linux/macOS). The student will learn how to configure essential parameters in the my.cnf / my.ini file, secure the MySQL installation using the built-in security script, and test the connection using MySQL Workbench and the command-line client.
+</p>
+<p class="text-on-surface-variant font-body leading-relaxed">
+This practical simulates the initial database administrator (DBA) setup phase that is mandatory for any production deployment — from a hospital EMR system to an enterprise ERP. Understanding configuration parameters such as buffer pool size, max connections, and binary logging is critical for performance tuning and disaster recovery planning.
+</p>
 </div>
 </section>
-<!-- Verification Section -->
-<section class="mb-24">
-<div class="flex items-baseline gap-4 mb-10">
-<h2 class="text-3xl font-headline font-semibold text-secondary">Verification</h2>
-<div class="h-px flex-1 bg-outline-variant/20"></div>
-</div>
-<div class="bg-surface-container-high rounded-xl p-8 border border-outline-variant/10">
-<div class="flex flex-col md:flex-row gap-8">
-<div class="flex-1">
-<h4 class="font-headline font-bold text-lg mb-4 flex items-center gap-2">
-<span class="material-symbols-outlined text-secondary">task_alt</span>
-                                Service Check
-                            </h4>
-<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Confirm that the MySQL daemon is active and running as a background service.</p>
-<div class="bg-surface-container-lowest p-4 rounded-lg font-mono text-xs text-secondary-fixed">
-<code>$ systemctl status mysql</code>
-</div>
-</div>
-<div class="flex-1">
-<h4 class="font-headline font-bold text-lg mb-4 flex items-center gap-2">
-<span class="material-symbols-outlined text-secondary">login</span>
-                                Access Login
-                            </h4>
-<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Attempt a local connection to the database server using the client terminal.</p>
-<div class="bg-surface-container-lowest p-4 rounded-lg font-mono text-xs text-secondary-fixed">
-<code>$ sudo mysql -u root -p</code>
-</div>
-</div>
-</div>
-<div class="mt-8 p-4 bg-secondary/5 rounded-lg border border-secondary/10">
-<p class="text-secondary text-sm font-body italic flex items-center gap-3">
-<span class="material-symbols-outlined text-[18px]">info</span>
-                            Pro Tip: Successful login will present you with the <span class="font-mono px-1 bg-secondary/10">mysql&gt;</span> prompt.
-                        </p>
-</div>
+
+<!-- THEORY -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Theory & Background</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Core Concepts</span></div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-primary lg:col-span-2">
+<h3 class="text-lg font-headline font-semibold text-primary mb-3">MySQL Installation Process</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">MySQL Server can be installed via: (1) MySQL Installer (Windows MSI wizard with product selector — Server, Workbench, Shell, Router), (2) Package Manager on Linux (apt/yum: sudo apt install mysql-server), (3) DMG package on macOS, (4) Docker container: docker run -d mysql:8.0. The installer automatically initialises the data directory and generates a temporary root password.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-secondary">
+<h3 class="text-lg font-headline font-semibold text-secondary mb-3">MySQL Editions</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">Community Edition: Free, open-source (GPL), supported by community. Enterprise Edition: Commercial, includes monitoring (MySQL Enterprise Monitor), backup (MEB), encryption, firewall, audit log, technical support from Oracle. Cluster CGE: High-availability via NDB storage engine for 99.999% uptime.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-primary lg:col-span-3">
+<h3 class="text-lg font-headline font-semibold text-primary mb-3">my.cnf / my.ini Configuration File</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">The server configuration file controls runtime behaviour: [mysqld] section sets server variables. Key parameters: port (default 3306), bind-address, datadir, max_connections (default 151), innodb_buffer_pool_size (set to 70% of RAM), slow_query_log, log_error, character-set-server=utf8mb4, collation-server=utf8mb4_unicode_ci.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-secondary">
+<h3 class="text-lg font-headline font-semibold text-secondary mb-3">mysql_secure_installation</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">After installation, run mysql_secure_installation to: set the root password, remove anonymous users, disallow remote root login, remove the test database, and reload privilege tables. This hardens the default installation against common security vulnerabilities.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-primary">
+<h3 class="text-lg font-headline font-semibold text-primary mb-3">MySQL Workbench</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">MySQL Workbench is the official GUI tool for MySQL. It provides: (1) SQL Editor with syntax highlighting, (2) Visual Schema Designer for ER diagrams, (3) Server Administration panel, (4) Performance Dashboard, (5) Data Import/Export wizard, (6) Migration Wizard for migrating from other RDBMS.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-secondary">
+<h3 class="text-lg font-headline font-semibold text-secondary mb-3">User Management & Privileges</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">MySQL uses a privilege system based on: GRANT/REVOKE statements, user accounts identified by username@host pair, privilege levels (Global, Database, Table, Column, Routine), and predefined roles (MySQL 8+). The mysql.user system table stores all account information.</p></div>
 </div>
 </section>
-<!-- Pagination Footer -->
-<footer class="flex justify-between items-center pt-12 border-t border-outline-variant/20">
-<a class="group flex flex-col items-start gap-1" href="#">
-<span class="text-[10px] uppercase tracking-widest text-on-surface-variant font-label">Previous Lab</span>
-<span class="flex items-center gap-2 text-on-surface group-hover:text-primary transition-colors font-headline font-bold text-xl">
-<span class="material-symbols-outlined">arrow_back</span>
-                        P1: Introduction
-                    </span>
-</a>
-<a class="group flex flex-col items-end gap-1" href="#">
-<span class="text-[10px] uppercase tracking-widest text-on-surface-variant font-label">Next Lab</span>
-<span class="flex items-center gap-2 text-on-surface group-hover:text-primary transition-colors font-headline font-bold text-xl text-right">
-                        P3: DDL Commands
-                        <span class="material-symbols-outlined">arrow_forward</span>
-</span>
-</a>
-</footer>
-</main>
+
+<!-- PROCEDURE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Procedure / Algorithm</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Step-by-Step</span></div>
+<div class="bg-surface-container-low rounded-xl border border-outline-variant/20 p-8">
+<ol class="flex flex-col gap-5"><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">01.</span><span class="text-on-surface-variant font-body leading-relaxed">Download MySQL Installer from <em>dev.mysql.com/downloads</em> — choose Community Edition for the lab environment.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">02.</span><span class="text-on-surface-variant font-body leading-relaxed">Run the installer and select 'Developer Default' setup type, which installs MySQL Server, Workbench, Shell, and connectors.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">03.</span><span class="text-on-surface-variant font-body leading-relaxed">During configuration wizard: set port to 3306, choose Strong Password Encryption (caching_sha2_password), and set a strong root password.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">04.</span><span class="text-on-surface-variant font-body leading-relaxed">After installation, open MySQL Workbench and create a new connection: Hostname=127.0.0.1, Port=3306, Username=root.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">05.</span><span class="text-on-surface-variant font-body leading-relaxed">Open terminal/command prompt and test CLI connection: <code class='text-cyan-400'>mysql -u root -p</code> — enter your root password.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">06.</span><span class="text-on-surface-variant font-body leading-relaxed">Run <code class='text-cyan-400'>SHOW VARIABLES LIKE 'innodb_buffer_pool_size';</code> to check current buffer pool (default ~128MB).</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">07.</span><span class="text-on-surface-variant font-body leading-relaxed">Open my.cnf (Linux: /etc/mysql/my.cnf; Windows: C:\ProgramData\MySQL\MySQL Server 8.0\my.ini) in a text editor.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">08.</span><span class="text-on-surface-variant font-body leading-relaxed">Add/modify: innodb_buffer_pool_size=512M, max_connections=200, slow_query_log=1, general_log=0. Save the file.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">09.</span><span class="text-on-surface-variant font-body leading-relaxed">Restart MySQL service: Linux: <code class='text-cyan-400'>sudo systemctl restart mysql</code> | Windows: Services panel → MySQL80 → Restart.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">10.</span><span class="text-on-surface-variant font-body leading-relaxed">Verify changes: <code class='text-cyan-400'>SHOW VARIABLES LIKE 'max_connections';</code> — confirm it shows 200.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">11.</span><span class="text-on-surface-variant font-body leading-relaxed">Create a dedicated application user: <code class='text-cyan-400'>CREATE USER 'hms_user'@'localhost' IDENTIFIED BY 'SecurePass@123';</code></span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">12.</span><span class="text-on-surface-variant font-body leading-relaxed">Grant privileges: <code class='text-cyan-400'>GRANT ALL PRIVILEGES ON hospital_db.* TO 'hms_user'@'localhost'; FLUSH PRIVILEGES;</code></span></li></ol>
 </div>
-<!-- Global Footer -->
-<footer class="bg-[#10141a] w-full border-t border-slate-800/50 mt-20">
+</section>
+
+<!-- CODE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Complete MySQL Code</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Runnable & Commented</span></div>
+<div class="mb-16">
+<div class="bg-[#0a0e14] rounded-xl border border-outline-variant/20 overflow-hidden shadow-2xl">
+<div class="flex items-center gap-2 px-4 py-3 bg-surface-container-lowest border-b border-outline-variant/20">
+<span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+<span class="ml-4 text-xs font-label text-slate-500 uppercase tracking-widest">MySQL 8.x — Hospital Management System</span>
+</div>
+<pre class="code-block p-6 text-slate-300">
+<span class="text-slate-500 italic">-- ================================================================</span>
+<span class="text-slate-500 italic">-- Practical 02: MySQL Installation & Configuration</span>
+<span class="text-slate-500 italic">-- Run these after successful installation</span>
+<span class="text-slate-500 italic">-- ================================================================</span>
+
+<span class="text-slate-500 italic">-- Step 1: Verify MySQL is running and accessible</span>
+<span class="text-cyan-400">SELECT</span> <span class="text-violet-400">NOW</span>() <span class="text-cyan-400">AS</span> <span class="text-slate-300">Server_Time</span>, <span class="text-violet-400">VERSION</span>() <span class="text-cyan-400">AS</span> <span class="text-slate-300">Version</span>, <span class="text-violet-400">USER</span>() <span class="text-cyan-400">AS</span> <span class="text-slate-300">Current_User</span>;
+
+<span class="text-slate-500 italic">-- Step 2: Check data directory location</span>
+<span class="text-cyan-400">SHOW</span> <span class="text-cyan-400">VARIABLES</span> <span class="text-cyan-400">LIKE</span> <span class="text-green-400">'datadir'</span>;
+
+<span class="text-slate-500 italic">-- Step 3: Verify port configuration</span>
+<span class="text-cyan-400">SHOW</span> <span class="text-cyan-400">VARIABLES</span> <span class="text-cyan-400">LIKE</span> <span class="text-green-400">'port'</span>;
+
+<span class="text-slate-500 italic">-- Step 4: Verify character set (should be utf8mb4 after configuration)</span>
+<span class="text-cyan-400">SHOW</span> <span class="text-cyan-400">VARIABLES</span> <span class="text-cyan-400">LIKE</span> <span class="text-green-400">'character_set_server'</span>;
+
+<span class="text-slate-500 italic">-- Step 5: Check max_connections</span>
+<span class="text-cyan-400">SHOW</span> <span class="text-cyan-400">VARIABLES</span> <span class="text-cyan-400">LIKE</span> <span class="text-green-400">'max_connections'</span>;
+
+<span class="text-slate-500 italic">-- Step 6: Create the HMS database with proper character set</span>
+<span class="text-cyan-400">CREATE DATABASE IF NOT EXISTS</span> <span class="text-slate-300">hospital_db</span>
+    <span class="text-cyan-400">CHARACTER SET</span> <span class="text-green-400">utf8mb4</span>
+    <span class="text-cyan-400">COLLATE</span> <span class="text-green-400">utf8mb4_unicode_ci</span>;
+
+<span class="text-cyan-400">USE</span> <span class="text-slate-300">hospital_db</span>;
+
+<span class="text-slate-500 italic">-- Step 7: Create a dedicated HMS application user</span>
+<span class="text-slate-500 italic">-- NOTE: Run these as root</span>
+<span class="text-cyan-400">CREATE USER</span> <span class="text-green-400">'hms_user'@'localhost'</span> <span class="text-cyan-400">IDENTIFIED WITH</span> <span class="text-green-400">caching_sha2_password</span> <span class="text-cyan-400">BY</span> <span class="text-green-400">'HospDB@2024!'</span>;
+
+<span class="text-slate-500 italic">-- Step 8: Grant appropriate privileges</span>
+<span class="text-cyan-400">GRANT</span> <span class="text-cyan-400">SELECT</span>, <span class="text-cyan-400">INSERT</span>, <span class="text-cyan-400">UPDATE</span>, <span class="text-cyan-400">DELETE</span>, <span class="text-cyan-400">CREATE</span>, <span class="text-cyan-400">DROP</span>, <span class="text-cyan-400">INDEX</span>, <span class="text-cyan-400">ALTER</span>
+<span class="text-cyan-400">ON</span> <span class="text-slate-300">hospital_db.*</span> <span class="text-cyan-400">TO</span> <span class="text-green-400">'hms_user'@'localhost'</span>;
+
+<span class="text-slate-500 italic">-- Step 9: Apply privilege changes immediately</span>
+<span class="text-cyan-400">FLUSH</span> <span class="text-cyan-400">PRIVILEGES</span>;
+
+<span class="text-slate-500 italic">-- Step 10: Verify the user was created</span>
+<span class="text-cyan-400">SELECT</span> <span class="text-slate-300">user</span>, <span class="text-slate-300">host</span>, <span class="text-slate-300">plugin</span> <span class="text-cyan-400">FROM</span> <span class="text-slate-300">mysql.user</span> <span class="text-cyan-400">WHERE</span> <span class="text-slate-300">user</span> = <span class="text-green-400">'hms_user'</span>;
+
+<span class="text-slate-500 italic">-- Step 11: Show all grants for the new user</span>
+<span class="text-cyan-400">SHOW</span> <span class="text-cyan-400">GRANTS</span> <span class="text-cyan-400">FOR</span> <span class="text-green-400">'hms_user'@'localhost'</span>;
+
+<span class="text-slate-500 italic">-- Step 12: Check InnoDB buffer pool size post-configuration</span>
+<span class="text-cyan-400">SHOW</span> <span class="text-cyan-400">VARIABLES</span> <span class="text-cyan-400">LIKE</span> <span class="text-green-400">'innodb_buffer_pool_size'</span>;
+
+<span class="text-slate-500 italic">-- Step 13: View slow query log settings</span>
+<span class="text-cyan-400">SHOW</span> <span class="text-cyan-400">VARIABLES</span> <span class="text-cyan-400">LIKE</span> <span class="text-green-400">'slow_query%'</span>;
+
+</pre></div></div>
+</section>
+
+<!-- OUTPUT -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Expected Output</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Query Results</span></div>
+<div class="bg-[#0a0e14] rounded-xl border border-outline-variant/20 p-6 overflow-x-auto">
+<p class="text-slate-500 font-label text-xs mb-3 uppercase tracking-widest">Server Info</p><div class="overflow-x-auto"><table class="output-table"><thead><tr><th>Server_Time</th><th>Version</th><th>Current_User</th></tr></thead><tbody><tr><td>2024-03-15 10:30:45</td><td>8.0.36</td><td>root@localhost</td></tr></tbody></table></div><br/><p class="text-slate-500 font-label text-xs mb-3 uppercase tracking-widest">SHOW VARIABLES — post-configuration</p><div class="overflow-x-auto"><table class="output-table"><thead><tr><th>Variable_name</th><th>Value</th></tr></thead><tbody><tr><td>character_set_server</td><td>utf8mb4</td></tr><tr><td>max_connections</td><td>200</td></tr><tr><td>innodb_buffer_pool_size</td><td>536870912</td></tr><tr><td>port</td><td>3306</td></tr><tr><td>datadir</td><td>/var/lib/mysql/</td></tr></tbody></table></div><br/><p class="text-slate-500 font-label text-xs mb-3 uppercase tracking-widest">User created successfully</p><div class="overflow-x-auto"><table class="output-table"><thead><tr><th>user</th><th>host</th><th>plugin</th></tr></thead><tbody><tr><td>hms_user</td><td>localhost</td><td>caching_sha2_password</td></tr></tbody></table></div>
+</div>
+</section>
+
+<!-- CONCLUSION -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Conclusion</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Summary</span></div>
+<div class="p-8 bg-surface-container rounded-xl border-l-4 border-secondary">
+<p class="text-on-surface font-body leading-relaxed mb-4">
+This practical demonstrated the complete MySQL 8.0 installation and post-installation configuration workflow. We successfully configured critical server parameters including character set (utf8mb4), max connections, and InnoDB buffer pool size to optimise the server for our Hospital Management System. The creation of a dedicated application user (hms_user) with principle-of-least-privilege access enforces the security best practice of never using the root account for application-level database operations.
+</p>
+<p class="text-on-surface-variant font-body leading-relaxed">
+Best practices observed: use utf8mb4 character set for full Unicode support (including emoji and multilingual clinical data), always run mysql_secure_installation after setup, configure innodb_buffer_pool_size to 70–80% of available RAM for OLTP workloads, and enable slow_query_log to identify and optimise performance bottlenecks early in development.
+</p>
+</div>
+</section>
+
+<!-- VIVA VOCE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Viva Voce</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Q & A</span></div>
+<div class="flex flex-col gap-4">
+<details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q1.</span>What is the default port for MySQL and how do you change it?
+</summary>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> The default MySQL port is 3306. To change it, modify the 'port' directive in my.cnf under [mysqld] section, then restart the MySQL service. The client must then use mysql -P <new_port> -u root -p to connect.
+</div></details><details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q2.</span>What is the difference between caching_sha2_password and mysql_native_password?
+</summary>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> caching_sha2_password (default in MySQL 8.0) uses SHA-256 hashing with salting and caching — significantly more secure. mysql_native_password uses SHA-1 hashing — weaker but widely compatible with older clients/drivers. For new installations, always use caching_sha2_password.
+</div></details><details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q3.</span>What is innodb_buffer_pool_size and why is it important?
+</summary>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> It is the memory area where InnoDB caches table and index data. Larger values mean more data fits in RAM, reducing disk I/O. For a dedicated MySQL server, setting it to 70-80% of total RAM significantly improves query performance for read-heavy workloads.
+</div></details><details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q4.</span>What does FLUSH PRIVILEGES do?
+</summary>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> FLUSH PRIVILEGES forces MySQL to reload the grant tables from the mysql.user system table into memory. It is required after directly modifying grant tables with INSERT/UPDATE/DELETE. When using GRANT/REVOKE statements, MySQL automatically flushes privileges.
+</div></details><details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q5.</span>What are the key files/directories created during MySQL installation?
+</summary>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> datadir (default /var/lib/mysql/) — stores all database files, ibdata1 (InnoDB system tablespace), ib_logfile0/1 (redo logs), error log file (hostname.err), my.cnf/my.ini — configuration file, and the mysql/ directory within datadir containing system tables.
+</div></details>
+</div>
+</section>
+
+<div class="flex justify-between items-center pt-12 border-t border-outline-variant/20 mt-16">
+<a class="group relative px-6 py-3 bg-surface-container border border-outline-variant/30 text-on-surface font-headline font-bold rounded-lg overflow-hidden transition-transform active:scale-95 hover:border-primary/40" href="../practical_01_study_of_mysql/code.html">
+<span class="relative z-10 flex items-center gap-2"><span class="material-symbols-outlined">arrow_back</span>Practical 01</span></a><a class="group relative px-8 py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-bold rounded-lg overflow-hidden transition-transform active:scale-95" href="../practical_03_sqlite_study/code.html">
+<span class="relative z-10 flex items-center gap-2">Next: Practical 03<span class="material-symbols-outlined">arrow_forward</span></span>
+<div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div></a></div>
+</div></main></div>
+<footer class="w-full border-t border-slate-800/50 mt-20 bg-[#10141a]">
 <div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full max-w-[1440px] mx-auto">
-<div class="text-amber-500 font-serif font-['Newsreader'] italic text-lg mb-4 md:mb-0">
-                S.Y.B.Tech IT | Sem IV | Pattern 2023
-            </div>
-<div class="flex gap-8 text-slate-500 text-sm font-label">
-<a class="hover:text-amber-200 transition-colors" href="#">University Guidelines</a>
-<a class="hover:text-amber-200 transition-colors" href="#">Lab Manual</a>
-<a class="hover:text-amber-200 transition-colors" href="#">Contact Faculty</a>
-</div>
-</div>
-</footer>
+<div class="text-amber-500 font-serif font-['Newsreader'] italic text-lg mb-4 md:mb-0">S.Y.B.Tech IT | Sem IV | Pattern 2023 | Subject: 2308215</div>
+<div class="flex gap-8 font-['Newsreader'] italic text-lg">
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">University Guidelines</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Lab Manual</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Contact Faculty</a>
+</div></div></footer>
 </body></html>

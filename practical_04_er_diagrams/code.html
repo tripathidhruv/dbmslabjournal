@@ -1,77 +1,74 @@
 <!DOCTYPE html>
-
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Practical 04 | DBMS Journal</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
         theme: {
           extend: {
             "colors": {
-                    "on-secondary-fixed-variant": "#633f00",
-                    "on-tertiary-container": "#6c4900",
-                    "on-primary-fixed-variant": "#004e5f",
-                    "secondary-fixed-dim": "#ffb955",
-                    "surface-bright": "#353940",
-                    "surface-dim": "#10141a",
-                    "on-tertiary": "#432c00",
-                    "on-surface": "#dfe2eb",
-                    "outline": "#859398",
-                    "inverse-on-surface": "#2d3137",
-                    "secondary-fixed": "#ffddb4",
-                    "on-error-container": "#ffdad6",
-                    "surface-container": "#1c2026",
-                    "on-primary-container": "#00586b",
-                    "primary-container": "#00d4ff",
-                    "on-secondary": "#452b00",
-                    "tertiary-fixed": "#ffdeae",
-                    "error-container": "#93000a",
-                    "surface-container-high": "#262a31",
-                    "on-tertiary-fixed": "#281900",
-                    "inverse-primary": "#00677e",
-                    "surface": "#10141a",
-                    "on-primary-fixed": "#001f27",
-                    "surface-container-low": "#181c22",
-                    "surface-container-highest": "#31353c",
-                    "on-surface-variant": "#bbc9cf",
-                    "error": "#ffb4ab",
-                    "surface-container-lowest": "#0a0e14",
-                    "inverse-surface": "#dfe2eb",
-                    "on-secondary-fixed": "#291800",
-                    "primary": "#a8e8ff",
-                    "on-error": "#690005",
-                    "tertiary-fixed-dim": "#ffba3d",
-                    "on-tertiary-fixed-variant": "#604100",
-                    "tertiary": "#ffd9a1",
-                    "secondary": "#ffb955",
-                    "on-background": "#dfe2eb",
-                    "primary-fixed-dim": "#3cd7ff",
-                    "outline-variant": "#3c494e",
-                    "on-secondary-container": "#4f3100",
-                    "primary-fixed": "#b4ebff",
-                    "surface-variant": "#31353c",
-                    "on-primary": "#003642",
-                    "secondary-container": "#dc9100",
-                    "tertiary-container": "#feb528",
-                    "background": "#10141a",
-                    "surface-tint": "#3cd7ff"
+                "inverse-surface": "#dfe2eb",
+                "tertiary-fixed-dim": "#ffba3d",
+                "tertiary-fixed": "#ffdeae",
+                "primary-container": "#00d4ff",
+                "on-background": "#dfe2eb",
+                "on-primary-container": "#00586b",
+                "on-primary-fixed": "#001f27",
+                "surface-tint": "#3cd7ff",
+                "surface-container-high": "#262a31",
+                "on-primary": "#003642",
+                "primary-fixed-dim": "#3cd7ff",
+                "surface-container": "#1c2026",
+                "error": "#ffb4ab",
+                "on-secondary-fixed": "#291800",
+                "inverse-on-surface": "#2d3137",
+                "surface-container-lowest": "#0a0e14",
+                "secondary-container": "#dc9100",
+                "surface-variant": "#31353c",
+                "secondary-fixed": "#ffddb4",
+                "inverse-primary": "#00677e",
+                "on-secondary": "#452b00",
+                "on-secondary-fixed-variant": "#633f00",
+                "primary-fixed": "#b4ebff",
+                "on-tertiary-fixed-variant": "#604100",
+                "on-tertiary": "#432c00",
+                "on-error-container": "#ffdad6",
+                "on-tertiary-container": "#6c4900",
+                "on-primary-fixed-variant": "#004e5f",
+                "on-error": "#690005",
+                "surface-container-highest": "#31353c",
+                "tertiary-container": "#feb528",
+                "secondary": "#ffb955",
+                "surface-dim": "#10141a",
+                "on-tertiary-fixed": "#281900",
+                "on-secondary-container": "#4f3100",
+                "error-container": "#93000a",
+                "secondary-fixed-dim": "#ffb955",
+                "outline": "#859398",
+                "surface-bright": "#353940",
+                "on-surface": "#dfe2eb",
+                "surface-container-low": "#181c22",
+                "on-surface-variant": "#bbc9cf",
+                "surface": "#10141a",
+                "background": "#10141a",
+                "tertiary": "#ffd9a1",
+                "primary": "#a8e8ff",
+                "outline-variant": "#3c494e"
             },
             "borderRadius": {
-                    "DEFAULT": "0.125rem",
-                    "lg": "0.25rem",
-                    "xl": "0.5rem",
-                    "full": "0.75rem"
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
             },
             "fontFamily": {
-                    "headline": ["Space Grotesk"],
-                    "body": ["Newsreader"],
-                    "label": ["Inter"]
+                "headline": ["Space Grotesk"],
+                "body": ["Newsreader"],
+                "label": ["Inter"]
             }
           },
         },
@@ -80,214 +77,329 @@
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            display: inline-block;
-            vertical-align: middle;
         }
         .dot-matrix {
             background-image: radial-gradient(circle, #3c494e 1px, transparent 1px);
-            background-size: 24px 24px;
+            background-size: 32px 32px;
+            opacity: 0.05;
         }
+        body { background-color: #10141a; color: #dfe2eb; }
+        pre { overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
+        .code-block { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.7; }
+        .output-table { border-collapse: collapse; width: 100%; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+        .output-table th { background: rgba(168,232,255,0.12); color: #a8e8ff; padding: 8px 12px; text-align: left; border-bottom: 1px solid #3c494e; }
+        .output-table td { padding: 7px 12px; border-bottom: 1px solid #1c2026; color: #bbc9cf; }
+        .output-table tr:hover td { background: rgba(168,232,255,0.04); }
+        details > summary { cursor: pointer; }
+        details[open] > summary { color: #a8e8ff; }
     </style>
-</head>
-<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container">
-<!-- TopNavBar -->
+
+<title>Practical 04 | DBMS Journal</title>
+<body class="font-body selection:bg-primary/30 selection:text-primary">
 <nav class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)]">
 <div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
-<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-['Space_Grotesk'] tracking-tight">
-                DBMS Journal
-            </div>
-<div class="hidden md:flex gap-8 items-center">
-<a class="text-slate-400 hover:text-cyan-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#">Home</a>
-<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1 font-['Space_Grotesk'] tracking-tight" href="#">Practicals</a>
-<a class="text-slate-400 hover:text-cyan-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#">About</a>
+<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-headline tracking-tight">DBMS Journal</div>
+<div class="hidden md:flex gap-8 font-headline">
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="../index.html">Home</a>
+<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1" href="#">Practicals</a>
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">About</a>
 </div>
 <div class="flex items-center gap-4">
-<button class="p-2 text-cyan-400 hover:bg-cyan-500/10 transition-all duration-300 scale-95 active:scale-90">
-<span class="material-symbols-outlined">menu</span>
-</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">menu</button>
+</div></div></nav>
+<div class="flex max-w-[1440px] mx-auto relative">
+<aside class="hidden md:block sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] overflow-y-auto border-none top-[64px]">
+<div class="flex flex-col gap-1 p-6">
+<div class="mb-6">
+<h3 class="font-headline font-bold text-primary tracking-widest uppercase text-xs">Lab Practicals</h3>
+<p class="text-on-surface-variant text-[10px] uppercase tracking-[0.2em] mt-1 font-label">DBMS Coursework</p>
 </div>
-</div>
-</nav>
-<div class="flex max-w-[1440px] mx-auto">
-<!-- SideNavBar -->
-<aside class="sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] overflow-y-auto hidden lg:block">
-<div class="p-8 border-b border-outline-variant/20">
-<h3 class="font-['JetBrains_Mono'] text-sm uppercase tracking-widest text-cyan-400">Lab Practicals</h3>
-<p class="text-slate-500 text-xs font-['Inter'] mt-1">DBMS Coursework</p>
-</div>
-<div class="flex flex-col gap-2 p-6 overflow-y-auto">
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors ease-out duration-400 translate-x-1 font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined">terminal</span> Practical 1
-                </a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors ease-out duration-400 translate-x-1 font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined">database</span> Practical 2
-                </a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors ease-out duration-400 translate-x-1 font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined">schema</span> Practical 3
-                </a>
-<a class="flex items-center gap-3 p-3 rounded-lg bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 ease-out duration-400 translate-x-1 font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined">table_chart</span> Practical 4
-                </a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors ease-out duration-400 translate-x-1 font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined">query_stats</span> Practical 5
-                </a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors ease-out duration-400 translate-x-1 font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined">storage</span> Practical 6
-                </a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors ease-out duration-400 translate-x-1 font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined">security</span> Practical 7
-                </a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors ease-out duration-400 translate-x-1 font-['JetBrains_Mono'] text-sm uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined">code_blocks</span> Practical 8
-                </a>
-</div>
-</aside>
-<!-- Main Content -->
-<main class="flex-1 min-w-0 bg-surface dot-matrix bg-opacity-5">
-<div class="max-w-4xl mx-auto px-8 py-12">
-<!-- Header Section -->
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_01_study_of_mysql/code.html">
+<span class="material-symbols-outlined">terminal</span>Practical 01</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_02_mysql_installation/code.html">
+<span class="material-symbols-outlined">database</span>Practical 02</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_03_sqlite_study/code.html">
+<span class="material-symbols-outlined">schema</span>Practical 03</a>
+<a class="flex items-center gap-3 p-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 font-label text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">table_chart</span>Practical 04</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_05_ddl_normalization/code.html">
+<span class="material-symbols-outlined">query_stats</span>Practical 05</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_06_constraints_alter_drop/code.html">
+<span class="material-symbols-outlined">storage</span>Practical 06</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_07_sql_queries/code.html">
+<span class="material-symbols-outlined">security</span>Practical 07</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_08_views/code.html">
+<span class="material-symbols-outlined">code_blocks</span>Practical 08</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_09_implementation_of_joins/code.html">
+<span class="material-symbols-outlined">settings_ethernet</span>Practical 09</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_10_stored_procedures/code.html">
+<span class="material-symbols-outlined">lan</span>Practical 10</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_11_triggers/code.html">
+<span class="material-symbols-outlined">cloud_done</span>Practical 11</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_12_cursors/code.html">
+<span class="material-symbols-outlined">account_tree</span>Practical 12</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_13_project_proposal_srs/code.html">
+<span class="material-symbols-outlined">reorder</span>Practical 13</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_14_er_diagram_database_design/code.html">
+<span class="material-symbols-outlined">history</span>Practical 14</a>
+
+</div></aside>
+<main class="flex-1 min-w-0 bg-background relative overflow-hidden">
+<div class="absolute inset-0 dot-matrix pointer-events-none"></div>
+<div class="px-8 py-12 lg:px-16 max-w-5xl mx-auto relative z-10">
+<!-- Header -->
 <header class="mb-16">
-<div class="flex items-center gap-4 mb-4">
-<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-['JetBrains_Mono'] tracking-widest uppercase rounded">Practical 04</span>
-<span class="px-3 py-1 bg-secondary/10 text-secondary text-xs font-['JetBrains_Mono'] tracking-widest uppercase rounded">Group B: MySQL</span>
+<div class="flex items-center gap-4 mb-6">
+<span class="px-3 py-1 bg-primary/10 text-primary border border-primary/20 rounded-lg text-xs font-label uppercase tracking-widest">Group A</span>
+<span class="text-on-surface-variant/40">—</span>
+<span class="text-on-surface-variant font-label text-xs uppercase tracking-widest">Data Modelling</span>
 </div>
-<h1 class="text-5xl md:text-6xl font-['Space_Grotesk'] font-bold tracking-tight text-on-surface mb-6 leading-tight">
-                        Design a database using EER/ER model. <span class="text-primary/50">Draw ER/EER diagram.</span>
+<h1 class="text-5xl md:text-6xl font-headline font-bold text-on-surface mb-6 tracking-tight">
+Practical 04: <span class="text-primary">ER Diagrams</span>
 </h1>
-<div class="flex gap-2">
-<span class="px-3 py-1.5 border border-outline-variant/30 rounded text-[10px] uppercase tracking-tighter font-['Inter'] text-on-surface-variant">CO301.1: Database Design</span>
-<span class="px-3 py-1.5 border border-outline-variant/30 rounded text-[10px] uppercase tracking-tighter font-['Inter'] text-on-surface-variant">CO301.4: Schema Modeling</span>
-</div>
+<p class="text-xl md:text-2xl text-on-surface-variant font-body leading-relaxed max-w-3xl italic">Designing and mapping an Entity-Relationship diagram for the Hospital Management System to a relational schema.</p>
 </header>
-<!-- Theory Bento Grid -->
-<section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
-<div class="p-8 bg-surface-container-low rounded-xl group hover:bg-surface-container-high transition-colors">
-<div class="flex items-center gap-3 mb-4">
-<span class="material-symbols-outlined text-primary">schema</span>
-<h3 class="text-xl font-['Space_Grotesk'] font-semibold">Entities</h3>
-</div>
-<p class="font-['Newsreader'] text-lg text-on-surface-variant leading-relaxed italic">
-                            A real-world object distinguishable from other objects. An entity set is a collection of similar entities, usually mapped to a database table.
-                        </p>
-</div>
-<div class="p-8 bg-surface-container-low rounded-xl group hover:bg-surface-container-high transition-colors">
-<div class="flex items-center gap-3 mb-4">
-<span class="material-symbols-outlined text-secondary">settings_ethernet</span>
-<h3 class="text-xl font-['Space_Grotesk'] font-semibold">Relationships</h3>
-</div>
-<p class="font-['Newsreader'] text-lg text-on-surface-variant leading-relaxed italic">
-                            Associations among entities. We define cardinality (one-to-one, one-to-many, many-to-many) to enforce business rules in the schema.
-                        </p>
-</div>
-<div class="p-8 bg-surface-container-low rounded-xl group hover:bg-surface-container-high transition-colors">
-<div class="flex items-center gap-3 mb-4">
-<span class="material-symbols-outlined text-primary">reorder</span>
-<h3 class="text-xl font-['Space_Grotesk'] font-semibold">Attributes</h3>
-</div>
-<p class="font-['Newsreader'] text-lg text-on-surface-variant leading-relaxed italic">
-                            Properties of an entity. They can be simple, composite, multi-valued, or derived. The Primary Key is a unique attribute.
-                        </p>
-</div>
-<div class="p-8 bg-surface-container-low rounded-xl group hover:bg-surface-container-high transition-colors">
-<div class="flex items-center gap-3 mb-4">
-<span class="material-symbols-outlined text-secondary">history</span>
-<h3 class="text-xl font-['Space_Grotesk'] font-semibold">Notation</h3>
-</div>
-<p class="font-['Newsreader'] text-lg text-on-surface-variant leading-relaxed italic">
-                            Standard symbols used for drawing: Rectangles (Entities), Diamonds (Relationships), Ellipses (Attributes), and Lines.
-                        </p>
+
+<!-- AIM -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Aim</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Objective</span></div>
+<div class="p-8 bg-surface-container rounded-xl border border-outline-variant/20">
+<p class="text-on-surface font-body leading-relaxed text-lg mb-4">
+The aim of this practical is to design Entity-Relationship (ER) diagrams for the Hospital Management System — a structured graphical representation of all entities, attributes, and the relationships between them. The student will apply ER modelling notation (Chen's notation and Crow's Foot notation) to model real-world hospital data requirements before translating the conceptual model into a logical relational schema.
+</p>
+<p class="text-on-surface-variant font-body leading-relaxed">
+ER diagrams are the blueprint of any database system, serving as a communication tool between database designers, application developers, and business stakeholders. Understanding cardinality (one-to-one, one-to-many, many-to-many), participation constraints (total vs partial), and specialization/generalisation hierarchies is fundamental to database design and is tested extensively in examinations and interviews.
+</p>
 </div>
 </section>
-<!-- Problem Statement -->
-<section class="mb-20">
-<div class="flex items-center gap-4 mb-8">
-<div class="h-[1px] flex-1 bg-outline-variant/30"></div>
-<h2 class="text-3xl font-['Space_Grotesk'] font-bold text-center">Problem Statement</h2>
-<div class="h-[1px] flex-1 bg-outline-variant/30"></div>
-</div>
-<div class="bg-surface-container-lowest p-10 rounded-xl border-l-4 border-primary">
-<p class="font-['Newsreader'] text-2xl text-on-surface leading-snug">
-                            "Design a comprehensive <span class="text-primary font-semibold">Library Management System</span> that tracks books, authors, publishers, and library members. The system must support book lending, late fee calculations, and category management while ensuring data integrity through appropriate EER constraints."
-                        </p>
+
+<!-- THEORY -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Theory & Background</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Core Concepts</span></div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-primary lg:col-span-2">
+<h3 class="text-lg font-headline font-semibold text-primary mb-3">What is an ER Diagram?</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">An Entity-Relationship (ER) diagram is a visual representation of the logical structure of a database, proposed by Peter Chen in 1976. It models the real world as Entities (objects with independent existence), Attributes (properties of entities), and Relationships (associations between entities).</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-secondary">
+<h3 class="text-lg font-headline font-semibold text-secondary mb-3">Entity Types</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">Strong Entity: has its own primary key (PATIENT, DOCTOR, DEPARTMENT). Weak Entity: cannot be uniquely identified without a parent entity — identified by a partial key + parent PK (e.g., APPOINTMENT may depend on PATIENT). Weak entities are shown with double rectangles in Chen notation.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-primary lg:col-span-3">
+<h3 class="text-lg font-headline font-semibold text-primary mb-3">Attribute Types</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">Simple: atomic, indivisible (age, salary). Composite: divisible into sub-parts (full_name → first_name, last_name). Multi-valued: can hold multiple values (phone_numbers) — shown with double ellipses. Derived: computed from other attributes (age derived from birth_date). Key Attribute: uniquely identifies entity — underlined in ER diagrams.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-secondary">
+<h3 class="text-lg font-headline font-semibold text-secondary mb-3">Cardinality Ratios</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">One-to-One (1:1): One doctor is head of one department. One-to-Many (1:N): One doctor has many appointments. Many-to-Many (M:N): Many patients can see many doctors — requires a junction/associative table (APPOINTMENT). Cardinality is one of the most important design decisions in ER modelling.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-primary">
+<h3 class="text-lg font-headline font-semibold text-primary mb-3">Participation Constraints</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">Total Participation (double line): every entity must participate in the relationship (every APPOINTMENT must have a PATIENT). Partial Participation (single line): some entities may not participate (some DOCTORs may have no appointments yet). Also called mandatory vs optional participation.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-secondary">
+<h3 class="text-lg font-headline font-semibold text-secondary mb-3">HMS ER Description</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">Entities: PATIENT, DOCTOR, DEPARTMENT, APPOINTMENT, BILL. Key Relationships: PATIENT makes APPOINTMENT (1:N) — one patient can have multiple appointments. DOCTOR handles APPOINTMENT (1:N). DEPARTMENT has DOCTOR (1:N). PATIENT generates BILL (1:N). DEPARTMENT is headed by DOCTOR (1:1 optional).</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-primary lg:col-span-2">
+<h3 class="text-lg font-headline font-semibold text-primary mb-3">Mapping ER to Relational Schema</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">Rules: (1) Each strong entity → table with PK. (2) Each multi-valued attribute → separate table. (3) 1:N relationship → FK in the N-side table. (4) M:N relationship → new junction table with FKs from both entities. (5) Weak entity → table with composite PK (partial key + parent PK).</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-secondary">
+<h3 class="text-lg font-headline font-semibold text-secondary mb-3">EER — Enhanced ER</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">EER extends ER with OOP concepts: Generalisation (PATIENT generalises to INPATIENT, OUTPATIENT — bottom-up), Specialisation (top-down), Aggregation (relationship treated as entity), and Category/union types. Disjoint vs Overlapping specialisation determines if a patient can be both in- and out-patient.</p></div>
 </div>
 </section>
-<!-- ER Diagram Frame -->
-<section class="mb-20">
-<div class="bg-surface-container-high rounded-xl overflow-hidden shadow-2xl">
-<div class="p-4 bg-surface-container-highest flex items-center gap-2 border-b border-outline-variant/10">
-<div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-<div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-<div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
-<span class="ml-4 font-['JetBrains_Mono'] text-xs text-slate-400 uppercase tracking-widest">library_eer_diagram.png</span>
-</div>
-<div class="aspect-[16/10] bg-black/40 relative group">
-<img alt="Technical diagram" class="w-full h-full object-cover mix-blend-luminosity opacity-40 group-hover:opacity-60 transition-opacity" data-alt="Blueprint of a technical architectural diagram on a dark blueprint paper with glowing cyan lines and geometric shapes representing database schema" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpOMecAUm3fqc657uAEcffmG3030qGq4CwwXLNrEqPdcaYdqJ_aNNGYkNtXGvQrwwDdyFl2vGmJv5b_MMwauuzutRa2b7ZgyAqp82LuF9GXvCzAHL0rvaWLr3L0BWVnTTE19jVSWb65VcTpNHx8dKVoA2vOR61vlY2nDH3WRAKf715poSjAMui47jV8fvCtL9-qfsmDg3GDS019z8TKqzn3zmecznZFgr8rlY83_E-QVDiSpSmibV6cupHHFB148J3dIn1VavlFe8"/>
-<div class="absolute inset-0 flex flex-col items-center justify-center p-12 text-center">
-<span class="material-symbols-outlined text-6xl text-primary mb-4 opacity-50">account_tree</span>
-<h4 class="text-2xl font-['Space_Grotesk'] font-bold text-primary mb-2">ER Diagram for Library Management System</h4>
-<p class="text-slate-400 font-['Inter'] text-sm max-w-md">Detailed mapping of Book, Author, Member, and Transaction entities with primary/foreign key relationships.</p>
-</div>
-</div>
+
+<!-- PROCEDURE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Procedure / Algorithm</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Step-by-Step</span></div>
+<div class="bg-surface-container-low rounded-xl border border-outline-variant/20 p-8">
+<ol class="flex flex-col gap-5"><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">01.</span><span class="text-on-surface-variant font-body leading-relaxed">Identify all entities in the Hospital Management System from the requirements: PATIENT, DOCTOR, DEPARTMENT, APPOINTMENT, BILL.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">02.</span><span class="text-on-surface-variant font-body leading-relaxed">For each entity, list all attributes and classify them (simple, composite, multi-valued, derived, key).</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">03.</span><span class="text-on-surface-variant font-body leading-relaxed">Identify all relationships between entities and assign meaningful verb phrases: PATIENT <em>makes</em> APPOINTMENT, DOCTOR <em>handles</em> APPOINTMENT.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">04.</span><span class="text-on-surface-variant font-body leading-relaxed">Determine cardinality for each relationship: PATIENT → APPOINTMENT (1:N), DOCTOR → APPOINTMENT (1:N), DEPARTMENT → DOCTOR (1:N), PATIENT → BILL (1:N), DEPARTMENT → DOCTOR as head (1:1).</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">05.</span><span class="text-on-surface-variant font-body leading-relaxed">Determine participation constraints: total participation — every APPOINTMENT must have a PATIENT and DOCTOR; partial — a DOCTOR may have zero appointments initially.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">06.</span><span class="text-on-surface-variant font-body leading-relaxed">Draw the ER diagram using Chen's notation: rectangles for entities, ellipses for attributes, diamonds for relationships, lines for connections with cardinality labels.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">07.</span><span class="text-on-surface-variant font-body leading-relaxed">Alternatively, use Crow's Foot notation (used in MySQL Workbench): lines with fork/crow's foot symbols for '1' and 'many' ends.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">08.</span><span class="text-on-surface-variant font-body leading-relaxed">Identify the APPOINTMENT entity as potentially an associative (bridge) entity because it resolves the M:N relationship between PATIENT and DOCTOR.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">09.</span><span class="text-on-surface-variant font-body leading-relaxed">Map the ER diagram to a relational schema: identify each table, primary key, foreign keys, and constraints.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">10.</span><span class="text-on-surface-variant font-body leading-relaxed">Validate the schema: ensure every relationship is represented by either a FK or a junction table.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">11.</span><span class="text-on-surface-variant font-body leading-relaxed">Open MySQL Workbench → Model → New Model → Add Diagram → Build the visual ER diagram using the drag-and-drop interface.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">12.</span><span class="text-on-surface-variant font-body leading-relaxed">Export the diagram as PNG and SQL forward-engineering script — validate against the hospital_db schema.</span></li></ol>
 </div>
 </section>
-<!-- Viva Q&A -->
-<section class="mb-20">
-<h2 class="text-3xl font-['Space_Grotesk'] font-bold mb-8">Viva Questions &amp; Answers</h2>
-<div class="space-y-4">
-<details class="group bg-surface-container-low rounded-lg overflow-hidden transition-all duration-300">
-<summary class="flex justify-between items-center p-6 cursor-pointer list-none">
-<h3 class="text-xl font-['Newsreader'] font-semibold italic">1. What is the difference between Strong and Weak entities?</h3>
-<span class="material-symbols-outlined text-secondary transition-transform group-open:rotate-180">expand_more</span>
+
+<!-- CODE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Complete MySQL Code</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Runnable & Commented</span></div>
+<div class="mb-16">
+<div class="bg-[#0a0e14] rounded-xl border border-outline-variant/20 overflow-hidden shadow-2xl">
+<div class="flex items-center gap-2 px-4 py-3 bg-surface-container-lowest border-b border-outline-variant/20">
+<span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+<span class="ml-4 text-xs font-label text-slate-500 uppercase tracking-widest">MySQL 8.x — Hospital Management System</span>
+</div>
+<pre class="code-block p-6 text-slate-300">
+<span class="text-slate-500 italic">-- ================================================================</span>
+<span class="text-slate-500 italic">-- Practical 04: ER Diagram → Relational Schema Mapping</span>
+<span class="text-slate-500 italic">-- Hospital Management System — Complete Schema</span>
+<span class="text-slate-500 italic">-- ================================================================</span>
+
+<span class="text-slate-500 italic">-- ER Diagram Description (Text Representation):</span>
+<span class="text-slate-500 italic">--</span>
+<span class="text-slate-500 italic">-- [DEPARTMENT]----<has>----[DOCTOR]----<handles>----[APPOINTMENT]</span>
+<span class="text-slate-500 italic">--      |                      |                          |</span>
+<span class="text-slate-500 italic">--   floor_no              salary                    appt_date</span>
+<span class="text-slate-500 italic">--   dept_name          specialization               status</span>
+<span class="text-slate-500 italic">--      |                      |                          |</span>
+<span class="text-slate-500 italic">--      +------<heads>---------+              [PATIENT]--<makes>-+</span>
+<span class="text-slate-500 italic">--                                              |</span>
+<span class="text-slate-500 italic">--                                         [BILL]<--generates</span>
+<span class="text-slate-500 italic">--</span>
+<span class="text-slate-500 italic">-- Cardinalities:</span>
+<span class="text-slate-500 italic">-- DEPARTMENT : DOCTOR     = 1 : N (one dept has many doctors)</span>
+<span class="text-slate-500 italic">-- DOCTOR : APPOINTMENT    = 1 : N (one doctor has many appts)</span>
+<span class="text-slate-500 italic">-- PATIENT : APPOINTMENT   = 1 : N (one patient has many appts)</span>
+<span class="text-slate-500 italic">-- PATIENT : BILL          = 1 : N (one patient has many bills)</span>
+<span class="text-slate-500 italic">-- DEPARTMENT : DOCTOR(head)= 1 : 1 (optional, partial)</span>
+
+<span class="text-cyan-400">DROP DATABASE IF EXISTS</span> <span class="text-slate-300">hospital_db</span>;
+<span class="text-cyan-400">CREATE DATABASE</span> <span class="text-slate-300">hospital_db</span> <span class="text-cyan-400">CHARACTER SET</span> <span class="text-green-400">utf8mb4</span> <span class="text-cyan-400">COLLATE</span> <span class="text-green-400">utf8mb4_unicode_ci</span>;
+<span class="text-cyan-400">USE</span> <span class="text-slate-300">hospital_db</span>;
+
+<span class="text-slate-500 italic">-- Strong Entity 1: DEPARTMENT (created first — no FK dependencies)</span>
+<span class="text-cyan-400">CREATE TABLE</span> <span class="text-slate-300">DEPARTMENT</span> (
+    <span class="text-slate-300">dept_id</span>        <span class="text-cyan-400">INT</span>         <span class="text-cyan-400">PRIMARY KEY</span> <span class="text-cyan-400">COMMENT</span> <span class="text-green-400">'Department unique identifier'</span>,
+    <span class="text-slate-300">dept_name</span>      <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">50</span>)  <span class="text-cyan-400">NOT NULL</span> <span class="text-cyan-400">UNIQUE</span> <span class="text-cyan-400">COMMENT</span> <span class="text-green-400">'Department name — must be unique'</span>,
+    <span class="text-slate-300">floor_no</span>       <span class="text-cyan-400">INT</span>         <span class="text-cyan-400">NOT NULL</span> <span class="text-cyan-400">CHECK</span>(<span class="text-slate-300">floor_no</span> <span class="text-cyan-400">BETWEEN</span> <span class="text-amber-400">1</span> <span class="text-cyan-400">AND</span> <span class="text-amber-400">20</span>),
+    <span class="text-slate-300">head_doctor_id</span> <span class="text-cyan-400">INT</span>         <span class="text-cyan-400">DEFAULT</span> <span class="text-cyan-400">NULL</span> <span class="text-cyan-400">COMMENT</span> <span class="text-green-400">'1:1 partial relationship to DOCTOR'</span>
+) <span class="text-cyan-400">ENGINE</span>=<span class="text-green-400">InnoDB</span> <span class="text-cyan-400">COMMENT</span> <span class="text-green-400">'Represents hospital departments'</span>;
+
+<span class="text-slate-500 italic">-- Strong Entity 2: DOCTOR (FK to DEPARTMENT)</span>
+<span class="text-cyan-400">CREATE TABLE</span> <span class="text-slate-300">DOCTOR</span> (
+    <span class="text-slate-300">doctor_id</span>        <span class="text-cyan-400">INT</span>          <span class="text-cyan-400">PRIMARY KEY</span>,
+    <span class="text-slate-300">name</span>             <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">80</span>)  <span class="text-cyan-400">NOT NULL</span>,
+    <span class="text-slate-300">specialization</span>   <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">50</span>)  <span class="text-cyan-400">NOT NULL</span>,
+    <span class="text-slate-300">experience_years</span> <span class="text-cyan-400">INT</span>          <span class="text-cyan-400">NOT NULL</span> <span class="text-cyan-400">CHECK</span>(<span class="text-slate-300">experience_years</span> &gt;= <span class="text-amber-400">0</span>),
+    <span class="text-slate-300">salary</span>           <span class="text-cyan-400">DECIMAL</span>(<span class="text-amber-400">10</span>,<span class="text-amber-400">2</span>) <span class="text-cyan-400">NOT NULL</span> <span class="text-cyan-400">CHECK</span>(<span class="text-slate-300">salary</span> &gt; <span class="text-amber-400">0</span>),
+    <span class="text-slate-300">dept_id</span>          <span class="text-cyan-400">INT</span>,
+    <span class="text-cyan-400">FOREIGN KEY</span> (<span class="text-slate-300">dept_id</span>) <span class="text-cyan-400">REFERENCES</span> <span class="text-slate-300">DEPARTMENT</span>(<span class="text-slate-300">dept_id</span>) <span class="text-cyan-400">ON DELETE SET NULL</span>
+    <span class="text-slate-500 italic">-- 1:N: One DEPARTMENT has many DOCTORs</span>
+) <span class="text-cyan-400">ENGINE</span>=<span class="text-green-400">InnoDB</span>;
+
+<span class="text-slate-500 italic">-- Strong Entity 3: PATIENT</span>
+<span class="text-cyan-400">CREATE TABLE</span> <span class="text-slate-300">PATIENT</span> (
+    <span class="text-slate-300">patient_id</span>     <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">10</span>) <span class="text-cyan-400">PRIMARY KEY</span>,
+    <span class="text-slate-300">name</span>           <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">80</span>) <span class="text-cyan-400">NOT NULL</span>,
+    <span class="text-slate-300">age</span>            <span class="text-cyan-400">INT</span>         <span class="text-cyan-400">NOT NULL</span> <span class="text-cyan-400">CHECK</span>(<span class="text-slate-300">age</span> <span class="text-cyan-400">BETWEEN</span> <span class="text-amber-400">0</span> <span class="text-cyan-400">AND</span> <span class="text-amber-400">150</span>),
+    <span class="text-slate-300">gender</span>         <span class="text-cyan-400">ENUM</span>(<span class="text-green-400">'Male'</span>,<span class="text-green-400">'Female'</span>,<span class="text-green-400">'Other'</span>) <span class="text-cyan-400">NOT NULL</span>,
+    <span class="text-slate-300">disease</span>        <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">100</span>) <span class="text-cyan-400">NOT NULL</span>,
+    <span class="text-slate-300">ward_no</span>        <span class="text-cyan-400">INT</span>,
+    <span class="text-slate-300">admission_date</span> <span class="text-cyan-400">DATE</span>        <span class="text-cyan-400">DEFAULT</span> (<span class="text-cyan-400">CURRENT_DATE</span>)
+) <span class="text-cyan-400">ENGINE</span>=<span class="text-green-400">InnoDB</span>;
+
+<span class="text-slate-500 italic">-- Associative (Junction) Entity: APPOINTMENT (resolves M:N between PATIENT & DOCTOR)</span>
+<span class="text-cyan-400">CREATE TABLE</span> <span class="text-slate-300">APPOINTMENT</span> (
+    <span class="text-slate-300">appt_id</span>    <span class="text-cyan-400">INT</span>          <span class="text-cyan-400">PRIMARY KEY</span> <span class="text-cyan-400">AUTO_INCREMENT</span>,
+    <span class="text-slate-300">patient_id</span> <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">10</span>) <span class="text-cyan-400">NOT NULL</span>,
+    <span class="text-slate-300">doctor_id</span>  <span class="text-cyan-400">INT</span>          <span class="text-cyan-400">NOT NULL</span>,
+    <span class="text-slate-300">appt_date</span>  <span class="text-cyan-400">DATE</span>         <span class="text-cyan-400">NOT NULL</span>,
+    <span class="text-slate-300">status</span>     <span class="text-cyan-400">ENUM</span>(<span class="text-green-400">'Scheduled'</span>,<span class="text-green-400">'Completed'</span>,<span class="text-green-400">'Cancelled'</span>) <span class="text-cyan-400">DEFAULT</span> <span class="text-green-400">'Scheduled'</span>,
+    <span class="text-cyan-400">FOREIGN KEY</span> (<span class="text-slate-300">patient_id</span>) <span class="text-cyan-400">REFERENCES</span> <span class="text-slate-300">PATIENT</span>(<span class="text-slate-300">patient_id</span>) <span class="text-cyan-400">ON DELETE CASCADE</span>,
+    <span class="text-cyan-400">FOREIGN KEY</span> (<span class="text-slate-300">doctor_id</span>)  <span class="text-cyan-400">REFERENCES</span> <span class="text-slate-300">DOCTOR</span>(<span class="text-slate-300">doctor_id</span>)  <span class="text-cyan-400">ON DELETE CASCADE</span>
+) <span class="text-cyan-400">ENGINE</span>=<span class="text-green-400">InnoDB</span>;
+
+<span class="text-slate-500 italic">-- Dependent Entity: BILL (total participation — every bill must have a patient)</span>
+<span class="text-cyan-400">CREATE TABLE</span> <span class="text-slate-300">BILL</span> (
+    <span class="text-slate-300">bill_id</span>      <span class="text-cyan-400">INT</span>          <span class="text-cyan-400">PRIMARY KEY</span> <span class="text-cyan-400">AUTO_INCREMENT</span>,
+    <span class="text-slate-300">patient_id</span>   <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">10</span>) <span class="text-cyan-400">NOT NULL</span>,
+    <span class="text-slate-300">total_amount</span> <span class="text-cyan-400">DECIMAL</span>(<span class="text-amber-400">10</span>,<span class="text-amber-400">2</span>) <span class="text-cyan-400">NOT NULL</span> <span class="text-cyan-400">CHECK</span>(<span class="text-slate-300">total_amount</span> &gt;= <span class="text-amber-400">0</span>),
+    <span class="text-slate-300">paid_status</span>  <span class="text-cyan-400">ENUM</span>(<span class="text-green-400">'Paid'</span>,<span class="text-green-400">'Unpaid'</span>,<span class="text-green-400">'Partial'</span>) <span class="text-cyan-400">DEFAULT</span> <span class="text-green-400">'Unpaid'</span>,
+    <span class="text-slate-300">bill_date</span>    <span class="text-cyan-400">DATE</span>         <span class="text-cyan-400">NOT NULL</span> <span class="text-cyan-400">DEFAULT</span> (<span class="text-cyan-400">CURRENT_DATE</span>),
+    <span class="text-cyan-400">FOREIGN KEY</span> (<span class="text-slate-300">patient_id</span>) <span class="text-cyan-400">REFERENCES</span> <span class="text-slate-300">PATIENT</span>(<span class="text-slate-300">patient_id</span>) <span class="text-cyan-400">ON DELETE CASCADE</span>
+) <span class="text-cyan-400">ENGINE</span>=<span class="text-green-400">InnoDB</span>;
+
+<span class="text-slate-500 italic">-- Now add the self-referencing head_doctor FK to DEPARTMENT</span>
+<span class="text-cyan-400">ALTER TABLE</span> <span class="text-slate-300">DEPARTMENT</span>
+    <span class="text-cyan-400">ADD CONSTRAINT</span> <span class="text-slate-300">fk_head_doctor</span>
+    <span class="text-cyan-400">FOREIGN KEY</span> (<span class="text-slate-300">head_doctor_id</span>) <span class="text-cyan-400">REFERENCES</span> <span class="text-slate-300">DOCTOR</span>(<span class="text-slate-300">doctor_id</span>) <span class="text-cyan-400">ON DELETE SET NULL</span>;
+
+<span class="text-slate-500 italic">-- Verify schema structure</span>
+<span class="text-cyan-400">SHOW</span> <span class="text-cyan-400">TABLES</span>;
+<span class="text-cyan-400">DESCRIBE</span> <span class="text-slate-300">APPOINTMENT</span>;
+
+</pre></div></div>
+</section>
+
+<!-- OUTPUT -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Expected Output</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Query Results</span></div>
+<div class="bg-[#0a0e14] rounded-xl border border-outline-variant/20 p-6 overflow-x-auto">
+<p class="text-slate-500 font-label text-xs mb-3 uppercase tracking-widest">SHOW TABLES</p><div class="overflow-x-auto"><table class="output-table"><thead><tr><th>Tables_in_hospital_db</th></tr></thead><tbody><tr><td>APPOINTMENT</td></tr><tr><td>BILL</td></tr><tr><td>DEPARTMENT</td></tr><tr><td>DOCTOR</td></tr><tr><td>PATIENT</td></tr></tbody></table></div><br/><p class="text-slate-500 font-label text-xs mb-3 uppercase tracking-widest">DESCRIBE APPOINTMENT</p><div class="overflow-x-auto"><table class="output-table"><thead><tr><th>Field</th><th>Type</th><th>Null</th><th>Key</th><th>Default</th><th>Extra</th></tr></thead><tbody><tr><td>appt_id</td><td>int</td><td>NO</td><td>PRI</td><td>NULL</td><td>auto_increment</td></tr><tr><td>patient_id</td><td>varchar(10)</td><td>NO</td><td>MUL</td><td>NULL</td><td></td></tr><tr><td>doctor_id</td><td>int</td><td>NO</td><td>MUL</td><td>NULL</td><td></td></tr><tr><td>appt_date</td><td>date</td><td>NO</td><td></td><td>NULL</td><td></td></tr><tr><td>status</td><td>enum(...)</td><td>YES</td><td></td><td>Scheduled</td><td></td></tr></tbody></table></div>
+</div>
+</section>
+
+<!-- CONCLUSION -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Conclusion</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Summary</span></div>
+<div class="p-8 bg-surface-container rounded-xl border-l-4 border-secondary">
+<p class="text-on-surface font-body leading-relaxed mb-4">
+This practical successfully demonstrated the process of ER modelling for the Hospital Management System. We identified five strong entities (PATIENT, DOCTOR, DEPARTMENT, APPOINTMENT, BILL), correctly classified all relationships with their cardinalities and participation constraints, and translated the conceptual ER model into a logical relational schema with appropriate primary keys, foreign keys, and integrity constraints.
+</p>
+<p class="text-on-surface-variant font-body leading-relaxed">
+The APPOINTMENT table serves as the bridge entity resolving the implicit many-to-many relationship between PATIENT and DOCTOR. The circular dependency between DEPARTMENT and DOCTOR (via head_doctor_id) was resolved by creating DEPARTMENT first, DOCTOR second, and then adding the FK with ALTER TABLE. This ordering strategy is a critical skill in schema deployment scripts and is a best practice for avoiding circular FK creation errors.
+</p>
+</div>
+</section>
+
+<!-- VIVA VOCE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Viva Voce</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Q & A</span></div>
+<div class="flex flex-col gap-4">
+<details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q1.</span>What is the difference between a strong entity and a weak entity?
 </summary>
-<div class="px-6 pb-6 pt-0 font-['Inter'] text-on-surface-variant leading-relaxed">
-                                A strong entity exists independently and has its own primary key. A weak entity depends on a identifying owner entity and uses a partial key (discriminator) combined with the owner's primary key for identification.
-                            </div>
-</details>
-<details class="group bg-surface-container-low rounded-lg overflow-hidden transition-all duration-300">
-<summary class="flex justify-between items-center p-6 cursor-pointer list-none">
-<h3 class="text-xl font-['Newsreader'] font-semibold italic">2. Define Participation Constraints in E-R Modeling.</h3>
-<span class="material-symbols-outlined text-secondary transition-transform group-open:rotate-180">expand_more</span>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> A strong entity has its own unique primary key and exists independently (e.g., PATIENT with patient_id). A weak entity cannot be uniquely identified by its own attributes alone — it depends on a strong (owner) entity and uses a composite key of its partial key + owner's PK (e.g., an APPOINTMENT_DETAIL might depend on APPOINTMENT).
+</div></details><details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q2.</span>How do you map a Many-to-Many relationship in a relational schema?
 </summary>
-<div class="px-6 pb-6 pt-0 font-['Inter'] text-on-surface-variant leading-relaxed">
-                                Participation constraints specify whether the existence of an entity depends on its being related to another entity via the relationship set. It can be Total (Double line) or Partial (Single line).
-                            </div>
-</details>
-<details class="group bg-surface-container-low rounded-lg overflow-hidden transition-all duration-300">
-<summary class="flex justify-between items-center p-6 cursor-pointer list-none">
-<h3 class="text-xl font-['Newsreader'] font-semibold italic">3. When should we use EER (Enhanced ER) diagrams over standard ER?</h3>
-<span class="material-symbols-outlined text-secondary transition-transform group-open:rotate-180">expand_more</span>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> A M:N relationship cannot be directly represented with just foreign keys. It must be resolved by creating a junction/associative/bridge table that contains foreign keys referencing both participating entities. APPOINTMENT is our bridge table with FKs to both PATIENT and DOCTOR.
+</div></details><details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q3.</span>What is the difference between total and partial participation?
 </summary>
-<div class="px-6 pb-6 pt-0 font-['Inter'] text-on-surface-variant leading-relaxed">
-                                EER is used when we need to model complex requirements like Specialization, Generalization, and Aggregation, which are not easily captured by standard ER modeling.
-                            </div>
-</details>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> Total (mandatory) participation — double line in ER — means every entity instance must participate in at least one relationship instance (every APPOINTMENT must have a PATIENT). Partial (optional) participation — single line — means some instances may not participate (a DOCTOR may initially have no APPOINTMENT).
+</div></details><details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q4.</span>What is a derived attribute? Give a hospital example.
+</summary>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> A derived attribute is computed from other stored attributes and typically not stored physically. In our HMS, a patient's 'age' could be a derived attribute computed from their 'date_of_birth' (since storing only DOB is more accurate). Similarly, 'years_since_admission' can be derived from admission_date.
+</div></details><details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q5.</span>What is the difference between Chen's notation and Crow's Foot notation?
+</summary>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> Chen notation: uses rectangles (entities), ellipses (attributes), diamonds (relationships), and 1/N/M labels on lines — good for academic/conceptual modelling. Crow's Foot: uses line-end symbols (|, O, <) to show cardinality and participation — more compact, widely used in tools like MySQL Workbench, ERwin, Lucidchart.
+</div></details>
 </div>
 </section>
-<!-- Navigation Footer -->
-<footer class="flex justify-between items-center pt-12 border-t border-outline-variant/20">
-<button class="flex items-center gap-2 px-6 py-3 bg-surface-container-low text-slate-400 hover:text-white transition-all font-['JetBrains_Mono'] text-sm uppercase tracking-widest rounded group">
-<span class="material-symbols-outlined group-hover:-translate-x-1 transition-transform">arrow_back</span>
-                        Previous
-                    </button>
-<button class="flex items-center gap-2 px-8 py-3 bg-gradient-to-br from-cyan-300 to-cyan-500 text-on-primary font-['JetBrains_Mono'] text-sm uppercase tracking-widest rounded-lg shadow-[0_0_20px_rgba(0,212,255,0.2)] hover:scale-105 transition-all">
-                        Next Practical
-                        <span class="material-symbols-outlined">arrow_forward</span>
-</button>
-</footer>
-</div>
-</main>
-</div>
-<!-- Global Footer -->
-<footer class="bg-[#10141a] border-t border-slate-800/50 mt-20">
+
+<div class="flex justify-between items-center pt-12 border-t border-outline-variant/20 mt-16">
+<a class="group relative px-6 py-3 bg-surface-container border border-outline-variant/30 text-on-surface font-headline font-bold rounded-lg overflow-hidden transition-transform active:scale-95 hover:border-primary/40" href="../practical_03_sqlite_study/code.html">
+<span class="relative z-10 flex items-center gap-2"><span class="material-symbols-outlined">arrow_back</span>Practical 03</span></a><a class="group relative px-8 py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-bold rounded-lg overflow-hidden transition-transform active:scale-95" href="../practical_05_ddl_normalization/code.html">
+<span class="relative z-10 flex items-center gap-2">Next: Practical 05<span class="material-symbols-outlined">arrow_forward</span></span>
+<div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div></a></div>
+</div></main></div>
+<footer class="w-full border-t border-slate-800/50 mt-20 bg-[#10141a]">
 <div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full max-w-[1440px] mx-auto">
-<div class="text-amber-500 font-serif font-['Newsreader'] italic text-lg mb-4 md:mb-0">
-                S.Y.B.Tech IT | Sem IV | Pattern 2023
-            </div>
-<div class="flex gap-8">
-<a class="text-slate-500 hover:text-amber-200 transition-colors font-['Newsreader'] italic" href="#">University Guidelines</a>
-<a class="text-slate-500 hover:text-amber-200 transition-colors font-['Newsreader'] italic" href="#">Lab Manual</a>
-<a class="text-slate-500 hover:text-amber-200 transition-colors font-['Newsreader'] italic" href="#">Contact Faculty</a>
-</div>
-</div>
-</footer>
+<div class="text-amber-500 font-serif font-['Newsreader'] italic text-lg mb-4 md:mb-0">S.Y.B.Tech IT | Sem IV | Pattern 2023 | Subject: 2308215</div>
+<div class="flex gap-8 font-['Newsreader'] italic text-lg">
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">University Guidelines</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Lab Manual</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Contact Faculty</a>
+</div></div></footer>
 </body></html>

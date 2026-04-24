@@ -1,0 +1,671 @@
+================================================================================
+       DBMS LAB JOURNAL PORTAL — SOLVED ASSIGNMENT 13 & 14
+       S.Y.B.Tech IT | Sem IV | Pattern 2023 | Group D
+================================================================================
+
+PROJECT NAME  : DBMS Lab Journal Portal
+ORGANIZATION  : S.Y.B.Tech IT Department (Backend-Only Design Study)
+DATE          : April 2026
+
+================================================================================
+                       PRACTICAL 13 — PROJECT PROPOSAL & HIGH-LEVEL SRS
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+(a) PROJECT DESCRIPTION / GOALS
+────────────────────────────────────────────────────────────────────────────────
+
+The DBMS Lab Journal Portal is a web-based application designed to digitize and
+streamline the submission, review, and grading workflow for database management
+system laboratory practicals in an undergraduate IT program. The current paper-
+based or email-based submission process is error-prone, lacks real-time tracking,
+and places a significant administrative burden on faculty staff. This system
+replaces that manual process with a structured, transparent, and auditable
+digital workflow backed by a reliable relational database (PostgreSQL via Supabase)
+and a secure cloud storage layer.
+
+The primary goals of the portal are to:
+  1. Allow students (members of a defined course batch) to register, log in, and
+     submit their lab work (source code files + screenshots) for each of the 14
+     practicals defined in the course curriculum.
+  2. Enable lab staff / faculty to review all submitted practicals from a central
+     dashboard, leave textual remarks, and mark submissions as "approved" or
+     "rejected" without needing to physically collect files.
+  3. Maintain a complete audit trail — including timestamps for submission and
+     review, reviewer identity, and status changes — so that grading disputes can
+     be resolved transparently.
+  4. Provide a scalable backend foundation (Row Level Security, storage policies,
+     trigger-based auto-profiling) that can be extended to cover additional
+     semesters or departments with minimal configuration changes.
+
+
+────────────────────────────────────────────────────────────────────────────────
+(b) TYPES OF USERS
+────────────────────────────────────────────────────────────────────────────────
+
+The application supports two distinct user roles:
+
+1. STUDENT
+   --------
+   A student is any registered member of the batch who is enrolled in the DBMS
+   lab course. Students can self-register through the portal's sign-up page.
+   After successful authentication, a student can:
+     - View the list of all 14 practicals.
+     - View detailed content/instructions for each practical.
+     - Upload their code file (HTML / SQL / .txt) and a screenshot for any
+       practical they have not yet submitted.
+     - Track the status of each of their submissions (Pending / Approved /
+       Rejected) and read any staff remarks attached to their submission.
+   Students cannot view other students' submissions or profiles.
+
+2. STAFF (Lab Administrator / Faculty)
+   ------------------------------------
+   Staff accounts are pre-created and provisioned by the system administrator.
+   A staff user (identified by the role = 'staff' flag in the profiles table)
+   can:
+     - View ALL student profiles and their roll numbers.
+     - View ALL practical submissions across all students with full metadata
+       (submission time, file URLs, review status).
+     - Approve or reject any pending submission and add written remarks.
+     - Access a unified dashboard showing per-practical submission statistics
+       (how many submitted, approved, or pending for each practical number).
+   Staff accounts cannot be self-registered; they must be provisioned via the
+   SQL setup script or the Supabase Auth admin panel.
+
+3. SYSTEM / DATABASE ADMINISTRATOR (Implicit)
+   --------------------------------------------
+   This is not an in-app user type but refers to the person managing the
+   Supabase project. They configure RLS policies, provision staff accounts via
+   the SQL editor, and manage storage buckets and triggers.
+
+
+────────────────────────────────────────────────────────────────────────────────
+(c) APPLICATION FUNCTIONALITIES
+────────────────────────────────────────────────────────────────────────────────
+
+1. USER REGISTRATION & AUTHENTICATION
+   ------------------------------------
+   Students can register using their institutional email address, full name, and
+   roll number. The system uses Supabase Auth (email + password) to manage
+   authentication tokens and sessions. Upon successful signup, a database trigger
+   (handle_new_user) automatically creates a corresponding row in the "profiles"
+   table, storing the user's display name, role (defaulting to 'student'), and
+   roll number pulled from the registration metadata. Staff accounts are
+   pre-seeded in the database; they can log in using the same email/password
+   flow. All sessions are JWT-based and managed entirely server-side.
+
+2. PRACTICAL CONTENT VIEWER
+   -------------------------
+   The portal hosts static pages for each of the 14 practicals defined in the
+   course (e.g., Study of MySQL, ER Diagrams, DDL & Normalization, Triggers,
+   Cursors, Project Proposal, etc.). Each practical page displays the aim,
+   theory, procedure, code blocks, and a screenshot of expected output. This
+   content is rendered from HTML files and is accessible to any authenticated
+   user (both students and staff) without additional database queries.
+
+3. PRACTICAL SUBMISSION SYSTEM
+   -----------------------------
+   Any authenticated student can submit their work for a given practical. A
+   submission consists of: (a) an uploaded code file stored in a dedicated
+   Supabase Storage bucket (practical-uploads), and (b) a screenshot image of
+   the working output. The submission is recorded in the "practical_submissions"
+   table with the student's UUID, the practical number (1–14), file URLs,
+   submission timestamp, and an initial status of "pending". The system enforces
+   a UNIQUE constraint on (student_id, practical_number), preventing duplicate
+   submissions for the same practical by the same student. Students can update
+   their own submissions while they remain in "pending" status.
+
+4. STAFF REVIEW & GRADING DASHBOARD
+   ------------------------------------
+   The staff dashboard fetches all rows from practical_submissions joined with
+   the profiles table to display student names and roll numbers alongside
+   submission metadata. Staff can filter by practical number or status. For each
+   submission, the staff member can: view the uploaded code file and screenshot,
+   type textual remarks in a remarks field, and click "Approve" or "Reject". On
+   save, the system updates the submission row with: status = 'approved'/'rejected',
+   staff_remarks = <text>, reviewed_by = <staff UUID>, reviewed_at = NOW(). This
+   creates a complete audit record of who reviewed what and when.
+
+5. ROLE-BASED ACCESS CONTROL (RBAC) & ROW LEVEL SECURITY
+   --------------------------------------------------------
+   All database tables enforce PostgreSQL Row Level Security (RLS). Policies are
+   defined at the database layer (not just the application layer) to ensure that
+   even if the API is called directly, students can only ever read or write their
+   own data. The helper function is_staff() (a SECURITY DEFINER SQL function)
+   breaks potential infinite recursion in policies and is used as the centralized
+   authorization check for all staff-level SELECT and UPDATE policies. Storage
+   objects are similarly partitioned: each student's files are stored under a
+   folder named after their UUID, and storage policies restrict access so that
+   students can only read/write their own folder.
+
+6. CLOUD FILE STORAGE
+   --------------------
+   Uploaded code files and screenshots are stored in a private Supabase Storage
+   bucket named "practical-uploads". Files are organized by student UUID as the
+   top-level folder. The system generates and stores permanent URLs pointing to
+   each uploaded file in the practical_submissions table (code_file_url and
+   screenshot_url columns). Staff, via their special policy, can read all files
+   from this bucket regardless of which student's folder they belong to.
+
+7. AUTOMATED PROFILE PROVISIONING (TRIGGER)
+   ------------------------------------------
+   The database trigger on_auth_user_created fires after every new row is
+   inserted into auth.users (i.e., on every signup). It automatically inserts a
+   corresponding profile record into the public.profiles table, extracting
+   full_name, role, and roll_number from the user's raw_user_meta_data JSON
+   supplied during registration. This eliminates any gap where a user could
+   authenticate but have no application-level profile record.
+
+
+────────────────────────────────────────────────────────────────────────────────
+(d) HARDWARE & SOFTWARE REQUIREMENTS
+────────────────────────────────────────────────────────────────────────────────
+
+  ┌──────────────────────────────────────────────────────────────────────────┐
+  │                         BACKEND REQUIREMENTS                              │
+  ├──────────────────────────────────────────────────────────────────────────┤
+  │ HARDWARE                                                                  │
+  │   • Application/API Host : Supabase-managed cloud compute (equivalent to  │
+  │     a 4-vCPU, 8 GB RAM virtual machine on a cloud provider).             │
+  │   • Database Server       : PostgreSQL 15 cluster hosted on Supabase      │
+  │     (managed, with automated backups and read replicas available on       │
+  │     paid tiers). Initial storage allocation: 500 MB database + 1 GB      │
+  │     file storage.                                                         │
+  │   • Network               : HTTPS-only endpoint with TLS 1.3 termination  │
+  │     at Supabase's edge (CDN-backed for static asset delivery).            │
+  │                                                                           │
+  │ SOFTWARE                                                                  │
+  │   • Database Engine       : PostgreSQL 15 (hosted, Supabase cloud)        │
+  │   • Backend Runtime       : Supabase PostgREST (auto-generated REST API   │
+  │     from PostgreSQL schema) + Supabase Auth (GoTrue service)              │
+  │   • Storage Service       : Supabase Storage (S3-compatible object store) │
+  │   • Authentication        : Supabase Auth with JWT (email/password flow)  │
+  │   • Security              : Row Level Security (PostgreSQL native RLS),    │
+  │     SECURITY DEFINER functions, bcrypt password hashing (via crypt())     │
+  │   • OS (Supabase infra)   : Ubuntu 22.04 LTS (managed by Supabase)        │
+  │   • Database Client SDK   : supabase-js v2 (on the frontend side)         │
+  ├──────────────────────────────────────────────────────────────────────────┤
+  │                         FRONTEND REQUIREMENTS                             │
+  ├──────────────────────────────────────────────────────────────────────────┤
+  │ HARDWARE                                                                  │
+  │   • Any device capable of running a modern web browser (laptop, desktop,  │
+  │     tablet). Minimum: 4 GB RAM, any dual-core processor from 2015+.       │
+  │   • Stable internet connection (minimum 2 Mbps for file uploads).         │
+  │                                                                           │
+  │ SOFTWARE                                                                  │
+  │   • Web Browser           : Google Chrome 110+, Mozilla Firefox 110+,     │
+  │     Microsoft Edge 110+, or Safari 16+ (any ES2020-capable browser)       │
+  │   • Frontend Stack        : Vanilla HTML5, CSS3 (TailwindCSS v3 via CDN), │
+  │     Vanilla JavaScript (ES2020)                                           │
+  │   • Font/Icon CDN         : Google Fonts (Space Grotesk, Newsreader,      │
+  │     JetBrains Mono, Inter) + Google Material Symbols                      │
+  │   • Client SDK            : @supabase/supabase-js v2 (loaded via ESM CDN) │
+  │   • No native app or installation required — purely browser-based.        │
+  └──────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────
+(e) USER ESTIMATES, EXPECTED LOAD & DATABASE SIZE
+────────────────────────────────────────────────────────────────────────────────
+
+  USER TYPE ESTIMATES:
+  ┌────────────────────┬───────────────────────────────────────────────────┐
+  │ User Type          │ Estimated Count                                   │
+  ├────────────────────┼───────────────────────────────────────────────────┤
+  │ Students           │ ~60–80 per lab batch; up to 240 across 4 divisions │
+  │ Staff (Faculty)    │ 2–5 per department (1 lab in-charge + assistants)  │
+  │ System Admin (DBA) │ 1 (the person running the SQL setup scripts)       │
+  └────────────────────┴───────────────────────────────────────────────────┘
+
+  EXPECTED LOAD (Transactions Per Day):
+  ┌─────────────────────────────────────────────┬───────────────────────────┐
+  │ Operation                                   │ Estimated Volume / Day    │
+  ├─────────────────────────────────────────────┼───────────────────────────┤
+  │ Student Login (SELECT from auth.users)      │ ~80–240 sessions/day      │
+  │ Practical content page loads (static HTML)  │ ~300–500 page reads/day   │
+  │ File uploads (INSERT into storage + table)  │ ~30–60 uploads/day        │
+  │ Submission status checks (SELECT)           │ ~150–300 queries/day      │
+  │ Staff review actions (UPDATE submissions)   │ ~20–50 review ops/day     │
+  │ Staff dashboard loads (SELECT all + JOIN)   │ ~10–20 queries/day        │
+  ├─────────────────────────────────────────────┼───────────────────────────┤
+  │ TOTAL ESTIMATED                             │ ~600–1,200 transactions/dy │
+  └─────────────────────────────────────────────┴───────────────────────────┘
+  Peak concurrent users at lab session start: ~30–40 simultaneous requests.
+  This is well within Supabase's free tier limits (500 MB DB, 1 GB storage).
+
+  EXPECTED DATABASE SIZE (Initial + Growth):
+  ┌─────────────────────────────────────────────┬───────────────────────────┐
+  │ Table / Entity                              │ Estimated Size            │
+  ├─────────────────────────────────────────────┼───────────────────────────┤
+  │ auth.users (Supabase managed)               │ ~50 KB (for 240 users)    │
+  │ profiles table                              │ ~100 KB (for 240 profiles) │
+  │ practical_submissions (14 per student)      │ ~2 MB (text metadata only) │
+  │ Storage bucket (code + screenshots)         │ ~500 MB – 1 GB per semester│
+  ├─────────────────────────────────────────────┼───────────────────────────┤
+  │ Total DB (relational data)                  │ ~5–10 MB                  │
+  │ Total with file storage                     │ ~500 MB – 1.5 GB          │
+  └─────────────────────────────────────────────┴───────────────────────────┘
+  Annual growth rate: ~1–2 GB per academic semester (primarily file uploads).
+  The system can comfortably scale on Supabase's paid tier to multi-GB capacity.
+
+
+================================================================================
+                   PRACTICAL 14 — ER DIAGRAM & DATABASE DESIGN
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+1. ER DIAGRAM (Textual / Crow's Foot Notation Description)
+────────────────────────────────────────────────────────────────────────────────
+
+Below is a textual representation of the ER Diagram for the DBMS Lab Journal
+Portal. (Use Draw.io or any ER tool to render the visual diagram from this spec.)
+
+ENTITIES AND ATTRIBUTES:
+─────────────────────────
+
+  [USER (auth.users — Supabase managed)]
+    • id              UUID  (PK, auto-generated)
+    • email           VARCHAR(255), UNIQUE, NOT NULL
+    • encrypted_password  TEXT, NOT NULL
+    • email_confirmed_at  TIMESTAMPTZ
+    • raw_user_meta_data  JSONB  (stores full_name, role, roll_number)
+    • created_at      TIMESTAMPTZ
+    • updated_at      TIMESTAMPTZ
+
+  [PROFILE]
+    • id              UUID  (PK, FK → auth.users.id, CASCADE DELETE)
+    • full_name       TEXT, NOT NULL, DEFAULT 'User'
+    • role            TEXT, NOT NULL, CHECK IN ('student','staff'), DEFAULT 'student'
+    • roll_number     TEXT, NULLABLE
+    • created_at      TIMESTAMPTZ, DEFAULT now()
+
+  [PRACTICAL_SUBMISSION]
+    • id              UUID  (PK, DEFAULT gen_random_uuid())
+    • student_id      UUID  (FK → profiles.id, NOT NULL, CASCADE DELETE)
+    • practical_number  INT, NOT NULL, CHECK BETWEEN 1 AND 14
+    • code_file_url   TEXT, NULLABLE
+    • screenshot_url  TEXT, NULLABLE
+    • submitted_at    TIMESTAMPTZ, DEFAULT now()
+    • status          TEXT, DEFAULT 'pending', CHECK IN ('pending','approved','rejected')
+    • staff_remarks   TEXT, NULLABLE
+    • reviewed_by     UUID  (FK → profiles.id, NULLABLE)
+    • reviewed_at     TIMESTAMPTZ, NULLABLE
+    • UNIQUE (student_id, practical_number)
+
+  [STORAGE_OBJECT (Supabase Storage — implicit entity)]
+    • bucket_id       TEXT  ('practical-uploads')
+    • name            TEXT  (path: <student_uuid>/<filename>)
+    • owner           UUID  (FK → auth.users.id)
+    • created_at      TIMESTAMPTZ
+    • (Referenced via URL stored in practical_submissions)
+
+RELATIONSHIPS:
+──────────────
+
+  1. USER "has one" PROFILE
+     ┌──────────┐  1       1  ┌─────────┐
+     │  USER    │────────────│ PROFILE │
+     └──────────┘            └─────────┘
+     • One auth.users record maps to exactly one profile record.
+     • Enforced by PK = FK on profiles.id.
+     • Created automatically via the on_auth_user_created trigger.
+
+  2. PROFILE (student) "submits many" PRACTICAL_SUBMISSION
+     ┌─────────┐  1     0..N  ┌──────────────────────┐
+     │ PROFILE │──────────────│ PRACTICAL_SUBMISSION  │
+     │(student)│              │  (student_id → FK)   │
+     └─────────┘              └──────────────────────┘
+     • A student can have 0 to 14 submissions (one per practical number).
+     • Enforced by UNIQUE(student_id, practical_number).
+     • CASCADE DELETE: deleting a student profile deletes all submissions.
+
+  3. PROFILE (staff) "reviews many" PRACTICAL_SUBMISSION
+     ┌─────────┐  1     0..N  ┌──────────────────────┐
+     │ PROFILE │──────────────│ PRACTICAL_SUBMISSION  │
+     │ (staff) │              │  (reviewed_by → FK)  │
+     └─────────┘              └──────────────────────┘
+     • A staff member can review zero or many submissions.
+     • The reviewed_by column is nullable — it is NULL when status = 'pending'.
+
+  4. PRACTICAL_SUBMISSION "references" STORAGE_OBJECTS (logical link)
+     ┌──────────────────────┐        ┌────────────────────┐
+     │ PRACTICAL_SUBMISSION │────────│  STORAGE OBJECT    │
+     │ (code_file_url,      │  URL   │  (practical-       │
+     │  screenshot_url)     │        │   uploads bucket)  │
+     └──────────────────────┘        └────────────────────┘
+     • Not a formal FK constraint — stored as a URL string.
+     • Storage policies mirror RLS at the object-store level.
+
+ER DIAGRAM (ASCII Simplified):
+
+  +---------------+       +------------------+       +------------------------+
+  |   auth.users  |  1:1  |    profiles      |  1:N  | practical_submissions  |
+  +---------------+       +------------------+       +------------------------+
+  | id (PK)       |───────| id (PK, FK)      |───────| id (PK)               |
+  | email         |       | full_name        |       | student_id (FK)       |
+  | password_hash |       | role             |       | practical_number      |
+  | confirmed_at  |       | roll_number      |       | code_file_url         |
+  | metadata JSON |       | created_at       |  1:N  | screenshot_url        |
+  +---------------+       +------------------+  ┐    | submitted_at          |
+                                                 └───| reviewed_by (FK)      |
+                                                     | reviewed_at           |
+                                                     | status                |
+                                                     | staff_remarks         |
+                                                     +------------------------+
+
+
+────────────────────────────────────────────────────────────────────────────────
+2. RELATIONAL TABLES (Reduced from ER Diagram)
+────────────────────────────────────────────────────────────────────────────────
+
+TABLE 1: auth_users  (managed by Supabase Auth)
+─────────────────────────────────────────────────
+  Column Name           Data Type        Constraints
+  ────────────────────  ───────────────  ────────────────────────────────────
+  id                    UUID             PRIMARY KEY, DEFAULT gen_random_uuid()
+  email                 VARCHAR(255)     UNIQUE, NOT NULL
+  encrypted_password    TEXT             NOT NULL
+  email_confirmed_at    TIMESTAMPTZ      NULLABLE
+  raw_user_meta_data    JSONB            NULLABLE
+  created_at            TIMESTAMPTZ      DEFAULT now()
+  updated_at            TIMESTAMPTZ      DEFAULT now()
+
+TABLE 2: profiles
+──────────────────
+  Column Name     Data Type        Constraints
+  ──────────────  ───────────────  ─────────────────────────────────────────
+  id              UUID             PRIMARY KEY, FK → auth.users(id) ON DELETE CASCADE
+  full_name       TEXT             NOT NULL, DEFAULT 'User'
+  role            TEXT             NOT NULL, DEFAULT 'student',
+                                   CHECK (role IN ('student', 'staff'))
+  roll_number     TEXT             NULLABLE
+  created_at      TIMESTAMPTZ      DEFAULT now()
+
+TABLE 3: practical_submissions
+────────────────────────────────
+  Column Name        Data Type        Constraints
+  ─────────────────  ───────────────  ──────────────────────────────────────
+  id                 UUID             PRIMARY KEY, DEFAULT gen_random_uuid()
+  student_id         UUID             NOT NULL, FK → profiles(id) ON DELETE CASCADE
+  practical_number   INT              NOT NULL, CHECK (1 ≤ practical_number ≤ 14)
+  code_file_url      TEXT             NULLABLE
+  screenshot_url     TEXT             NULLABLE
+  submitted_at       TIMESTAMPTZ      DEFAULT now()
+  status             TEXT             DEFAULT 'pending',
+                                      CHECK (status IN ('pending','approved','rejected'))
+  staff_remarks      TEXT             NULLABLE
+  reviewed_by        UUID             FK → profiles(id), NULLABLE
+  reviewed_at        TIMESTAMPTZ      NULLABLE
+  ─
+  UNIQUE (student_id, practical_number)
+
+
+────────────────────────────────────────────────────────────────────────────────
+3. FUNCTIONAL DEPENDENCIES
+────────────────────────────────────────────────────────────────────────────────
+
+TABLE: profiles
+───────────────
+  FD1:  id → full_name
+  FD2:  id → role
+  FD3:  id → roll_number
+  FD4:  id → created_at
+  Summary: id (UUID, PK) is the sole determinant for all non-key attributes.
+  No partial or transitive dependencies exist (single-attribute PK).
+
+TABLE: practical_submissions
+────────────────────────────
+  FD1:  id → student_id
+  FD2:  id → practical_number
+  FD3:  id → code_file_url
+  FD4:  id → screenshot_url
+  FD5:  id → submitted_at
+  FD6:  id → status
+  FD7:  id → staff_remarks
+  FD8:  id → reviewed_by
+  FD9:  id → reviewed_at
+
+  FD10: {student_id, practical_number} → id   (Candidate Key / Unique Key)
+  FD11: {student_id, practical_number} → code_file_url
+  FD12: {student_id, practical_number} → screenshot_url
+  FD13: {student_id, practical_number} → submitted_at
+  FD14: {student_id, practical_number} → status
+  FD15: {student_id, practical_number} → staff_remarks
+  FD16: {student_id, practical_number} → reviewed_by
+  FD17: {student_id, practical_number} → reviewed_at
+
+  NOTE: There are two candidate keys:
+    CK1 = {id}
+    CK2 = {student_id, practical_number}
+
+  Partial Dependency Check (for 2NF with CK2):
+    • All non-key attributes (code_file_url, screenshot_url, submitted_at,
+      status, staff_remarks, reviewed_by, reviewed_at) depend on THE COMPOSITE
+      KEY {student_id, practical_number} as a whole — not on just student_id
+      alone or practical_number alone.
+    • Therefore: NO partial dependencies exist. Table is in 2NF.
+
+  Transitive Dependency Check (for 3NF):
+    • reviewed_by (a UUID) points to a staff member. However, it does NOT
+      functionally determine any attribute stored in this table (staff_remarks
+      is linked to the submission context, not determined by reviewed_by alone
+      across all rows).
+    • No non-prime attribute determines another non-prime attribute.
+    • Therefore: NO transitive dependencies. Table is in 3NF.
+
+
+────────────────────────────────────────────────────────────────────────────────
+4. NORMALIZATION ANALYSIS (3NF / BCNF CHECK)
+────────────────────────────────────────────────────────────────────────────────
+
+  STEP 1: CHECK 1NF (First Normal Form)
+  ───────────────────────────────────────
+  A relation is in 1NF if:
+    (i)  All attributes contain atomic (indivisible) values.
+    (ii) There are no repeating groups.
+
+  CHECK:
+  • profiles: All columns are atomic (UUID, TEXT, TIMESTAMPTZ). No arrays or
+    nested structures in the physical table design. ✓ IN 1NF.
+  • practical_submissions: All columns are atomic types. The code_file_url and
+    screenshot_url are single TEXT values (URLs), not multi-valued. ✓ IN 1NF.
+
+  NOTE: raw_user_meta_data in auth.users is JSONB — this is in the Supabase-
+  managed auth schema, not our application schema. The extracted values (full_name,
+  role, roll_number) are stored atomically in the profiles table. ✓
+
+  STEP 2: CHECK 2NF (Second Normal Form)
+  ───────────────────────────────────────
+  A relation is in 2NF if it is in 1NF AND every non-prime attribute is fully
+  functionally dependent on the WHOLE primary key (no partial dependencies).
+
+  CHECK:
+  • profiles: PK is a single column (id). With a single-attribute PK, partial
+    dependency is impossible by definition. ✓ IN 2NF.
+  • practical_submissions: PK is id (single UUID). The composite unique key is
+    {student_id, practical_number}. None of the remaining attributes
+    (code_file_url, status, etc.) depend on only student_id or only
+    practical_number — they all require both to identify the correct submission.
+    ✓ IN 2NF.
+
+  STEP 3: CHECK 3NF (Third Normal Form)
+  ───────────────────────────────────────
+  A relation is in 3NF if it is in 2NF AND no non-prime attribute is
+  transitively dependent on the primary key (i.e., X → Y → Z where X is PK,
+  Y and Z are non-prime attributes — not allowed).
+
+  CHECK:
+  • profiles:
+      id → full_name           (direct, no transitivity) ✓
+      id → role                (direct, no transitivity) ✓
+      id → roll_number         (direct, no transitivity) ✓
+      id → created_at          (direct, no transitivity) ✓
+      Result: ✓ IN 3NF.
+
+  • practical_submissions:
+      id → student_id → (full_name, role…)?
+        • student_id is a FK, not a non-prime attribute determining another
+          non-prime attribute of this table. The student's name etc. are stored
+          in the profiles table, not here. No transitive dependency. ✓
+      id → reviewed_by → (staff name, remarks…)?
+        • reviewed_by is a FK pointing to a profile ID. The staff's details
+          live in the profiles table. No transitive dependency within this table. ✓
+      id → status → staff_remarks?
+        • staff_remarks is contextual; it does not depend on status — a
+          submission could have remarks at any status. Not a transitive dep. ✓
+      Result: ✓ IN 3NF.
+
+  STEP 4: CHECK BCNF (Boyce–Codd Normal Form)
+  ─────────────────────────────────────────────
+  A relation is in BCNF if for every non-trivial functional dependency X → Y,
+  X is a superkey.
+
+  CHECK:
+  • profiles:
+      Only FD is:  id → {full_name, role, roll_number, created_at}
+      id is the PK (superkey). ✓ IN BCNF.
+
+  • practical_submissions:
+      FDs:
+        id → all other attributes          (id is PK = superkey) ✓
+        {student_id, practical_number} → all other attributes
+           ({student_id, practical_number} is a candidate key = superkey) ✓
+      No FD where the LHS is NOT a superkey. ✓ IN BCNF.
+
+  CONCLUSION:
+  ┌─────────────────────────────┬──────┬──────┬──────┬───────┐
+  │ Table                       │  1NF │  2NF │  3NF │  BCNF │
+  ├─────────────────────────────┼──────┼──────┼──────┼───────┤
+  │ profiles                    │  ✓   │  ✓   │  ✓   │   ✓   │
+  │ practical_submissions       │  ✓   │  ✓   │  ✓   │   ✓   │
+  └─────────────────────────────┴──────┴──────┴──────┴───────┘
+
+  The database schema is ALREADY IN BCNF. No normalization decomposition is
+  required. This is because the schema was designed from the ground up with
+  clear entity separation, no repeating groups, and a single determinant per
+  table. No non-loss decomposition is necessary.
+
+
+────────────────────────────────────────────────────────────────────────────────
+5. DATA DICTIONARY (Complete)
+────────────────────────────────────────────────────────────────────────────────
+
+TABLE: profiles
+─────────────────────────────────────────────────────────────────────────────
+Field Name    | Data Type    | Constraints              | Description
+──────────────|──────────────|──────────────────────────|─────────────────────
+id            | UUID         | PK, FK→auth.users(id),   | Unique user identity;
+              |              | ON DELETE CASCADE         | mirrors Supabase Auth UUID
+full_name     | TEXT         | NOT NULL, DEFAULT 'User'  | Student or staff display name
+role          | TEXT         | NOT NULL, DEFAULT 'student'| Access control role:
+              |              | CHECK IN ('student','staff')| 'student' or 'staff' only
+roll_number   | TEXT         | NULLABLE                  | Academic roll number;
+              |              |                           | NULL for staff accounts
+created_at    | TIMESTAMPTZ  | DEFAULT now()             | Profile creation timestamp
+
+TABLE: practical_submissions
+─────────────────────────────────────────────────────────────────────────────
+Field Name       | Data Type    | Constraints                | Description
+─────────────────|──────────────|────────────────────────────|──────────────────
+id               | UUID         | PK, DEFAULT gen_random_uuid()| Unique submission ID
+student_id       | UUID         | NOT NULL, FK→profiles(id), | Submitting student's
+                 |              | ON DELETE CASCADE           | profile UUID
+practical_number | INT          | NOT NULL,                  | Lab practical number
+                 |              | CHECK (1–14)                | (1 to 14)
+code_file_url    | TEXT         | NULLABLE                   | URL to uploaded code file
+                 |              |                            | in Supabase Storage
+screenshot_url   | TEXT         | NULLABLE                   | URL to uploaded screenshot
+                 |              |                            | image
+submitted_at     | TIMESTAMPTZ  | DEFAULT now()              | Timestamp of submission
+status           | TEXT         | DEFAULT 'pending',         | Review lifecycle state:
+                 |              | CHECK IN ('pending',       | pending → approved/rejected
+                 |              | 'approved','rejected')     |
+staff_remarks    | TEXT         | NULLABLE                   | Faculty feedback / comments
+                 |              |                            | on this submission
+reviewed_by      | UUID         | FK→profiles(id), NULLABLE  | Staff member UUID who
+                 |              |                            | performed the review
+reviewed_at      | TIMESTAMPTZ  | NULLABLE                   | Timestamp of review action
+─────────────────────────────────────────────────────────────────────────────
+COMPOSITE UNIQUE: (student_id, practical_number)
+  → Prevents a student from submitting the same practical more than once.
+
+
+────────────────────────────────────────────────────────────────────────────────
+6. COMPLETE DATABASE DESIGN (DDL — PostgreSQL)
+────────────────────────────────────────────────────────────────────────────────
+
+-- Table 1: profiles
+CREATE TABLE IF NOT EXISTS profiles (
+  id          UUID        REFERENCES auth.users ON DELETE CASCADE PRIMARY KEY,
+  full_name   TEXT        NOT NULL DEFAULT 'User',
+  role        TEXT        NOT NULL DEFAULT 'student'
+                          CHECK (role IN ('student', 'staff')),
+  roll_number TEXT,
+  created_at  TIMESTAMPTZ DEFAULT now()
+);
+
+-- Table 2: practical_submissions
+CREATE TABLE IF NOT EXISTS practical_submissions (
+  id               UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
+  student_id       UUID        NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
+  practical_number INT         NOT NULL CHECK (practical_number BETWEEN 1 AND 14),
+  code_file_url    TEXT,
+  screenshot_url   TEXT,
+  submitted_at     TIMESTAMPTZ DEFAULT now(),
+  status           TEXT        DEFAULT 'pending'
+                               CHECK (status IN ('pending', 'approved', 'rejected')),
+  staff_remarks    TEXT,
+  reviewed_by      UUID        REFERENCES profiles(id),
+  reviewed_at      TIMESTAMPTZ,
+  UNIQUE (student_id, practical_number)
+);
+
+-- Trigger: Auto-create profile on new user signup
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS TRIGGER LANGUAGE plpgsql SECURITY DEFINER AS $$
+BEGIN
+  INSERT INTO public.profiles (id, full_name, role, roll_number)
+  VALUES (
+    NEW.id,
+    COALESCE(NEW.raw_user_meta_data->>'full_name', split_part(NEW.email,'@',1)),
+    COALESCE(NEW.raw_user_meta_data->>'role', 'student'),
+    NULLIF(NEW.raw_user_meta_data->>'roll_number', '')
+  ) ON CONFLICT (id) DO NOTHING;
+  RETURN NEW;
+END;
+$$;
+
+CREATE TRIGGER on_auth_user_created
+  AFTER INSERT ON auth.users
+  FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
+
+
+================================================================================
+                             SUMMARY TABLE
+================================================================================
+
+  Practical 13 Answers Covered:
+  ┌───┬────────────────────────────────────────────────────────┬───────────┐
+  │ # │ Question                                               │ Status    │
+  ├───┼────────────────────────────────────────────────────────┼───────────┤
+  │ a │ Project description / goals (2 paragraphs)             │ ANSWERED  │
+  │ b │ Types of users                                         │ ANSWERED  │
+  │ c │ Application functionalities (7 modules, each ~1 para)  │ ANSWERED  │
+  │ d │ Hardware + software requirements (backend + frontend)  │ ANSWERED  │
+  │ e │ User count estimates, TPS load, DB size estimates      │ ANSWERED  │
+  └───┴────────────────────────────────────────────────────────┴───────────┘
+
+  Practical 14 Answers Covered:
+  ┌───┬────────────────────────────────────────────────────────┬───────────┐
+  │ # │ Question                                               │ Status    │
+  ├───┼────────────────────────────────────────────────────────┼───────────┤
+  │ 1 │ ER Diagram (textual + ASCII representation)            │ ANSWERED  │
+  │ 2 │ Reduced relational tables with full column definitions │ ANSWERED  │
+  │ 3 │ Functional dependencies listed for each table          │ ANSWERED  │
+  │ 4 │ 3NF/BCNF normalization check (all tables pass BCNF)   │ ANSWERED  │
+  │ + │ Data dictionary (complete for all application tables)  │ ANSWERED  │
+  └───┴────────────────────────────────────────────────────────┴───────────┘
+
+================================================================================
+                              END OF DOCUMENT
+================================================================================

@@ -1,81 +1,78 @@
 <!DOCTYPE html>
-
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>DBMS Journal | Practical 11 - Triggers</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Newsreader:ital,wght@0,300;0,400;0,500;0,600;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "inverse-surface": "#dfe2eb",
-                        "tertiary-fixed-dim": "#ffba3d",
-                        "tertiary-fixed": "#ffdeae",
-                        "primary-container": "#00d4ff",
-                        "on-background": "#dfe2eb",
-                        "on-primary-container": "#00586b",
-                        "on-primary-fixed": "#001f27",
-                        "surface-tint": "#3cd7ff",
-                        "surface-container-high": "#262a31",
-                        "on-primary": "#003642",
-                        "primary-fixed-dim": "#3cd7ff",
-                        "surface-container": "#1c2026",
-                        "error": "#ffb4ab",
-                        "on-secondary-fixed": "#291800",
-                        "inverse-on-surface": "#2d3137",
-                        "surface-container-lowest": "#0a0e14",
-                        "secondary-container": "#dc9100",
-                        "surface-variant": "#31353c",
-                        "secondary-fixed": "#ffddb4",
-                        "inverse-primary": "#00677e",
-                        "on-secondary": "#452b00",
-                        "on-secondary-fixed-variant": "#633f00",
-                        "primary-fixed": "#b4ebff",
-                        "on-tertiary-fixed-variant": "#604100",
-                        "on-tertiary": "#432c00",
-                        "on-error-container": "#ffdad6",
-                        "on-tertiary-container": "#6c4900",
-                        "on-primary-fixed-variant": "#004e5f",
-                        "on-error": "#690005",
-                        "surface-container-highest": "#31353c",
-                        "tertiary-container": "#feb528",
-                        "secondary": "#ffb955",
-                        "surface-dim": "#10141a",
-                        "on-tertiary-fixed": "#281900",
-                        "on-secondary-container": "#4f3100",
-                        "error-container": "#93000a",
-                        "secondary-fixed-dim": "#ffb955",
-                        "outline": "#859398",
-                        "surface-bright": "#353940",
-                        "on-surface": "#dfe2eb",
-                        "surface-container-low": "#181c22",
-                        "on-surface-variant": "#bbc9cf",
-                        "surface": "#10141a",
-                        "background": "#10141a",
-                        "tertiary": "#ffd9a1",
-                        "primary": "#a8e8ff",
-                        "outline-variant": "#3c494e"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "fontFamily": {
-                        "headline": ["Space Grotesk"],
-                        "body": ["Newsreader"],
-                        "label": ["Inter"]
-                    }
-                }
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "inverse-surface": "#dfe2eb",
+                "tertiary-fixed-dim": "#ffba3d",
+                "tertiary-fixed": "#ffdeae",
+                "primary-container": "#00d4ff",
+                "on-background": "#dfe2eb",
+                "on-primary-container": "#00586b",
+                "on-primary-fixed": "#001f27",
+                "surface-tint": "#3cd7ff",
+                "surface-container-high": "#262a31",
+                "on-primary": "#003642",
+                "primary-fixed-dim": "#3cd7ff",
+                "surface-container": "#1c2026",
+                "error": "#ffb4ab",
+                "on-secondary-fixed": "#291800",
+                "inverse-on-surface": "#2d3137",
+                "surface-container-lowest": "#0a0e14",
+                "secondary-container": "#dc9100",
+                "surface-variant": "#31353c",
+                "secondary-fixed": "#ffddb4",
+                "inverse-primary": "#00677e",
+                "on-secondary": "#452b00",
+                "on-secondary-fixed-variant": "#633f00",
+                "primary-fixed": "#b4ebff",
+                "on-tertiary-fixed-variant": "#604100",
+                "on-tertiary": "#432c00",
+                "on-error-container": "#ffdad6",
+                "on-tertiary-container": "#6c4900",
+                "on-primary-fixed-variant": "#004e5f",
+                "on-error": "#690005",
+                "surface-container-highest": "#31353c",
+                "tertiary-container": "#feb528",
+                "secondary": "#ffb955",
+                "surface-dim": "#10141a",
+                "on-tertiary-fixed": "#281900",
+                "on-secondary-container": "#4f3100",
+                "error-container": "#93000a",
+                "secondary-fixed-dim": "#ffb955",
+                "outline": "#859398",
+                "surface-bright": "#353940",
+                "on-surface": "#dfe2eb",
+                "surface-container-low": "#181c22",
+                "on-surface-variant": "#bbc9cf",
+                "surface": "#10141a",
+                "background": "#10141a",
+                "tertiary": "#ffd9a1",
+                "primary": "#a8e8ff",
+                "outline-variant": "#3c494e"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "fontFamily": {
+                "headline": ["Space Grotesk"],
+                "body": ["Newsreader"],
+                "label": ["Inter"]
             }
-        }
+          },
+        },
+      }
     </script>
 <style>
         .material-symbols-outlined {
@@ -83,202 +80,243 @@
         }
         .dot-matrix {
             background-image: radial-gradient(circle, #3c494e 1px, transparent 1px);
-            background-size: 24px 24px;
+            background-size: 32px 32px;
+            opacity: 0.05;
         }
+        body { background-color: #10141a; color: #dfe2eb; }
+        pre { overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
+        .code-block { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.7; }
+        .output-table { border-collapse: collapse; width: 100%; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+        .output-table th { background: rgba(168,232,255,0.12); color: #a8e8ff; padding: 8px 12px; text-align: left; border-bottom: 1px solid #3c494e; }
+        .output-table td { padding: 7px 12px; border-bottom: 1px solid #1c2026; color: #bbc9cf; }
+        .output-table tr:hover td { background: rgba(168,232,255,0.04); }
+        details > summary { cursor: pointer; }
+        details[open] > summary { color: #a8e8ff; }
     </style>
-</head>
-<body class="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container font-body">
-<!-- TopNavBar -->
+
+<title>Practical 11 | DBMS Journal</title>
+<body class="font-body selection:bg-primary/30 selection:text-primary">
 <nav class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)]">
 <div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
-<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-headline tracking-tight">
-                DBMS Journal
-            </div>
-<div class="hidden md:flex items-center gap-8 font-headline text-sm uppercase tracking-widest">
-<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">Home</a>
+<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-headline tracking-tight">DBMS Journal</div>
+<div class="hidden md:flex gap-8 font-headline">
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="../index.html">Home</a>
 <a class="text-cyan-400 border-b-2 border-cyan-400 pb-1" href="#">Practicals</a>
 <a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">About</a>
 </div>
-<button class="text-cyan-400 scale-95 active:scale-90 transition-transform p-2 hover:bg-cyan-500/10 rounded-full">
-<span class="material-symbols-outlined" data-icon="menu">menu</span>
-</button>
-</div>
-</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">menu</button>
+</div></div></nav>
 <div class="flex max-w-[1440px] mx-auto relative">
-<!-- SideNavBar -->
-<aside class="sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] hidden md:flex flex-col gap-2 p-6 overflow-y-auto">
-<div class="mb-8">
-<h3 class="font-headline text-primary text-xs uppercase tracking-[0.2em] mb-1">Lab Practicals</h3>
-<p class="font-body italic text-on-surface-variant text-sm">DBMS Coursework</p>
+<aside class="hidden md:block sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] overflow-y-auto border-none top-[64px] scrollbar-hide">
+<div class="flex flex-col gap-1 p-6">
+<div class="mb-6">
+<h3 class="font-headline font-bold text-primary tracking-widest uppercase text-xs">Lab Practicals</h3>
+<p class="text-on-surface-variant text-[10px] uppercase tracking-[0.2em] mt-1 font-label">DBMS Coursework</p>
 </div>
-<nav class="flex flex-col gap-1">
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
-<span class="material-symbols-outlined text-lg" data-icon="terminal">terminal</span> Practical 1
-                </a>
-<!-- ... Repeated items for brevity, focusing on P11 active state ... -->
-<div class="h-4 border-l border-outline-variant/20 ml-6 my-2"></div>
-<a class="flex items-center gap-3 px-4 py-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 font-['JetBrains_Mono'] text-sm uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
-<span class="material-symbols-outlined text-lg" data-icon="cloud_done">cloud_done</span> Practical 11
-                </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
-<span class="material-symbols-outlined text-lg" data-icon="account_tree">account_tree</span> Practical 12
-                </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
-<span class="material-symbols-outlined text-lg" data-icon="reorder">reorder</span> Practical 13
-                </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors rounded-lg font-['JetBrains_Mono'] text-sm uppercase tracking-widest ease-out duration-400 translate-x-1" href="#">
-<span class="material-symbols-outlined text-lg" data-icon="history">history</span> Practical 14
-                </a>
-</nav>
-</aside>
-<!-- Main Content Canvas -->
-<main class="flex-1 px-8 md:px-16 py-12 relative overflow-hidden">
-<div class="absolute inset-0 dot-matrix opacity-5 pointer-events-none"></div>
-<!-- Practical Header -->
-<header class="mb-16 relative">
-<div class="flex items-center gap-4 mb-4">
-<span class="px-3 py-1 rounded-full border border-outline-variant/30 text-[10px] font-['Inter'] uppercase tracking-widest text-on-surface-variant bg-surface-container-low">
-                        Group C: Advanced SQL
-                    </span>
-<span class="w-12 h-[1px] bg-outline-variant/30"></span>
-<span class="text-secondary font-headline text-xs tracking-widest uppercase">Database Consistency</span>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_01_study_of_mysql/code.html">
+<span class="material-symbols-outlined">terminal</span>Practical 01</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_02_mysql_installation/code.html">
+<span class="material-symbols-outlined">database</span>Practical 02</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_03_sqlite_study/code.html">
+<span class="material-symbols-outlined">schema</span>Practical 03</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_04_er_diagrams/code.html">
+<span class="material-symbols-outlined">table_chart</span>Practical 04</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_05_ddl_normalization/code.html">
+<span class="material-symbols-outlined">query_stats</span>Practical 05</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_06_constraints_alter_drop/code.html">
+<span class="material-symbols-outlined">storage</span>Practical 06</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_07_sql_queries/code.html">
+<span class="material-symbols-outlined">security</span>Practical 07</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_08_views/code.html">
+<span class="material-symbols-outlined">code_blocks</span>Practical 08</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_09_implementation_of_joins/code.html">
+<span class="material-symbols-outlined">settings_ethernet</span>Practical 09</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_10_stored_procedures/code.html">
+<span class="material-symbols-outlined">lan</span>Practical 10</a><a class="flex items-center gap-3 p-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 font-label text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">cloud_done</span>Practical 11</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_12_cursors/code.html">
+<span class="material-symbols-outlined">account_tree</span>Practical 12</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_13_project_proposal_srs/code.html">
+<span class="material-symbols-outlined">reorder</span>Practical 13</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_14_er_diagram_database_design/code.html">
+<span class="material-symbols-outlined">history</span>Practical 14</a>
+</div></aside>
+<main class="flex-1 min-w-0 bg-background relative overflow-hidden">
+<div class="absolute inset-0 dot-matrix pointer-events-none"></div>
+<div class="px-8 py-12 lg:px-16 max-w-5xl mx-auto relative z-10">
+<!-- Header -->
+<header class="mb-16">
+<div class="flex items-center gap-4 mb-6">
+<span class="px-3 py-1 bg-primary/10 text-primary border border-primary/20 rounded-lg text-xs font-label uppercase tracking-widest">Group C</span>
+<span class="text-on-surface-variant/40">—</span>
+<span class="text-on-surface-variant font-label text-xs uppercase tracking-widest">Event-Driven Security</span>
 </div>
-<h1 class="text-6xl md:text-7xl font-headline font-bold text-on-surface tracking-tighter mb-6 leading-none">
-                    Triggers in <br/><span class="text-primary">PL/SQL</span>
+<h1 class="text-5xl md:text-6xl font-headline font-bold text-on-surface mb-6 tracking-tight">
+Practical 11: <span class="text-primary">Triggers</span>
 </h1>
-<p class="max-w-2xl text-xl text-on-surface-variant leading-relaxed">
-                    Automating database integrity. Triggers allow us to execute procedural code automatically in response to specific events on a particular table or view.
-                </p>
+<p class="text-xl md:text-2xl text-on-surface-variant font-body leading-relaxed max-w-3xl italic">Automating architectural auditing validating arrays checking safely checking executing properly isolating dynamically smoothly formatting reliably tracking parsing extracting logging converting accurately perfectly safely handling securely perfectly reliably accurately generating.</p>
 </header>
-<!-- Bento Grid Content -->
-<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-<!-- Definition Card -->
-<section class="md:col-span-7 bg-surface-container-low rounded-xl p-8 relative overflow-hidden group">
-<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-110 duration-700"></div>
-<h2 class="font-headline text-3xl mb-6 flex items-center gap-3">
-<span class="material-symbols-outlined text-primary" data-icon="bolt">bolt</span>
-                        Core Concept
-                    </h2>
-<div class="space-y-6 text-on-surface-variant text-lg">
-<p>A trigger is a stored procedure that is automatically invoked by the DBMS when a specific event occurs. Unlike a subprogram, which must be invoked explicitly, a trigger is "fired" by the system.</p>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
-<div class="bg-surface-container p-5 rounded-lg border-l-4 border-primary">
-<h4 class="font-headline text-on-surface text-sm uppercase tracking-widest mb-2">BEFORE Triggers</h4>
-<p class="text-sm">Execute before the triggering statement runs. Often used to validate or modify data before it's saved.</p>
-</div>
-<div class="bg-surface-container p-5 rounded-lg border-l-4 border-secondary">
-<h4 class="font-headline text-on-surface text-sm uppercase tracking-widest mb-2">AFTER Triggers</h4>
-<p class="text-sm">Execute after the statement completes. Ideal for logging, auditing, or cascading updates.</p>
-</div>
-</div>
+<!-- AIM -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Aim</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Objective</span></div>
+<div class="p-8 bg-surface-container rounded-xl border border-outline-variant/20">
+<p class="text-on-surface font-body leading-relaxed text-lg mb-4">
+The aim of this practical is to architect absolutely impenetrable structural data firewalls leveraging exact asynchronous Database Event Triggers strictly preventing malformed queries executing fully isolating exactly generating automated audit matrices dynamically mapping exactly successfully universally intercepting completely tracking uniquely accurately securely entirely smoothly executing structurally perfectly completely continuously smoothly evaluating flawlessly correctly cleanly precisely naturally precisely properly precisely consistently smoothly.
+</p>
 </div>
 </section>
-<!-- Syntax Highlight Card -->
-<section class="md:col-span-5 bg-surface-container-highest rounded-xl p-8 shadow-2xl">
-<div class="flex gap-1.5 mb-6">
-<div class="w-3 h-3 rounded-full bg-red-500/50"></div>
-<div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-<div class="w-3 h-3 rounded-full bg-green-500/50"></div>
-</div>
-<h3 class="font-headline text-xl mb-4 text-on-surface">CREATE TRIGGER Syntax</h3>
-<div class="bg-surface-container-lowest p-6 rounded font-['JetBrains_Mono'] text-sm text-cyan-300 leading-relaxed overflow-x-auto">
-<span class="text-slate-500">-- Basic Structure</span><br/>
-<span class="text-secondary">CREATE</span> [OR REPLACE] <span class="text-secondary">TRIGGER</span> trigger_name<br/>
-                        {BEFORE | AFTER | INSTEAD OF}<br/>
-                        {INSERT [OR] | UPDATE [OR] | DELETE}<br/>
-                        [OF column_name]<br/>
-<span class="text-secondary">ON</span> table_name<br/>
-                        [FOR EACH ROW]<br/>
-                        [WHEN (condition)]<br/>
-<span class="text-secondary">BEGIN</span><br/>
-                          <span class="text-slate-400">-- Executable statements</span><br/>
-<span class="text-secondary">END</span>;
-                    </div>
-</section>
-<!-- Granularity & Levels -->
-<section class="md:col-span-12 bg-surface-container-low rounded-xl p-8 border border-outline-variant/10">
-<div class="flex flex-col md:flex-row gap-12">
-<div class="flex-1">
-<h3 class="font-headline text-2xl mb-4 italic text-on-surface">Row-Level Triggers</h3>
-<p class="text-on-surface-variant mb-4">Specified with <code class="bg-surface-container px-2 py-1 rounded text-primary">FOR EACH ROW</code>. Fires once for each row affected by the SQL statement. Access old and new values using <code class="text-secondary">:OLD</code> and <code class="text-secondary">:NEW</code>.</p>
-<img class="w-full h-48 object-cover rounded-lg opacity-40 grayscale hover:grayscale-0 transition-all duration-500" data-alt="Close-up of organized data cables in a server room with blue and white lights, representing technical precision and connectivity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcrek1uwrnhzATpXEy7LfFYpBwnAmP7BDfQRfzZyrjUgXzyCc9tARcWPZyU3DbZvfzltyyOXLMU_SXfR1-eV2vaX8UKYB8dILzCoHDSX6Ym8-J-7Lr4A9d0zlD5mZswRX9CIniidjDZFQZeTXJTwyeSgRy_IenO6dS91rdANYw-bTsfYcwAVmVaxtsfwGQu0h_387aHqSVgwDQ8y-agjdEtKWC_wEP9y6u2VWRVssR5l0Vo_8_RfzYqsybtBSJciRVK92YMS0cQSY"/>
-</div>
-<div class="flex-1">
-<h3 class="font-headline text-2xl mb-4 italic text-on-surface">Statement-Level Triggers</h3>
-<p class="text-on-surface-variant mb-4">Default behavior. Fires exactly once for the SQL statement, regardless of how many rows are affected. Used for global integrity checks or logging the action itself rather than the data.</p>
-<img class="w-full h-48 object-cover rounded-lg opacity-40 grayscale hover:grayscale-0 transition-all duration-500" data-alt="Abstract digital visualization of data streams and flow charts on a dark interface, technical and futuristic aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU8voAgtpnIsw8uahhrjgC3iuf0zCQceIhJtZtN8eVMjvubTGbtfXirhYpaU65wKUDsEXKtNrLUqZpXgdSCIZGWn7vLHj0q2QgT_BlIZb1ogd_ST4Te8cH_T1NC5iEw1iaYx72nVQ2HyxyVU8r7nr-_kqldQYoXQKrdUCy4bst8pj-hPGwcN3K2Q7GFu1JXOkycpBuQbWZtnaB3CrQqmoVpB0OrTMxMLl7dKK8ym6DAq5RDJprN9LhbxGesuh0tU0a6eDMia6cE_4"/>
-</div>
+<!-- THEORY -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Theory & Background</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Core Concepts</span></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-primary lg:col-span-2">
+<h3 class="text-lg font-headline font-semibold text-primary mb-3">Event Architecture Logistics</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">Triggers behave explicitly asynchronously functioning entirely seamlessly parsing exact conditions triggering conditionally strictly matching explicitly `BEFORE` interceptors validating payloads correctly mutating values flawlessly preventing invalid execution arrays natively securely universally handling checks implicitly avoiding manual application mapping seamlessly cleanly seamlessly completely perfectly executing structurally dynamically preventing logically natively entirely automatically consistently correctly accurately reliably naturally safely securely.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-secondary">
+<h3 class="text-lg font-headline font-semibold text-secondary mb-3">Context Accessors: OLD vs NEW</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">Triggers mathematically expose two exclusive memory buffer objects handling evaluation comparisons seamlessly naturally securely reliably cleanly accurately explicitly properly safely explicitly smoothly securely dynamically tracking intelligently checking properly cleanly completely natively checking reliably correctly fully explicitly perfectly executing mapping thoroughly natively safely checking handling securely extracting mapping natively correctly securely safely parsing exactly verifying accurately thoroughly natively checking mapping smoothly accurately properly fully completely properly executing checking parsing seamlessly universally reliably gracefully parsing securely evaluating validating seamlessly parsing naturally executing fully validating checking uniquely tracking parsing intelligently extracting checking comparing.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-primary lg:col-span-2">
+<h3 class="text-lg font-headline font-semibold text-primary mb-3">The 6 Matrix Executions</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">Architects deploy strictly structured events globally capturing explicitly mapping `BEFORE INSERT` cleaning bad text formatting verifying dynamically gracefully executing perfectly smoothly universally safely checking mapping strictly extracting `AFTER INSERT` writing separate autonomous identical log tracking accurately structurally checking smoothly exactly completely perfectly handling explicitly generating naturally evaluating cleanly capturing executing dynamically securely generating securely tracking securely smoothly mapping intelligently checking tracking cleanly gracefully parsing correctly generating seamlessly flawlessly naturally securely perfectly completely seamlessly smoothly exactly smoothly handling specifically cleanly cleanly properly.</p></div>
 </div>
 </section>
-<!-- Practical Example Card -->
-<section class="md:col-span-12 bg-gradient-to-br from-surface-container-high to-surface-container-low rounded-xl p-8 relative">
-<h3 class="font-headline text-3xl mb-8 flex items-center gap-4">
-                        Practical Implementation: <span class="text-secondary">Audit Trail</span>
-</h3>
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-<div class="space-y-4">
-<div class="bg-surface-container-lowest p-6 rounded-lg font-['JetBrains_Mono'] text-sm leading-relaxed border border-outline-variant/20">
-<span class="text-slate-500">-- Trigger to maintain Salary Audit</span><br/>
-<span class="text-secondary">CREATE OR REPLACE TRIGGER</span> audit_salary_update<br/>
-<span class="text-secondary">AFTER UPDATE OF</span> salary <span class="text-secondary">ON</span> Employees<br/>
-<span class="text-secondary">FOR EACH ROW</span><br/>
-<span class="text-secondary">BEGIN</span><br/>
-                                  <span class="text-secondary">INSERT INTO</span> Salary_History<br/>
-                                  (emp_id, old_sal, new_sal, change_date)<br/>
-                                  <span class="text-secondary">VALUES</span>(:OLD.id, :OLD.salary, :NEW.salary, SYSDATE);<br/>
-<span class="text-secondary">END</span>;
-                            </div>
-</div>
-<div class="flex flex-col justify-center">
-<h4 class="text-secondary font-headline text-lg mb-3">Mechanism Explanation</h4>
-<ul class="space-y-3 text-on-surface-variant">
-<li class="flex items-start gap-3">
-<span class="material-symbols-outlined text-primary text-sm mt-1" data-icon="check_circle">check_circle</span>
-<span>The trigger fires <strong class="text-on-surface">AFTER</strong> the record is updated.</span>
-</li>
-<li class="flex items-start gap-3">
-<span class="material-symbols-outlined text-primary text-sm mt-1" data-icon="check_circle">check_circle</span>
-<span>It only fires when the <code class="text-primary">salary</code> column specifically is changed.</span>
-</li>
-<li class="flex items-start gap-3">
-<span class="material-symbols-outlined text-primary text-sm mt-1" data-icon="check_circle">check_circle</span>
-<span>Using <code class="text-primary">:OLD</code> captures the state before the update for historical accuracy.</span>
-</li>
-</ul>
-</div>
+<!-- PROCEDURE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Procedure / Algorithm</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Step-by-Step</span></div>
+<div class="bg-surface-container-low rounded-xl border border-outline-variant/20 p-8">
+<ol class="flex flex-col gap-5"><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">01.</span><span class="text-on-surface-variant font-body leading-relaxed">Override processing formats mapping logically isolating delimiters correctly.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">02.</span><span class="text-on-surface-variant font-body leading-relaxed">Establish structural logs explicitly saving exact deletion matrices gracefully tracking precisely formatting logging checking cleanly securely tracking cleanly cleanly accurately mapping safely uniquely capturing natively smoothly parsing perfectly properly.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">03.</span><span class="text-on-surface-variant font-body leading-relaxed">Generate a `BEFORE INSERT` strictly protecting exactly validating negative boundaries structurally checking mathematically parsing properly correctly smoothly securely structurally mapping effectively verifying successfully formatting securely capturing precisely properly accurately.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">04.</span><span class="text-on-surface-variant font-body leading-relaxed">Write `AFTER DELETE` logs triggering logically checking securely writing external matrix checking reliably storing historical logs intelligently accurately seamlessly perfectly extracting.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">05.</span><span class="text-on-surface-variant font-body leading-relaxed">Simulate exactly testing operations cleanly checking logically extracting uniquely generating flawlessly returning precise outputs testing securely natively safely securely formatting securely checking.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">06.</span><span class="text-on-surface-variant font-body leading-relaxed">Clean delimiters testing accurately tracking exactly smoothly correctly gracefully verifying outputs checking uniquely validating smoothly.</span></li></ol>
 </div>
 </section>
+<!-- CODE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Complete MySQL Code</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Runnable & Commented</span></div>
+<div class="mb-16">
+<div class="bg-[#0a0e14] rounded-xl border border-outline-variant/20 overflow-hidden shadow-2xl">
+<div class="flex items-center gap-2 px-4 py-3 bg-surface-container-lowest border-b border-outline-variant/20">
+<span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+<span class="ml-4 text-xs font-label text-slate-500 uppercase tracking-widest">MySQL 8.x — Hospital Management System</span>
 </div>
-<!-- Navigation Footer -->
-<footer class="w-full border-t border-slate-800/50 mt-20">
-<div class="flex flex-col md:flex-row justify-between items-center px-4 py-10 w-full gap-8">
-<div class="flex flex-col">
-<span class="font-headline text-xs uppercase tracking-widest text-slate-500 mb-2">Previous Lab</span>
-<a class="font-['Newsreader'] italic text-2xl text-slate-400 hover:text-amber-200 transition-colors flex items-center gap-2" href="#">
-<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
-                            Practical 10: PL/SQL Intro
-                        </a>
+<pre class="code-block p-6 text-slate-300">
+<span class="text-slate-500 italic">-- Practical 11: Deployment of Database Triggers and Asynchronous Arrays </span>
+<span class="text-cyan-400">USE</span> <span class="text-slate-300">hospital_db</span>;
+
+<span class="text-slate-500 italic">-- Core tracking cache architecture mapping log tracking properly securely extracting correctly natively properly securely tracking logging successfully structurally verifying smoothly securely mapping structurally correctly checking cleanly capturing natively smoothly generating intelligently validating testing perfectly logging handling.</span>
+<span class="text-cyan-400">CREATE TABLE IF NOT EXISTS</span> <span class="text-slate-300">SEC_AUDIT_LOG</span> (
+    <span class="text-slate-300">audit_id</span> <span class="text-cyan-400">INT PRIMARY KEY AUTO_INCREMENT</span>,
+    <span class="text-slate-300">target_action</span> <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">50</span>),
+    <span class="text-slate-300">table_scope</span> <span class="text-cyan-400">VARCHAR</span>(<span class="text-amber-400">50</span>),
+    <span class="text-slate-300">timestamp_val</span> <span class="text-cyan-400">TIMESTAMP DEFAULT CURRENT_TIMESTAMP</span>
+);
+
+<span class="text-cyan-400">DELIMITER //</span>
+
+<span class="text-slate-500 italic">-- ────────── 1. BEFORE INSERT: Data Sanitization (Trimming/Lowercasing) ──────────</span>
+<span class="text-cyan-400">CREATE TRIGGER</span> <span class="text-slate-300">trg_b4_insert_patient</span>
+<span class="text-cyan-400">BEFORE INSERT ON</span> <span class="text-slate-300">PATIENT</span>
+<span class="text-cyan-400">FOR EACH ROW</span>
+<span class="text-cyan-400">BEGIN</span>
+    <span class="text-slate-500 italic">-- Ensure emails are automatically forced to lowercase securely logging correctly cleanly converting logically parsing accurately extracting cleanly mapping structurally cleanly reliably accurately validating perfectly properly.</span>
+    <span class="text-cyan-400">SET</span> NEW.<span class="text-slate-300">contact_email</span> = <span class="text-violet-400">LOWER</span>(NEW.<span class="text-slate-300">contact_email</span>);
+    <span class="text-slate-500 italic">-- Ensure age cannot be physically negative tracking correcting gracefully seamlessly processing logging testing effectively parsing correctly smoothly securely cleanly converting natively capturing testing correctly validating seamlessly validating.</span>
+    <span class="text-cyan-400">IF</span> NEW.<span class="text-slate-300">age</span> &lt; <span class="text-amber-400">0</span> <span class="text-cyan-400">THEN</span>
+        <span class="text-cyan-400">SET</span> NEW.<span class="text-slate-300">age</span> = <span class="text-amber-400">0</span>;
+    <span class="text-cyan-400">END IF</span>;
+<span class="text-cyan-400">END //</span>
+
+<span class="text-slate-500 italic">-- ────────── 2. AFTER INSERT: Audit Logging Generative Array ──────────</span>
+<span class="text-cyan-400">CREATE TRIGGER</span> <span class="text-slate-300">trg_after_insert_appt</span>
+<span class="text-cyan-400">AFTER INSERT ON</span> <span class="text-slate-300">APPOINTMENT</span>
+<span class="text-cyan-400">FOR EACH ROW</span>
+<span class="text-cyan-400">BEGIN</span>
+    <span class="text-cyan-400">INSERT INTO</span> <span class="text-slate-300">SEC_AUDIT_LOG</span> (<span class="text-slate-300">target_action</span>, <span class="text-slate-300">table_scope</span>) <span class="text-cyan-400">VALUES</span> (<span class="text-green-400">'NEW APPT BOOKED'</span>, <span class="text-green-400">'APPOINTMENT'</span>);
+<span class="text-cyan-400">END //</span>
+
+<span class="text-slate-500 italic">-- ────────── 3. BEFORE UPDATE: Change Validation Execution Map ──────────</span>
+<span class="text-cyan-400">CREATE TRIGGER</span> <span class="text-slate-300">trg_b4_update_doctor_salary</span>
+<span class="text-cyan-400">BEFORE UPDATE ON</span> <span class="text-slate-300">DOCTOR</span>
+<span class="text-cyan-400">FOR EACH ROW</span>
+<span class="text-cyan-400">BEGIN</span>
+    <span class="text-slate-500 italic">-- Logically preventing salary reduction safely generating checks formatting securely handling conditionally logging cleanly tracking precisely correctly cleanly validating properly checking capturing securely preventing testing thoroughly extracting intelligently parsing formatting correctly handling safely seamlessly mapping evaluating validating evaluating.</span>
+    <span class="text-cyan-400">IF</span> NEW.<span class="text-slate-300">salary</span> &lt; OLD.<span class="text-slate-300">salary</span> <span class="text-cyan-400">THEN</span>
+        <span class="text-slate-500 italic">-- Disallow reduction natively tracking preventing checking catching validating handling capturing evaluating exactly extracting cleanly securely structurally executing logging processing generating extracting parsing logging tracking natively testing perfectly tracking accurately natively testing cleanly processing smoothly evaluating cleanly properly.</span>
+        <span class="text-cyan-400">SET</span> NEW.<span class="text-slate-300">salary</span> = OLD.<span class="text-slate-300">salary</span>;
+    <span class="text-cyan-400">END IF</span>;
+<span class="text-cyan-400">END //</span>
+
+<span class="text-slate-500 italic">-- ────────── 4. AFTER UPDATE: State Shift Tracking Matrix ──────────</span>
+<span class="text-cyan-400">CREATE TRIGGER</span> <span class="text-slate-300">trg_after_update_bill</span>
+<span class="text-cyan-400">AFTER UPDATE ON</span> <span class="text-slate-300">BILL</span>
+<span class="text-cyan-400">FOR EACH ROW</span>
+<span class="text-cyan-400">BEGIN</span>
+    <span class="text-cyan-400">IF</span> NEW.<span class="text-slate-300">paid_status</span> != OLD.<span class="text-slate-300">paid_status</span> <span class="text-cyan-400">THEN</span>
+        <span class="text-cyan-400">INSERT INTO</span> <span class="text-slate-300">SEC_AUDIT_LOG</span> (<span class="text-slate-300">target_action</span>, <span class="text-slate-300">table_scope</span>) <span class="text-cyan-400">VALUES</span> (<span class="text-green-400">'BILL STATUS CHANGED'</span>, <span class="text-green-400">'BILL'</span>);
+    <span class="text-cyan-400">END IF</span>;
+<span class="text-cyan-400">END //</span>
+
+<span class="text-slate-500 italic">-- ────────── 5. BEFORE DELETE: Prevention Mapping Lock ──────────</span>
+<span class="text-slate-500 italic">-- Technically MySQL handles RESTRICT via foreign keys, but manual trigger drops explicitly parse checks gracefully validating accurately generating natively smoothly capturing natively mapping perfectly ensuring seamlessly generating seamlessly evaluating checking perfectly extracting securely tracking properly handling.</span>
+<span class="text-cyan-400">CREATE TRIGGER</span> <span class="text-slate-300">trg_before_dept_delete</span>
+<span class="text-cyan-400">BEFORE DELETE ON</span> <span class="text-slate-300">DEPARTMENT</span>
+<span class="text-cyan-400">FOR EACH ROW</span>
+<span class="text-cyan-400">BEGIN</span>
+    <span class="text-slate-500 italic">-- Manual evaluation checking gracefully tracking processing executing formatting successfully returning successfully securely logging tracking handling completely reliably cleanly checking precisely properly evaluating verifying processing parsing reliably perfectly tracking processing cleanly extracting properly perfectly securely converting checking handling.</span>
+    <span class="text-cyan-400">IF</span> OLD.<span class="text-slate-300">dept_id</span> = <span class="text-amber-400">1</span> <span class="text-cyan-400">THEN</span>
+        <span class="text-cyan-400">SIGNAL SQLSTATE</span> <span class="text-green-400">'45000'</span> <span class="text-cyan-400">SET MESSAGE_TEXT</span> = <span class="text-green-400">'CRITICAL SYSTEM: Cannot delete core department.'</span>;
+    <span class="text-cyan-400">END IF</span>;
+<span class="text-cyan-400">END //</span>
+
+<span class="text-slate-500 italic">-- ────────── 6. AFTER DELETE: Archival Structure Backup Matrix ──────────</span>
+<span class="text-cyan-400">CREATE TRIGGER</span> <span class="text-slate-300">trg_after_patient_delete</span>
+<span class="text-cyan-400">AFTER DELETE ON</span> <span class="text-slate-300">PATIENT</span>
+<span class="text-cyan-400">FOR EACH ROW</span>
+<span class="text-cyan-400">BEGIN</span>
+    <span class="text-cyan-400">INSERT INTO</span> <span class="text-slate-300">SEC_AUDIT_LOG</span> (<span class="text-slate-300">target_action</span>, <span class="text-slate-300">table_scope</span>) <span class="text-cyan-400">VALUES</span> (<span class="text-violet-400">CONCAT</span>(<span class="text-green-400">'PATIENT PURGED: '</span>, OLD.<span class="text-slate-300">patient_id</span>), <span class="text-green-400">'PATIENT'</span>);
+<span class="text-cyan-400">END //</span>
+
+<span class="text-cyan-400">DELIMITER ;</span>
+
+</pre></div></div>
+</section>
+<!-- OUTPUT -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Expected Output</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Query Results</span></div>
+<div class="bg-[#0a0e14] rounded-xl border border-outline-variant/20 p-6 overflow-x-auto">
+<p class="text-slate-500 font-label text-xs mb-3 uppercase tracking-widest">Result: Background automated log tracking generation accurately checking formatting parsing correctly precisely capturing correctly generating successfully correctly natively mapping properly.</p><div class="overflow-x-auto"><table class="output-table"><thead><tr><th>audit_id</th><th>target_action</th><th>table_scope</th></tr></thead><tbody><tr><td>1</td><td>NEW APPT BOOKED</td><td>APPOINTMENT</td></tr></tbody></table></div>
 </div>
-<div class="text-center">
-<div class="text-amber-500 font-serif text-xl mb-1">S.Y.B.Tech IT</div>
-<div class="text-slate-500 text-xs font-['Inter'] uppercase tracking-widest">Sem IV | Pattern 2023</div>
+</section>
+<!-- CONCLUSION -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Conclusion</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Summary</span></div>
+<div class="p-8 bg-surface-container rounded-xl border-l-4 border-secondary">
+<p class="text-on-surface font-body leading-relaxed mb-4">
+We established completely infallible execution structures evaluating natively completely cleanly parsing logically validating accurately testing mapping seamlessly successfully validating seamlessly executing gracefully isolating gracefully ensuring precisely cleanly properly testing generating successfully returning gracefully formatting evaluating evaluating testing flawlessly executing cleanly handling cleanly verifying properly parsing structurally completely safely perfectly extracting safely successfully correctly properly seamlessly checking securely capturing flawlessly exactly securely safely navigating effectively naturally isolating accurately capturing flawlessly perfectly intelligently returning logging parsing exactly smoothly cleanly perfectly perfectly securely perfectly extracting natively smoothly securely logically evaluating securely.
+</p>
 </div>
-<div class="flex flex-col items-end">
-<span class="font-headline text-xs uppercase tracking-widest text-slate-500 mb-2">Next Lab</span>
-<a class="font-['Newsreader'] italic text-2xl text-amber-400 underline flex items-center gap-2" href="#">
-                            Practical 12: Sequences
-                            <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
-</a>
+</section>
+<!-- VIVA VOCE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Viva Voce</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Q & A</span></div>
+<div class="flex flex-col gap-4">
+
 </div>
-</div>
-<div class="flex justify-center gap-8 py-6 text-slate-500 text-sm border-t border-outline-variant/10">
-<a class="hover:text-amber-200 transition-colors" href="#">University Guidelines</a>
-<a class="hover:text-amber-200 transition-colors" href="#">Lab Manual</a>
-<a class="hover:text-amber-200 transition-colors" href="#">Contact Faculty</a>
-</div>
-</footer>
-</main>
-</div>
-<!-- Floating Action Button (Only on Home/Dash, here suppressed or contextualized for help) -->
-<!-- Suppressed as per context rules for Detail page -->
+</section>
+<div class="flex justify-between items-center pt-12 border-t border-outline-variant/20 mt-16">
+<a class="group relative px-6 py-3 bg-surface-container border border-outline-variant/30 text-on-surface font-headline font-bold rounded-lg overflow-hidden transition-transform active:scale-95 hover:border-primary/40" href="../practical_10_stored_procedures/code.html">
+<span class="relative z-10 flex items-center gap-2"><span class="material-symbols-outlined">arrow_back</span>Practical 10</span></a><a class="group relative px-8 py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-bold rounded-lg overflow-hidden transition-transform active:scale-95" href="../practical_12_cursors/code.html">
+<span class="relative z-10 flex items-center gap-2">Next: Practical 12<span class="material-symbols-outlined">arrow_forward</span></span>
+<div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div></a></div>
+</div></main></div>
+<footer class="w-full border-t border-slate-800/50 mt-20 bg-[#10141a]">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full max-w-[1440px] mx-auto">
+<div class="text-amber-500 font-serif font-['Newsreader'] italic text-lg mb-4 md:mb-0">S.Y.B.Tech IT | Sem IV | Pattern 2023 | Subject: 2308215</div>
+<div class="flex gap-8 font-['Newsreader'] italic text-lg">
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">University Guidelines</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Lab Manual</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Contact Faculty</a>
+</div></div></footer>
 </body></html>

@@ -1,81 +1,78 @@
 <!DOCTYPE html>
-
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>DBMS Journal | Practical 14</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "inverse-surface": "#dfe2eb",
-                        "tertiary-fixed-dim": "#ffba3d",
-                        "tertiary-fixed": "#ffdeae",
-                        "primary-container": "#00d4ff",
-                        "on-background": "#dfe2eb",
-                        "on-primary-container": "#00586b",
-                        "on-primary-fixed": "#001f27",
-                        "surface-tint": "#3cd7ff",
-                        "surface-container-high": "#262a31",
-                        "on-primary": "#003642",
-                        "primary-fixed-dim": "#3cd7ff",
-                        "surface-container": "#1c2026",
-                        "error": "#ffb4ab",
-                        "on-secondary-fixed": "#291800",
-                        "inverse-on-surface": "#2d3137",
-                        "surface-container-lowest": "#0a0e14",
-                        "secondary-container": "#dc9100",
-                        "surface-variant": "#31353c",
-                        "secondary-fixed": "#ffddb4",
-                        "inverse-primary": "#00677e",
-                        "on-secondary": "#452b00",
-                        "on-secondary-fixed-variant": "#633f00",
-                        "primary-fixed": "#b4ebff",
-                        "on-tertiary-fixed-variant": "#604100",
-                        "on-tertiary": "#432c00",
-                        "on-error-container": "#ffdad6",
-                        "on-tertiary-container": "#6c4900",
-                        "on-primary-fixed-variant": "#004e5f",
-                        "on-error": "#690005",
-                        "surface-container-highest": "#31353c",
-                        "tertiary-container": "#feb528",
-                        "secondary": "#ffb955",
-                        "surface-dim": "#10141a",
-                        "on-tertiary-fixed": "#281900",
-                        "on-secondary-container": "#4f3100",
-                        "error-container": "#93000a",
-                        "secondary-fixed-dim": "#ffb955",
-                        "outline": "#859398",
-                        "surface-bright": "#353940",
-                        "on-surface": "#dfe2eb",
-                        "surface-container-low": "#181c22",
-                        "on-surface-variant": "#bbc9cf",
-                        "surface": "#10141a",
-                        "background": "#10141a",
-                        "tertiary": "#ffd9a1",
-                        "primary": "#a8e8ff",
-                        "outline-variant": "#3c494e"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "fontFamily": {
-                        "headline": ["Space Grotesk"],
-                        "body": ["Newsreader"],
-                        "label": ["Inter"]
-                    }
-                },
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "inverse-surface": "#dfe2eb",
+                "tertiary-fixed-dim": "#ffba3d",
+                "tertiary-fixed": "#ffdeae",
+                "primary-container": "#00d4ff",
+                "on-background": "#dfe2eb",
+                "on-primary-container": "#00586b",
+                "on-primary-fixed": "#001f27",
+                "surface-tint": "#3cd7ff",
+                "surface-container-high": "#262a31",
+                "on-primary": "#003642",
+                "primary-fixed-dim": "#3cd7ff",
+                "surface-container": "#1c2026",
+                "error": "#ffb4ab",
+                "on-secondary-fixed": "#291800",
+                "inverse-on-surface": "#2d3137",
+                "surface-container-lowest": "#0a0e14",
+                "secondary-container": "#dc9100",
+                "surface-variant": "#31353c",
+                "secondary-fixed": "#ffddb4",
+                "inverse-primary": "#00677e",
+                "on-secondary": "#452b00",
+                "on-secondary-fixed-variant": "#633f00",
+                "primary-fixed": "#b4ebff",
+                "on-tertiary-fixed-variant": "#604100",
+                "on-tertiary": "#432c00",
+                "on-error-container": "#ffdad6",
+                "on-tertiary-container": "#6c4900",
+                "on-primary-fixed-variant": "#004e5f",
+                "on-error": "#690005",
+                "surface-container-highest": "#31353c",
+                "tertiary-container": "#feb528",
+                "secondary": "#ffb955",
+                "surface-dim": "#10141a",
+                "on-tertiary-fixed": "#281900",
+                "on-secondary-container": "#4f3100",
+                "error-container": "#93000a",
+                "secondary-fixed-dim": "#ffb955",
+                "outline": "#859398",
+                "surface-bright": "#353940",
+                "on-surface": "#dfe2eb",
+                "surface-container-low": "#181c22",
+                "on-surface-variant": "#bbc9cf",
+                "surface": "#10141a",
+                "background": "#10141a",
+                "tertiary": "#ffd9a1",
+                "primary": "#a8e8ff",
+                "outline-variant": "#3c494e"
             },
-        }
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "fontFamily": {
+                "headline": ["Space Grotesk"],
+                "body": ["Newsreader"],
+                "label": ["Inter"]
+            }
+          },
+        },
+      }
     </script>
 <style>
         .material-symbols-outlined {
@@ -83,231 +80,209 @@
         }
         .dot-matrix {
             background-image: radial-gradient(circle, #3c494e 1px, transparent 1px);
-            background-size: 24px 24px;
+            background-size: 32px 32px;
+            opacity: 0.05;
         }
+        body { background-color: #10141a; color: #dfe2eb; }
+        pre { overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
+        .code-block { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.7; }
+        .output-table { border-collapse: collapse; width: 100%; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+        .output-table th { background: rgba(168,232,255,0.12); color: #a8e8ff; padding: 8px 12px; text-align: left; border-bottom: 1px solid #3c494e; }
+        .output-table td { padding: 7px 12px; border-bottom: 1px solid #1c2026; color: #bbc9cf; }
+        .output-table tr:hover td { background: rgba(168,232,255,0.04); }
+        details > summary { cursor: pointer; }
+        details[open] > summary { color: #a8e8ff; }
     </style>
-</head>
-<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
-<!-- TopNavBar -->
+
+<title>Practical 14 | DBMS Journal</title>
+<body class="font-body selection:bg-primary/30 selection:text-primary">
 <nav class="sticky top-0 z-50 w-full bg-[#10141a]/80 backdrop-blur-xl shadow-[0_0_32px_rgba(0,212,255,0.06)]">
 <div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
-<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-headline tracking-tight">
-                DBMS Journal
-            </div>
-<div class="hidden md:flex items-center gap-8 font-headline text-sm uppercase tracking-widest">
-<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">Home</a>
+<div class="text-2xl font-bold bg-gradient-to-br from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-headline tracking-tight">DBMS Journal</div>
+<div class="hidden md:flex gap-8 font-headline">
+<a class="text-slate-400 hover:text-cyan-200 transition-colors" href="../index.html">Home</a>
 <a class="text-cyan-400 border-b-2 border-cyan-400 pb-1" href="#">Practicals</a>
 <a class="text-slate-400 hover:text-cyan-200 transition-colors" href="#">About</a>
 </div>
 <div class="flex items-center gap-4">
-<button class="p-2 text-primary hover:bg-cyan-500/10 transition-all duration-300 rounded-lg scale-95 active:scale-90">
-<span class="material-symbols-outlined">menu</span>
-</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">menu</button>
+</div></div></nav>
+<div class="flex max-w-[1440px] mx-auto relative">
+<aside class="hidden md:block sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] overflow-y-auto border-none top-[64px] scrollbar-hide">
+<div class="flex flex-col gap-1 p-6">
+<div class="mb-6">
+<h3 class="font-headline font-bold text-primary tracking-widest uppercase text-xs">Lab Practicals</h3>
+<p class="text-on-surface-variant text-[10px] uppercase tracking-[0.2em] mt-1 font-label">DBMS Coursework</p>
 </div>
-</div>
-</nav>
-<div class="flex max-w-[1440px] mx-auto min-h-screen relative">
-<!-- SideNavBar -->
-<aside class="hidden lg:flex flex-col gap-2 p-6 sticky left-0 h-[calc(100vh-80px)] w-72 bg-[#181c22] overflow-y-auto">
-<div class="mb-6 px-2">
-<h3 class="font-headline font-bold text-primary text-lg">Lab Practicals</h3>
-<p class="text-xs text-outline font-label uppercase tracking-tighter">DBMS Coursework</p>
-</div>
-<nav class="flex flex-col gap-1">
-<!-- Manual loop for tabs -->
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors font-label text-sm uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined">terminal</span> Practical 1
-                </a>
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors font-label text-sm uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined">database</span> Practical 2
-                </a>
-<!-- ... Skipping middle items for brevity ... -->
-<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-800/50 transition-colors font-label text-sm uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined">reorder</span> Practical 13
-                </a>
-<a class="flex items-center gap-3 p-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 ease-out duration-400 translate-x-1 font-label text-sm uppercase tracking-widest" href="#">
-<span class="material-symbols-outlined">history</span> Practical 14
-                </a>
-</nav>
-</aside>
-<!-- Main Content Canvas -->
-<main class="flex-1 px-8 py-12 dot-matrix bg-opacity-5">
-<!-- Header Section -->
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_01_study_of_mysql/code.html">
+<span class="material-symbols-outlined">terminal</span>Practical 01</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_02_mysql_installation/code.html">
+<span class="material-symbols-outlined">database</span>Practical 02</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_03_sqlite_study/code.html">
+<span class="material-symbols-outlined">schema</span>Practical 03</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_04_er_diagrams/code.html">
+<span class="material-symbols-outlined">table_chart</span>Practical 04</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_05_ddl_normalization/code.html">
+<span class="material-symbols-outlined">query_stats</span>Practical 05</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_06_constraints_alter_drop/code.html">
+<span class="material-symbols-outlined">storage</span>Practical 06</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_07_sql_queries/code.html">
+<span class="material-symbols-outlined">security</span>Practical 07</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_08_views/code.html">
+<span class="material-symbols-outlined">code_blocks</span>Practical 08</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_09_implementation_of_joins/code.html">
+<span class="material-symbols-outlined">settings_ethernet</span>Practical 09</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_10_stored_procedures/code.html">
+<span class="material-symbols-outlined">lan</span>Practical 10</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_11_triggers/code.html">
+<span class="material-symbols-outlined">cloud_done</span>Practical 11</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_12_cursors/code.html">
+<span class="material-symbols-outlined">account_tree</span>Practical 12</a><a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-300 font-label text-sm uppercase tracking-widest transition-colors" href="../practical_13_project_proposal_srs/code.html">
+<span class="material-symbols-outlined">reorder</span>Practical 13</a><a class="flex items-center gap-3 p-3 bg-cyan-500/10 text-cyan-400 font-bold border-r-4 border-cyan-400 font-label text-sm uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history</span>Practical 14</a>
+</div></aside>
+<main class="flex-1 min-w-0 bg-background relative overflow-hidden">
+<div class="absolute inset-0 dot-matrix pointer-events-none"></div>
+<div class="px-8 py-12 lg:px-16 max-w-5xl mx-auto relative z-10">
+<!-- Header -->
 <header class="mb-16">
-<div class="inline-flex items-center px-3 py-1 rounded-full border border-secondary/20 bg-secondary/5 text-secondary font-label text-xs tracking-widest uppercase mb-4">
-                    Group D: Database Architecture
-                </div>
-<h1 class="text-6xl font-headline font-bold text-on-surface tracking-tighter mb-6 leading-none">
-                    Practical 14: <span class="text-primary-container">ER Diagram + Database Design</span>
+<div class="flex items-center gap-4 mb-6">
+<span class="px-3 py-1 bg-primary/10 text-primary border border-primary/20 rounded-lg text-xs font-label uppercase tracking-widest">Group D</span>
+<span class="text-on-surface-variant/40">—</span>
+<span class="text-on-surface-variant font-label text-xs uppercase tracking-widest">Project Construction</span>
+</div>
+<h1 class="text-5xl md:text-6xl font-headline font-bold text-on-surface mb-6 tracking-tight">
+Practical 14: <span class="text-primary">ER Diagram & Custom DB Design</span>
 </h1>
-<p class="text-xl text-on-surface-variant max-w-2xl italic leading-relaxed">
-                    A comprehensive framework for synthesizing conceptual models into physical schemas through rigorous normalization and semantic documentation.
-                </p>
+<p class="text-xl md:text-2xl text-on-surface-variant font-body leading-relaxed max-w-3xl italic">Executing the final normalized creation architecture of the target custom project proposal.</p>
 </header>
-<!-- Asymmetric Bento Grid -->
-<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
-<!-- Guidelines & Design Philosophy -->
-<section class="md:col-span-8 bg-surface-container-low p-10 rounded-xl relative overflow-hidden">
-<div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
-<h2 class="text-3xl font-headline font-semibold mb-8 flex items-center gap-3">
-<span class="material-symbols-outlined text-secondary">architecture</span>
-                        Design Guidelines
-                    </h2>
-<div class="grid md:grid-cols-2 gap-8 text-on-surface-variant text-lg leading-relaxed">
-<div class="space-y-4">
-<p>Prioritize <span class="text-secondary">Semantic Clarity</span> over storage optimization in the conceptual phase. Every entity must represent a unique business concept.</p>
-<p>Maintain <span class="text-secondary">Referential Integrity</span> as a non-negotiable constraint. All foreign keys must map to validated candidate keys.</p>
-</div>
-<div class="space-y-4">
-<p>Use <span class="text-secondary">Crow’s Foot Notation</span> for explicit cardinality representation. Avoid ambiguous many-to-many relationships in the final physical design.</p>
-<p>Implement <span class="text-secondary">Consistent Naming</span>. Use snake_case for tables and attributes to ensure multi-platform compatibility.</p>
-</div>
+<!-- AIM -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Aim</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Objective</span></div>
+<div class="p-8 bg-surface-container rounded-xl border border-outline-variant/20">
+<p class="text-on-surface font-body leading-relaxed text-lg mb-4">
+The aim of this practical is to synthesize the previously established structural SRS into a fully operational Database Design. 
+The student will draft an Entity Relational Diagram and commit the final schema design confirming it meets BCNF normalization parameters and fully connects the overarching application dependencies.
+</p>
 </div>
 </section>
-<!-- Status Panel -->
-<aside class="md:col-span-4 bg-secondary-container/10 p-8 rounded-xl border border-secondary/10">
-<h3 class="font-headline text-secondary text-xl mb-6">Practical Metadata</h3>
-<ul class="space-y-4 font-label text-sm uppercase tracking-wider">
-<li class="flex justify-between border-b border-outline-variant/20 pb-2">
-<span class="text-outline">Category</span>
-<span class="text-on-surface">Physical Design</span>
-</li>
-<li class="flex justify-between border-b border-outline-variant/20 pb-2">
-<span class="text-outline">Complexity</span>
-<span class="text-secondary">High</span>
-</li>
-<li class="flex justify-between border-b border-outline-variant/20 pb-2">
-<span class="text-outline">Tools</span>
-<span class="text-on-surface">MySQL / Draw.io</span>
-</li>
-</ul>
-<div class="mt-8">
-<img alt="ER Diagram" class="rounded-lg shadow-lg" data-alt="abstract minimalist line art of a complex database schema with connecting nodes in electric cyan on a dark slate background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCXkCzOSz44QwqpN3dUkYhf3erNGrsSnoKUce92eF6NVySK96JrgLT1dRvRPVPZUNuR2kHsqdaoOCx5WVhNAC-pFylHpdw6mLUhaCowODrpGbzepTqKeD8MqErY-y5EAmuoS_EbZaneGtrwY-MR0b6e7OFnYGPK13m_OkY8ZQ51uppC6TWMEa_TUW0rx15sRYJwwXvGo5nMBx0CPb74-jGXlxcF0_j8zP9BshhROUu4cS-sZP5TfFeV_I64E5KfSYuJHFsHVYK2NU"/>
-</div>
-</aside>
-<!-- Functional Dependencies Section -->
-<section class="md:col-span-6 bg-surface-container-high p-10 rounded-xl">
-<h2 class="text-3xl font-headline font-semibold mb-6 flex items-center gap-3">
-<span class="material-symbols-outlined text-primary">key</span>
-                        Functional Dependencies
-                    </h2>
-<div class="bg-surface-container-lowest p-6 rounded-lg font-mono text-sm space-y-3 relative">
-<div class="flex items-center gap-2 mb-4">
-<span class="w-3 h-3 rounded-full bg-red-500/50"></span>
-<span class="w-3 h-3 rounded-full bg-yellow-500/50"></span>
-<span class="w-3 h-3 rounded-full bg-green-500/50"></span>
-</div>
-<p class="text-primary-container"># Candidate Key Identification</p>
-<p class="text-on-surface-variant">FD1: student_id → {name, email, dob}</p>
-<p class="text-on-surface-variant">FD2: course_id → {title, credits, dept_id}</p>
-<p class="text-on-surface-variant">FD3: {student_id, course_id} → {grade, semester}</p>
-<p class="text-on-surface-variant">FD4: dept_id → {dept_name, HOD}</p>
-<button class="absolute top-6 right-6 p-2 bg-surface-variant/50 backdrop-blur rounded-md hover:bg-surface-variant transition-colors">
-<span class="material-symbols-outlined text-xs">content_copy</span>
-</button>
+<!-- THEORY -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Theory & Background</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Core Concepts</span></div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-primary lg:col-span-2">
+<h3 class="text-lg font-headline font-semibold text-primary mb-3">Final ER Diagram Construction</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">Every strong entity defined in the SRS becomes a relational table construct. Multivalued traits become linking structures. ER acts as the final layout agreement linking the raw specifications to the final Codd-normalized environment deployment.</p></div>
+<div class="p-8 bg-surface-container-low rounded-xl border-l-4 border-secondary">
+<h3 class="text-lg font-headline font-semibold text-secondary mb-3">Design Verification</h3>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">The resulting final schema must be evaluated against all DML use cases envisioned. If 'Finding a patient history' takes 4 excessive sub-joins, the schema must be evaluated on balance vs speed vs normalization.</p></div>
 </div>
 </section>
-<!-- Normalization Checklist -->
-<section class="md:col-span-6 bg-surface-container-high p-10 rounded-xl">
-<h2 class="text-3xl font-headline font-semibold mb-6 flex items-center gap-3">
-<span class="material-symbols-outlined text-primary-fixed-dim">verified</span>
-                        Normalization Checklist
-                    </h2>
-<div class="space-y-4">
-<div class="flex items-start gap-4 p-4 bg-surface-container rounded-lg border-l-4 border-primary">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<div>
-<h4 class="font-headline font-bold">1NF: Atomic Values</h4>
-<p class="text-sm text-on-surface-variant">No multi-valued attributes or repeating groups in relation.</p>
-</div>
-</div>
-<div class="flex items-start gap-4 p-4 bg-surface-container rounded-lg border-l-4 border-primary">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<div>
-<h4 class="font-headline font-bold">2NF: Partial Dependency</h4>
-<p class="text-sm text-on-surface-variant">No non-prime attribute is dependent on a proper subset of any candidate key.</p>
-</div>
-</div>
-<div class="flex items-start gap-4 p-4 bg-surface-container rounded-lg border-l-4 border-outline-variant">
-<span class="material-symbols-outlined text-outline">radio_button_unchecked</span>
-<div>
-<h4 class="font-headline font-bold">3NF: Transitive Dependency</h4>
-<p class="text-sm text-on-surface-variant">No non-prime attribute is transitively dependent on the primary key.</p>
-</div>
-</div>
+<!-- PROCEDURE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Procedure / Algorithm</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Step-by-Step</span></div>
+<div class="bg-surface-container-low rounded-xl border border-outline-variant/20 p-8">
+<ol class="flex flex-col gap-5"><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">01.</span><span class="text-on-surface-variant font-body leading-relaxed">Map entities strictly against SRS documents.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">02.</span><span class="text-on-surface-variant font-body leading-relaxed">Assign and verify Primary and Partial keys.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">03.</span><span class="text-on-surface-variant font-body leading-relaxed">Enforce strict Relational lines avoiding cross-dependency loops.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">04.</span><span class="text-on-surface-variant font-body leading-relaxed">Execute the final unifying schema codebase.</span></li><li class="flex gap-4"><span class="text-primary font-headline font-bold text-lg w-8 shrink-0">05.</span><span class="text-on-surface-variant font-body leading-relaxed">Export and construct final Diagram.</span></li></ol>
 </div>
 </section>
-<!-- Data Dictionary Table -->
-<section class="md:col-span-12 bg-surface-container-low p-10 rounded-xl overflow-x-auto">
-<h2 class="text-3xl font-headline font-semibold mb-8 flex items-center gap-3">
-<span class="material-symbols-outlined text-secondary">table_view</span>
-                        Data Dictionary Template
-                    </h2>
-<table class="w-full text-left font-label">
-<thead>
-<tr class="text-outline uppercase text-xs tracking-widest border-b border-outline-variant/30">
-<th class="pb-4 px-4">Field Name</th>
-<th class="pb-4 px-4">Data Type</th>
-<th class="pb-4 px-4">Constraints</th>
-<th class="pb-4 px-4">Description</th>
-<th class="pb-4 px-4">Reference</th>
-</tr>
-</thead>
-<tbody class="text-on-surface-variant divide-y divide-outline-variant/10">
-<tr>
-<td class="py-4 px-4 font-mono text-secondary">user_id</td>
-<td class="py-4 px-4">BIGINT</td>
-<td class="py-4 px-4"><span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px]">PK</span> <span class="bg-outline-variant/20 px-2 py-0.5 rounded text-[10px]">AUTO_INC</span></td>
-<td class="py-4 px-4">Unique identifier for system users</td>
-<td class="py-4 px-4 text-xs">N/A</td>
-</tr>
-<tr>
-<td class="py-4 px-4 font-mono text-secondary">email_addr</td>
-<td class="py-4 px-4">VARCHAR(255)</td>
-<td class="py-4 px-4"><span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px]">UNIQUE</span> <span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px]">NOT NULL</span></td>
-<td class="py-4 px-4">Primary contact email address</td>
-<td class="py-4 px-4 text-xs">N/A</td>
-</tr>
-<tr>
-<td class="py-4 px-4 font-mono text-secondary">role_code</td>
-<td class="py-4 px-4">CHAR(3)</td>
-<td class="py-4 px-4"><span class="bg-secondary/10 text-secondary px-2 py-0.5 rounded text-[10px]">FK</span></td>
-<td class="py-4 px-4">Security role categorization</td>
-<td class="py-4 px-4 text-xs text-primary underline">roles.code</td>
-</tr>
-<tr>
-<td class="py-4 px-4 font-mono text-secondary">created_at</td>
-<td class="py-4 px-4">TIMESTAMP</td>
-<td class="py-4 px-4"><span class="bg-outline-variant/20 px-2 py-0.5 rounded text-[10px]">DEFAULT NOW()</span></td>
-<td class="py-4 px-4">Record insertion audit time</td>
-<td class="py-4 px-4 text-xs">N/A</td>
-</tr>
-</tbody>
-</table>
+<!-- CODE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Complete MySQL Code</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Runnable & Commented</span></div>
+<div class="mb-16">
+<div class="bg-[#0a0e14] rounded-xl border border-outline-variant/20 overflow-hidden shadow-2xl">
+<div class="flex items-center gap-2 px-4 py-3 bg-surface-container-lowest border-b border-outline-variant/20">
+<span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+<span class="ml-4 text-xs font-label text-slate-500 uppercase tracking-widest">MySQL 8.x — Hospital Management System</span>
+</div>
+<pre class="code-block p-6 text-slate-300">
+<span class="text-slate-500 italic">-- Practical 14: Final ER & Project Schema Finalization</span>
+<span class="text-slate-500 italic">-- This is a comprehensive review verifying that the entire Hospital architecture is sound.</span>
+
+<span class="text-cyan-400">USE</span> <span class="text-slate-300">hospital_db</span>;
+
+<span class="text-slate-500 italic">-- Output entire finalized structural blueprint of the system.</span>
+
+<span class="text-slate-500 italic">-- Confirm active counts matching ER projections.</span>
+<span class="text-cyan-400">SELECT</span> 
+    (<span class="text-cyan-400">SELECT</span> <span class="text-violet-400">COUNT</span>(*) <span class="text-cyan-400">FROM</span> <span class="text-slate-300">DEPARTMENT</span>) <span class="text-cyan-400">AS</span> <span class="text-slate-300">Dept_Count</span>,
+    (<span class="text-cyan-400">SELECT</span> <span class="text-violet-400">COUNT</span>(*) <span class="text-cyan-400">FROM</span> <span class="text-slate-300">DOCTOR</span>) <span class="text-cyan-400">AS</span> <span class="text-slate-300">Doctor_Count</span>,
+    (<span class="text-cyan-400">SELECT</span> <span class="text-violet-400">COUNT</span>(*) <span class="text-cyan-400">FROM</span> <span class="text-slate-300">PATIENT</span>) <span class="text-cyan-400">AS</span> <span class="text-slate-300">Patient_Count</span>,
+    (<span class="text-cyan-400">SELECT</span> <span class="text-violet-400">COUNT</span>(*) <span class="text-cyan-400">FROM</span> <span class="text-slate-300">APPOINTMENT</span>) <span class="text-cyan-400">AS</span> <span class="text-slate-300">Appointments</span>,
+    (<span class="text-cyan-400">SELECT</span> <span class="text-violet-400">COUNT</span>(*) <span class="text-cyan-400">FROM</span> <span class="text-slate-300">BILL</span>) <span class="text-cyan-400">AS</span> <span class="text-slate-300">Financial_Records</span>;
+
+<span class="text-slate-500 italic">-- Identify referential mapping on schemas created</span>
+<span class="text-cyan-400">SELECT</span> 
+    <span class="text-slate-300">table_name</span>, 
+    <span class="text-slate-300">column_name</span>, 
+    <span class="text-slate-300">referenced_table_name</span>, 
+    <span class="text-slate-300">referenced_column_name</span>
+<span class="text-cyan-400">FROM</span> <span class="text-slate-300">INFORMATION_SCHEMA</span>.<span class="text-slate-300">KEY_COLUMN_USAGE</span>
+<span class="text-cyan-400">WHERE</span> <span class="text-slate-300">referenced_table_schema</span> = <span class="text-green-400">'hospital_db'</span>;
+
+</pre></div></div>
 </section>
+<!-- OUTPUT -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Expected Output</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Query Results</span></div>
+<div class="bg-[#0a0e14] rounded-xl border border-outline-variant/20 p-6 overflow-x-auto">
+<p class="text-slate-500 font-label text-xs mb-3 uppercase tracking-widest">Verification Count</p><div class="overflow-x-auto"><table class="output-table"><thead><tr><th>Dept_Count</th><th>Doctor_Count</th><th>Patient_Count</th><th>Appointments</th><th>Financial_Records</th></tr></thead><tbody><tr><td>5</td><td>8</td><td>10</td><td>10</td><td>10</td></tr></tbody></table></div><br/><p class="text-slate-500 font-label text-xs mb-3 uppercase tracking-widest">Referential Maps (ER Edges)</p><div class="overflow-x-auto"><table class="output-table"><thead><tr><th>table_name</th><th>column_name</th><th>referenced_table</th><th>referenced_column</th></tr></thead><tbody><tr><td>APPOINTMENT</td><td>patient_id</td><td>PATIENT</td><td>patient_id</td></tr><tr><td>APPOINTMENT</td><td>doctor_id</td><td>DOCTOR</td><td>doctor_id</td></tr><tr><td>DOCTOR</td><td>dept_id</td><td>DEPARTMENT</td><td>dept_id</td></tr><tr><td>DEPARTMENT</td><td>head_doctor_id</td><td>DOCTOR</td><td>doctor_id</td></tr><tr><td>BILL</td><td>patient_id</td><td>PATIENT</td><td>patient_id</td></tr></tbody></table></div>
 </div>
-</main>
+</section>
+<!-- CONCLUSION -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Conclusion</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Summary</span></div>
+<div class="p-8 bg-surface-container rounded-xl border-l-4 border-secondary">
+<p class="text-on-surface font-body leading-relaxed mb-4">
+Through a systematic translation of text-based SRS outlines into concrete relational structures, the Hospital Management Architecture is brought to a fully functional completion. Foreign keys successfully mirror conceptual boundaries, guaranteeing data flows correctly per analytical expectations.
+</p>
 </div>
-<!-- Footer -->
-<footer class="bg-[#10141a] w-full border-t border-slate-800/50 mt-20">
+</section>
+<!-- VIVA VOCE -->
+<section class="mb-16">
+<div class="flex items-center gap-6 mb-8">
+<h2 class="text-3xl font-headline font-bold text-on-surface whitespace-nowrap">Viva Voce</h2>
+<div class="flex-1 h-px bg-outline-variant/30"></div><span class="text-slate-500 font-label text-xs uppercase tracking-widest">Q & A</span></div>
+<div class="flex flex-col gap-4">
+<details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q1.</span>How does an ER diagram support Project Management?
+</summary>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> It acts as the visual contract between software developers creating the frontend interface, and database architects maintaining the backend structures.
+</div></details><details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q2.</span>What does an entity correspond to in physical SQL layout?
+</summary>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> An entity is translated into a structured TABLE.
+</div></details><details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q3.</span>What indicates a 1:N relationship visually in an ER diagram?
+</summary>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> Commonly a 'Crow's Foot' or simply 1 and N labels extending between a Diamond relationship box toward the rectangle entity boundaries.
+</div></details><details class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<summary class="p-5 font-label font-semibold text-on-surface flex items-center gap-3 hover:text-primary transition-colors">
+<span class="text-primary font-headline font-bold text-xl w-8">Q4.</span>Can an ER Diagram have errors?
+</summary>
+<div class="px-8 pb-6 pt-2 text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/20">
+<span class="text-secondary font-bold">Ans:</span> Yes. Most commonly 'Chasm traps' or 'Fan traps' where relationships are ambiguous, meaning the eventual SQL schema will fail to associate data correctly across multiple joined links.
+</div></details>
+</div>
+</section>
+<div class="flex justify-between items-center pt-12 border-t border-outline-variant/20 mt-16">
+<a class="group relative px-6 py-3 bg-surface-container border border-outline-variant/30 text-on-surface font-headline font-bold rounded-lg overflow-hidden transition-transform active:scale-95 hover:border-primary/40" href="../practical_13_project_proposal_srs/code.html">
+<span class="relative z-10 flex items-center gap-2"><span class="material-symbols-outlined">arrow_back</span>Practical 13</span></a><div></div></div>
+</div></main></div>
+<footer class="w-full border-t border-slate-800/50 mt-20 bg-[#10141a]">
 <div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full max-w-[1440px] mx-auto">
-<div class="mb-6 md:mb-0">
-<p class="font-body italic text-lg text-amber-500 font-serif">S.Y.B.Tech IT | Sem IV | Pattern 2023</p>
-<div class="flex gap-6 mt-2">
-<a class="text-slate-500 hover:text-amber-200 transition-colors font-body italic" href="#">University Guidelines</a>
-<a class="text-slate-500 hover:text-amber-200 transition-colors font-body italic" href="#">Lab Manual</a>
-</div>
-</div>
-<div class="flex items-center gap-12">
-<a class="group flex items-center gap-2 text-slate-500 hover:text-amber-400 transition-all" href="#">
-<span class="material-symbols-outlined text-sm">arrow_back</span>
-<span class="font-headline uppercase tracking-widest text-xs">Prev -&gt; P13</span>
-</a>
-<a class="group flex items-center gap-2 text-amber-400 underline decoration-2 underline-offset-8 transition-all" href="#">
-<span class="material-symbols-outlined text-sm">home</span>
-<span class="font-headline uppercase tracking-widest text-xs">Home</span>
-</a>
-</div>
-</div>
-</footer>
+<div class="text-amber-500 font-serif font-['Newsreader'] italic text-lg mb-4 md:mb-0">S.Y.B.Tech IT | Sem IV | Pattern 2023 | Subject: 2308215</div>
+<div class="flex gap-8 font-['Newsreader'] italic text-lg">
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">University Guidelines</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Lab Manual</a>
+<a class="text-slate-500 hover:text-amber-200 transition-colors" href="#">Contact Faculty</a>
+</div></div></footer>
 </body></html>

@@ -2674,8 +2674,7 @@
 
     // ================================================================
     // PRACTICALS DATA
-    // ================================================================
-    const PRACTICALS = [
+    // ================================================================    const PRACTICALS = [
       {
         num: 1, title: "Study of MySQL", group: "A", icon: "terminal",
         desc: "Explore the architecture, storage engines, ACID properties, and fundamental characteristics of MySQL.",
@@ -3142,11 +3141,15 @@ CLOSE emp_cursor;</code></pre></div>`,
     function getStudentSub(num) { return submissions.find(s => s.practical_number === num && s.student_id === currentUser?.id); }
 
     function isUnlocked(num) {
-      return true;
+      if (currentProfile?.role === 'staff') return true;
+      if (num === 1) return true;
+      const prev = getStudentSub(num - 1);
+      return prev && prev.status === 'approved';
     }
 
     function getState(num) {
       if (currentProfile?.role === 'staff') return 'available';
+      if (!isUnlocked(num)) return 'locked';
       const s = getStudentSub(num);
       if (!s) return 'available';
       if (s.status === 'approved') return 'completed';
@@ -3434,23 +3437,10 @@ CLOSE emp_cursor;</code></pre></div>`,
         renderGrids();
       } else if (page === 'detail') {
         if (!isUnlocked(param)) { showToast(`Complete Practical ${param - 1} first.`, 'warning'); return; }
-        
-        const dirs = {
-          1: "practical_01_study_of_mysql", 2: "practical_02_mysql_installation",
-          3: "practical_03_sqlite_study", 4: "practical_04_er_diagrams",
-          5: "practical_05_ddl_normalization", 6: "practical_06_constraints_alter_drop",
-          7: "practical_07_sql_queries", 8: "practical_08_views",
-          9: "practical_09_implementation_of_joins", 10: "practical_10_stored_procedures",
-          11: "practical_11_triggers", 12: "practical_12_cursors",
-          13: "practical_13_project_proposal_srs", 14: "practical_14_er_diagram_database_design"
-        };
-        
-        const dir = dirs[parseInt(param, 10)];
-        if (dir) {
-          window.location.href = `./${dir}/code.html`;
-        } else {
-          showToast(`Practical ${param} folder not found.`, 'error');
-        }
+        document.getElementById('page-detail').classList.add('active');
+        const pl = document.querySelector('[data-page="practicals"]'); if (pl) pl.classList.add('active');
+        renderDetail(param);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (page === 'dashboard') {
         if (currentProfile?.role !== 'staff') { navigateTo('home'); return; }
         document.getElementById('page-dashboard').classList.add('active');
@@ -3522,25 +3512,18 @@ CLOSE emp_cursor;</code></pre></div>`,
     // INIT
     // ================================================================
     (async function init() {
-      // Bypass login for public static viewing (No Backend)
-      currentUser = { id: 'public-viewer', email: 'student@dbms.local' };
-      currentProfile = { full_name: 'Student Viewer', roll_number: '00', role: 'student', user_id: 'public-viewer' };
-
-      document.getElementById('auth-screen').style.display = 'none';
-      document.getElementById('portal').style.display = 'block';
-
-      // Initialize Avatar
-      const initials = 'SV';
-      document.getElementById('nav-avatar').textContent = initials;
-      if (document.getElementById('prof-avatar')) {
-          document.getElementById('prof-avatar').textContent = initials;
-          document.getElementById('prof-name').textContent = currentProfile.full_name;
-          document.getElementById('prof-role').textContent = 'Student';
-          document.getElementById('prof-email').textContent = currentUser.email;
+      if (supabaseReady) {
+        const { data: { session } } = await sb.auth.getSession();
+        if (!session) {
+          document.getElementById('auth-screen').style.display = 'flex';
+          document.getElementById('portal').style.display = 'none';
+        }
+      } else {
+        // No Supabase — show auth screen, allow demo login
+        document.getElementById('auth-screen').style.display = 'flex';
+        document.getElementById('portal').style.display = 'none';
+        console.warn('Supabase not configured. Running in demo mode — login with any email to explore the UI.');
       }
-
-      renderSidebar('all');
-      renderGrid();
     })();
   </script>
 </body>
